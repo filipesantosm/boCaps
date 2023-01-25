@@ -22,13 +22,13 @@ export const Container = styled.main`
 
 export const Content = styled.form`
   width: 34.5rem;
-  height: fit-content;
+  height: 42.5rem;
 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 
-  padding: 2.75rem 3.75rem 3.125rem 3.75rem;
+  padding: 2.75rem 3.75rem 0 3.75rem;
 
   background: #ffffff;
 
