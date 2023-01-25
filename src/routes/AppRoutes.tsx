@@ -5,6 +5,7 @@ import {
   Routes,
 } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import Login from '../pages/Login/Login';
 
 const AppRoutes = () => {
@@ -17,6 +18,8 @@ const AppRoutes = () => {
           path="/"
           element={isAuthenticated() ? <Navigate to="/home" /> : <Login />}
         />
+
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>
     </Router>
   );
