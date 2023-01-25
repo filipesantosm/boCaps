@@ -170,7 +170,7 @@ export const Table = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 2.75rem;
-  grid-template-rows: repeat(8, 1fr);
+  grid-template-rows: repeat(7, 1fr);
   grid-row-gap: 0.625rem;
 
   margin-bottom: auto;
