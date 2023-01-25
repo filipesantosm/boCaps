@@ -8,6 +8,7 @@ import { useAuth } from '../hooks/useAuth';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
+import ManageFees from '../pages/ManageFees/ManageFees';
 import Sales from '../pages/Sales/Sales';
 
 const AppRoutes = () => {
@@ -24,6 +25,7 @@ const AppRoutes = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
 
         <Route path="/home" element={<Home />} />
+        <Route path="/home/manage" element={<ManageFees />} />
 
         <Route path="/sales" element={<Sales />} />
       </Routes>
