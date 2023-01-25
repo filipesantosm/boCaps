@@ -8,6 +8,7 @@ import { useAuth } from '../hooks/useAuth';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
+import Sales from '../pages/Sales/Sales';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -23,6 +24,8 @@ const AppRoutes = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
 
         <Route path="/home" element={<Home />} />
+
+        <Route path="/sales" element={<Sales />} />
       </Routes>
     </Router>
   );
