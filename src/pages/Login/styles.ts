@@ -98,7 +98,7 @@ export const Input = styled.input<InputProps>`
 
   background: #ffffff;
 
-  border: none;
+  border: ${props => (props.hasError ? '1px solid #ff0000' : 'none')};
   border-radius: 0.5rem;
 
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 4px;

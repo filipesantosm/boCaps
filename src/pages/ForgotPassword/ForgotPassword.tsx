@@ -15,6 +15,7 @@ import {
 import { PasswordSchema } from '../../validations/PasswordSchema';
 import logo from '../../assets/img/logo.svg';
 import handleError from '../../services/handleToast';
+import PasswordModal from '../../components/PasswordModal/PasswordModal';
 
 interface ForgotPasswordProps {
   email: string;
@@ -66,6 +67,7 @@ const ForgotPassword = () => {
           Voltar para o login
         </BackToLogin>
       </Content>
+      {showModal && <PasswordModal isOpen={setShowModal} />}
     </Container>
   );
 };
