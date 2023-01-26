@@ -6,7 +6,7 @@ interface ModalProps {
   text: 'salvo' | 'cadastrado';
 }
 
-const FeeSavedOrDeleted = ({ isOpen, text }: ModalProps) => {
+const FeeSavedOrRegistered = ({ isOpen, text }: ModalProps) => {
   return (
     <Container onClick={() => isOpen(false)}>
       <Content>
@@ -22,4 +22,4 @@ const FeeSavedOrDeleted = ({ isOpen, text }: ModalProps) => {
   );
 };
 
-export default FeeSavedOrDeleted;
+export default FeeSavedOrRegistered;
