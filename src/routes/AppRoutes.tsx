@@ -10,6 +10,7 @@ import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
 import ManageFees from '../pages/ManageFees/ManageFees';
+import ManageSales from '../pages/ManageSales/ManageSales';
 import NewFee from '../pages/NewFee/NewFee';
 import Sales from '../pages/Sales/Sales';
 
@@ -32,6 +33,7 @@ const AppRoutes = () => {
         <Route path="/home/manage/:id" element={<EditFee />} />
 
         <Route path="/sales" element={<Sales />} />
+        <Route path="/sales/manage" element={<ManageSales />} />
       </Routes>
     </Router>
   );
