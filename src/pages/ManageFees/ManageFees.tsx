@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import DeleteFee from '../../components/DeleteFee/DeleteFee';
+import DeleteFeeSuccess from '../../components/DeleteFeeSuccess/DeleteFeeSuccess';
 import Header from '../../components/Header/Header';
 import NavBar from '../../components/NavBar/NavBar';
 import SmallPagination from '../../components/Pagination/Pagination';
@@ -27,6 +29,8 @@ import {
 
 const ManageFees = () => {
   const [page, setPage] = useState(1);
+  const [deleteModal, setDeleteModal] = useState('');
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
 
   const navigate = useNavigate();
 
@@ -81,7 +85,7 @@ const ManageFees = () => {
               <CompDivider isActive>
                 <VisualizeIcon onClick={() => navigate('/home/manage/001')} />
 
-                <DeleteIcon />
+                <DeleteIcon onClick={() => setDeleteModal('id')} />
               </CompDivider>
             </FeeComp>
 
@@ -99,7 +103,7 @@ const ManageFees = () => {
               <CompDivider isActive={false}>
                 <VisualizeIcon onClick={() => navigate('/home/manage/002')} />
 
-                <DeleteIcon />
+                <DeleteIcon onClick={() => setDeleteModal('id')} />
               </CompDivider>
             </FeeComp>
           </TableBody>
@@ -120,6 +124,15 @@ const ManageFees = () => {
           </ButtonDivider>
         </MainForm>
       </Content>
+      {deleteModal !== '' && (
+        <DeleteFee
+          id={deleteModal}
+          isOpen={setDeleteModal}
+          isOtherOpen={setDeleteSuccess}
+        />
+      )}
+
+      {deleteSuccess && <DeleteFeeSuccess isOpen={setDeleteSuccess} />}
     </Container>
   );
 };
