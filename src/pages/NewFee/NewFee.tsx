@@ -33,12 +33,13 @@ import {
   TitleIcon,
 } from './styles';
 import background from '../../assets/img/upload.svg';
+import useImageArray from '../../hooks/useImageArray';
 
 interface NewFeeProps {
   name: string;
   value: number;
   holes: number;
-  image: BlobPart[];
+  image: FileList;
   days_of_week: string;
   description: string;
 }
@@ -61,9 +62,7 @@ const NewFee = () => {
   const formWatch = watch('image');
   const daySelected = watch('days_of_week');
 
-  const imageUrl = formWatch?.length
-    ? URL.createObjectURL(new Blob(formWatch))
-    : '';
+  const imageUrl = useImageArray(formWatch)[0];
 
   const handleNewFee = async () => {
     try {
