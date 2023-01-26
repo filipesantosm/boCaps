@@ -1,23 +1,32 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import Switch from 'react-switch';
+import DeleteFee from '../../components/DeleteFee/DeleteFee';
+import DeleteFeeSuccess from '../../components/DeleteFeeSuccess/DeleteFeeSuccess';
 import FeeSavedOrRegistered from '../../components/FeeSavedOrRegistered/FeeSavedOrRegisted';
 import Header from '../../components/Header/Header';
 import NavBar from '../../components/NavBar/NavBar';
-import handleError from '../../services/handleToast';
+import useImageArray from '../../hooks/useImageArray';
+import handleError, { handleSuccess } from '../../services/handleToast';
 import { NewFeeSchema } from '../../validations/NewFeeSchema';
+import { DeleteIcon } from '../ManageFees/styles';
+import { NewFeeProps } from '../NewFee/NewFee';
 import {
   BackDivider,
   BackIcon,
   BackTitle,
   ButtonDivider,
-  CancelButton,
   Container,
   Content,
+  DeleteButton,
+  DeleteImageIcon,
+  DeleteImageTag,
   FormColumn,
   FormDivider,
   IconTag,
+  ImageDivider,
   ImageInput,
   Input,
   Label,
@@ -26,28 +35,30 @@ import {
   RadioboxColumn,
   RadioboxDivider,
   RadioboxLabel,
-  RegisterButton,
+  SaveButton,
+  SwitchDivider,
+  SwitchText,
   TextArea,
   Title,
   TitleDivider,
   TitleIcon,
 } from './styles';
 import background from '../../assets/img/upload.svg';
-import useImageArray from '../../hooks/useImageArray';
+import DeletePicture from '../../components/DeletePicture/DeletePicture';
+import DeletePictureSuccess from '../../components/DeletePictureSuccess/DeletePictureSuccess';
 
-export interface NewFeeProps {
-  name: string;
-  value: number;
-  holes: number;
-  image: FileList;
-  days_of_week: string;
-  description: string;
-}
-
-const NewFee = () => {
-  const [registeredModal, setRegisteredModal] = useState(false);
+const EditFee = () => {
+  const [checked, setChecked] = useState(false);
+  const [savedModal, setSavedModal] = useState(false);
+  const [deleteImage, setDeleteImage] = useState('');
+  const [deleteImageSuccess, setDeleteImageSuccess] = useState(false);
+  const [deleteFeeModal, setDeleteFeeModal] = useState('');
+  const [deleteFeeSuccess, setDeleteFeeSuccess] = useState(false);
 
   const navigate = useNavigate();
+
+  const params = useParams();
+  const id = params.id as string;
 
   const {
     register,
@@ -64,9 +75,18 @@ const NewFee = () => {
 
   const imageUrl = useImageArray(formWatch)[0];
 
-  const handleNewFee: SubmitHandler<NewFeeProps> = async value => {
+  const handleNewStatus = async () => {
     try {
-      setRegisteredModal(true);
+      setChecked(!checked);
+      handleSuccess('Status alterado com sucesso!');
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
+  const handleEditFee: SubmitHandler<NewFeeProps> = async value => {
+    try {
+      setSavedModal(true);
     } catch (error) {
       handleError(error);
     }
@@ -79,7 +99,7 @@ const NewFee = () => {
       <Content>
         <Header />
 
-        <MainForm onSubmit={handleSubmit(handleNewFee)}>
+        <MainForm onSubmit={handleSubmit(handleEditFee)}>
           <TitleDivider>
             <TitleIcon />
 
@@ -91,7 +111,22 @@ const NewFee = () => {
               <BackIcon />
             </IconTag>
 
-            <BackTitle>Novo Green-fee</BackTitle>
+            <BackTitle>Chip Shot</BackTitle>
+
+            <SwitchDivider>
+              <Switch
+                checked={checked}
+                onChange={handleNewStatus}
+                activeBoxShadow="none"
+                offColor="#C6CEDD"
+                onColor="#003575"
+                uncheckedIcon={false}
+              />
+
+              <SwitchText style={{ color: checked ? '' : '#C6CEDD' }}>
+                {checked ? 'Ativo' : 'Desativado'}
+              </SwitchText>
+            </SwitchDivider>
           </BackDivider>
 
           <FormDivider>
@@ -99,48 +134,54 @@ const NewFee = () => {
               <Label htmlFor="name">Nome</Label>
 
               <Input
+                hasError={!!errors.name}
                 type="text"
                 id="name"
                 {...register('name')}
-                placeholder="Digite um nome"
-                hasError={!!errors.name}
+                defaultValue="Chip Shot"
               />
 
               <Label htmlFor="value">Valor (R$)</Label>
 
               <Input
+                hasError={!!errors.value}
                 type="text"
                 id="value"
                 {...register('value')}
-                placeholder="Ex.: 200,00"
-                hasError={!!errors.value}
+                defaultValue="90,00"
               />
 
               <Label htmlFor="holes">Buracos</Label>
 
               <Input
+                hasError={!!errors.holes}
                 type="text"
                 id="holes"
                 {...register('holes')}
-                placeholder="Ex.: 12"
-                hasError={!!errors.holes}
+                defaultValue="09"
               />
 
               <Label htmlFor="image">Imagem do produto</Label>
 
-              <ImageInput
-                hasError={!!errors.image}
-                type="file"
-                id="image"
-                {...register('image')}
-                style={{
-                  backgroundImage: formWatch
-                    ? `url(${imageUrl})`
-                    : `url(${background})`,
-                  backgroundSize: formWatch ? 'cover' : '',
-                }}
-                accept="image/*"
-              />
+              <ImageDivider>
+                <ImageInput
+                  hasError={!!errors.image}
+                  type="file"
+                  id="image"
+                  {...register('image')}
+                  style={{
+                    backgroundImage: formWatch
+                      ? `url(${imageUrl})`
+                      : `url(${background})`,
+                    backgroundSize: formWatch ? 'cover' : '',
+                  }}
+                  accept="image/*"
+                />
+
+                <DeleteImageTag>
+                  <DeleteImageIcon onClick={() => setDeleteImage('id')} />
+                </DeleteImageTag>
+              </ImageDivider>
             </FormColumn>
 
             <FormColumn>
@@ -202,29 +243,51 @@ const NewFee = () => {
                 hasError={!!errors.description}
                 id="description"
                 {...register('description')}
-                placeholder="Clique para digitar..."
+                defaultValue="Jogadores iniciantes podem jogar no campo, desde que acompanhados de um Profissional de golfe credenciado
+                Autorização do Starter e emissão de etiqueta para o início do jogo.
+                Uso de pelo menos 1 Caddie por grupo de saída. O Caddie deverá ser pago diretamente pelo jogador;
+                Utilizar o Dress Code estabelecido pelo Clube."
               />
             </FormColumn>
           </FormDivider>
 
           <ButtonDivider>
-            <RegisterButton type="submit">Cadastrar green-fee</RegisterButton>
+            <SaveButton type="submit">Salvar mudanças</SaveButton>
 
-            <CancelButton
-              type="button"
-              onClick={() => navigate('/home/manage')}
-            >
-              Cancelar
-            </CancelButton>
+            <DeleteButton type="button" onClick={() => setDeleteFeeModal('id')}>
+              <DeleteIcon />
+              Excluir
+            </DeleteButton>
           </ButtonDivider>
         </MainForm>
       </Content>
+      {savedModal && (
+        <FeeSavedOrRegistered isOpen={setSavedModal} text="salvo" />
+      )}
 
-      {registeredModal && (
-        <FeeSavedOrRegistered isOpen={setRegisteredModal} text="cadastrado" />
+      {deleteFeeModal && (
+        <DeleteFee
+          isOpen={setDeleteFeeModal}
+          id={id}
+          isOtherOpen={setDeleteFeeSuccess}
+        />
+      )}
+
+      {deleteFeeSuccess && <DeleteFeeSuccess isOpen={setDeleteFeeSuccess} />}
+
+      {deleteImage && (
+        <DeletePicture
+          id={id}
+          isOpen={setDeleteImage}
+          isOtherOpen={setDeleteImageSuccess}
+        />
+      )}
+
+      {deleteImageSuccess && (
+        <DeletePictureSuccess isOpen={setDeleteImageSuccess} />
       )}
     </Container>
   );
 };
 
-export default NewFee;
+export default EditFee;

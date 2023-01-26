@@ -5,6 +5,7 @@ import {
   Routes,
 } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import EditFee from '../pages/EditFee/EditFee';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
@@ -28,6 +29,7 @@ const AppRoutes = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/home/manage" element={<ManageFees />} />
         <Route path="/home/manage/new" element={<NewFee />} />
+        <Route path="/home/manage/:id" element={<EditFee />} />
 
         <Route path="/sales" element={<Sales />} />
       </Routes>

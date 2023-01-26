@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { HiOutlineTicket } from 'react-icons/hi';
-import { FiChevronLeft } from 'react-icons/fi';
+import { FiChevronLeft, FiTrash } from 'react-icons/fi';
 import { InputProps } from '../Login/styles';
 
 export const Container = styled.div`
@@ -119,6 +119,21 @@ export const BackTitle = styled.span`
   color: #2c406e;
 `;
 
+export const SwitchDivider = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+export const SwitchText = styled.span`
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.125rem;
+
+  color: #003575;
+`;
+
 export const FormDivider = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 1fr;
@@ -191,6 +206,15 @@ export const Input = styled.input<InputProps>`
   }
 `;
 
+export const ImageDivider = styled.div`
+  height: 5.875rem;
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+`;
+
 export const ImageInput = styled.input<InputProps>`
   width: 14.625rem;
   height: 5.875rem;
@@ -219,6 +243,33 @@ export const ImageInput = styled.input<InputProps>`
   }
 `;
 
+export const DeleteImageTag = styled.div`
+  width: 2rem;
+  height: 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #007126;
+
+  color: #fff;
+
+  transition: 500ms;
+
+  &:hover {
+    cursor: pointer;
+
+    opacity: 0.875;
+  }
+`;
+
+export const DeleteImageIcon = styled(FiTrash)`
+  font-size: 1rem;
+`;
+
 export const ButtonDivider = styled.div`
   width: 100%;
   height: 3.75rem;
@@ -232,7 +283,7 @@ export const ButtonDivider = styled.div`
   margin-top: 2.5rem;
 `;
 
-export const RegisterButton = styled.button`
+export const SaveButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -263,25 +314,25 @@ export const RegisterButton = styled.button`
   }
 `;
 
-export const CancelButton = styled.button`
+export const DeleteButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
 
-  width: 10.5rem;
+  width: 12.25rem;
   height: 3.75rem;
 
-  border: 1px solid #007126;
-  border-radius: 0.875rem;
+  border: none;
 
   background: #fff;
 
   font-family: 'Hind Siliguri';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 1rem;
 
-  color: #007126;
+  color: #003575;
 
   transition: 500ms;
 
@@ -371,7 +422,7 @@ export const RadioboxLabel = styled.label<LabelProps>`
 
 export const TextArea = styled.textarea<InputProps>`
   width: 100%;
-  height: 6.5rem;
+  height: 14rem;
 
   padding: 1rem;
 
@@ -390,7 +441,23 @@ export const TextArea = styled.textarea<InputProps>`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #c6cedd;
+  color: #252729;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 0.75rem;
+    display: block;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #c6cedd;
+
+    border-radius: 99px;
+  }
 
   &::placeholder {
     color: #c6cedd;
