@@ -14,6 +14,7 @@ import ManageFees from '../pages/ManageFees/ManageFees';
 import ManageSales from '../pages/ManageSales/ManageSales';
 import NewFee from '../pages/NewFee/NewFee';
 import Sales from '../pages/Sales/Sales';
+import Tax from '../pages/Tax/Tax';
 import Terms from '../pages/Terms/Terms';
 
 const AppRoutes = () => {
@@ -36,6 +37,8 @@ const AppRoutes = () => {
 
         <Route path="/sales" element={<Sales />} />
         <Route path="/sales/manage" element={<ManageSales />} />
+
+        <Route path="/tax" element={<Tax />} />
 
         <Route path="/terms" element={<Terms />} />
         <Route path="/terms/edit-terms" element={<EditTerms />} />
