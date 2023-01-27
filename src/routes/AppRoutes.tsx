@@ -13,6 +13,7 @@ import ManageFees from '../pages/ManageFees/ManageFees';
 import ManageSales from '../pages/ManageSales/ManageSales';
 import NewFee from '../pages/NewFee/NewFee';
 import Sales from '../pages/Sales/Sales';
+import Terms from '../pages/Terms/Terms';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -34,6 +35,8 @@ const AppRoutes = () => {
 
         <Route path="/sales" element={<Sales />} />
         <Route path="/sales/manage" element={<ManageSales />} />
+
+        <Route path="/terms" element={<Terms />} />
       </Routes>
     </Router>
   );
