@@ -226,10 +226,6 @@ export const TaxCompText = styled.div<TaxProps>`
   font-size: 1rem;
 
   color: ${props => (props.hasTax ? '#003575' : '#252729')};
-
-  &:hover {
-    cursor: ${props => (props.hasTax ? 'pointer' : 'default')};
-  }
 `;
 
 export const EditDivider = styled.div`
@@ -277,13 +273,6 @@ export const DeleteIcon = styled(FiTrash)`
   font-size: 1.375rem;
 
   color: #003575;
-
-  transition: 500ms;
-
-  &:hover {
-    cursor: pointer;
-    opacity: 0.875;
-  }
 `;
 
 export const WarnIcon = styled(RiErrorWarningLine)`

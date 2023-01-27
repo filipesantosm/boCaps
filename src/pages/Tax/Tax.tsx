@@ -3,6 +3,7 @@ import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 import Header from '../../components/Header/Header';
 import NavBar from '../../components/NavBar/NavBar';
 import SmallPagination from '../../components/Pagination/Pagination';
+import handleError, { handleSuccess } from '../../services/handleToast';
 import {
   Container,
   Content,
@@ -30,7 +31,6 @@ const Tax = () => {
   const [page, setPage] = useState(1);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [editModal, setEditModal] = useState('');
-  const [deleteModal, setDeleteModal] = useState('');
 
   // mock
 
@@ -46,6 +46,14 @@ const Tax = () => {
       tax: '0',
     },
   ];
+
+  const handleDeleteTax = async (id: string) => {
+    try {
+      handleSuccess('Taxa deletada com sucesso!');
+    } catch (error) {
+      handleError(error);
+    }
+  };
 
   return (
     <Container>
@@ -105,7 +113,12 @@ const Tax = () => {
                     </EditDivider>
                   </TaxCompDivider>
 
-                  <TaxCompDivider>
+                  <TaxCompDivider
+                    style={{ cursor: tax.tax !== '0' ? 'pointer' : 'default' }}
+                    onClick={() =>
+                      tax.tax !== '0' ? handleDeleteTax(tax.id) : ''
+                    }
+                  >
                     {tax.tax === '0' ? (
                       <>
                         <WarnIcon />
