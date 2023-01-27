@@ -61,7 +61,7 @@ export const Title = styled.span`
 
 export const TextArea = styled.textarea`
   width: calc(100% - 1.5rem);
-  height: calc(100% - 15rem);
+  height: calc(100% - 16rem);
   padding: 2.125rem 3.25rem 1.875rem 2.5rem;
   outline: none;
   resize: none;
