@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
+import EditTaxModal from '../../components/EditTaxModal/EditTaxModal';
+import EditTaxSuccess from '../../components/EditTaxSuccess/EditTaxSuccess';
 import Header from '../../components/Header/Header';
 import NavBar from '../../components/NavBar/NavBar';
 import SmallPagination from '../../components/Pagination/Pagination';
@@ -31,6 +33,7 @@ const Tax = () => {
   const [page, setPage] = useState(1);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [editModal, setEditModal] = useState('');
+  const [editSuccess, setEditSuccess] = useState(false);
 
   // mock
 
@@ -148,6 +151,16 @@ const Tax = () => {
           />
         </MainForm>
       </Content>
+
+      {editModal && (
+        <EditTaxModal
+          isOpen={setEditModal}
+          isOtherOpen={setEditSuccess}
+          id={editModal}
+        />
+      )}
+
+      {editSuccess && <EditTaxSuccess isOpen={setEditSuccess} />}
     </Container>
   );
 };
