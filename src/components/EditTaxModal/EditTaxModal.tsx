@@ -57,7 +57,7 @@ const EditTaxModal = ({ isOpen, id, isOtherOpen }: EditTaxProps) => {
     try {
       if (tax !== 0) {
         isOpen('');
-        handleSuccess('Taxa excluída com sucesso!');
+        handleSuccess('Taxa deletada com sucesso!');
       }
     } catch (error) {
       handleError(error);
