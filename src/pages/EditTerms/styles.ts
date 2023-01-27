@@ -96,7 +96,31 @@ export const ButtonDivider = styled.div`
   justify-content: flex-start;
   width: 100%;
   height: 3.75rem;
+  gap: 1.75rem;
   margin-top: auto;
+`;
+
+export const CancelButton = styled.button`
+  width: 10.5rem;
+  height: 3.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid #007126;
+  border-radius: 0.75rem;
+
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1rem;
+
+  color: #007126;
+
+  transition: 500ms;
+  &:hover {
+    opacity: 0.75;
+  }
 `;
 
 export const EditButton = styled.button`
@@ -105,7 +129,6 @@ export const EditButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.875rem;
   background: #007126;
   box-shadow: -3px 7px 13px #f1f7ff;
   border: none;
