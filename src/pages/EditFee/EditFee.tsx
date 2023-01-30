@@ -31,12 +31,15 @@ import {
   Input,
   Label,
   MainForm,
+  PersonalizedSwitch,
   RadioBox,
   RadioboxColumn,
   RadioboxDivider,
   RadioboxLabel,
   SaveButton,
+  SwitchBall,
   SwitchDivider,
+  SwitchIcon,
   SwitchText,
   TextArea,
   Title,
@@ -114,14 +117,14 @@ const EditFee = () => {
             <BackTitle>Chip Shot</BackTitle>
 
             <SwitchDivider>
-              <Switch
-                checked={checked}
-                onChange={handleNewStatus}
-                activeBoxShadow="none"
-                offColor="#C6CEDD"
-                onColor="#003575"
-                uncheckedIcon={false}
-              />
+              <PersonalizedSwitch
+                isChecked={checked}
+                onClick={() => handleNewStatus()}
+              >
+                <SwitchBall isChecked={checked}>
+                  <SwitchIcon isChecked={checked} />
+                </SwitchBall>
+              </PersonalizedSwitch>
 
               <SwitchText style={{ color: checked ? '' : '#C6CEDD' }}>
                 {checked ? 'Ativo' : 'Desativado'}
