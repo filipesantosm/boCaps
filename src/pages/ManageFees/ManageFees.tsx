@@ -11,6 +11,7 @@ import {
   BackTitle,
   ButtonDivider,
   CompDivider,
+  CompText,
   Container,
   Content,
   DeleteIcon,
@@ -72,15 +73,25 @@ const ManageFees = () => {
 
           <TableBody>
             <FeeComp>
-              <CompDivider isActive>1</CompDivider>
+              <CompDivider isActive>
+                <CompText>1</CompText>
+              </CompDivider>
 
-              <CompDivider isActive>Chip Shot</CompDivider>
+              <CompDivider isActive>
+                <CompText>Chip Shot</CompText>
+              </CompDivider>
 
-              <CompDivider isActive>Segunda à Sexta</CompDivider>
+              <CompDivider isActive>
+                <CompText>Segunda à Sexta</CompText>
+              </CompDivider>
 
-              <CompDivider isActive>09</CompDivider>
+              <CompDivider isActive>
+                <CompText>09</CompText>
+              </CompDivider>
 
-              <CompDivider isActive>Ativo</CompDivider>
+              <CompDivider isActive>
+                <CompText>Ativo</CompText>
+              </CompDivider>
 
               <CompDivider isActive>
                 <VisualizeIcon onClick={() => navigate('/home/manage/001')} />
@@ -90,15 +101,25 @@ const ManageFees = () => {
             </FeeComp>
 
             <FeeComp>
-              <CompDivider isActive={false}>2</CompDivider>
+              <CompDivider isActive={false}>
+                <CompText>2</CompText>
+              </CompDivider>
 
-              <CompDivider isActive={false}>Hole-in-one</CompDivider>
+              <CompDivider isActive={false}>
+                <CompText>Hole-in-one</CompText>
+              </CompDivider>
 
-              <CompDivider isActive={false}>Segunda à Sexta</CompDivider>
+              <CompDivider isActive={false}>
+                <CompText>Segunda à Sexta</CompText>
+              </CompDivider>
 
-              <CompDivider isActive={false}>18</CompDivider>
+              <CompDivider isActive={false}>
+                <CompText>18</CompText>
+              </CompDivider>
 
-              <CompDivider isActive={false}>Desativado</CompDivider>
+              <CompDivider isActive={false}>
+                <CompText>Desativado</CompText>
+              </CompDivider>
 
               <CompDivider isActive={false}>
                 <VisualizeIcon onClick={() => navigate('/home/manage/002')} />

@@ -11,6 +11,7 @@ import {
   BackTitle,
   ButtonDivider,
   CompDivider,
+  CompText,
   Container,
   Content,
   DeleteIcon,
@@ -72,15 +73,25 @@ const ManageSales = () => {
 
           <TableBody>
             <FeeComp>
-              <CompDivider isActive>1</CompDivider>
+              <CompDivider isActive>
+                <CompText>1</CompText>
+              </CompDivider>
 
-              <CompDivider isActive>Black Friday</CompDivider>
+              <CompDivider isActive>
+                <CompText>Black Friday</CompText>
+              </CompDivider>
 
-              <CompDivider isActive>Green-fee 2x1</CompDivider>
+              <CompDivider isActive>
+                <CompText>Green-fee 2x1</CompText>
+              </CompDivider>
 
-              <CompDivider isActive>29/09/2022</CompDivider>
+              <CompDivider isActive>
+                <CompText>29/09/2022</CompText>
+              </CompDivider>
 
-              <CompDivider isActive>Ativo</CompDivider>
+              <CompDivider isActive>
+                <CompText>Ativo</CompText>
+              </CompDivider>
 
               <CompDivider isActive>
                 <VisualizeIcon onClick={() => navigate('/sales/manage/001')} />
@@ -90,15 +101,25 @@ const ManageSales = () => {
             </FeeComp>
 
             <FeeComp>
-              <CompDivider isActive={false}>2</CompDivider>
+              <CompDivider isActive={false}>
+                <CompText>2</CompText>
+              </CompDivider>
 
-              <CompDivider isActive={false}>Black Friday</CompDivider>
+              <CompDivider isActive={false}>
+                <CompText>Black Friday</CompText>
+              </CompDivider>
 
-              <CompDivider isActive={false}>Green-fee especial</CompDivider>
+              <CompDivider isActive={false}>
+                <CompText>Green-fee especial</CompText>
+              </CompDivider>
 
-              <CompDivider isActive={false}>29/09/2022</CompDivider>
+              <CompDivider isActive={false}>
+                <CompText>29/09/2022</CompText>
+              </CompDivider>
 
-              <CompDivider isActive={false}>Desativado</CompDivider>
+              <CompDivider isActive={false}>
+                <CompText>Desativado</CompText>
+              </CompDivider>
 
               <CompDivider isActive={false}>
                 <VisualizeIcon onClick={() => navigate('/sales/manage/002')} />

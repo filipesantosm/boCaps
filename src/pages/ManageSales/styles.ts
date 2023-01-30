@@ -111,7 +111,7 @@ export const TableHeader = styled.div`
   height: fit-content;
 
   display: grid;
-  grid-template-columns: 1fr 2.5fr 2.5fr 2.5fr 2.5fr 1.5fr;
+  grid-template-columns: 1fr 2.5fr 1.25fr 2.5fr 2.5fr 1.5fr;
 
   padding-right: 3.125rem;
 
@@ -163,7 +163,7 @@ export const FeeComp = styled.div`
   height: 100%;
 
   display: grid;
-  grid-template-columns: 1fr 2.5fr 2.5fr 2.5fr 2.5fr 1.5fr;
+  grid-template-columns: 1fr 2.5fr 1.25fr 2.5fr 2.5fr 1.5fr;
 
   background: #ffffff;
 
@@ -189,6 +189,10 @@ export const CompDivider = styled.div<CompProps>`
 
   color: ${props => (props.isActive ? '#515258' : '#C6CEDD')};
 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
   &:nth-of-type(1) {
     padding-left: 2.5rem;
   }
@@ -208,6 +212,14 @@ export const CompDivider = styled.div<CompProps>`
 
     padding-right: 1.375rem;
   }
+`;
+
+export const CompText = styled.div`
+  display: block;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 export const ButtonDivider = styled.div`

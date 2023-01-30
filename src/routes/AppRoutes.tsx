@@ -13,6 +13,7 @@ import Login from '../pages/Login/Login';
 import ManageFees from '../pages/ManageFees/ManageFees';
 import ManageSales from '../pages/ManageSales/ManageSales';
 import NewFee from '../pages/NewFee/NewFee';
+import NewSale from '../pages/NewSale/NewSale';
 import Sales from '../pages/Sales/Sales';
 import Tax from '../pages/Tax/Tax';
 import Terms from '../pages/Terms/Terms';
@@ -37,6 +38,7 @@ const AppRoutes = () => {
 
         <Route path="/sales" element={<Sales />} />
         <Route path="/sales/manage" element={<ManageSales />} />
+        <Route path="/sales/manage/new" element={<NewSale />} />
 
         <Route path="/tax" element={<Tax />} />
 

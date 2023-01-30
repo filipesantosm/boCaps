@@ -241,7 +241,7 @@ export const Input = styled.input<InputProps>`
 
   background: #ffffff;
 
-  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.15);
+  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
 
   font-family: 'Hind Siliguri';
   font-style: normal;
@@ -425,7 +425,7 @@ export const RadioboxColumn = styled.div<InputProps>`
 
   background: #ffffff;
 
-  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.15);
+  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
 `;
 
 export const RadioBox = styled.input`
@@ -485,7 +485,7 @@ export const TextArea = styled.textarea<InputProps>`
 
   background: #ffffff;
 
-  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.15);
+  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
 
   font-family: 'Hind Siliguri';
   font-style: normal;

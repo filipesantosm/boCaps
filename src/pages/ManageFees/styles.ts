@@ -189,6 +189,10 @@ export const CompDivider = styled.div<CompProps>`
 
   color: ${props => (props.isActive ? '#515258' : '#C6CEDD')};
 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
   &:nth-of-type(1) {
     padding-left: 2.5rem;
   }
@@ -208,6 +212,14 @@ export const CompDivider = styled.div<CompProps>`
 
     padding-right: 1.375rem;
   }
+`;
+
+export const CompText = styled.div`
+  display: block;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 export const ButtonDivider = styled.div`
