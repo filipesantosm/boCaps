@@ -290,6 +290,22 @@ export const DescriptionTextArea = styled.textarea<InputProps>`
 
   margin-bottom: 1rem;
 
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 0.75rem;
+    display: block;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #c6cedd;
+
+    border-radius: 99px;
+  }
+
   &::placeholder {
     color: #c6cedd;
   }

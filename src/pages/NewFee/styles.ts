@@ -392,6 +392,22 @@ export const TextArea = styled.textarea<InputProps>`
 
   color: #252729;
 
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 0.75rem;
+    display: block;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #c6cedd;
+
+    border-radius: 99px;
+  }
+
   &::placeholder {
     color: #c6cedd;
   }
