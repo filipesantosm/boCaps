@@ -23,7 +23,7 @@ const Header = () => {
       <LogoutDivider onClick={() => logout()}>
         <LogoutIcon />
 
-        <LogoutText>Sair</LogoutText>
+        <LogoutText>Logout</LogoutText>
       </LogoutDivider>
     </Container>
   );
