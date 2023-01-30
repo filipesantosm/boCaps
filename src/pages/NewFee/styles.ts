@@ -390,7 +390,7 @@ export const TextArea = styled.textarea<InputProps>`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #c6cedd;
+  color: #252729;
 
   &::placeholder {
     color: #c6cedd;
