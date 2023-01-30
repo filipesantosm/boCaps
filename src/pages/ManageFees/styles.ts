@@ -111,7 +111,7 @@ export const TableHeader = styled.div`
   height: fit-content;
 
   display: grid;
-  grid-template-columns: 1fr 2.5fr 2.5fr 2.5fr 2.5fr 1.5fr;
+  grid-template-columns: 1fr 2.5fr 0.875fr 2.5fr 2.5fr 1.5fr;
 
   padding-right: 3.125rem;
 
@@ -163,7 +163,7 @@ export const FeeComp = styled.div`
   height: 100%;
 
   display: grid;
-  grid-template-columns: 1fr 2.5fr 2.5fr 2.5fr 2.5fr 1.5fr;
+  grid-template-columns: 1fr 2.5fr 0.875fr 2.5fr 2.5fr 1.5fr;
 
   background: #ffffff;
 
