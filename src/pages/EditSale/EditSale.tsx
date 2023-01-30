@@ -1,17 +1,13 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
-import DeleteFee from '../../components/DeleteFee/DeleteFee';
-import DeleteFeeSuccess from '../../components/DeleteFeeSuccess/DeleteFeeSuccess';
-import FeeSavedOrRegistered from '../../components/FeeSavedOrRegistered/FeeSavedOrRegisted';
-import Header from '../../components/Header/Header';
-import NavBar from '../../components/NavBar/NavBar';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { NewSaleSchema } from '../../validations/NewSaleSchema';
+import { NewSaleProps } from '../NewSale/NewSale';
 import useImageArray from '../../hooks/useImageArray';
 import handleError, { handleSuccess } from '../../services/handleToast';
-import { NewFeeSchema } from '../../validations/NewFeeSchema';
-import { DeleteIcon } from '../ManageFees/styles';
-import { NewFeeProps } from '../NewFee/NewFee';
+import NavBar from '../../components/NavBar/NavBar';
+import background from '../../assets/img/upload.svg';
 import {
   BackDivider,
   BackIcon,
@@ -22,6 +18,9 @@ import {
   DeleteButton,
   DeleteImageIcon,
   DeleteImageTag,
+  DescriptionTextArea,
+  DisponibilityDivider,
+  DisponibilityInput,
   FormColumn,
   FormDivider,
   IconTag,
@@ -31,10 +30,6 @@ import {
   Label,
   MainForm,
   PersonalizedSwitch,
-  RadioBox,
-  RadioboxColumn,
-  RadioboxDivider,
-  RadioboxLabel,
   SaveButton,
   SwitchBall,
   SwitchDivider,
@@ -45,17 +40,21 @@ import {
   TitleDivider,
   TitleIcon,
 } from './styles';
-import background from '../../assets/img/upload.svg';
+import Header from '../../components/Header/Header';
+import SaleSavedOrRegistered from '../../components/SaleSavedOrRegistered/SaleSavedOrRegistered';
+import { DeleteIcon } from '../ManageSales/styles';
 import DeletePicture from '../../components/DeletePicture/DeletePicture';
 import DeletePictureSuccess from '../../components/DeletePictureSuccess/DeletePictureSuccess';
+import DeleteSale from '../../components/DeleteSale/DeleteSale';
+import DeleteSaleSuccess from '../../components/DeleteSaleSuccess/DeleteSaleSuccess';
 
-const EditFee = () => {
+const EditSale = () => {
   const [checked, setChecked] = useState(false);
   const [savedModal, setSavedModal] = useState(false);
   const [deleteImage, setDeleteImage] = useState('');
   const [deleteImageSuccess, setDeleteImageSuccess] = useState(false);
-  const [deleteFeeModal, setDeleteFeeModal] = useState('');
-  const [deleteFeeSuccess, setDeleteFeeSuccess] = useState(false);
+  const [deleteSaleModal, setDeleteSaleModal] = useState('');
+  const [deleteSaleSuccess, setDeleteSaleSuccess] = useState(false);
 
   const navigate = useNavigate();
 
@@ -67,13 +66,12 @@ const EditFee = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<NewFeeProps>({
+  } = useForm<NewSaleProps>({
     mode: 'onChange',
-    resolver: yupResolver(NewFeeSchema),
+    resolver: yupResolver(NewSaleSchema),
   });
 
   const formWatch = watch('image');
-  const daySelected = watch('days_of_week');
 
   const imageUrl = useImageArray(formWatch)[0];
 
@@ -86,7 +84,7 @@ const EditFee = () => {
     }
   };
 
-  const handleEditFee: SubmitHandler<NewFeeProps> = async value => {
+  const handleEditSale: SubmitHandler<NewSaleProps> = async value => {
     try {
       setSavedModal(true);
     } catch (error) {
@@ -101,19 +99,19 @@ const EditFee = () => {
       <Content>
         <Header />
 
-        <MainForm onSubmit={handleSubmit(handleEditFee)}>
+        <MainForm onSubmit={handleSubmit(handleEditSale)}>
           <TitleDivider>
             <TitleIcon />
 
-            <Title>Green-Fees</Title>
+            <Title>Promoções</Title>
           </TitleDivider>
 
           <BackDivider>
-            <IconTag onClick={() => navigate('/home/manage')}>
+            <IconTag onClick={() => navigate('/sales/manage')}>
               <BackIcon />
             </IconTag>
 
-            <BackTitle>Chip Shot</BackTitle>
+            <BackTitle>Green-fee 2x1</BackTitle>
 
             <SwitchDivider>
               <PersonalizedSwitch
@@ -133,34 +131,44 @@ const EditFee = () => {
 
           <FormDivider>
             <FormColumn>
-              <Label htmlFor="name">Nome</Label>
+              <Label htmlFor="sale_name">Nome da promoção</Label>
 
               <Input
-                hasError={!!errors.name}
                 type="text"
-                id="name"
-                {...register('name')}
-                defaultValue="Chip Shot"
+                id="sale_name"
+                {...register('sale_name')}
+                defaultValue="Black Friday"
+                hasError={!!errors.sale_name}
+              />
+
+              <Label htmlFor="name_fee">Nome do green-fee</Label>
+
+              <Input
+                type="text"
+                id="name_fee"
+                {...register('name_fee')}
+                defaultValue="Green-fee 2x1"
+                hasError={!!errors.name_fee}
               />
 
               <Label htmlFor="value">Valor (R$)</Label>
 
               <Input
-                hasError={!!errors.value}
                 type="text"
                 id="value"
                 {...register('value')}
-                defaultValue="90,00"
+                defaultValue="90"
+                hasError={!!errors.value}
               />
 
               <Label htmlFor="holes">Buracos</Label>
 
               <Input
-                hasError={!!errors.holes}
                 type="text"
                 id="holes"
                 {...register('holes')}
-                defaultValue="09"
+                defaultValue="36"
+                hasError={!!errors.holes}
               />
 
               <Label htmlFor="image">Imagem do produto</Label>
@@ -184,100 +192,97 @@ const EditFee = () => {
                   <DeleteImageIcon onClick={() => setDeleteImage('id')} />
                 </DeleteImageTag>
               </ImageDivider>
-            </FormColumn>
 
-            <FormColumn>
-              <Label htmlFor="">Dias de uso</Label>
+              <Label htmlFor="description">Descrição</Label>
 
-              <RadioboxDivider>
-                <RadioboxColumn hasError={!!errors.days_of_week}>
-                  <RadioBox
-                    type="radio"
-                    id="all"
-                    value="all"
-                    {...register('days_of_week')}
-                  />
-
-                  <RadioboxLabel
-                    htmlFor="all"
-                    isSelected={daySelected === 'all'}
-                  >
-                    Todos os dias
-                  </RadioboxLabel>
-                </RadioboxColumn>
-
-                <RadioboxColumn hasError={!!errors.days_of_week}>
-                  <RadioBox
-                    type="radio"
-                    id="weekend"
-                    value="weekend"
-                    {...register('days_of_week')}
-                  />
-
-                  <RadioboxLabel
-                    htmlFor="weekend"
-                    isSelected={daySelected === 'weekend'}
-                  >
-                    Final de semana
-                  </RadioboxLabel>
-                </RadioboxColumn>
-
-                <RadioboxColumn hasError={!!errors.days_of_week}>
-                  <RadioBox
-                    type="radio"
-                    id="weekdays"
-                    value="weekdays"
-                    {...register('days_of_week')}
-                  />
-
-                  <RadioboxLabel
-                    htmlFor="weekdays"
-                    isSelected={daySelected === 'weekdays'}
-                  >
-                    Segunda à sexta
-                  </RadioboxLabel>
-                </RadioboxColumn>
-              </RadioboxDivider>
-
-              <Label htmlFor="description">Regulamento</Label>
-
-              <TextArea
+              <DescriptionTextArea
                 hasError={!!errors.description}
                 id="description"
                 {...register('description')}
+                placeholder="Ex: Compre 2 green-fees de 18 buracos pelo preço de um!"
+                defaultValue="Compre 2 green-fees de 18 buracos pelo preço de um!
+
+                36 buracos para serem usados em um dia de preferência exceto feriados.
+
+                Validade de um ano para uso."
+              />
+            </FormColumn>
+
+            <FormColumn>
+              <Label htmlFor="">Disponibilidade de compra</Label>
+
+              <DisponibilityDivider>
+                <DisponibilityInput
+                  type="text"
+                  id="day"
+                  {...register('day')}
+                  defaultValue="20"
+                  hasError={!!errors.day}
+                  width="3.75rem"
+                />
+
+                <DisponibilityInput
+                  type="text"
+                  id="month"
+                  {...register('month')}
+                  defaultValue="09"
+                  hasError={!!errors.month}
+                  width="3.75rem"
+                />
+
+                <DisponibilityInput
+                  type="text"
+                  id="year"
+                  {...register('year')}
+                  defaultValue="2023"
+                  hasError={!!errors.year}
+                  width="4.75rem"
+                />
+              </DisponibilityDivider>
+
+              <Label htmlFor="rules">Regulamento</Label>
+
+              <TextArea
+                hasError={!!errors.rules}
+                id="rules"
+                {...register('rules')}
                 defaultValue="Jogadores iniciantes podem jogar no campo, desde que acompanhados de um Profissional de golfe credenciado
                 Autorização do Starter e emissão de etiqueta para o início do jogo.
                 Uso de pelo menos 1 Caddie por grupo de saída. O Caddie deverá ser pago diretamente pelo jogador;
                 Utilizar o Dress Code estabelecido pelo Clube."
               />
+
+              <ButtonDivider>
+                <SaveButton type="submit">Salvar mudanças</SaveButton>
+
+                <DeleteButton
+                  type="button"
+                  onClick={() => setDeleteSaleModal('id')}
+                >
+                  <DeleteIcon />
+                  Excluir
+                </DeleteButton>
+              </ButtonDivider>
             </FormColumn>
           </FormDivider>
-
-          <ButtonDivider>
-            <SaveButton type="submit">Salvar mudanças</SaveButton>
-
-            <DeleteButton type="button" onClick={() => setDeleteFeeModal('id')}>
-              <DeleteIcon />
-              Excluir
-            </DeleteButton>
-          </ButtonDivider>
         </MainForm>
       </Content>
+
       {savedModal && (
-        <FeeSavedOrRegistered isOpen={setSavedModal} text="salvo" />
+        <SaleSavedOrRegistered isOpen={setSavedModal} text="salva" />
       )}
 
-      {deleteFeeModal && (
-        <DeleteFee
-          isOpen={setDeleteFeeModal}
-          id={id}
-          isOtherOpen={setDeleteFeeSuccess}
+      {deleteSaleModal !== '' && (
+        <DeleteSale
+          id={deleteSaleModal}
+          isOpen={setDeleteSaleModal}
+          isOtherOpen={setDeleteSaleSuccess}
         />
       )}
 
-      {deleteFeeSuccess && <DeleteFeeSuccess isOpen={setDeleteFeeSuccess} />}
+      {deleteSaleSuccess && <DeleteSaleSuccess isOpen={setDeleteSaleSuccess} />}
 
-      {deleteImage && (
+      {deleteImage !== '' && (
         <DeletePicture
           id={id}
           isOpen={setDeleteImage}
@@ -292,4 +297,4 @@ const EditFee = () => {
   );
 };
 
-export default EditFee;
+export default EditSale;

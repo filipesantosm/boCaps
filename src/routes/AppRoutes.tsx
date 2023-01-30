@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import EditFee from '../pages/EditFee/EditFee';
+import EditSale from '../pages/EditSale/EditSale';
 import EditTerms from '../pages/EditTerms/EditTerms';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import Home from '../pages/Home/Home';
@@ -39,6 +40,7 @@ const AppRoutes = () => {
         <Route path="/sales" element={<Sales />} />
         <Route path="/sales/manage" element={<ManageSales />} />
         <Route path="/sales/manage/new" element={<NewSale />} />
+        <Route path="/sales/manage/:id" element={<EditSale />} />
 
         <Route path="/tax" element={<Tax />} />
 

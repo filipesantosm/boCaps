@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { HiOutlineTicket } from 'react-icons/hi';
+import { TbDiscount2 } from 'react-icons/tb';
 import { FiChevronLeft, FiTrash } from 'react-icons/fi';
 import { GoCheck } from 'react-icons/go';
 import { InputProps } from '../Login/styles';
@@ -61,7 +61,7 @@ export const TitleDivider = styled.div`
   margin-bottom: 4rem;
 `;
 
-export const TitleIcon = styled(HiOutlineTicket)`
+export const TitleIcon = styled(TbDiscount2)`
   font-size: 1.875rem;
 
   color: #003575;
@@ -264,6 +264,8 @@ export const ImageDivider = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem;
+
+  margin-bottom: 1.25rem;
 `;
 
 export const ImageInput = styled.input<InputProps>`
@@ -321,17 +323,155 @@ export const DeleteImageIcon = styled(FiTrash)`
   font-size: 1rem;
 `;
 
+export const TextArea = styled.textarea<InputProps>`
+  width: 100%;
+  height: 14rem;
+
+  padding: 1rem;
+
+  border: ${props => (props.hasError ? '1px solid #ff0000' : 'none')};
+  border-radius: 0.75rem;
+
+  outline: none;
+  resize: none;
+
+  background: #ffffff;
+
+  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
+
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+
+  color: #252729;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 0.75rem;
+    display: block;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #c6cedd;
+
+    border-radius: 99px;
+  }
+
+  &::placeholder {
+    color: #c6cedd;
+  }
+`;
+
+export const DescriptionTextArea = styled.textarea<InputProps>`
+  width: 100%;
+  height: 10.3125rem;
+
+  padding: 1rem;
+
+  border: ${props => (props.hasError ? '1px solid #ff0000' : 'none')};
+  border-radius: 0.75rem;
+
+  outline: none;
+  resize: none;
+
+  background: #ffffff;
+
+  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
+
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+
+  color: #252729;
+
+  margin-bottom: 1rem;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 0.75rem;
+    display: block;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #c6cedd;
+
+    border-radius: 99px;
+  }
+
+  &::placeholder {
+    color: #c6cedd;
+  }
+
+  @media (max-width: 1280px) {
+    margin-bottom: 0;
+  }
+`;
+
+export const DisponibilityDivider = styled.div`
+  width: 100%;
+  height: 2.625rem;
+
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+
+  margin-bottom: 1.25rem;
+`;
+
+interface DisponibilityProps {
+  width: string;
+  hasError: boolean;
+}
+
+export const DisponibilityInput = styled.input<DisponibilityProps>`
+  width: ${props => props.width};
+  height: 2.625rem;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  border: ${props => (props.hasError ? '1px solid #ff0000' : 'none')};
+  border-radius: 0.75rem;
+
+  outline: none;
+  resize: none;
+
+  background: #ffffff;
+
+  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
+
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+
+  color: #252729;
+
+  &::placeholder {
+    color: #c6cedd;
+  }
+`;
+
 export const ButtonDivider = styled.div`
   width: 100%;
   height: 3.75rem;
-
-  padding-left: 2.5rem;
 
   display: flex;
   align-items: center;
   gap: 1.875rem;
 
-  margin-top: 2.5rem;
+  margin-top: 3.25rem;
 `;
 
 export const SaveButton = styled.button`
@@ -393,124 +533,5 @@ export const DeleteButton = styled.button`
 
   @media (max-width: 1280px) {
     margin-bottom: 4.75rem;
-  }
-`;
-
-export const RadioboxDivider = styled.div`
-  width: 100%;
-  height: 2.625rem;
-
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.875rem;
-
-  margin-bottom: 2.375rem;
-`;
-
-export const RadioboxColumn = styled.div<InputProps>`
-  width: 100%;
-  height: 2.625rem;
-
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-
-  padding-left: 0.625rem;
-
-  border: ${props => (props.hasError ? '1px solid #ff0000' : 'none')};
-  border-radius: 0.75rem;
-
-  outline: none;
-  resize: none;
-
-  background: #ffffff;
-
-  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
-`;
-
-export const RadioBox = styled.input`
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  -o-appearance: none;
-  outline: none;
-  content: none;
-  &:hover {
-    cursor: pointer;
-  }
-  &:before {
-    content: '';
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 0.75rem;
-    height: 0.75rem;
-    border: none;
-    border-radius: 50%;
-    background: #c6cedd;
-  }
-  &:checked::before {
-    background: #007126;
-  }
-`;
-
-interface LabelProps {
-  isSelected: boolean;
-}
-
-export const RadioboxLabel = styled.label<LabelProps>`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1rem;
-
-  color: ${props => (props.isSelected ? '#007126' : '#003575')};
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-export const TextArea = styled.textarea<InputProps>`
-  width: 100%;
-  height: 14rem;
-
-  padding: 1rem;
-
-  border: ${props => (props.hasError ? '1px solid #ff0000' : 'none')};
-  border-radius: 0.75rem;
-
-  outline: none;
-  resize: none;
-
-  background: #ffffff;
-
-  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
-
-  font-family: 'Hind Siliguri';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1rem;
-
-  color: #252729;
-
-  overflow-x: hidden;
-  overflow-y: auto;
-
-  &::-webkit-scrollbar {
-    width: 0.75rem;
-    display: block;
-  }
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: #c6cedd;
-
-    border-radius: 99px;
-  }
-
-  &::placeholder {
-    color: #c6cedd;
   }
 `;

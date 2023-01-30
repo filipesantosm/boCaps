@@ -34,7 +34,7 @@ import Header from '../../components/Header/Header';
 import background from '../../assets/img/upload.svg';
 import SaleSavedOrRegistered from '../../components/SaleSavedOrRegistered/SaleSavedOrRegistered';
 
-interface NewSaleProps {
+export interface NewSaleProps {
   sale_name: string;
   name_fee: string;
   value: number;
