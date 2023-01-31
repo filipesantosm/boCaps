@@ -1,6 +1,13 @@
 import Header from '../../components/Header/Header';
 import NavBar from '../../components/NavBar/NavBar';
-import { Container, Content, MainForm } from './styles';
+import {
+  Container,
+  Content,
+  MainForm,
+  Title,
+  TitleDivider,
+  TitleIcon,
+} from './styles';
 
 const Payment = () => {
   return (
@@ -10,7 +17,13 @@ const Payment = () => {
       <Content>
         <Header />
 
-        <MainForm />
+        <MainForm>
+          <TitleDivider>
+            <TitleIcon />
+
+            <Title>Pagamento</Title>
+          </TitleDivider>
+        </MainForm>
       </Content>
     </Container>
   );

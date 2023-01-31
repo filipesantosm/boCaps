@@ -81,6 +81,8 @@ export const FormDivider = styled.div`
   flex-direction: column;
   gap: 0.625rem;
 
+  padding-left: 0.5rem;
+
   position: relative;
 
   &:nth-of-type(2) {
@@ -171,6 +173,8 @@ export const ButtonDivider = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+
+  padding-left: 0.5rem;
 `;
 
 export const SaveButton = styled.button`
