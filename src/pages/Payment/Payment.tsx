@@ -2,16 +2,32 @@ import { BiWalletAlt } from 'react-icons/bi';
 import { BsBank, BsFileText } from 'react-icons/bs';
 import { HiOutlineCreditCard } from 'react-icons/hi';
 import { useState } from 'react';
+import { RiHandCoinLine } from 'react-icons/ri';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import NavBar from '../../components/NavBar/NavBar';
 import {
+  AccountCard,
+  AccountContainer,
+  AccountTitle,
+  ButtonDivider,
   Card,
   CardTitle,
+  ColumnSpan,
   Container,
   Content,
+  DeleteIcon,
+  DescriptionDivider,
+  EditIcon,
+  FirstColumn,
+  IconDivider,
+  InformationDivider,
+  LastColumn,
   MainForm,
+  NewButton,
   PaymentDivider,
   PixIcon,
+  Price,
   SubtitleDivider,
   SwitchDivider,
   SwitchText,
@@ -27,6 +43,8 @@ const Payment = () => {
   const [card, setCard] = useState(false);
   const [ticket, setTicket] = useState(false);
   const [pix, setPix] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleCardStatus = async () => {
     try {
@@ -125,6 +143,51 @@ const Payment = () => {
             <BsBank size={24} />
             Conta de Recebimento
           </SubtitleDivider>
+
+          <DescriptionDivider>
+            <IconDivider>
+              <RiHandCoinLine size={24} />
+              Saldo total
+            </IconDivider>
+
+            <Price>R$ 820,00</Price>
+          </DescriptionDivider>
+
+          <AccountContainer>
+            <AccountCard>
+              <AccountTitle>Minha conta preferida</AccountTitle>
+
+              <InformationDivider>
+                <FirstColumn>
+                  <ColumnSpan>Banco</ColumnSpan>
+
+                  <ColumnSpan>Agência</ColumnSpan>
+
+                  <ColumnSpan>Conta</ColumnSpan>
+                </FirstColumn>
+
+                <FirstColumn style={{ marginRight: 'auto' }}>
+                  <ColumnSpan>Nubank</ColumnSpan>
+
+                  <ColumnSpan>0001</ColumnSpan>
+
+                  <ColumnSpan>1234567-0</ColumnSpan>
+                </FirstColumn>
+
+                <LastColumn>
+                  <EditIcon />
+
+                  <DeleteIcon />
+                </LastColumn>
+              </InformationDivider>
+            </AccountCard>
+          </AccountContainer>
+
+          <ButtonDivider>
+            <NewButton type="button" onClick={() => navigate('/payment/new')}>
+              Cadastrar nova conta
+            </NewButton>
+          </ButtonDivider>
         </MainForm>
       </Content>
     </Container>

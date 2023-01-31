@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { BiWalletAlt } from 'react-icons/bi';
+import { BsPencil } from 'react-icons/bs';
+import { FiTrash } from 'react-icons/fi';
 
 export const Container = styled.div`
   width: 100%;
@@ -156,4 +158,167 @@ export const SwitchText = styled.span`
   font-size: 1.125rem;
 
   color: #003575;
+`;
+
+export const DescriptionDivider = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+
+  padding-left: 0.5rem;
+
+  margin-bottom: 1.5rem;
+`;
+
+export const IconDivider = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.25rem;
+
+  color: #252729;
+`;
+
+export const Price = styled.span`
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.25rem;
+
+  color: #515258;
+`;
+
+export const AccountContainer = styled.div`
+  width: fit-content;
+  height: fit-content;
+
+  padding-left: 0.5rem;
+
+  margin-bottom: 2.875rem;
+`;
+
+export const AccountCard = styled.div`
+  width: 25.75rem;
+  height: fit-content;
+
+  padding: 1.25rem 1.625rem 1rem 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  background: #ffffff;
+
+  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
+
+  border: none;
+  border-radius: 1.125rem;
+`;
+
+export const AccountTitle = styled.span`
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.25rem;
+
+  color: #252729;
+`;
+
+export const InformationDivider = styled.div`
+  display: flex;
+  align-items: flex-start;
+
+  height: calc(100% - 2.5rem);
+  width: 100%;
+`;
+
+export const FirstColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+
+  margin-right: 4.75rem;
+
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+
+  color: #898f9a;
+`;
+
+export const ColumnSpan = styled.span``;
+
+export const LastColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+
+  font-size: 1.5rem;
+
+  color: #003575;
+`;
+
+export const EditIcon = styled(BsPencil)`
+  transition: 500ms;
+
+  &:hover {
+    cursor: pointer;
+
+    opacity: 0.875;
+  }
+`;
+
+export const DeleteIcon = styled(FiTrash)`
+  transition: 500ms;
+
+  &:hover {
+    cursor: pointer;
+
+    opacity: 0.875;
+  }
+`;
+
+export const ButtonDivider = styled.div`
+  padding-left: 0.5rem;
+
+  width: 100%;
+  height: 3.75rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+export const NewButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 12.5rem;
+  height: 3.75rem;
+
+  border: 1px solid #007126;
+  border-radius: 0.75rem;
+
+  background: #ffffff;
+
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1rem;
+
+  color: #007126;
+
+  transition: 500ms;
+
+  &:hover {
+    background: #007126;
+
+    color: #fff;
+  }
 `;
