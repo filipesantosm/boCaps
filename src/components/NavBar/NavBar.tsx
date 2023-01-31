@@ -3,6 +3,7 @@ import { HiOutlineTicket, HiOutlineUsers } from 'react-icons/hi';
 import { TbClipboardText, TbDiscount2 } from 'react-icons/tb';
 import { FaBalanceScaleLeft } from 'react-icons/fa';
 import { BiWalletAlt } from 'react-icons/bi';
+import { MdLockOutline } from 'react-icons/md';
 import logo from '../../assets/img/logo.svg';
 import { Container, Logo, MenuItem, MenuText } from './styles';
 
@@ -116,6 +117,24 @@ const NavBar = () => {
         >
           <TbClipboardText className="icon" style={{ fontSize: '1.5rem' }} />
           <MenuText>Termos de Uso</MenuText>
+        </NavLink>
+      </MenuItem>
+
+      <MenuItem>
+        <NavLink
+          className={({ isActive }) => (isActive ? 'active' : '')}
+          to="/edit-profile"
+          style={({ isActive }) => ({
+            color: isActive ? '#007126' : '#C6CEDD',
+            textDecoration: 'none',
+            alignItems: 'center',
+            display: 'flex',
+            width: '100%',
+            paddingLeft: '1.125rem',
+          })}
+        >
+          <MdLockOutline className="icon" style={{ fontSize: '1.5rem' }} />
+          <MenuText>Redefinir Senha</MenuText>
         </NavLink>
       </MenuItem>
     </Container>
