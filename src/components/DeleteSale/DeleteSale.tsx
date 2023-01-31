@@ -32,7 +32,7 @@ const DeleteSale = ({ id, isOpen, isOtherOpen }: ModalProps) => {
         <ErrorIcon />
 
         <Description>
-          Tem certeza de que gostaria de <span>excluir</span> a
+          Tem certeza de que deseja <span>excluir</span> a
         </Description>
         <Description style={{ marginBottom: '1.375rem' }}>
           promoção “nome da promoção”?

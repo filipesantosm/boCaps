@@ -32,7 +32,7 @@ const DeleteFee = ({ id, isOpen, isOtherOpen }: ModalProps) => {
         <ErrorIcon />
 
         <Description>
-          Tem certeza de que gostaria de <span>excluir</span> o
+          Tem certeza de que deseja <span>excluir</span> o
         </Description>
         <Description style={{ marginBottom: '1.375rem' }}>
           green-fee “nome do green-fee”?
