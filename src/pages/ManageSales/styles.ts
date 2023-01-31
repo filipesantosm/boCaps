@@ -12,6 +12,8 @@ export const Container = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
 
+  overflow: hidden;
+
   padding: 1.875rem 1.875rem 2.5rem 1rem;
 
   position: relative;

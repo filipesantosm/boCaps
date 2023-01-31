@@ -12,7 +12,7 @@ export const Container = styled.main`
 
   position: relative;
 
-  overflow-x: hidden;
+  overflow: hidden;
 
   background-image: url(${background});
   background-repeat: no-repeat;
