@@ -12,6 +12,7 @@ import handleError, { handleSuccess } from '../../services/handleToast';
 import { NewFeeSchema } from '../../validations/NewFeeSchema';
 import { DeleteIcon } from '../ManageFees/styles';
 import { NewFeeProps } from '../NewFee/NewFee';
+import Switch from '../../components/Switch/Switch';
 import {
   BackDivider,
   BackIcon,
@@ -30,15 +31,12 @@ import {
   Input,
   Label,
   MainForm,
-  PersonalizedSwitch,
   RadioBox,
   RadioboxColumn,
   RadioboxDivider,
   RadioboxLabel,
   SaveButton,
-  SwitchBall,
   SwitchDivider,
-  SwitchIcon,
   SwitchText,
   TextArea,
   Title,
@@ -116,14 +114,7 @@ const EditFee = () => {
             <BackTitle>Chip Shot</BackTitle>
 
             <SwitchDivider>
-              <PersonalizedSwitch
-                isChecked={checked}
-                onClick={() => handleNewStatus()}
-              >
-                <SwitchBall isChecked={checked}>
-                  <SwitchIcon isChecked={checked} />
-                </SwitchBall>
-              </PersonalizedSwitch>
+              <Switch isChecked={checked} onClick={handleNewStatus} />
 
               <SwitchText style={{ color: checked ? '' : '#C6CEDD' }}>
                 {checked ? 'Ativo' : 'Desativado'}

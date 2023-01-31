@@ -29,11 +29,8 @@ import {
   Input,
   Label,
   MainForm,
-  PersonalizedSwitch,
   SaveButton,
-  SwitchBall,
   SwitchDivider,
-  SwitchIcon,
   SwitchText,
   TextArea,
   Title,
@@ -47,6 +44,7 @@ import DeletePicture from '../../components/DeletePicture/DeletePicture';
 import DeletePictureSuccess from '../../components/DeletePictureSuccess/DeletePictureSuccess';
 import DeleteSale from '../../components/DeleteSale/DeleteSale';
 import DeleteSaleSuccess from '../../components/DeleteSaleSuccess/DeleteSaleSuccess';
+import Switch from '../../components/Switch/Switch';
 
 const EditSale = () => {
   const [checked, setChecked] = useState(false);
@@ -114,14 +112,7 @@ const EditSale = () => {
             <BackTitle>Green-fee 2x1</BackTitle>
 
             <SwitchDivider>
-              <PersonalizedSwitch
-                isChecked={checked}
-                onClick={() => handleNewStatus()}
-              >
-                <SwitchBall isChecked={checked}>
-                  <SwitchIcon isChecked={checked} />
-                </SwitchBall>
-              </PersonalizedSwitch>
+              <Switch isChecked={checked} onClick={handleNewStatus} />
 
               <SwitchText style={{ color: checked ? '' : '#C6CEDD' }}>
                 {checked ? 'Ativo' : 'Desativado'}

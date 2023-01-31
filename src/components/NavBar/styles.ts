@@ -12,14 +12,11 @@ export const Container = styled.div`
 `;
 
 export const Logo = styled.img`
-  width: 6.75rem;
+  width: 10.375rem;
   height: auto;
   object-fit: cover;
-  margin-bottom: 3.125rem;
+  margin-bottom: 7.125rem;
   @media (max-width: 1280px) {
-    width: 5.75rem;
-  }
-  @media (max-width: 1024px) {
     width: 6.75rem;
   }
 `;
