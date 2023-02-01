@@ -179,7 +179,7 @@ const Payment = () => {
                 </FirstColumn>
 
                 <LastColumn>
-                  <EditIcon />
+                  <EditIcon onClick={() => navigate('/payment/001')} />
 
                   <DeleteIcon onClick={() => setDeleteModal('id')} />
                 </LastColumn>

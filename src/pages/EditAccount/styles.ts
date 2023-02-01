@@ -232,6 +232,8 @@ export const ButtonDivider = styled.div`
   align-items: center;
   justify-content: flex-start;
 
+  gap: 1.875rem;
+
   padding-left: 2.5rem;
 `;
 
@@ -254,6 +256,60 @@ export const RegisterButton = styled.button`
   font-size: 1rem;
 
   color: #ffffff;
+
+  transition: 500ms;
+
+  &:hover {
+    opacity: 0.875;
+  }
+`;
+
+export const CancelButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 10.5rem;
+  height: 3.75rem;
+
+  border: 1px solid #007126;
+  border-radius: 0.875rem;
+
+  background: #fff;
+
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+
+  color: #007126;
+
+  transition: 500ms;
+
+  &:hover {
+    opacity: 0.875;
+  }
+`;
+
+export const DeleteButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  width: fit-content;
+  height: 3.75rem;
+
+  border: none;
+
+  background: #fff;
+
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1rem;
+
+  color: #003575;
 
   transition: 500ms;
 
