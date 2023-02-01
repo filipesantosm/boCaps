@@ -14,6 +14,7 @@ import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
 import ManageFees from '../pages/ManageFees/ManageFees';
 import ManageSales from '../pages/ManageSales/ManageSales';
+import NewAccount from '../pages/NewAccount/NewAccount';
 import NewFee from '../pages/NewFee/NewFee';
 import NewSale from '../pages/NewSale/NewSale';
 import Payment from '../pages/Payment/Payment';
@@ -47,6 +48,7 @@ const AppRoutes = () => {
         <Route path="/tax" element={<Tax />} />
 
         <Route path="/payment" element={<Payment />} />
+        <Route path="/payment/new" element={<NewAccount />} />
 
         <Route path="/terms" element={<Terms />} />
         <Route path="/terms/edit-terms" element={<EditTerms />} />
