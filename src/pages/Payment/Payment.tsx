@@ -38,8 +38,12 @@ import {
 import pixImg from '../../assets/img/pix.svg';
 import Switch from '../../components/Switch/Switch';
 import handleError, { handleSuccess } from '../../services/handleToast';
+import DeleteAccount from '../../components/DeleteAccount/DeleteAccount';
+import DeleteAccountSuccess from '../../components/DeleteAccountSuccess/DeleteAccountSuccess';
 
 const Payment = () => {
+  const [deleteModal, setDeleteModal] = useState('');
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
   const [card, setCard] = useState(false);
   const [ticket, setTicket] = useState(false);
   const [pix, setPix] = useState(false);
@@ -177,7 +181,7 @@ const Payment = () => {
                 <LastColumn>
                   <EditIcon />
 
-                  <DeleteIcon />
+                  <DeleteIcon onClick={() => setDeleteModal('id')} />
                 </LastColumn>
               </InformationDivider>
             </AccountCard>
@@ -190,6 +194,15 @@ const Payment = () => {
           </ButtonDivider>
         </MainForm>
       </Content>
+      {deleteModal !== '' && (
+        <DeleteAccount
+          id={deleteModal}
+          isOpen={setDeleteModal}
+          isOtherOpen={setDeleteSuccess}
+        />
+      )}
+
+      {deleteSuccess && <DeleteAccountSuccess isOpen={setDeleteSuccess} />}
     </Container>
   );
 };
