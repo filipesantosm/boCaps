@@ -61,3 +61,54 @@ export const Title = styled.span`
 
   color: #007126;
 `;
+
+export const FilterDivider = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4.625rem;
+
+  padding-left: 2.5rem;
+
+  margin-bottom: 5rem;
+`;
+
+interface FilterProps {
+  isSelected: boolean;
+}
+
+export const FilterText = styled.span<FilterProps>`
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2rem;
+
+  position: relative;
+
+  color: ${props => (props.isSelected ? '#007126' : '#C6CEDD')};
+
+  transition: 500ms;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    bottom: -0.125rem;
+    left: 0;
+
+    display: block;
+
+    width: 2.625rem;
+    height: 0.375rem;
+
+    border: none;
+    border-radius: 1px;
+
+    background: #00182c;
+
+    visibility: ${props => (props.isSelected ? 'visible' : 'hidden')};
+  }
+`;
