@@ -127,6 +127,18 @@ export const TableHeader = styled.div`
   margin-bottom: 2.375rem;
 `;
 
+export const ClientHeader = styled.div`
+  width: 100%;
+  height: fit-content;
+
+  display: grid;
+  grid-template-columns: 1fr 6fr 2fr 2fr 1fr;
+
+  padding-right: 3.125rem;
+
+  margin-bottom: 2.375rem;
+`;
+
 export const TableHeaderDivider = styled.div`
   display: flex;
   align-items: center;
@@ -152,6 +164,49 @@ export const TableHeaderDivider = styled.div`
   }
 
   &:nth-of-type(4) {
+    justify-content: flex-end;
+
+    padding-right: 1.375rem;
+  }
+`;
+
+export const ClientHeaderDivider = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.75rem;
+
+  color: #007126;
+
+  &:nth-of-type(1) {
+    padding-left: 2.5rem;
+  }
+
+  &:nth-of-type(2) {
+    gap: 1.625rem;
+  }
+
+  &:nth-of-type(3) {
+    justify-content: center;
+
+    color: #003575;
+
+    gap: 0.625rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &:nth-of-type(4) {
+    justify-content: center;
+  }
+
+  &:nth-of-type(5) {
     justify-content: flex-end;
 
     padding-right: 1.375rem;
@@ -236,6 +291,21 @@ export const UserComp = styled.div`
   border-radius: 1.5rem;
 `;
 
+export const ClientComp = styled.div`
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 6fr 2fr 2fr 1fr;
+
+  background: #ffffff;
+
+  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
+
+  border: none;
+  border-radius: 1.5rem;
+`;
+
 export const CompDivider = styled.div`
   display: flex;
   align-items: center;
@@ -261,6 +331,43 @@ export const CompDivider = styled.div`
   }
 
   &:nth-of-type(4) {
+    justify-content: flex-end;
+
+    padding-right: 1.375rem;
+  }
+`;
+
+export const ClientCompDivider = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+
+  color: #515258;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &:nth-of-type(1) {
+    padding-left: 2.5rem;
+  }
+
+  &:nth-of-type(3) {
+    justify-content: center;
+
+    padding-right: 2.375rem;
+  }
+
+  &:nth-of-type(4) {
+    justify-content: center;
+  }
+
+  &:nth-of-type(5) {
     justify-content: flex-end;
 
     padding-right: 1.375rem;
