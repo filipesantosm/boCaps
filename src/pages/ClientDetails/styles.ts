@@ -90,7 +90,7 @@ export const Subtitle = styled.span`
   color: #c6cedd;
 
   position: absolute;
-  right: -7rem;
+  right: -8rem;
   bottom: 0.3rem;
 `;
 
