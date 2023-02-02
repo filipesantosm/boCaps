@@ -5,6 +5,7 @@ import {
   Routes,
 } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import ClubDetails from '../pages/ClubDetails/ClubDetails';
 import EditAccount from '../pages/EditAccount/EditAccount';
 import EditFee from '../pages/EditFee/EditFee';
 import EditProfile from '../pages/EditProfile/EditProfile';
@@ -50,6 +51,7 @@ const AppRoutes = () => {
         <Route path="/tax" element={<Tax />} />
 
         <Route path="/users" element={<Users />} />
+        <Route path="/users/club/:id" element={<ClubDetails />} />
 
         <Route path="/payment" element={<Payment />} />
         <Route path="/payment/new" element={<NewAccount />} />

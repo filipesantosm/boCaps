@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
+import DeleteClient from '../../components/DeleteClient/DeleteClient';
+import DeleteClientSuccess from '../../components/DeleteClientSuccess/DeleteClientSuccess';
+import DeleteClub from '../../components/DeleteClub/DeleteClub';
+import DeleteClubSuccess from '../../components/DeleteClubSuccess/DeleteClubSuccess';
 import Header from '../../components/Header/Header';
 import NavBar from '../../components/NavBar/NavBar';
 import SmallPagination from '../../components/Pagination/Pagination';
@@ -35,6 +39,10 @@ const Users = () => {
   const [clubPage, setClubPage] = useState(1);
   const [clientPage, setClientPage] = useState(1);
   const [dropdown, setDropdown] = useState(false);
+  const [deleteClub, setDeleteClub] = useState('');
+  const [deleteClient, setDeleteClient] = useState('');
+  const [deleteClubSuccess, setDeleteClubSuccess] = useState(false);
+  const [deleteClientSuccess, setDeleteClientSuccess] = useState(false);
 
   const navigate = useNavigate();
 
@@ -109,7 +117,7 @@ const Users = () => {
                   </CompDivider>
 
                   <CompDivider>
-                    <DeleteIcon />
+                    <DeleteIcon onClick={() => setDeleteClub('id')} />
                   </CompDivider>
                 </UserComp>
               </TableBody>
@@ -171,7 +179,7 @@ const Users = () => {
                   </ClientCompDivider>
 
                   <ClientCompDivider>
-                    <DeleteIcon />
+                    <DeleteIcon onClick={() => setDeleteClient('id')} />
                   </ClientCompDivider>
                 </ClientComp>
               </TableBody>
@@ -179,12 +187,33 @@ const Users = () => {
               <SmallPagination
                 total={5}
                 currentPage={clientPage}
-                handleChange={() => setClubPage(clientPage + 1)}
+                handleChange={() => setClientPage(clientPage + 1)}
               />
             </>
           )}
         </MainForm>
       </Content>
+      {deleteClub !== '' && (
+        <DeleteClub
+          id={deleteClub}
+          isOpen={setDeleteClub}
+          isOtherOpen={setDeleteClubSuccess}
+        />
+      )}
+
+      {deleteClubSuccess && <DeleteClubSuccess isOpen={setDeleteClubSuccess} />}
+
+      {deleteClient !== '' && (
+        <DeleteClient
+          id={deleteClient}
+          isOpen={setDeleteClient}
+          isOtherOpen={setDeleteClientSuccess}
+        />
+      )}
+
+      {deleteClientSuccess && (
+        <DeleteClientSuccess isOpen={setDeleteClientSuccess} />
+      )}
     </Container>
   );
 };
