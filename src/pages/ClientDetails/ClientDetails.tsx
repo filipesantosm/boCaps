@@ -83,7 +83,7 @@ const ClientDetails = () => {
                 readOnly
               />
 
-              <Label htmlFor="born_date">Nome Fantasia</Label>
+              <Label htmlFor="born_date">Data de Nascimento</Label>
 
               <Input
                 type="text"
