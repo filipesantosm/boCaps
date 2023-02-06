@@ -81,7 +81,7 @@ const Login = () => {
           />
         </FormDivider>
 
-        <FormDivider>
+        <FormDivider style={{ marginBottom: '3.625rem' }}>
           <Input
             type={visible ? 'text' : 'password'}
             hasError={!!errors.password}
@@ -97,9 +97,9 @@ const Login = () => {
           )}
         </FormDivider>
 
-        <ForgotPassword onClick={() => navigate('/forgot-password')}>
+        {/* <ForgotPassword onClick={() => navigate('/forgot-password')}>
           Esqueci a senha
-        </ForgotPassword>
+        </ForgotPassword> */}
 
         <LoginButton type="submit">Login</LoginButton>
       </Content>
