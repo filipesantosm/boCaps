@@ -66,6 +66,18 @@ export const AccountSelect = ({
                 ...prev,
                 width: '100%',
                 outline: 'none',
+                minHeight: '2.625rem',
+                maxHeight: '2.625rem',
+              }),
+              valueContainer: prev => ({
+                ...prev,
+                minHeight: '2.625rem',
+                maxHeight: '2.625rem',
+              }),
+              indicatorsContainer: prev => ({
+                ...prev,
+                minHeight: '2.625rem',
+                maxHeight: '2.625rem',
               }),
               menu: prev => ({
                 ...prev,
