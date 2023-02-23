@@ -218,6 +218,11 @@ export const ImageInput = styled.input<InputProps>`
   ::-webkit-file-upload-button {
     display: none;
   }
+
+  &::file-selector-button {
+    display: none;
+  }
+
   &:hover {
     cursor: pointer;
   }
