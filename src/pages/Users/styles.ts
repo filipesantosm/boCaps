@@ -120,7 +120,7 @@ export const TableHeader = styled.div`
   height: fit-content;
 
   display: grid;
-  grid-template-columns: 1fr 8fr 2fr 1fr;
+  grid-template-columns: 1fr 12fr 2fr 1fr;
 
   padding-right: 3.125rem;
 
@@ -132,7 +132,7 @@ export const ClientHeader = styled.div`
   height: fit-content;
 
   display: grid;
-  grid-template-columns: 1fr 6fr 2fr 2fr 1fr;
+  grid-template-columns: 1fr 10fr 2fr 2fr 1fr;
 
   padding-right: 3.125rem;
 
@@ -281,7 +281,7 @@ export const UserComp = styled.div`
   height: 100%;
 
   display: grid;
-  grid-template-columns: 1fr 8fr 2fr 1fr;
+  grid-template-columns: 1fr 12fr 2fr 1fr;
 
   background: #ffffff;
 
@@ -296,7 +296,7 @@ export const ClientComp = styled.div`
   height: 100%;
 
   display: grid;
-  grid-template-columns: 1fr 6fr 2fr 2fr 1fr;
+  grid-template-columns: 1fr 10fr 2fr 2fr 1fr;
 
   background: #ffffff;
 
