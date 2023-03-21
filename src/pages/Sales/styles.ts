@@ -172,10 +172,33 @@ export const Table = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 2.75rem;
-  grid-template-rows: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   grid-row-gap: 0.625rem;
 
   margin-bottom: auto;
+
+  @media (max-width: 1600px) {
+    @media (max-height: 900px) {
+      grid-template-rows: auto;
+      grid-template-columns: 1fr;
+
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      &::-webkit-scrollbar {
+        width: 0.00001px;
+        display: block;
+      }
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: transparent;
+      }
+
+      padding: 0 3.5rem 1rem 0;
+    }
+  }
 `;
 
 export const GreenFeeComp = styled.div`
@@ -197,6 +220,13 @@ export const GreenFeeComp = styled.div`
 
   &:hover {
     cursor: pointer;
+  }
+
+  @media (max-width: 1600px) {
+    @media (max-height: 900px) {
+      min-height: 2.5rem;
+      max-height: 2.5rem;
+    }
   }
 `;
 

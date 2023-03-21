@@ -16,8 +16,19 @@ export const Logo = styled.img`
   height: auto;
   object-fit: cover;
   margin-bottom: 7.125rem;
+
+  @media (max-width: 1400px) {
+    margin-bottom: 3rem;
+
+    width: 8.75rem;
+  }
+
   @media (max-width: 1280px) {
-    width: 6.75rem;
+    @media (min-height: 830px) {
+      margin-bottom: 7.125rem;
+
+      width: 10.375rem;
+    }
   }
 `;
 
@@ -51,11 +62,15 @@ export const MenuItem = styled.div`
     cursor: pointer;
     opacity: 0.75;
   }
-  @media (max-width: 1280px) {
-    margin-bottom: 2rem;
+
+  @media (max-width: 1400px) {
+    margin-bottom: 1.75rem;
   }
-  @media (max-width: 1024px) {
-    margin-bottom: 2.5rem;
+
+  @media (max-width: 1280px) {
+    @media (min-height: 830px) {
+      margin-bottom: 2.25rem;
+    }
   }
 `;
 

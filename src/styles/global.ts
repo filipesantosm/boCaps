@@ -17,29 +17,26 @@ const GlobalStyle = createGlobalStyle`
     p, h1, h2 {
       margin: 0;
     }
+
+
     html {
     @media (min-width: 1600px) {
       font-size: 100%;
     }
     @media (max-width: 1400px) {
-      font-size: 93.75%;
+      font-size: 83.75%;
     }
-    @media (max-width: 1366px) {
-      font-size: 83.5%;
-    }
-    @media (max-width: 1280px) {
+    @media (max-width: 1100px) {
       font-size: 75%;
     }
-    @media (max-width: 1024px) {
-      font-size: 70%;
-    }
-    @media (max-width: 900px) {
+    @media (max-width: 700px) {
       font-size: 60%;
     }
-    @media (max-width: 600px) {
-      font-size: 58.75%;
+    @media (max-width: 500px) {
+      font-size: 50%;
     }
   }
+
   body {
     background-color: #FFFFFF;
     height: 100vh;

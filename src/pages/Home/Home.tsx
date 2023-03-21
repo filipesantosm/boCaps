@@ -76,14 +76,6 @@ const Home = () => {
       id: 12,
       name: 'R Golf Club',
     },
-    {
-      id: 13,
-      name: 'S Golf Club',
-    },
-    {
-      id: 14,
-      name: 'T Golf Club',
-    },
   ];
 
   return (
