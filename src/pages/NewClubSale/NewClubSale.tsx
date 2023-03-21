@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
@@ -47,10 +47,13 @@ export interface NewSaleProps {
   rules: string;
 }
 
-const NewSale = () => {
+const NewClubSale = () => {
   const [registeredModal, setRegisteredModal] = useState(false);
 
   const navigate = useNavigate();
+
+  const params = useParams();
+  const id = params.clubId as string;
 
   const {
     register,
@@ -89,7 +92,7 @@ const NewSale = () => {
           </TitleDivider>
 
           <BackDivider>
-            <IconTag onClick={() => navigate('/sales/manage')}>
+            <IconTag onClick={() => navigate(`/sales/${id}`)}>
               <BackIcon />
             </IconTag>
 
@@ -212,7 +215,7 @@ const NewSale = () => {
 
                 <CancelButton
                   type="button"
-                  onClick={() => navigate('/sales/manage')}
+                  onClick={() => navigate(`/sales/${id}`)}
                 >
                   Cancelar
                 </CancelButton>
@@ -228,4 +231,4 @@ const NewSale = () => {
   );
 };
 
-export default NewSale;
+export default NewClubSale;

@@ -25,6 +25,12 @@ import Sales from '../pages/Sales/Sales';
 import Tax from '../pages/Tax/Tax';
 import Terms from '../pages/Terms/Terms';
 import Users from '../pages/Users/Users';
+import GreenFeeDetail from '../pages/GreenFeeDetail/GreenFeeDetail';
+import EditClubFee from '../pages/EditClubFee/EditClubFee';
+import NewClubFee from '../pages/NewClubFee/NewClubFee';
+import ClubSales from '../pages/ClubSales/ClubSales';
+import NewClubSale from '../pages/NewClubSale/NewClubSale';
+import EditClubSale from '../pages/EditClubSale/EditClubSale';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -40,11 +46,17 @@ const AppRoutes = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
 
         <Route path="/home" element={<Home />} />
+        <Route path="/home/:clubId" element={<GreenFeeDetail />} />
+        <Route path="/home/:clubId/:id" element={<EditClubFee />} />
+        <Route path="/home/:clubId/new" element={<NewClubFee />} />
         <Route path="/home/manage" element={<ManageFees />} />
         <Route path="/home/manage/new" element={<NewFee />} />
         <Route path="/home/manage/:id" element={<EditFee />} />
 
         <Route path="/sales" element={<Sales />} />
+        <Route path="/sales/:clubId" element={<ClubSales />} />
+        <Route path="/sales/:clubId/:id" element={<EditClubSale />} />
+        <Route path="/sales/:clubId/new" element={<NewClubSale />} />
         <Route path="/sales/manage" element={<ManageSales />} />
         <Route path="/sales/manage/new" element={<NewSale />} />
         <Route path="/sales/manage/:id" element={<EditSale />} />

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import DeleteSale from '../../components/DeleteSale/DeleteSale';
 import DeleteSaleSuccess from '../../components/DeleteSaleSuccess/DeleteSaleSuccess';
 import Header from '../../components/Header/Header';
@@ -28,12 +28,15 @@ import {
   VisualizeIcon,
 } from './styles';
 
-const ManageSales = () => {
+const ClubSales = () => {
   const [page, setPage] = useState(1);
   const [deleteModal, setDeleteModal] = useState('');
   const [deleteSuccess, setDeleteSuccess] = useState(false);
 
   const navigate = useNavigate();
+
+  const params = useParams();
+  const id = params.clubId as string;
 
   return (
     <Container>
@@ -54,7 +57,7 @@ const ManageSales = () => {
               <BackIcon />
             </IconTag>
 
-            <BackTitle>Gerenciar promoções padrão</BackTitle>
+            <BackTitle>Atenas Golf Club</BackTitle>
           </BackDivider>
 
           <TableHeader>
@@ -94,7 +97,7 @@ const ManageSales = () => {
               </CompDivider>
 
               <CompDivider isActive>
-                <VisualizeIcon onClick={() => navigate('/sales/manage/001')} />
+                <VisualizeIcon onClick={() => navigate(`/sales/${id}/001`)} />
 
                 <DeleteIcon onClick={() => setDeleteModal('id')} />
               </CompDivider>
@@ -122,7 +125,7 @@ const ManageSales = () => {
               </CompDivider>
 
               <CompDivider isActive={false}>
-                <VisualizeIcon onClick={() => navigate('/sales/manage/002')} />
+                <VisualizeIcon onClick={() => navigate(`/sales/${id}/002`)} />
 
                 <DeleteIcon onClick={() => setDeleteModal('id')} />
               </CompDivider>
@@ -138,7 +141,7 @@ const ManageSales = () => {
 
             <NewButton
               type="button"
-              onClick={() => navigate('/sales/manage/new')}
+              onClick={() => navigate(`/sales/${id}/new`)}
             >
               Criar nova promoção
             </NewButton>
@@ -158,4 +161,4 @@ const ManageSales = () => {
   );
 };
 
-export default ManageSales;
+export default ClubSales;

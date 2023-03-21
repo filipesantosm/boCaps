@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import DeleteSale from '../../components/DeleteSale/DeleteSale';
-import DeleteSaleSuccess from '../../components/DeleteSaleSuccess/DeleteSaleSuccess';
+import { useNavigate, useParams } from 'react-router-dom';
+import DeleteFee from '../../components/DeleteFee/DeleteFee';
+import DeleteFeeSuccess from '../../components/DeleteFeeSuccess/DeleteFeeSuccess';
 import Header from '../../components/Header/Header';
 import NavBar from '../../components/NavBar/NavBar';
 import SmallPagination from '../../components/Pagination/Pagination';
@@ -28,12 +28,15 @@ import {
   VisualizeIcon,
 } from './styles';
 
-const ManageSales = () => {
+const GreenFeeDetail = () => {
   const [page, setPage] = useState(1);
   const [deleteModal, setDeleteModal] = useState('');
   const [deleteSuccess, setDeleteSuccess] = useState(false);
 
   const navigate = useNavigate();
+
+  const params = useParams();
+  const id = params.clubId as string;
 
   return (
     <Container>
@@ -46,25 +49,25 @@ const ManageSales = () => {
           <TitleDivider>
             <TitleIcon />
 
-            <Title>Promoções</Title>
+            <Title>Green-Fees</Title>
           </TitleDivider>
 
           <BackDivider>
-            <IconTag onClick={() => navigate('/sales')}>
+            <IconTag onClick={() => navigate('/home')}>
               <BackIcon />
             </IconTag>
 
-            <BackTitle>Gerenciar promoções padrão</BackTitle>
+            <BackTitle>Atenas Golf Club</BackTitle>
           </BackDivider>
 
           <TableHeader>
             <TableHeaderDivider>N°</TableHeaderDivider>
 
-            <TableHeaderDivider>Promoção</TableHeaderDivider>
-
             <TableHeaderDivider>Nome</TableHeaderDivider>
 
-            <TableHeaderDivider>Validade</TableHeaderDivider>
+            <TableHeaderDivider>Uso</TableHeaderDivider>
+
+            <TableHeaderDivider>Buracos</TableHeaderDivider>
 
             <TableHeaderDivider>Status</TableHeaderDivider>
 
@@ -78,15 +81,15 @@ const ManageSales = () => {
               </CompDivider>
 
               <CompDivider isActive>
-                <CompText>Black Friday</CompText>
+                <CompText>Chip Shot</CompText>
               </CompDivider>
 
               <CompDivider isActive>
-                <CompText>Green-fee 2x1</CompText>
+                <CompText>Segunda à Sexta</CompText>
               </CompDivider>
 
               <CompDivider isActive>
-                <CompText>29/09/2022</CompText>
+                <CompText>09</CompText>
               </CompDivider>
 
               <CompDivider isActive>
@@ -94,7 +97,7 @@ const ManageSales = () => {
               </CompDivider>
 
               <CompDivider isActive>
-                <VisualizeIcon onClick={() => navigate('/sales/manage/001')} />
+                <VisualizeIcon onClick={() => navigate(`/home/${id}/001`)} />
 
                 <DeleteIcon onClick={() => setDeleteModal('id')} />
               </CompDivider>
@@ -106,15 +109,15 @@ const ManageSales = () => {
               </CompDivider>
 
               <CompDivider isActive={false}>
-                <CompText>Black Friday</CompText>
+                <CompText>Hole-in-one</CompText>
               </CompDivider>
 
               <CompDivider isActive={false}>
-                <CompText>Green-fee especial</CompText>
+                <CompText>Segunda à Sexta</CompText>
               </CompDivider>
 
               <CompDivider isActive={false}>
-                <CompText>29/09/2022</CompText>
+                <CompText>18</CompText>
               </CompDivider>
 
               <CompDivider isActive={false}>
@@ -122,7 +125,7 @@ const ManageSales = () => {
               </CompDivider>
 
               <CompDivider isActive={false}>
-                <VisualizeIcon onClick={() => navigate('/sales/manage/002')} />
+                <VisualizeIcon onClick={() => navigate(`/home/${id}/001`)} />
 
                 <DeleteIcon onClick={() => setDeleteModal('id')} />
               </CompDivider>
@@ -138,24 +141,24 @@ const ManageSales = () => {
 
             <NewButton
               type="button"
-              onClick={() => navigate('/sales/manage/new')}
+              onClick={() => navigate(`/home/${id}/new`)}
             >
-              Criar nova promoção
+              Criar novo green-fee
             </NewButton>
           </ButtonDivider>
         </MainForm>
       </Content>
       {deleteModal !== '' && (
-        <DeleteSale
+        <DeleteFee
           id={deleteModal}
           isOpen={setDeleteModal}
           isOtherOpen={setDeleteSuccess}
         />
       )}
 
-      {deleteSuccess && <DeleteSaleSuccess isOpen={setDeleteSuccess} />}
+      {deleteSuccess && <DeleteFeeSuccess isOpen={setDeleteSuccess} />}
     </Container>
   );
 };
 
-export default ManageSales;
+export default GreenFeeDetail;

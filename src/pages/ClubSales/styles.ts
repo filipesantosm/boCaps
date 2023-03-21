@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { HiOutlineTicket } from 'react-icons/hi';
 import { FiChevronLeft } from 'react-icons/fi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { FiTrash } from 'react-icons/fi';
+import { TbDiscount2 } from 'react-icons/tb';
 
 export const Container = styled.div`
   width: 100%;
@@ -49,7 +49,7 @@ export const TitleDivider = styled.div`
   margin-bottom: 4rem;
 `;
 
-export const TitleIcon = styled(HiOutlineTicket)`
+export const TitleIcon = styled(TbDiscount2)`
   font-size: 1.875rem;
 
   color: #003575;
@@ -113,7 +113,7 @@ export const TableHeader = styled.div`
   height: fit-content;
 
   display: grid;
-  grid-template-columns: 1fr 2.5fr 0.875fr 2.5fr 2.5fr 1.5fr;
+  grid-template-columns: 1fr 2.5fr 1.25fr 2.5fr 2.5fr 1.5fr;
 
   padding-right: 3.125rem;
 
@@ -165,7 +165,7 @@ export const FeeComp = styled.div`
   height: 100%;
 
   display: grid;
-  grid-template-columns: 1fr 2.5fr 0.875fr 2.5fr 2.5fr 1.5fr;
+  grid-template-columns: 1fr 2.5fr 1.25fr 2.5fr 2.5fr 1.5fr;
 
   background: #ffffff;
 

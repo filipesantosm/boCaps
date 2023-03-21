@@ -128,7 +128,10 @@ const Sales = () => {
           <Table>
             {sales.length > 0 &&
               sales.map(sale => (
-                <GreenFeeComp key={sale.id}>
+                <GreenFeeComp
+                  key={sale.id}
+                  onClick={() => navigate(`/sales/${sale.id}`)}
+                >
                   <CompText style={{ width: '4.375rem' }}>{sale.id}</CompText>
 
                   <CompText>{sale.name}</CompText>

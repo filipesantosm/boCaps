@@ -46,7 +46,7 @@ import DeleteSale from '../../components/DeleteSale/DeleteSale';
 import DeleteSaleSuccess from '../../components/DeleteSaleSuccess/DeleteSaleSuccess';
 import Switch from '../../components/Switch/Switch';
 
-const EditSale = () => {
+const EditClubSale = () => {
   const [checked, setChecked] = useState(false);
   const [savedModal, setSavedModal] = useState(false);
   const [deleteImage, setDeleteImage] = useState('');
@@ -57,6 +57,7 @@ const EditSale = () => {
   const navigate = useNavigate();
 
   const params = useParams();
+  const clubId = params.clubId as string;
   const id = params.id as string;
 
   const {
@@ -105,7 +106,7 @@ const EditSale = () => {
           </TitleDivider>
 
           <BackDivider>
-            <IconTag onClick={() => navigate('/sales/manage')}>
+            <IconTag onClick={() => navigate(`/sales/${clubId}`)}>
               <BackIcon />
             </IconTag>
 
@@ -288,4 +289,4 @@ const EditSale = () => {
   );
 };
 
-export default EditSale;
+export default EditClubSale;

@@ -194,6 +194,10 @@ export const GreenFeeComp = styled.div`
 
   border: none;
   border-radius: 1.5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const CompText = styled.span`
