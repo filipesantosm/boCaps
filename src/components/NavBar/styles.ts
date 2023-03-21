@@ -17,7 +17,7 @@ export const Logo = styled.img`
   object-fit: cover;
   margin-bottom: 7.125rem;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 1380px) {
     margin-bottom: 3rem;
 
     width: 8.75rem;
@@ -63,7 +63,7 @@ export const MenuItem = styled.div`
     opacity: 0.75;
   }
 
-  @media (max-width: 1400px) {
+  @media (max-width: 1380px) {
     margin-bottom: 1.75rem;
   }
 
