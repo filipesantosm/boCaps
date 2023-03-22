@@ -292,6 +292,8 @@ export const ButtonDivider = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+
+  margin-bottom: 1rem;
 `;
 
 export const NewButton = styled.button`

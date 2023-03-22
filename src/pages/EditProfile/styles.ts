@@ -177,6 +177,8 @@ export const ButtonDivider = styled.div`
   justify-content: flex-start;
 
   padding-left: 0.5rem;
+
+  margin-bottom: 1rem;
 `;
 
 export const SaveButton = styled.button`

@@ -429,6 +429,7 @@ export const ButtonDivider = styled.div`
   gap: 1.875rem;
 
   margin-top: 3.25rem;
+  margin-bottom: 1rem;
 `;
 
 export const SaveButton = styled.button`
