@@ -321,6 +321,7 @@ export const RadioboxColumn = styled.div<InputProps>`
   gap: 0.625rem;
 
   padding-left: 0.625rem;
+  padding-right: 0.625rem;
 
   border: ${props => (props.hasError ? '1px solid #ff0000' : 'none')};
   border-radius: 0.75rem;
@@ -331,6 +332,10 @@ export const RadioboxColumn = styled.div<InputProps>`
   background: #ffffff;
 
   box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const RadioBox = styled.input`
@@ -364,6 +369,12 @@ interface LabelProps {
 }
 
 export const RadioboxLabel = styled.label<LabelProps>`
+  display: block;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
   font-family: 'Hind Siliguri';
   font-style: normal;
   font-weight: 400;

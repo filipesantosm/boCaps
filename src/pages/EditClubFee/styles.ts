@@ -382,6 +382,10 @@ export const RadioboxColumn = styled.div<InputProps>`
   background: #ffffff;
 
   box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const RadioBox = styled.input`
@@ -415,6 +419,12 @@ interface LabelProps {
 }
 
 export const RadioboxLabel = styled.label<LabelProps>`
+  display: block;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
   font-family: 'Hind Siliguri';
   font-style: normal;
   font-weight: 400;
