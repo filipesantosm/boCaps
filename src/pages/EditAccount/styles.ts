@@ -235,6 +235,7 @@ export const ButtonDivider = styled.div`
   gap: 1.875rem;
 
   padding-left: 2.5rem;
+  margin-bottom: 1rem;
 `;
 
 export const RegisterButton = styled.button`

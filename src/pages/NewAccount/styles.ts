@@ -233,6 +233,7 @@ export const ButtonDivider = styled.div`
   justify-content: flex-start;
 
   padding-left: 2.5rem;
+  margin-bottom: 1rem;
 `;
 
 export const RegisterButton = styled.button`
