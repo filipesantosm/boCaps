@@ -181,7 +181,7 @@ export const TaxComp = styled.div`
   box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
 
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 100px;
 `;
 
 export const TaxCompDivider = styled.div`
