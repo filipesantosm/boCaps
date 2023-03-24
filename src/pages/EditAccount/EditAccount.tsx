@@ -203,7 +203,7 @@ const EditAccount = () => {
 
                 <EspecialColumn>
                   <Label htmlFor="digit" style={{ marginBottom: '0' }}>
-                    Conta
+                    Dígito
                   </Label>
 
                   <Input
