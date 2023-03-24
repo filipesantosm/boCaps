@@ -112,7 +112,7 @@ const Sales = () => {
                 type="text"
                 id="search"
                 name="search"
-                placeholder="Buscar promoção"
+                placeholder="Buscar clube"
               />
             </SearchDivider>
           </TableHeader>
