@@ -102,6 +102,8 @@ export const TableHeaderDivider = styled.div`
 
     gap: 0.875rem;
 
+    position: relative;
+
     &:hover {
       cursor: pointer;
     }
@@ -281,4 +283,52 @@ export const WarnIcon = styled(RiErrorWarningLine)`
   color: #f8c309;
 
   font-size: 1.375rem;
+`;
+
+export const BirthdayFilter = styled.div`
+  width: 6.5rem;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding: 0.625rem 1.875rem 0.375rem 0.875rem;
+
+  background: #ffffff;
+
+  border: none;
+  border-radius: 0px 0px 20px 20px;
+
+  position: absolute;
+  top: 2.75rem;
+  left: 0;
+  z-index: 999;
+
+  filter: drop-shadow(0px 2px 5px rgba(175, 176, 197, 0.1));
+`;
+
+export const BirthdayText = styled.div`
+  width: 100%;
+
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.875rem;
+
+  letter-spacing: 0.005em;
+
+  padding-bottom: 0.625rem;
+
+  color: #515258;
+
+  border-bottom: 1px solid #e4e7f9;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:last-of-type {
+    border-bottom: none;
+  }
 `;

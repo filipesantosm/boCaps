@@ -7,6 +7,8 @@ import NavBar from '../../components/NavBar/NavBar';
 import SmallPagination from '../../components/Pagination/Pagination';
 import handleError, { handleSuccess } from '../../services/handleToast';
 import {
+  BirthdayFilter,
+  BirthdayText,
   Container,
   Content,
   DeleteIcon,
@@ -31,6 +33,7 @@ import {
 
 const Tax = () => {
   const [page, setPage] = useState(1);
+  const [taxFilter, setTaxFilter] = useState('all');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [editModal, setEditModal] = useState('');
   const [editSuccess, setEditSuccess] = useState(false);
@@ -91,6 +94,25 @@ const Tax = () => {
 
             <TableHeaderDivider onClick={() => setDropdownOpen(!dropdownOpen)}>
               Taxa {dropdownOpen ? <BiChevronUp /> : <BiChevronDown />}
+              {dropdownOpen && (
+                <BirthdayFilter>
+                  <BirthdayText onClick={() => setTaxFilter('cresc')}>
+                    Crescente
+                  </BirthdayText>
+
+                  <BirthdayText onClick={() => setTaxFilter('desc')}>
+                    Decrescente
+                  </BirthdayText>
+
+                  <BirthdayText onClick={() => setTaxFilter('noTax')}>
+                    Sem taxa
+                  </BirthdayText>
+
+                  <BirthdayText onClick={() => setTaxFilter('all')}>
+                    Todos
+                  </BirthdayText>
+                </BirthdayFilter>
+              )}
             </TableHeaderDivider>
 
             <TableHeaderDivider />
