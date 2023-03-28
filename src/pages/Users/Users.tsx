@@ -9,6 +9,8 @@ import Header from '../../components/Header/Header';
 import NavBar from '../../components/NavBar/NavBar';
 import SmallPagination from '../../components/Pagination/Pagination';
 import {
+  BirthdayFilter,
+  BirthdayText,
   ClientComp,
   ClientCompDivider,
   ClientHeader,
@@ -36,6 +38,7 @@ import {
 
 const Users = () => {
   const [tab, setTab] = useState('clubs');
+  const [birthdayFilter, setBirthdayFilter] = useState('all');
   const [clubPage, setClubPage] = useState(1);
   const [clientPage, setClientPage] = useState(1);
   const [dropdown, setDropdown] = useState(false);
@@ -151,6 +154,21 @@ const Users = () => {
 
                 <ClientHeaderDivider onClick={() => setDropdown(!dropdown)}>
                   Aniversário {dropdown ? <BiChevronUp /> : <BiChevronDown />}
+                  {dropdown && (
+                    <BirthdayFilter>
+                      <BirthdayText onClick={() => setBirthdayFilter('cresc')}>
+                        Crescente
+                      </BirthdayText>
+
+                      <BirthdayText onClick={() => setBirthdayFilter('desc')}>
+                        Decrescente
+                      </BirthdayText>
+
+                      <BirthdayText onClick={() => setBirthdayFilter('all')}>
+                        Todos
+                      </BirthdayText>
+                    </BirthdayFilter>
+                  )}
                 </ClientHeaderDivider>
 
                 <ClientHeaderDivider>Visualizar</ClientHeaderDivider>
