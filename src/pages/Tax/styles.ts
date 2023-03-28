@@ -293,7 +293,7 @@ export const BirthdayFilter = styled.div`
   flex-direction: column;
   gap: 1rem;
 
-  padding: 0.625rem 1.875rem 0.375rem 0.875rem;
+  padding: 0.625rem 0.625rem 0.375rem 0.625rem;
 
   background: #ffffff;
 
