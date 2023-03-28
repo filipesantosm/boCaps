@@ -96,13 +96,15 @@ export const SubtitleDivider = styled.div`
 
 export const PaymentDivider = styled.div`
   width: calc(100% - 3.125rem);
-  height: 8.875rem;
+  height: fit-content;
 
   padding-left: 0.5rem;
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2.375rem;
+  grid-template-rows: auto;
+  grid-column-gap: 2.375rem;
+  grid-row-gap: 2rem;
 
   margin-bottom: 3.5rem;
 `;

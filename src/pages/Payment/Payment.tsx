@@ -45,6 +45,7 @@ const Payment = () => {
   const [deleteModal, setDeleteModal] = useState('');
   const [deleteSuccess, setDeleteSuccess] = useState(false);
   const [card, setCard] = useState(false);
+  const [debitCard, setDebitCard] = useState(false);
   const [ticket, setTicket] = useState(false);
   const [pix, setPix] = useState(false);
 
@@ -54,6 +55,15 @@ const Payment = () => {
     try {
       setCard(!card);
       handleSuccess('Pagamento por cartão de crédito atualizado!');
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
+  const handleDebitCardStatus = async () => {
+    try {
+      setDebitCard(!debitCard);
+      handleSuccess('Pagamento por cartão de débito atualizado!');
     } catch (error) {
       handleError(error);
     }
@@ -108,6 +118,21 @@ const Payment = () => {
 
                 <SwitchText style={{ color: card ? '' : '#C6CEDD' }}>
                   {card ? 'Ativo' : 'Desativado'}
+                </SwitchText>
+              </SwitchDivider>
+            </Card>
+
+            <Card>
+              <CardTitle>
+                <HiOutlineCreditCard size={24} />
+                Cartão de Débito
+              </CardTitle>
+
+              <SwitchDivider>
+                <Switch isChecked={debitCard} onClick={handleDebitCardStatus} />
+
+                <SwitchText style={{ color: debitCard ? '' : '#C6CEDD' }}>
+                  {debitCard ? 'Ativo' : 'Desativado'}
                 </SwitchText>
               </SwitchDivider>
             </Card>
