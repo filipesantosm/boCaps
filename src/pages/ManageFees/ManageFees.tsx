@@ -140,7 +140,7 @@ const ManageFees = () => {
               type="button"
               onClick={() => navigate('/home/manage/new')}
             >
-              Criar novo green-fee
+              Cadastrar green-fee
             </NewButton>
           </ButtonDivider>
         </MainForm>

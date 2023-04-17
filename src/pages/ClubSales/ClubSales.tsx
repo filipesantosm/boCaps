@@ -143,7 +143,7 @@ const ClubSales = () => {
               type="button"
               onClick={() => navigate(`/sales/${id}/new`)}
             >
-              Criar nova promoção
+              Cadastrar promoção
             </NewButton>
           </ButtonDivider>
         </MainForm>

@@ -140,7 +140,7 @@ const ManageSales = () => {
               type="button"
               onClick={() => navigate('/sales/manage/new')}
             >
-              Criar nova promoção
+              Cadastrar promoção
             </NewButton>
           </ButtonDivider>
         </MainForm>

@@ -143,7 +143,7 @@ const GreenFeeDetail = () => {
               type="button"
               onClick={() => navigate(`/home/${id}/new`)}
             >
-              Criar novo green-fee
+              Cadastrar green-fee
             </NewButton>
           </ButtonDivider>
         </MainForm>
