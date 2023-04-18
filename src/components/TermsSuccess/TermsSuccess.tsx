@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { Container, Content, Description, SuccessIcon, Title } from './styles';
 import success from '../../assets/img/success.svg';
 
@@ -6,8 +7,15 @@ interface ModalProps {
 }
 
 const TermsSuccess = ({ isOpen }: ModalProps) => {
+  const navigate = useNavigate();
+
   return (
-    <Container onClick={() => isOpen(false)}>
+    <Container
+      onClick={() => {
+        isOpen(false);
+        navigate('/terms');
+      }}
+    >
       <Content>
         <SuccessIcon src={success} alt="Ícone de sucesso" />
 
