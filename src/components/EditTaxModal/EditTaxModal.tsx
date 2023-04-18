@@ -1,8 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useRef } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useOutside } from '../../hooks/useOutside';
-import handleError, { handleSuccess } from '../../services/handleToast';
+import handleError from '../../services/handleToast';
 import { EditTaxSchema } from '../../validations/EditTaxSchema';
 import {
   ButtonDivider,
@@ -17,6 +16,8 @@ import {
   Subtitle,
   Title,
 } from './styles';
+import DeleteTax from '../DeleteTax/DeleteTax';
+import DeleteTaxSuccess from '../DeleteTaxSuccess/DeleteTaxSuccess';
 
 interface EditTaxProps {
   isOpen: React.Dispatch<React.SetStateAction<string>>;
@@ -29,9 +30,8 @@ interface EditProps {
 }
 
 const EditTaxModal = ({ isOpen, id, isOtherOpen }: EditTaxProps) => {
-  const modalRef = useRef(null);
-
-  useOutside(modalRef, () => isOpen(''));
+  const [deleteTax, setDeleteTax] = useState('');
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
 
   const {
     register,
@@ -56,8 +56,7 @@ const EditTaxModal = ({ isOpen, id, isOtherOpen }: EditTaxProps) => {
   const handleDeleteTax = async () => {
     try {
       if (tax !== 0) {
-        isOpen('');
-        handleSuccess('Taxa deletada com sucesso!');
+        setDeleteTax(id);
       }
     } catch (error) {
       handleError(error);
@@ -66,7 +65,7 @@ const EditTaxModal = ({ isOpen, id, isOtherOpen }: EditTaxProps) => {
 
   return (
     <Container>
-      <Content ref={modalRef} onSubmit={handleSubmit(handleEditUser)}>
+      <Content onSubmit={handleSubmit(handleEditUser)}>
         <Title>Atenas Golf Club</Title>
 
         <Subtitle>Taxa do estabelecimento (%)</Subtitle>
@@ -92,6 +91,16 @@ const EditTaxModal = ({ isOpen, id, isOtherOpen }: EditTaxProps) => {
           <CancelButton onClick={() => isOpen('')}>Cancelar</CancelButton>
         </ButtonDivider>
       </Content>
+
+      {deleteTax !== '' && (
+        <DeleteTax
+          id={deleteTax}
+          isOpen={setDeleteTax}
+          isOtherOpen={setDeleteSuccess}
+        />
+      )}
+
+      {deleteSuccess && <DeleteTaxSuccess isOpen={setDeleteSuccess} />}
     </Container>
   );
 };

@@ -5,7 +5,6 @@ import EditTaxSuccess from '../../components/EditTaxSuccess/EditTaxSuccess';
 import Header from '../../components/Header/Header';
 import NavBar from '../../components/NavBar/NavBar';
 import SmallPagination from '../../components/Pagination/Pagination';
-import handleError, { handleSuccess } from '../../services/handleToast';
 import {
   BirthdayFilter,
   BirthdayText,
@@ -30,6 +29,8 @@ import {
   TitleIcon,
   WarnIcon,
 } from './styles';
+import DeleteTax from '../../components/DeleteTax/DeleteTax';
+import DeleteTaxSuccess from '../../components/DeleteTaxSuccess/DeleteTaxSuccess';
 
 const Tax = () => {
   const [page, setPage] = useState(1);
@@ -37,6 +38,8 @@ const Tax = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [editModal, setEditModal] = useState('');
   const [editSuccess, setEditSuccess] = useState(false);
+  const [deleteTax, setDeleteTax] = useState('');
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
 
   // mock
 
@@ -52,14 +55,6 @@ const Tax = () => {
       tax: '0',
     },
   ];
-
-  const handleDeleteTax = async (id: string) => {
-    try {
-      handleSuccess('Taxa deletada com sucesso!');
-    } catch (error) {
-      handleError(error);
-    }
-  };
 
   return (
     <Container>
@@ -141,7 +136,7 @@ const Tax = () => {
                   <TaxCompDivider
                     style={{ cursor: tax.tax !== '0' ? 'pointer' : 'default' }}
                     onClick={() =>
-                      tax.tax !== '0' ? handleDeleteTax(tax.id) : ''
+                      tax.tax !== '0' ? setDeleteTax(tax.id) : ''
                     }
                   >
                     {tax.tax === '0' ? (
@@ -173,6 +168,16 @@ const Tax = () => {
           />
         </MainForm>
       </Content>
+
+      {deleteTax !== '' && (
+        <DeleteTax
+          id={deleteTax}
+          isOpen={setDeleteTax}
+          isOtherOpen={setDeleteSuccess}
+        />
+      )}
+
+      {deleteSuccess && <DeleteTaxSuccess isOpen={setDeleteSuccess} />}
 
       {editModal && (
         <EditTaxModal

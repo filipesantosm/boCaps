@@ -16,8 +16,8 @@ interface ModalProps {
   isOtherOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const DeleteClient = ({ id, isOpen, isOtherOpen }: ModalProps) => {
-  const handleDeleteClient = async () => {
+const DeleteTax = ({ id, isOpen, isOtherOpen }: ModalProps) => {
+  const handleDeleteTax = async () => {
     try {
       isOpen('');
       isOtherOpen(true);
@@ -32,18 +32,16 @@ const DeleteClient = ({ id, isOpen, isOtherOpen }: ModalProps) => {
         <ErrorIcon />
 
         <Description>
-          Tem certeza de que deseja <span>excluir</span> o
+          Tem certeza de que deseja <span>excluir</span> a
         </Description>
-        <Description style={{ marginBottom: '1.375rem' }}>
-          cliente “nome do cliente”?
-        </Description>
+        <Description style={{ marginBottom: '1.375rem' }}>taxa?</Description>
 
         <ButtonDiv>
           <CancelButton type="button" onClick={() => isOpen('')}>
             Cancelar
           </CancelButton>
 
-          <DeleteButton type="submit" onClick={handleDeleteClient}>
+          <DeleteButton type="submit" onClick={handleDeleteTax}>
             Excluir
           </DeleteButton>
         </ButtonDiv>
@@ -52,4 +50,4 @@ const DeleteClient = ({ id, isOpen, isOtherOpen }: ModalProps) => {
   );
 };
 
-export default DeleteClient;
+export default DeleteTax;

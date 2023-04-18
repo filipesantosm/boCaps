@@ -5,7 +5,7 @@ interface ModalProps {
   isOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const DeleteSaleSuccess = ({ isOpen }: ModalProps) => {
+const DeleteTaxSuccess = ({ isOpen }: ModalProps) => {
   return (
     <Container onClick={() => isOpen(false)}>
       <Content>
@@ -13,12 +13,10 @@ const DeleteSaleSuccess = ({ isOpen }: ModalProps) => {
 
         <Title>Sucesso!</Title>
 
-        <Description>
-          Promoção &quot;nome da promoção&quot; excluída com sucesso.
-        </Description>
+        <Description>Taxa excluída com sucesso.</Description>
       </Content>
     </Container>
   );
 };
 
-export default DeleteSaleSuccess;
+export default DeleteTaxSuccess;
