@@ -46,6 +46,7 @@ import {
 import background from '../../assets/img/upload.svg';
 import DeletePicture from '../../components/DeletePicture/DeletePicture';
 import DeletePictureSuccess from '../../components/DeletePictureSuccess/DeletePictureSuccess';
+import { HourColumn, HourDivider } from '../NewFee/styles';
 
 const EditClubFee = () => {
   const [checked, setChecked] = useState(false);
@@ -230,6 +231,34 @@ const EditClubFee = () => {
                   </RadioboxLabel>
                 </RadioboxColumn>
               </RadioboxDivider>
+
+              <HourDivider>
+                <HourColumn>
+                  <Label htmlFor="start_hour">Horário Início</Label>
+
+                  <Input
+                    style={{ marginBottom: '0', textAlign: 'center' }}
+                    type="time"
+                    id="start_hour"
+                    {...register('start_hour')}
+                    placeholder="00:00"
+                    hasError={!!errors.start_hour}
+                  />
+                </HourColumn>
+
+                <HourColumn>
+                  <Label htmlFor="end_hour">Horário Final</Label>
+
+                  <Input
+                    style={{ marginBottom: '0', textAlign: 'center' }}
+                    type="time"
+                    id="end_hour"
+                    {...register('end_hour')}
+                    placeholder="00:00"
+                    hasError={!!errors.end_hour}
+                  />
+                </HourColumn>
+              </HourDivider>
 
               <Label htmlFor="description">Regulamento</Label>
 

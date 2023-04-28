@@ -45,6 +45,7 @@ import DeletePictureSuccess from '../../components/DeletePictureSuccess/DeletePi
 import DeleteSale from '../../components/DeleteSale/DeleteSale';
 import DeleteSaleSuccess from '../../components/DeleteSaleSuccess/DeleteSaleSuccess';
 import Switch from '../../components/Switch/Switch';
+import { HourColumn, HourDivider } from '../NewFee/styles';
 
 const EditSale = () => {
   const [checked, setChecked] = useState(false);
@@ -230,6 +231,34 @@ const EditSale = () => {
                   width="4.75rem"
                 />
               </DisponibilityDivider>
+
+              <HourDivider>
+                <HourColumn>
+                  <Label htmlFor="start_hour">Horário Início</Label>
+
+                  <Input
+                    style={{ marginBottom: '0', textAlign: 'center' }}
+                    type="time"
+                    id="start_hour"
+                    {...register('start_hour')}
+                    placeholder="00:00"
+                    hasError={!!errors.start_hour}
+                  />
+                </HourColumn>
+
+                <HourColumn>
+                  <Label htmlFor="end_hour">Horário Final</Label>
+
+                  <Input
+                    style={{ marginBottom: '0', textAlign: 'center' }}
+                    type="time"
+                    id="end_hour"
+                    {...register('end_hour')}
+                    placeholder="00:00"
+                    hasError={!!errors.end_hour}
+                  />
+                </HourColumn>
+              </HourDivider>
 
               <Label htmlFor="rules">Regulamento</Label>
 

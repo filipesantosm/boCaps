@@ -183,7 +183,7 @@ export const Input = styled.input<InputProps>`
   width: 100%;
   height: 2.625rem;
 
-  padding-left: 1rem;
+  padding: 0 1rem;
 
   border: ${props => (props.hasError ? '1px solid #ff0000' : 'none')};
   border-radius: 0.75rem;
@@ -206,6 +206,11 @@ export const Input = styled.input<InputProps>`
 
   &::placeholder {
     color: #c6cedd;
+  }
+
+  ::-webkit-calendar-picker-indicator {
+    background: none;
+    display: none;
   }
 `;
 
