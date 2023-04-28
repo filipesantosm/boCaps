@@ -1,4 +1,11 @@
-import { Container, Content, Description, SuccessIcon, Title } from './styles';
+import {
+  CloseIcon,
+  Container,
+  Content,
+  Description,
+  SuccessIcon,
+  Title,
+} from './styles';
 import success from '../../assets/img/success.svg';
 
 interface ModalProps {
@@ -10,6 +17,8 @@ const AccountSavedOrRegistered = ({ isOpen, text }: ModalProps) => {
   return (
     <Container onClick={() => isOpen(false)}>
       <Content>
+        <CloseIcon onClick={() => isOpen(false)} />
+
         <SuccessIcon src={success} alt="Ícone de sucesso" />
 
         <Title>Sucesso!</Title>

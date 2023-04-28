@@ -22,6 +22,8 @@ export const Content = styled.div`
   width: 32rem;
   height: fit-content;
 
+  position: relative;
+
   display: flex;
   flex-direction: column;
   align-items: center;
