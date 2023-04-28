@@ -167,7 +167,7 @@ export const Input = styled.input<InputProps>`
   width: 100%;
   height: 2.625rem;
 
-  padding-left: 1rem;
+  padding: 0 1rem;
 
   border: ${props => (props.hasError ? '1px solid #ff0000' : 'none')};
   border-radius: 0.75rem;
@@ -190,6 +190,11 @@ export const Input = styled.input<InputProps>`
 
   &::placeholder {
     color: #c6cedd;
+  }
+
+  ::-webkit-calendar-picker-indicator {
+    background: none;
+    display: none;
   }
 `;
 
@@ -310,7 +315,7 @@ export const RadioboxDivider = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 0.875rem;
 
-  margin-bottom: 2.375rem;
+  margin-bottom: 1.25rem;
 `;
 
 export const RadioboxColumn = styled.div<InputProps>`
@@ -322,7 +327,6 @@ export const RadioboxColumn = styled.div<InputProps>`
   gap: 0.625rem;
 
   padding-left: 0.625rem;
-  padding-right: 0.625rem;
 
   border: ${props => (props.hasError ? '1px solid #ff0000' : 'none')};
   border-radius: 0.75rem;
@@ -343,6 +347,7 @@ export const RadioBox = styled.input`
   -moz-appearance: none;
   -webkit-appearance: none;
   -o-appearance: none;
+  appearance: none;
   outline: none;
   content: none;
   &:hover {
@@ -386,6 +391,22 @@ export const RadioboxLabel = styled.label<LabelProps>`
   &:hover {
     cursor: pointer;
   }
+`;
+
+export const HourDivider = styled.div`
+  width: 100%;
+  height: fit-content;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.875rem;
+
+  margin-bottom: 1.25rem;
+`;
+
+export const HourColumn = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const TextArea = styled.textarea<InputProps>`

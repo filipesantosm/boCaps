@@ -31,4 +31,6 @@ export const NewSaleSchema = yup.object().shape({
     .number()
     .typeError('O campo deve conter apenas caracteres numéricos')
     .required('Ano é obrigatório'),
+  start_hour: yup.string().required('Hora de início é obrigatório'),
+  end_hour: yup.string().required('Hora de término é obrigatório'),
 });

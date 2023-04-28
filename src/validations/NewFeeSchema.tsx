@@ -17,5 +17,7 @@ export const NewFeeSchema = yup.object().shape({
     return true;
   }),
   days_of_week: yup.string().required('Dias da semana é obrigatório'),
+  start_hour: yup.string().required('Hora de início é obrigatório'),
+  end_hour: yup.string().required('Hora de término é obrigatório'),
   description: yup.string().required('Descrição é obrigatório'),
 });

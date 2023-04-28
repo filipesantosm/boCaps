@@ -33,6 +33,7 @@ import NavBar from '../../components/NavBar/NavBar';
 import Header from '../../components/Header/Header';
 import background from '../../assets/img/upload.svg';
 import SaleSavedOrRegistered from '../../components/SaleSavedOrRegistered/SaleSavedOrRegistered';
+import { HourColumn, HourDivider } from '../NewFee/styles';
 
 export interface NewSaleProps {
   sale_name: string;
@@ -44,6 +45,8 @@ export interface NewSaleProps {
   day: number;
   month: number;
   year: number;
+  start_hour: string;
+  end_hour: string;
   rules: string;
 }
 
@@ -195,6 +198,34 @@ const NewSale = () => {
                   width="4.75rem"
                 />
               </DisponibilityDivider>
+
+              <HourDivider>
+                <HourColumn>
+                  <Label htmlFor="start_hour">Horário Início</Label>
+
+                  <Input
+                    style={{ marginBottom: '0', textAlign: 'center' }}
+                    type="time"
+                    id="start_hour"
+                    {...register('start_hour')}
+                    placeholder="00:00"
+                    hasError={!!errors.start_hour}
+                  />
+                </HourColumn>
+
+                <HourColumn>
+                  <Label htmlFor="end_hour">Horário Final</Label>
+
+                  <Input
+                    style={{ marginBottom: '0', textAlign: 'center' }}
+                    type="time"
+                    id="end_hour"
+                    {...register('end_hour')}
+                    placeholder="00:00"
+                    hasError={!!errors.end_hour}
+                  />
+                </HourColumn>
+              </HourDivider>
 
               <Label htmlFor="rules">Regulamento</Label>
 
