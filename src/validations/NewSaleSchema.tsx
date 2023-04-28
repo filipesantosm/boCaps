@@ -3,10 +3,7 @@ import * as yup from 'yup';
 export const NewSaleSchema = yup.object().shape({
   sale_name: yup.string().required('Nome é obrigatório'),
   name_fee: yup.string().required('Nome é obrigatório'),
-  value: yup
-    .number()
-    .typeError('O campo deve conter apenas caracteres numéricos')
-    .required('Valor é obrigatório'),
+  value: yup.string().required('Valor é obrigatório'),
   holes: yup
     .number()
     .typeError('O campo deve conter apenas caracteres numéricos')

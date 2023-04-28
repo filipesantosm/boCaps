@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import React, {
   createContext,
   ReactNode,
@@ -21,6 +22,8 @@ export interface IResponseLogin {
 interface IUserProvider {
   user: User;
   setUser: React.Dispatch<SetStateAction<User>>;
+  tab: string;
+  setTab: React.Dispatch<SetStateAction<string>>;
   isAuthenticated: () => boolean;
   logout: () => void;
 }
@@ -32,6 +35,7 @@ interface ChildrenProps {
 const AuthContext = createContext({} as IUserProvider);
 
 const AuthProvider = ({ children }: ChildrenProps) => {
+  const [tab, setTab] = useState('clubs');
   const [user, setUser] = useState<User>({} as User);
   const [loading, setLoading] = useState(true);
 
@@ -61,7 +65,9 @@ const AuthProvider = ({ children }: ChildrenProps) => {
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <AuthContext.Provider value={{ user, setUser, isAuthenticated, logout }}>
+    <AuthContext.Provider
+      value={{ user, setUser, isAuthenticated, logout, tab, setTab }}
+    >
       {children}
     </AuthContext.Provider>
   );

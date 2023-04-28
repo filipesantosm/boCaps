@@ -35,9 +35,9 @@ import {
   UserComp,
   VisualizeIcon,
 } from './styles';
+import { useAuth } from '../../hooks/useAuth';
 
 const Users = () => {
-  const [tab, setTab] = useState('clubs');
   const [birthdayFilter, setBirthdayFilter] = useState('all');
   const [clubPage, setClubPage] = useState(1);
   const [clientPage, setClientPage] = useState(1);
@@ -46,6 +46,8 @@ const Users = () => {
   const [deleteClient, setDeleteClient] = useState('');
   const [deleteClubSuccess, setDeleteClubSuccess] = useState(false);
   const [deleteClientSuccess, setDeleteClientSuccess] = useState(false);
+
+  const { tab, setTab } = useAuth();
 
   const navigate = useNavigate();
 
