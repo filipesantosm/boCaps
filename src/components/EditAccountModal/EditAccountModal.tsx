@@ -15,7 +15,7 @@ interface ModalProps {
   isOtherOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const EditTermsModal = ({ isOpen, isOtherOpen }: ModalProps) => {
+const EditAccountModal = ({ isOpen, isOtherOpen }: ModalProps) => {
   const handleEditTerms = async () => {
     try {
       isOpen(false);
@@ -34,7 +34,7 @@ const EditTermsModal = ({ isOpen, isOtherOpen }: ModalProps) => {
           Tem certeza de que deseja <span>salvar e</span>
         </Description>
         <Description style={{ marginBottom: '1.375rem' }}>
-          <span>atualizar</span> os termos de uso?
+          <span>atualizar</span> &quot;nome da conta&quot;?
         </Description>
 
         <ButtonDiv>
@@ -51,4 +51,4 @@ const EditTermsModal = ({ isOpen, isOtherOpen }: ModalProps) => {
   );
 };
 
-export default EditTermsModal;
+export default EditAccountModal;

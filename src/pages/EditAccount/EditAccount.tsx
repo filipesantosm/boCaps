@@ -34,6 +34,7 @@ import {
   TitleDivider,
   TitleIcon,
 } from './styles';
+import EditAccountModal from '../../components/EditAccountModal/EditAccountModal';
 
 export interface EditAccountProps {
   type: Options;
@@ -47,6 +48,7 @@ export interface EditAccountProps {
 }
 
 const EditAccount = () => {
+  const [saveModal, setSaveModal] = useState(false);
   const [savedModal, setSavedModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState('');
   const [deleteSuccess, setDeleteSuccess] = useState(false);
@@ -92,7 +94,7 @@ const EditAccount = () => {
 
   const handleEditAccount: SubmitHandler<EditAccountProps> = async value => {
     try {
-      setSavedModal(true);
+      setSaveModal(true);
     } catch (error) {
       handleError(error);
     }
@@ -256,6 +258,11 @@ const EditAccount = () => {
           </ButtonDivider>
         </MainForm>
       </Content>
+
+      {saveModal && (
+        <EditAccountModal isOpen={setSaveModal} isOtherOpen={setSavedModal} />
+      )}
+
       {savedModal && (
         <AccountSavedOrRegistered isOpen={setSavedModal} text="atualizada" />
       )}
