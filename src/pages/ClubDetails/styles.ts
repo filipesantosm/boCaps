@@ -149,12 +149,16 @@ export const FormDivider = styled.div`
   padding-right: 6.75rem;
   padding-left: 2.5rem;
 
+  margin-bottom: 3.5rem;
+
   @media (max-width: 1280px) {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 2rem;
 
     padding-right: 20rem;
+
+    margin-bottom: 0;
   }
 `;
 
@@ -238,4 +242,173 @@ export const RowColumn = styled.div`
 
   display: flex;
   flex-direction: column;
+`;
+
+export const HourTitle = styled.span`
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.25rem;
+
+  color: #007126;
+
+  margin-left: 2.5rem;
+  margin-bottom: 1.75rem;
+`;
+
+export const HourForm = styled.div`
+  width: fit-content;
+  height: fit-content;
+
+  padding-left: 2.5rem;
+  padding-right: 6.75rem;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-column-gap: 7.5rem;
+  grid-row-gap: 1rem;
+
+  padding-bottom: 1rem;
+
+  @media (max-width: 1280px) {
+    grid-column-gap: 2rem;
+  }
+`;
+
+export const FirstHourColumn = styled.div`
+  width: 100%;
+  height: 2.625rem;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+export const SecondHourColumn = styled.div`
+  width: 100%;
+  height: 2.625rem;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+export const RadioboxColumn = styled.div`
+  width: 8.25rem;
+  height: 2.625rem;
+
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+
+  padding-left: 1.125rem;
+
+  border: none;
+  border-radius: 0.625rem;
+
+  outline: none;
+  resize: none;
+
+  background: #ffffff;
+
+  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+export const RadioBox = styled.input`
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  outline: none;
+  content: none;
+
+  &:before {
+    content: '';
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 0.75rem;
+    height: 0.75rem;
+    border: none;
+    border-radius: 50%;
+    background: #c6cedd;
+  }
+  &:checked::before {
+    background: #007126;
+  }
+`;
+
+interface LabelProps {
+  isSelected: boolean;
+}
+
+export const RadioboxLabel = styled.label<LabelProps>`
+  display: block;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+
+  color: ${props => (props.isSelected ? '#007126' : '#515258')};
+`;
+
+export const InputDivider = styled.div`
+  width: fit-content;
+  height: 2.625rem;
+
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+
+  color: #515258;
+`;
+
+export const HourInput = styled.input`
+  width: 4.375rem;
+  height: 2.625rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  outline: none;
+
+  background: #ffffff;
+
+  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.15);
+
+  border: none;
+  border-radius: 0.75rem;
+
+  font-family: 'Hind Siliguri';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+
+  color: #252729;
+
+  &::placeholder {
+    color: #c6cedd;
+  }
+
+  ::-webkit-calendar-picker-indicator {
+    display: none;
+  }
 `;
