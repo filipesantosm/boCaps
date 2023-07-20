@@ -37,8 +37,6 @@ export const Content = styled.form`
 `;
 
 export const Title = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1.75rem;
 
@@ -48,8 +46,6 @@ export const Title = styled.span`
 `;
 
 export const Subtitle = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1.125rem;
 
@@ -87,8 +83,6 @@ export const Input = styled.input<InputProps>`
   border: ${props => (props.hasError ? '1px solid #ff0000' : 'none')};
   border-radius: 0.75rem;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 
@@ -105,8 +99,6 @@ export const ButtonDivider = styled.div`
 `;
 
 export const CancelButton = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1rem;
 
@@ -134,8 +126,6 @@ export const SaveButton = styled.button`
 
   background: #0054bc;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 
@@ -162,8 +152,6 @@ export const DeleteDivider = styled.div<DeleteProps>`
 
   transition: 500ms;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: ${props => (props.hasTax ? '600' : '400')};
   font-size: 1rem;
 

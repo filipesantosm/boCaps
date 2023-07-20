@@ -69,8 +69,6 @@ export const TitleIcon = styled(BiWalletAlt)`
 `;
 
 export const Title = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 3rem;
 
@@ -86,8 +84,6 @@ export const SubtitleDivider = styled.div`
 
   margin-bottom: 2.375rem;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1.75rem;
 
@@ -134,8 +130,6 @@ export const CardTitle = styled.div`
   align-items: center;
   gap: 1rem;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1.5rem;
 
@@ -154,8 +148,6 @@ export const SwitchDivider = styled.div`
 `;
 
 export const SwitchText = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 500;
   font-size: 1.125rem;
 
@@ -177,8 +169,6 @@ export const IconDivider = styled.div`
   align-items: center;
   gap: 1rem;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1.25rem;
 
@@ -186,8 +176,6 @@ export const IconDivider = styled.div`
 `;
 
 export const Price = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1.25rem;
 
@@ -222,8 +210,6 @@ export const AccountCard = styled.div`
 `;
 
 export const AccountTitle = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1.25rem;
 
@@ -245,8 +231,6 @@ export const FirstColumn = styled.div`
 
   margin-right: 4.75rem;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 
@@ -311,8 +295,6 @@ export const NewButton = styled.button`
 
   background: #ffffff;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1rem;
 

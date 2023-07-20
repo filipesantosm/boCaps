@@ -29,12 +29,15 @@ export const Content = styled.div`
 
 export const MainForm = styled.form`
   width: 100%;
-  height: calc(100% - 5rem);
+  flex: 1;
+
+  padding: 0 0.25rem;
+  // height: calc(100% - 5rem);
 
   display: flex;
   flex-direction: column;
 
-  padding-top: 2.125rem;
+  // padding-top: 2.125rem;
 
   overflow-x: hidden;
   overflow-y: auto;
@@ -59,7 +62,7 @@ export const TitleDivider = styled.div`
   width: fit-content;
   height: fit-content;
 
-  padding-left: 2.5rem;
+  // padding-left: 2.5rem;
 
   margin-bottom: 3rem;
 
@@ -73,8 +76,6 @@ export const TitleIcon = styled(HiOutlineUsers)`
 `;
 
 export const Title = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 3rem;
 
@@ -82,8 +83,6 @@ export const Title = styled.span`
 `;
 
 export const Subtitle = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 700;
   font-size: 2rem;
 
@@ -98,7 +97,7 @@ export const BackDivider = styled.div`
   display: flex;
   align-items: center;
 
-  padding-left: 1.875rem;
+  // padding-left: 1.875rem;
 
   gap: 1.5rem;
 
@@ -130,8 +129,6 @@ export const BackIcon = styled(FiChevronLeft)`
 `;
 
 export const BackTitle = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1.75rem;
 
@@ -140,21 +137,15 @@ export const BackTitle = styled.span`
 
 export const FormDivider = styled.div`
   display: flex;
-  // grid-template-columns: 1fr;
   gap: 7.5rem;
 
   width: 100%;
   height: fit-content;
 
   padding-right: 6.75rem;
-  padding-left: 2.5rem;
 
   @media (max-width: 1280px) {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
     gap: 2rem;
-
-    padding-right: 20rem;
   }
 `;
 
@@ -167,8 +158,6 @@ export const FormColumn = styled.div`
 `;
 
 export const ColumnTitle = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1.25rem;
 
@@ -178,8 +167,6 @@ export const ColumnTitle = styled.span`
 `;
 
 export const Label = styled.label`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1.125rem;
 
@@ -207,8 +194,6 @@ export const Input = styled.input`
 
   box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 
@@ -256,7 +241,7 @@ export const Button = styled.button`
   background: #0054bc;
 
   font-family: 'Hindi Siliguri', sans-serif;
-  font-style: normal;
+
   font-weight: 400;
   font-size: 0.875rem;
   letter-spacing: 0.4px;
@@ -268,4 +253,36 @@ export const Button = styled.button`
   &:hover {
     opacity: 0.875;
   }
+`;
+
+export const AvatarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+export const AvatarLabel = styled.label`
+  cursor: pointer;
+
+  transition: filter 0.3s;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+`;
+
+export const AvatarInput = styled.input`
+  display: none;
+`;
+
+export const AvatarPreview = styled.img`
+  width: 8rem;
+  height: 8rem;
+
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
 `;

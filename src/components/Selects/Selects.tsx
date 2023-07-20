@@ -8,6 +8,7 @@ interface SelectProps {
   options: Options[];
   control: any;
   hasError?: boolean;
+  defaultValue?: Options;
 }
 
 export interface Options {
@@ -22,6 +23,7 @@ export const AccountSelect = ({
   options,
   control,
   hasError,
+  defaultValue,
 }: SelectProps) => {
   return (
     <Controller
@@ -34,6 +36,7 @@ export const AccountSelect = ({
             onChange={event => onChange(event)}
             onBlur={onBlur}
             value={value}
+            defaultValue={defaultValue}
             className="basic-single"
             classNamePrefix="select"
             placeholder={placeholder}

@@ -73,8 +73,6 @@ export const TitleIcon = styled(HiOutlineUsers)`
 `;
 
 export const Title = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 3rem;
 
@@ -82,8 +80,6 @@ export const Title = styled.span`
 `;
 
 export const Subtitle = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 700;
   font-size: 2rem;
 
@@ -130,8 +126,6 @@ export const BackIcon = styled(FiChevronLeft)`
 `;
 
 export const BackTitle = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1.75rem;
 
@@ -171,8 +165,6 @@ export const FormColumn = styled.div`
 `;
 
 export const ColumnTitle = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1.25rem;
 
@@ -182,8 +174,6 @@ export const ColumnTitle = styled.span`
 `;
 
 export const Label = styled.label`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1.125rem;
 
@@ -211,8 +201,6 @@ export const Input = styled.input`
 
   box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 
@@ -245,8 +233,6 @@ export const RowColumn = styled.div`
 `;
 
 export const HourTitle = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1.25rem;
 
@@ -355,8 +341,6 @@ export const RadioboxLabel = styled.label<LabelProps>`
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 
@@ -371,8 +355,6 @@ export const InputDivider = styled.div`
   align-items: center;
   gap: 0.375rem;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 
@@ -397,8 +379,6 @@ export const HourInput = styled.input`
   border: none;
   border-radius: 0.75rem;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 

@@ -2,41 +2,143 @@ import { AiOutlineEye } from 'react-icons/ai';
 import { BiSearch } from 'react-icons/bi';
 import { FiTrash } from 'react-icons/fi';
 import { MdOutlineCake } from 'react-icons/md';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  flex: 1;
 
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-
-  overflow: hidden;
-
-  padding: 1.875rem 1.875rem 2.5rem 1rem;
+  flex-direction: column;
 
   position: relative;
 `;
 
 export const Content = styled.div`
-  width: calc(100% - 14.75rem);
-  height: 100%;
+  // width: calc(100% - 14.75rem);
+  flex: 1;
 
+  display: flex;
+  gap: 2rem;
+  align-items: stretch;
+`;
+
+export const FilterContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  padding: 0.125rem 0 0 4.125rem;
+  background: #ffffff;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 0.5rem;
+
+  padding: 0 1.5rem;
+  padding-top: 0.5rem;
+`;
+
+interface FilterButtonProps {
+  isOpen: boolean;
+}
+
+export const FilterButton = styled.button<FilterButtonProps>`
+  border: none;
+  background: #ffffff;
+
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+
+  color: #0054bc;
+
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.3s;
+
+  ${({ isOpen }) =>
+    isOpen &&
+    css`
+      color: #ffffff;
+      background: #0054bc;
+    `}
+
+  &:hover {
+    filter: brightness(0.95);
+  }
+`;
+
+export const FilterSection = styled.section`
+  padding-bottom: 1rem;
+  margin-top: 0.5rem;
+
+  border-bottom: 1px solid #dcdcdc;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+`;
+
+export const FilterTitle = styled.p`
+  margin-bottom: 0.5rem;
+
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0054bc;
+`;
+
+export const FilterItem = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  cursor: pointer;
+`;
+
+export const FilterCheckbox = styled.input`
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  outline: none;
+  content: none;
+
+  cursor: pointer;
+
+  &:before {
+    content: '\f00c';
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1rem;
+    height: 1rem;
+    border: none;
+    border-radius: 0.125rem;
+    // background: #c6cedd;
+    background: rgba(0, 33, 75, 0.125);
+
+    font-size: 0.5rem;
+    font-family: 'FontAwesome';
+    color: transparent !important;
+  }
+
+  &:checked::before {
+    background: #0054bc;
+    color: #fff !important;
+  }
 `;
 
 export const MainForm = styled.main`
   width: 100%;
-  height: calc(100% - 5rem);
+  flex: 1;
 
   display: flex;
   flex-direction: column;
-
-  padding-top: 2.125rem;
 `;
 
 export const TitleDivider = styled.div`
@@ -44,7 +146,7 @@ export const TitleDivider = styled.div`
   align-items: center;
   gap: 2rem;
 
-  padding-left: 2.5rem;
+  // padding-left: 2.5rem;
 
   margin-bottom: 2rem;
 `;
@@ -56,8 +158,6 @@ export const TitleIcon = styled(MdOutlineCake)`
 `;
 
 export const Title = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 3rem;
 
@@ -79,8 +179,6 @@ interface FilterProps {
 }
 
 export const FilterText = styled.span<FilterProps>`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 700;
   font-size: 2rem;
 
@@ -132,7 +230,7 @@ export const ClientHeader = styled.div`
   height: fit-content;
 
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(6, 1fr);
 
   padding-right: 3.125rem;
 
@@ -144,8 +242,6 @@ export const TableHeaderDivider = styled.div`
   align-items: center;
   justify-content: flex-start;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1.75rem;
 
@@ -173,46 +269,18 @@ export const TableHeaderDivider = styled.div`
 export const ClientHeaderDivider = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
+  text-align: center;
+
   font-weight: 600;
-  font-size: 1.75rem;
+  font-size: 1.125rem;
 
   color: #0054bc;
 
-  /* &:nth-of-type(1) {
-    padding-left: 2.5rem;
+  &:nth-of-type(1) {
+    padding-left: 1rem;
   }
-
-  &:nth-of-type(2) {
-    gap: 1.625rem;
-  }
-
-  &:nth-of-type(3) {
-    justify-content: center;
-
-    color: #515258;
-
-    gap: 0.625rem;
-
-    position: relative;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  &:nth-of-type(4) {
-    justify-content: center;
-  }
-
-  &:nth-of-type(5) {
-    justify-content: flex-end;
-
-    padding-right: 1.375rem;
-  } */
 `;
 
 export const PageHeader = styled.div`
@@ -251,7 +319,7 @@ export const Button = styled.button`
   background: #0054bc;
 
   font-family: 'Hindi Siliguri', sans-serif;
-  font-style: normal;
+
   font-weight: 400;
   font-size: 0.875rem;
   letter-spacing: 0.4px;
@@ -295,8 +363,6 @@ export const SearchInput = styled.input`
   border: none;
   border-radius: 0.75rem;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 0.875rem;
 
@@ -317,7 +383,7 @@ export const SearchIcon = styled(BiSearch)`
 
 export const TableBody = styled.div`
   width: 100%;
-  height: calc(100% - 26.625rem);
+  flex: 1;
 
   padding-right: 3.125rem;
 
@@ -345,10 +411,11 @@ export const UserComp = styled.div`
 
 export const ClientComp = styled.div`
   width: 100%;
-  height: 100%;
+  height: 3.5rem;
 
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+  grid-column-gap: 1rem;
 
   background: #ffffff;
 
@@ -363,8 +430,6 @@ export const CompDivider = styled.div`
   align-items: center;
   justify-content: flex-start;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 
@@ -394,8 +459,6 @@ export const ClientCompDivider = styled.div`
   align-items: center;
   justify-content: flex-start;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 
@@ -406,23 +469,7 @@ export const ClientCompDivider = styled.div`
   overflow: hidden;
 
   &:nth-of-type(1) {
-    padding-left: 2.5rem;
-  }
-
-  &:nth-of-type(3) {
-    justify-content: center;
-
-    padding-right: 2.375rem;
-  }
-
-  &:nth-of-type(4) {
-    justify-content: center;
-  }
-
-  &:nth-of-type(5) {
-    justify-content: flex-end;
-
-    padding-right: 1.375rem;
+    padding-left: 1rem;
   }
 `;
 
@@ -432,6 +479,8 @@ export const CompText = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  text-align: center;
+  width: 100%;
 `;
 
 export const VisualizeIcon = styled(AiOutlineEye)`
@@ -486,8 +535,6 @@ export const BirthdayFilter = styled.div`
 export const BirthdayText = styled.div`
   width: 100%;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 0.875rem;
 

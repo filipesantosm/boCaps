@@ -49,7 +49,7 @@ export const Logo = styled.img`
 
 export const Title = styled.span`
   font-family: 'Hindi Siliguri', sans-serif;
-  font-style: normal;
+
   font-weight: 600;
   font-size: 2.25rem;
 
@@ -60,7 +60,7 @@ export const Title = styled.span`
 
 export const Subtitle = styled.span`
   font-family: 'Hindi Siliguri', sans-serif;
-  font-style: normal;
+
   font-weight: 400;
   font-size: 1.5rem;
 
@@ -106,7 +106,7 @@ export const Input = styled.input<InputProps>`
   padding: 0 1.75rem;
 
   font-family: 'Hindi Siliguri', sans-serif;
-  font-style: normal;
+
   font-weight: 400;
   font-size: 1.375rem;
 
@@ -114,7 +114,7 @@ export const Input = styled.input<InputProps>`
 
   &::placeholder {
     font-family: 'Hindi Siliguri', sans-serif;
-    font-style: normal;
+
     font-weight: 400;
     font-size: 1.375rem;
 
@@ -152,7 +152,7 @@ export const InvisibleEye = styled(IoEyeOffOutline)`
 
 export const ForgotPassword = styled.span`
   font-family: 'Hindi Siliguri', sans-serif;
-  font-style: normal;
+
   font-weight: 600;
   font-size: 1.25rem;
 
@@ -185,7 +185,7 @@ export const LoginButton = styled.button`
   background: #0054bc;
 
   font-family: 'Hindi Siliguri', sans-serif;
-  font-style: normal;
+
   font-weight: 400;
   font-size: 1.25rem;
   letter-spacing: 0.4px;

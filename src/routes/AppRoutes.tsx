@@ -33,6 +33,7 @@ import NewClubSale from '../pages/NewClubSale/NewClubSale';
 import EditClubSale from '../pages/EditClubSale/EditClubSale';
 import NewClient from '../pages/NewClient/NewClient';
 import Birthdays from '../pages/Birthdays/Birthdays';
+import Dashboard from '../pages/Dashboard/Dashboard';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -54,6 +55,8 @@ const AppRoutes = () => {
         <Route path="/home/manage" element={<ManageFees />} />
         <Route path="/home/manage/new" element={<NewFee />} />
         <Route path="/home/manage/:id" element={<EditFee />} />
+
+        <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path="/sales" element={<Sales />} />
         <Route path="/sales/:clubId" element={<ClubSales />} />

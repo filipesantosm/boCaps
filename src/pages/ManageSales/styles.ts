@@ -56,8 +56,6 @@ export const TitleIcon = styled(TbDiscount2)`
 `;
 
 export const Title = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 3rem;
 
@@ -100,8 +98,6 @@ export const BackIcon = styled(FiChevronLeft)`
 `;
 
 export const BackTitle = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1.75rem;
 
@@ -125,8 +121,6 @@ export const TableHeaderDivider = styled.div`
   align-items: center;
   justify-content: flex-start;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1.75rem;
 
@@ -184,8 +178,6 @@ export const CompDivider = styled.div<CompProps>`
   align-items: center;
   justify-content: flex-start;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 
@@ -247,8 +239,6 @@ export const NewButton = styled.button`
 
   background: #0054bc;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 

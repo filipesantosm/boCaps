@@ -57,8 +57,6 @@ export const TitleIcon = styled(FaBalanceScaleLeft)`
 `;
 
 export const Title = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 3rem;
 
@@ -80,8 +78,6 @@ export const TableHeaderDivider = styled.div`
   align-items: center;
   justify-content: flex-start;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1.75rem;
 
@@ -140,8 +136,6 @@ export const SearchInput = styled.input`
   border: none;
   border-radius: 0.75rem;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 0.875rem;
 
@@ -224,8 +218,6 @@ export const TaxCompText = styled.div<TaxProps>`
   white-space: nowrap;
   overflow: hidden;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: ${props => (props.hasTax ? '600' : '400')};
   font-size: 1rem;
 
@@ -251,8 +243,6 @@ export const EditDivider = styled.div`
 `;
 
 export const TaxText = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1.25rem;
 
@@ -311,8 +301,6 @@ export const BirthdayFilter = styled.div`
 export const BirthdayText = styled.div`
   width: 100%;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 0.875rem;
 

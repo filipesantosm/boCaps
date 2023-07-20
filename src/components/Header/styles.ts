@@ -21,14 +21,12 @@ export const UserDivider = styled.div`
 `;
 
 export const UserRole = styled.span`
-  font-family: 'Hind Siliguri';
   font-weight: 400;
   font-size: 1rem;
   color: #515258;
 `;
 
 export const UserName = styled.span`
-  font-family: 'Hind Siliguri';
   font-weight: 400;
   font-size: 1rem;
   color: #898f9a;
@@ -53,7 +51,6 @@ export const LogoutIcon = styled(FiLogOut)`
 `;
 
 export const LogoutText = styled.span`
-  font-family: 'Hind Siliguri';
   font-weight: 500;
   font-size: 1rem;
   color: #515258;

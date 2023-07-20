@@ -1,11 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import DeleteClient from '../../components/DeleteClient/DeleteClient';
-import DeleteClientSuccess from '../../components/DeleteClientSuccess/DeleteClientSuccess';
-import DeleteClub from '../../components/DeleteClub/DeleteClub';
-import DeleteClubSuccess from '../../components/DeleteClubSuccess/DeleteClubSuccess';
-import Header from '../../components/Header/Header';
-import NavBar from '../../components/NavBar/NavBar';
+import { GiSettingsKnobs } from 'react-icons/gi';
+import Layout from '../../components/Layout/Layout';
 import SmallPagination from '../../components/Pagination/Pagination';
 import {
   Button,
@@ -16,122 +11,111 @@ import {
   CompText,
   Container,
   Content,
+  FilterButton,
+  FilterCheckbox,
+  FilterContainer,
+  FilterItem,
+  FilterSection,
+  FilterTitle,
   MainForm,
   PageHeader,
   TableBody,
   Title,
   TitleDivider,
-  TitleIcon,
-  VisualizeIcon,
 } from './styles';
+import { cityOptions, monthOptions } from './utils';
 
 const Birthdays = () => {
   const [clientPage, setClientPage] = useState(1);
-  const [deleteClub, setDeleteClub] = useState('');
-  const [deleteClient, setDeleteClient] = useState('');
-  const [deleteClubSuccess, setDeleteClubSuccess] = useState(false);
-  const [deleteClientSuccess, setDeleteClientSuccess] = useState(false);
 
-  const navigate = useNavigate();
+  const [showFilters, setShowFilters] = useState(false);
 
   return (
-    <Container>
-      <NavBar />
+    <Layout>
+      <Container>
+        <TitleDivider>
+          <Title>Aniversariantes</Title>
+        </TitleDivider>
 
-      <Content>
-        <Header />
+        <PageHeader>
+          <FilterButton
+            type="button"
+            onClick={() => setShowFilters(prev => !prev)}
+            isOpen={showFilters}
+            title={showFilters ? 'Esconder filtros' : 'Mostrar filtros'}
+          >
+            <GiSettingsKnobs
+              style={{
+                transform: 'rotate(90deg)',
+              }}
+            />
+          </FilterButton>
+          <Button>Exportar dados</Button>
+        </PageHeader>
 
-        <MainForm>
-          <TitleDivider>
-            <TitleIcon />
-
-            <Title>Aniversariantes</Title>
-          </TitleDivider>
-
-          <PageHeader>
-            <Button>Exportar dados</Button>
-          </PageHeader>
-
-          <ClientHeader>
-            <ClientHeaderDivider>ID</ClientHeaderDivider>
-
-            <ClientHeaderDivider>Criação</ClientHeaderDivider>
-
-            <ClientHeaderDivider>Aniversário</ClientHeaderDivider>
-
-            <ClientHeaderDivider>E-mail</ClientHeaderDivider>
-
-            <ClientHeaderDivider>Nome</ClientHeaderDivider>
-
-            <ClientHeaderDivider>CPF</ClientHeaderDivider>
-
-            <ClientHeaderDivider>Telefone</ClientHeaderDivider>
-
-            <ClientHeaderDivider>Visualizar</ClientHeaderDivider>
-          </ClientHeader>
-
-          <TableBody>
-            <ClientComp>
-              <ClientCompDivider>
-                <CompText>1</CompText>
-              </ClientCompDivider>
-              <ClientCompDivider>
-                <CompText>14/07/2023</CompText>
-              </ClientCompDivider>
-              <ClientCompDivider>
-                <CompText>10/01/2000</CompText>
-              </ClientCompDivider>
-
-              <ClientCompDivider>
-                <CompText>andrebarbosa@gmail.com</CompText>
-              </ClientCompDivider>
-
-              <ClientCompDivider>
-                <CompText>André Barbosa</CompText>
-              </ClientCompDivider>
-              <ClientCompDivider>
-                <CompText>123.456.789-12</CompText>
-              </ClientCompDivider>
-
-              <ClientCompDivider>
-                <CompText>(11) 99123-4234</CompText>
-              </ClientCompDivider>
-
-              <ClientCompDivider>
-                <VisualizeIcon onClick={() => navigate('/users/client/001')} />
-              </ClientCompDivider>
-            </ClientComp>
-          </TableBody>
-
-          <SmallPagination
-            total={5}
-            currentPage={clientPage}
-            handleChange={() => setClientPage(clientPage + 1)}
-          />
-        </MainForm>
-      </Content>
-      {deleteClub !== '' && (
-        <DeleteClub
-          id={deleteClub}
-          isOpen={setDeleteClub}
-          isOtherOpen={setDeleteClubSuccess}
-        />
-      )}
-
-      {deleteClubSuccess && <DeleteClubSuccess isOpen={setDeleteClubSuccess} />}
-
-      {deleteClient !== '' && (
-        <DeleteClient
-          id={deleteClient}
-          isOpen={setDeleteClient}
-          isOtherOpen={setDeleteClientSuccess}
-        />
-      )}
-
-      {deleteClientSuccess && (
-        <DeleteClientSuccess isOpen={setDeleteClientSuccess} />
-      )}
-    </Container>
+        <Content>
+          {showFilters && (
+            <FilterContainer>
+              <FilterSection>
+                <FilterTitle>Meses</FilterTitle>
+                {monthOptions.map(monthOption => (
+                  <FilterItem key={monthOption.value}>
+                    {monthOption.label}
+                    <FilterCheckbox type="checkbox" />
+                  </FilterItem>
+                ))}
+              </FilterSection>
+              <FilterSection>
+                <FilterTitle>Cidade</FilterTitle>
+                {cityOptions.map(cityOption => (
+                  <FilterItem key={cityOption.value}>
+                    {cityOption.label}
+                    <FilterCheckbox type="checkbox" />
+                  </FilterItem>
+                ))}
+              </FilterSection>
+            </FilterContainer>
+          )}
+          <MainForm>
+            <ClientHeader>
+              <ClientHeaderDivider>CPF</ClientHeaderDivider>
+              <ClientHeaderDivider>Nome</ClientHeaderDivider>
+              <ClientHeaderDivider>Aniversário</ClientHeaderDivider>
+              <ClientHeaderDivider>Telefone</ClientHeaderDivider>
+              <ClientHeaderDivider>E-mail</ClientHeaderDivider>
+              <ClientHeaderDivider>Cidade</ClientHeaderDivider>
+            </ClientHeader>
+            <TableBody>
+              <ClientComp>
+                <ClientCompDivider>
+                  <CompText>123.456.789-12</CompText>
+                </ClientCompDivider>
+                <ClientCompDivider>
+                  <CompText>André Barbosa</CompText>
+                </ClientCompDivider>
+                <ClientCompDivider>
+                  <CompText>10/01/2000</CompText>
+                </ClientCompDivider>
+                <ClientCompDivider>
+                  <CompText>(11) 99123-4234</CompText>
+                </ClientCompDivider>
+                <ClientCompDivider>
+                  <CompText>andrebarbosa@gmail.com</CompText>
+                </ClientCompDivider>
+                <ClientCompDivider>
+                  <CompText>Bauru</CompText>
+                </ClientCompDivider>
+              </ClientComp>
+            </TableBody>
+            <SmallPagination
+              total={5}
+              currentPage={clientPage}
+              handleChange={() => setClientPage(clientPage + 1)}
+            />
+          </MainForm>
+        </Content>
+      </Container>
+    </Layout>
   );
 };
 

@@ -54,7 +54,6 @@ export const TitleContainer = styled.div`
 `;
 
 export const Title = styled.span`
-  font-family: 'Hind Siliguri';
   font-weight: 600;
   font-size: 3rem;
   line-height: 110.7%;
@@ -71,8 +70,7 @@ export const TextArea = styled.textarea`
   box-shadow: -3px 7px 13px #f1f7ff;
   border: none;
   border-radius: 1.5rem;
-  font-family: 'Hind Siliguri';
-  font-style: normal;
+
   font-weight: 400;
   font-size: 1rem;
   color: #515258;
@@ -112,8 +110,6 @@ export const CancelButton = styled.button`
   border: 1px solid #0054bc;
   border-radius: 0.75rem;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1rem;
 
@@ -135,8 +131,7 @@ export const EditButton = styled.button`
   box-shadow: -3px 7px 13px #f1f7ff;
   border: none;
   border-radius: 0.875rem;
-  font-family: 'Hind Siliguri';
-  font-style: normal;
+
   font-weight: 600;
   font-size: 1rem;
   color: #fafafa;

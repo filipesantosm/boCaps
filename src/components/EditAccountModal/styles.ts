@@ -34,7 +34,6 @@ export const ErrorIcon = styled(MdErrorOutline)`
 `;
 
 export const Description = styled.p`
-  font-family: 'Hind Siliguri';
   font-weight: 500;
   font-size: 1.5rem;
   line-height: 110.7%;
@@ -61,8 +60,7 @@ export const CancelButton = styled.button`
   background: #ffffff;
   border: none;
   border-radius: 0.875rem;
-  font-family: 'Hind Siliguri';
-  font-style: normal;
+
   font-weight: 600;
   font-size: 1rem;
 
@@ -84,7 +82,7 @@ export const DeleteButton = styled.button`
   box-shadow: -3px 7px 13px #f1f7ff;
   border: none;
   border-radius: 0.875rem;
-  font-family: 'Hind Siliguri';
+
   font-weight: 600;
   font-size: 1rem;
   color: #fafafa;

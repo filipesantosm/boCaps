@@ -54,8 +54,6 @@ export const TitleIcon = styled(HiOutlineTicket)`
 `;
 
 export const Title = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 3rem;
 
@@ -75,8 +73,6 @@ export const ManageButton = styled.button`
   border: 1px solid #515258;
   border-radius: 0.75rem;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1.25rem;
 
@@ -105,8 +101,6 @@ export const TableHeader = styled.div`
 `;
 
 export const TableHeaderTitle = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1.75rem;
 
@@ -143,8 +137,6 @@ export const SearchInput = styled.input`
   border: none;
   border-radius: 0.75rem;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 0.875rem;
 
@@ -231,8 +223,6 @@ export const GreenFeeComp = styled.div`
 `;
 
 export const CompText = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 

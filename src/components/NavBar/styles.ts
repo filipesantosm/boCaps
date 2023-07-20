@@ -32,29 +32,6 @@ export const Logo = styled.img`
   }
 `;
 
-export const LogoText = styled.p`
-  color: #0054bc;
-  font-size: 3rem;
-  font-weight: 700;
-  font-family: 'Segoe UI', sans-serif;
-
-  margin-bottom: 7.125rem;
-
-  @media (max-width: 1380px) {
-    margin-bottom: 3rem;
-
-    width: 8.75rem;
-  }
-
-  @media (max-width: 1280px) {
-    @media (min-height: 830px) {
-      margin-bottom: 7.125rem;
-
-      width: 10.375rem;
-    }
-  }
-`;
-
 export const MenuItem = styled.div`
   display: flex;
   align-items: center;
@@ -98,7 +75,6 @@ export const MenuItem = styled.div`
 `;
 
 export const MenuText = styled.span`
-  font-family: 'Hind Siliguri';
   font-weight: 600;
   font-size: 1.125rem;
   margin-left: 1.125rem;

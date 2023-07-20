@@ -69,8 +69,6 @@ export const TitleIcon = styled(BiWalletAlt)`
 `;
 
 export const Title = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 3rem;
 
@@ -113,8 +111,6 @@ export const BackIcon = styled(FiChevronLeft)`
 `;
 
 export const BackTitle = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1.75rem;
 
@@ -152,8 +148,6 @@ export const FormColumn = styled.div`
 `;
 
 export const ColumnTitle = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1.25rem;
 
@@ -163,8 +157,6 @@ export const ColumnTitle = styled.span`
 `;
 
 export const Label = styled.label`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1.125rem;
 
@@ -192,8 +184,6 @@ export const Input = styled.input<InputProps>`
 
   box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 
@@ -251,8 +241,6 @@ export const RegisterButton = styled.button`
 
   background: #0054bc;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 
@@ -278,8 +266,6 @@ export const CancelButton = styled.button`
 
   background: #fff;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 
@@ -305,8 +291,6 @@ export const DeleteButton = styled.button`
 
   background: #fff;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1rem;
 

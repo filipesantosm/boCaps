@@ -1,218 +1,59 @@
-import styled from 'styled-components';
-import { HiOutlineUsers } from 'react-icons/hi';
-import { BiSearch } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
-import { FiTrash } from 'react-icons/fi';
-
-export const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-
-  overflow: hidden;
-
-  padding: 1.875rem 1.875rem 2.5rem 1rem;
-
-  position: relative;
-`;
+import { BiSearch } from 'react-icons/bi';
+import styled from 'styled-components';
 
 export const Content = styled.div`
-  width: calc(100% - 14.75rem);
-  height: 100%;
+  flex: 1;
 
   display: flex;
   flex-direction: column;
-
-  padding: 0.125rem 0 0 4.125rem;
 `;
 
 export const MainForm = styled.main`
-  width: 100%;
-  height: calc(100% - 5rem);
+  flex: 1;
 
   display: flex;
   flex-direction: column;
-
-  padding-top: 2.125rem;
-`;
-
-export const TitleDivider = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-
-  padding-left: 2.5rem;
-
-  margin-bottom: 2rem;
-`;
-
-export const TitleIcon = styled(HiOutlineUsers)`
-  font-size: 1.875rem;
-
-  color: #515258;
 `;
 
 export const Title = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 3rem;
 
   color: #0054bc;
+
+  margin-bottom: 2rem;
 `;
 
-export const FilterDivider = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4.625rem;
-
-  padding-left: 2.5rem;
-
-  margin-bottom: 5rem;
-`;
-
-interface FilterProps {
-  isSelected: boolean;
-}
-
-export const FilterText = styled.span<FilterProps>`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 2rem;
-
-  position: relative;
-
-  color: ${props => (props.isSelected ? '#0054BC' : '#C6CEDD')};
-
-  transition: 500ms;
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &::after {
-    content: '';
-
-    position: absolute;
-    bottom: -0.125rem;
-    left: 0;
-
-    display: block;
-
-    width: 2.625rem;
-    height: 0.375rem;
-
-    border: none;
-    border-radius: 1px;
-
-    background: #00182c;
-
-    visibility: ${props => (props.isSelected ? 'visible' : 'hidden')};
-  }
-`;
-
-export const TableHeader = styled.div`
-  width: 100%;
-  height: fit-content;
-
-  display: grid;
-  grid-template-columns: 1fr 12fr 2fr 1fr;
-
-  padding-right: 3.125rem;
-
-  margin-bottom: 2.375rem;
-`;
+const clientTableGridSpacing =
+  '0.75fr 0.75fr 0.75fr 2.5fr 1.875fr 1fr 1fr 1fr 0.5fr 1fr 1fr 1fr 0.75fr 0.5fr';
 
 export const ClientHeader = styled.div`
   width: 100%;
   height: fit-content;
 
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: ${clientTableGridSpacing};
+  grid-column-gap: 1rem;
 
-  padding-right: 3.125rem;
-
-  margin-bottom: 2.375rem;
-`;
-
-export const TableHeaderDivider = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-
-  font-family: 'Hind Siliguri';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1.75rem;
-
-  color: #0054bc;
-
-  &:nth-of-type(1) {
-    padding-left: 2.5rem;
-  }
-
-  &:nth-of-type(2) {
-    gap: 1.625rem;
-  }
-
-  &:nth-of-type(3) {
-    justify-content: center;
-  }
-
-  &:nth-of-type(4) {
-    justify-content: flex-end;
-
-    padding-right: 1.375rem;
-  }
+  padding: 0.25rem;
 `;
 
 export const ClientHeaderDivider = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
+  text-align: center;
+
   font-weight: 600;
-  font-size: 1.75rem;
+  font-size: 1.125rem;
 
   color: #0054bc;
 
-  /* &:nth-of-type(1) {
-    padding-left: 2.5rem;
+  &:nth-of-type(1) {
+    padding-left: 1rem;
   }
-
-  &:nth-of-type(2) {
-    gap: 1.625rem;
-  }
-
-  &:nth-of-type(3) {
-    justify-content: center;
-
-    color: #515258;
-
-    gap: 0.625rem;
-
-    position: relative;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  &:nth-of-type(4) {
-    justify-content: center;
-  }
-
-  &:nth-of-type(5) {
-    justify-content: flex-end;
-
-    padding-right: 1.375rem;
-  } */
 `;
 
 export const PageHeader = styled.div`
@@ -250,8 +91,6 @@ export const Button = styled.button`
 
   background: #0054bc;
 
-  font-family: 'Hindi Siliguri', sans-serif;
-  font-style: normal;
   font-weight: 400;
   font-size: 0.875rem;
   letter-spacing: 0.4px;
@@ -295,8 +134,6 @@ export const SearchInput = styled.input`
   border: none;
   border-radius: 0.75rem;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 0.875rem;
 
@@ -317,38 +154,33 @@ export const SearchIcon = styled(BiSearch)`
 
 export const TableBody = styled.div`
   width: 100%;
-  height: calc(100% - 26.625rem);
+  flex: 1;
 
-  padding-right: 3.125rem;
+  padding: 0.25rem;
 
-  display: grid;
-  grid-template-rows: repeat(6, 1fr);
-  grid-row-gap: 0.625rem;
+  max-height: 60vh;
 
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   margin-bottom: auto;
-`;
-
-export const UserComp = styled.div`
-  width: 100%;
-  height: 100%;
 
   display: grid;
-  grid-template-columns: 1fr 12fr 2fr 1fr;
+  grid-row-gap: 1rem;
 
-  background: #ffffff;
+  overflow: auto;
 
-  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
-
-  border: none;
-  border-radius: 1.5rem;
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
 `;
 
 export const ClientComp = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 3.5rem;
 
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: ${clientTableGridSpacing};
+  grid-column-gap: 1rem;
 
   background: #ffffff;
 
@@ -356,37 +188,6 @@ export const ClientComp = styled.div`
 
   border: none;
   border-radius: 1.5rem;
-`;
-
-export const CompDivider = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-
-  font-family: 'Hind Siliguri';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1rem;
-
-  color: #515258;
-
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-
-  &:nth-of-type(1) {
-    padding-left: 2.5rem;
-  }
-
-  &:nth-of-type(3) {
-    justify-content: center;
-  }
-
-  &:nth-of-type(4) {
-    justify-content: flex-end;
-
-    padding-right: 1.375rem;
-  }
 `;
 
 export const ClientCompDivider = styled.div`
@@ -394,8 +195,6 @@ export const ClientCompDivider = styled.div`
   align-items: center;
   justify-content: flex-start;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 
@@ -406,23 +205,7 @@ export const ClientCompDivider = styled.div`
   overflow: hidden;
 
   &:nth-of-type(1) {
-    padding-left: 2.5rem;
-  }
-
-  &:nth-of-type(3) {
-    justify-content: center;
-
-    padding-right: 2.375rem;
-  }
-
-  &:nth-of-type(4) {
-    justify-content: center;
-  }
-
-  &:nth-of-type(5) {
-    justify-content: flex-end;
-
-    padding-right: 1.375rem;
+    padding-left: 1rem;
   }
 `;
 
@@ -432,6 +215,9 @@ export const CompText = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+
+  text-align: center;
+  width: 100%;
 `;
 
 export const VisualizeIcon = styled(AiOutlineEye)`
@@ -444,66 +230,5 @@ export const VisualizeIcon = styled(AiOutlineEye)`
   &:hover {
     cursor: pointer;
     opacity: 0.75;
-  }
-`;
-
-export const DeleteIcon = styled(FiTrash)`
-  font-size: 1.5rem;
-
-  color: #515258;
-
-  transition: 500ms;
-
-  &:hover {
-    cursor: pointer;
-    opacity: 0.75;
-  }
-`;
-
-export const BirthdayFilter = styled.div`
-  width: 100%;
-  height: fit-content;
-
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  padding: 0.625rem 1.875rem 0.375rem 0.875rem;
-
-  background: #ffffff;
-
-  border: none;
-  border-radius: 0px 0px 20px 20px;
-
-  position: absolute;
-  top: 2.75rem;
-  left: 0;
-  z-index: 999;
-
-  filter: drop-shadow(0px 2px 5px rgba(175, 176, 197, 0.1));
-`;
-
-export const BirthdayText = styled.div`
-  width: 100%;
-
-  font-family: 'Hind Siliguri';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 0.875rem;
-
-  letter-spacing: 0.005em;
-
-  padding-bottom: 0.625rem;
-
-  color: #515258;
-
-  border-bottom: 1px solid #e4e7f9;
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:last-of-type {
-    border-bottom: none;
   }
 `;

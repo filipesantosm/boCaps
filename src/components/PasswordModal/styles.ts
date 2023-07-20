@@ -43,8 +43,6 @@ export const SuccessIcon = styled.img`
 `;
 
 export const Title = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 500;
   font-size: 2rem;
 
@@ -54,8 +52,6 @@ export const Title = styled.span`
 `;
 
 export const Description = styled.p`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1.25rem;
   line-height: 110.7%;

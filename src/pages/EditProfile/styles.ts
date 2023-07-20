@@ -67,8 +67,6 @@ export const TitleIcon = styled(MdLockOutline)`
 `;
 
 export const Title = styled.span`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 3rem;
 
@@ -87,22 +85,18 @@ export const FormDivider = styled.div`
 
   position: relative;
 
+  margin-bottom: 1rem;
+
   &:nth-of-type(2) {
-    margin-bottom: 3.75rem;
+    margin-bottom: 1.75rem;
   }
 
   &:nth-of-type(3) {
-    margin-bottom: 1.25rem;
-  }
-
-  &:nth-of-type(4) {
-    margin-bottom: 2.75rem;
+    margin-bottom: 2rem;
   }
 `;
 
 export const Label = styled.label`
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1.125rem;
 
@@ -128,8 +122,6 @@ export const Input = styled.input<InputProps>`
 
   padding: 0 2rem 0 1rem;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 400;
   font-size: 1rem;
 
@@ -194,8 +186,6 @@ export const SaveButton = styled.button`
 
   background: #0054bc;
 
-  font-family: 'Hind Siliguri';
-  font-style: normal;
   font-weight: 600;
   font-size: 1rem;
 
