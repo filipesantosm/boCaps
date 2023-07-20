@@ -63,7 +63,7 @@ export const TitleDivider = styled.div`
 export const TitleIcon = styled(MdLockOutline)`
   font-size: 1.875rem;
 
-  color: #003575;
+  color: #515258;
 `;
 
 export const Title = styled.span`
@@ -72,7 +72,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #007126;
+  color: #0054bc;
 `;
 
 export const FormDivider = styled.div`
@@ -192,7 +192,7 @@ export const SaveButton = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #007126;
+  background: #0054bc;
 
   font-family: 'Hind Siliguri';
   font-style: normal;

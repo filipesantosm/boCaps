@@ -53,7 +53,7 @@ export const AccountSelect = ({
                 fontSize: '1rem',
                 fontFamily: 'Hind Siliguri',
                 fontWeight: 400,
-                color: '#003575',
+                color: '#515258',
               }),
               placeholder: prev => ({
                 ...prev,
@@ -94,7 +94,7 @@ export const AccountSelect = ({
                 fontSize: '1rem',
                 fontFamily: 'Hind Siliguri',
                 fontWeight: 400,
-                color: '#003575',
+                color: '#515258',
               }),
               option: (prev, state) => ({
                 ...prev,

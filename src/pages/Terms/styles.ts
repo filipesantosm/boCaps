@@ -45,7 +45,7 @@ export const TitleDivider = styled.div`
 
 export const TitleIcon = styled(TbClipboardText)`
   font-size: 1.875rem;
-  color: #003575;
+  color: #515258;
 `;
 
 export const TitleContainer = styled.div`
@@ -58,7 +58,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
   line-height: 110.7%;
-  color: #007126;
+  color: #0054bc;
 `;
 
 export const TextArea = styled.textarea`
@@ -108,7 +108,7 @@ export const EditButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 1.875rem;
-  background: #007126;
+  background: #0054bc;
   box-shadow: -3px 7px 13px #f1f7ff;
   border: none;
   border-radius: 0.875rem;

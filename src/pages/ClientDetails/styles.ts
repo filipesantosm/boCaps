@@ -69,7 +69,7 @@ export const TitleDivider = styled.div`
 export const TitleIcon = styled(HiOutlineUsers)`
   font-size: 1.875rem;
 
-  color: #003575;
+  color: #515258;
 `;
 
 export const Title = styled.span`
@@ -78,7 +78,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #007126;
+  color: #0054bc;
 `;
 
 export const Subtitle = styled.span`
@@ -139,8 +139,8 @@ export const BackTitle = styled.span`
 `;
 
 export const FormDivider = styled.div`
-  display: grid;
-  grid-template-columns: 0.5fr 1fr;
+  display: flex;
+  // grid-template-columns: 0.5fr 1fr;
   gap: 7.5rem;
 
   width: 100%;
@@ -172,7 +172,7 @@ export const ColumnTitle = styled.span`
   font-weight: 600;
   font-size: 1.25rem;
 
-  color: #007126;
+  color: #0054bc;
 
   margin-bottom: 1.75rem;
 `;
@@ -238,4 +238,34 @@ export const RowColumn = styled.div`
 
   display: flex;
   flex-direction: column;
+`;
+
+export const Button = styled.button`
+  width: 100%;
+  min-height: 2.75rem;
+
+  max-width: 15.625rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 0.875rem;
+
+  background: #0054bc;
+
+  font-family: 'Hindi Siliguri', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.875rem;
+  letter-spacing: 0.4px;
+
+  color: #ffffff;
+
+  transition: 500ms;
+
+  &:hover {
+    opacity: 0.875;
+  }
 `;

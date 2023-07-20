@@ -66,7 +66,7 @@ export const TitleDivider = styled.div`
 export const TitleIcon = styled(TbDiscount2)`
   font-size: 1.875rem;
 
-  color: #003575;
+  color: #515258;
 `;
 
 export const Title = styled.span`
@@ -75,7 +75,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #007126;
+  color: #0054bc;
 `;
 
 export const BackDivider = styled.div`
@@ -134,7 +134,7 @@ export const SwitchText = styled.span`
   font-weight: 500;
   font-size: 1.125rem;
 
-  color: #003575;
+  color: #515258;
 `;
 
 export const FormDivider = styled.div`
@@ -268,7 +268,7 @@ export const DeleteImageTag = styled.div`
 
   border-radius: 50%;
 
-  background: #007126;
+  background: #0054bc;
 
   color: #fff;
 
@@ -448,7 +448,7 @@ export const SaveButton = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #007126;
+  background: #0054bc;
 
   font-family: 'Hind Siliguri';
   font-style: normal;
@@ -486,7 +486,7 @@ export const DeleteButton = styled.button`
   font-weight: 600;
   font-size: 1rem;
 
-  color: #003575;
+  color: #515258;
 
   transition: 500ms;
 

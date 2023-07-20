@@ -23,7 +23,7 @@ import {
   TitleIcon,
 } from './styles';
 
-const ClientDetails = () => {
+const NewClient = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -45,7 +45,7 @@ const ClientDetails = () => {
 
             <Title>Usuários</Title>
 
-            <Subtitle>Cliente</Subtitle>
+            <Subtitle>Cadastrar</Subtitle>
           </TitleDivider>
 
           <BackDivider>
@@ -53,7 +53,7 @@ const ClientDetails = () => {
               <BackIcon />
             </IconTag>
 
-            <BackTitle>André Barbosa</BackTitle>
+            <BackTitle>Voltar</BackTitle>
           </BackDivider>
 
           <FormDivider>
@@ -62,7 +62,12 @@ const ClientDetails = () => {
 
               <Label htmlFor="name">Nome</Label>
 
-              <Input type="text" id="name" name="name" value="André Barbosa" />
+              <Input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Insira o nome"
+              />
 
               <Label htmlFor="phone">Telefone</Label>
 
@@ -70,7 +75,7 @@ const ClientDetails = () => {
                 type="text"
                 id="phone"
                 name="phone"
-                value="(32) 9 1234-5678"
+                placeholder="Insira o telefone"
               />
 
               <Label htmlFor="email">E-mail</Label>
@@ -79,7 +84,7 @@ const ClientDetails = () => {
                 type="text"
                 id="email"
                 name="email"
-                value="andre.barbosa@gmail.com"
+                placeholder="Insira o e-mail"
               />
 
               <Label htmlFor="born_date">Data de Nascimento</Label>
@@ -88,10 +93,9 @@ const ClientDetails = () => {
                 type="text"
                 id="born_date"
                 name="born_date"
-                value="12/08/1992"
+                placeholder="Insira a data de nascimento"
               />
             </FormColumn>
-
             <FormColumn>
               <ColumnTitle>&nbsp;</ColumnTitle>
 
@@ -115,59 +119,50 @@ const ClientDetails = () => {
           <FormDivider>
             <FormColumn>
               <ColumnTitle>Endereço</ColumnTitle>
-
               <FormRow>
                 <RowColumn>
                   <Label htmlFor="cep">CEP</Label>
-
                   <Input
                     type="text"
                     id="cep"
                     name="cep"
-                    value="331630-430"
                     style={{ marginBottom: '0' }}
+                    placeholder="Insira o CEP"
                   />
                 </RowColumn>
-
                 <RowColumn>
                   <Label htmlFor="street">Rua</Label>
-
                   <Input
                     type="text"
                     id="street"
                     name="street"
-                    value="Santa Amélia"
                     style={{ marginBottom: '0' }}
+                    placeholder="Insira a rua"
                   />
                 </RowColumn>
               </FormRow>
-
               <FormRow>
                 <RowColumn>
                   <Label htmlFor="number">Número</Label>
-
                   <Input
                     type="text"
                     id="number"
                     name="number"
-                    value="1304"
                     style={{ marginBottom: '0' }}
+                    placeholder="Insira o número"
                   />
                 </RowColumn>
-
                 <RowColumn>
                   <Label htmlFor="neighborhood">Bairro</Label>
-
                   <Input
                     type="text"
                     id="neighborhood"
                     name="neighborhood"
-                    value="Horta"
                     style={{ marginBottom: '0' }}
+                    placeholder="Insira o bairro"
                   />
                 </RowColumn>
               </FormRow>
-
               <FormRow
                 style={{
                   gridTemplateColumns: '1fr 0.9fr 1fr',
@@ -181,37 +176,33 @@ const ClientDetails = () => {
                     name="country"
                     style={{ marginBottom: '0' }}
                     placeholder="Insira o país"
-                    defaultValue="Brasil"
                   />
                 </RowColumn>
                 <RowColumn>
                   <Label htmlFor="state">Estado</Label>
-
                   <Input
                     type="text"
                     id="state"
                     name="state"
-                    value="MG"
                     style={{ marginBottom: '0' }}
+                    placeholder="Insira o estado"
                   />
                 </RowColumn>
-
                 <RowColumn>
                   <Label htmlFor="city">Cidade</Label>
-
                   <Input
                     type="text"
                     id="city"
                     name="city"
-                    value="Leopoldina"
                     style={{ marginBottom: '0' }}
+                    placeholder="Insira a cidade"
                   />
                 </RowColumn>
               </FormRow>
             </FormColumn>
           </FormDivider>
           <FormDivider>
-            <Button>Salvar alterações</Button>
+            <Button>Cadastrar</Button>
           </FormDivider>
         </MainForm>
       </Content>
@@ -219,4 +210,4 @@ const ClientDetails = () => {
   );
 };
 
-export default ClientDetails;
+export default NewClient;

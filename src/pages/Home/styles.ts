@@ -50,7 +50,7 @@ export const TitleDivider = styled.div`
 export const TitleIcon = styled(HiOutlineTicket)`
   font-size: 1.875rem;
 
-  color: #003575;
+  color: #515258;
 `;
 
 export const Title = styled.span`
@@ -59,7 +59,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #007126;
+  color: #0054bc;
 `;
 
 export const ManageButton = styled.button`
@@ -72,7 +72,7 @@ export const ManageButton = styled.button`
 
   background: transparent;
 
-  border: 1px solid #003575;
+  border: 1px solid #515258;
   border-radius: 0.75rem;
 
   font-family: 'Hind Siliguri';
@@ -80,14 +80,14 @@ export const ManageButton = styled.button`
   font-weight: 600;
   font-size: 1.25rem;
 
-  color: #003575;
+  color: #515258;
 
   transition: 500ms;
 
   margin-bottom: 4rem;
 
   &:hover {
-    background: #003575;
+    background: #515258;
     color: #fff;
   }
 `;
@@ -110,7 +110,7 @@ export const TableHeaderTitle = styled.span`
   font-weight: 600;
   font-size: 1.75rem;
 
-  color: #007126;
+  color: #0054bc;
 `;
 
 export const SearchDivider = styled.div`

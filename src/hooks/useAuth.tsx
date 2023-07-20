@@ -35,7 +35,7 @@ interface ChildrenProps {
 const AuthContext = createContext({} as IUserProvider);
 
 const AuthProvider = ({ children }: ChildrenProps) => {
-  const [tab, setTab] = useState('clubs');
+  const [tab, setTab] = useState('clients');
   const [user, setUser] = useState<User>({} as User);
   const [loading, setLoading] = useState(true);
 

@@ -35,7 +35,7 @@ export const SwitchBall = styled.div<SwitchProps>`
   align-items: center;
   justify-content: center;
 
-  background: ${props => (props.isChecked ? '#003575' : '#C6CEDD')};
+  background: ${props => (props.isChecked ? '#515258' : '#C6CEDD')};
 
   border: none;
   border-radius: 50%;

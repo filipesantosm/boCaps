@@ -14,10 +14,10 @@ export const Container = styled.main`
 
   overflow: hidden;
 
-  background-image: url(${background});
+  /* background-image: url(${background});
   background-repeat: no-repeat;
   background-position: left;
-  background-size: contain;
+  background-size: contain; */
 `;
 
 export const Content = styled.form`
@@ -53,7 +53,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 2.25rem;
 
-  color: #003575;
+  color: #515258;
 
   margin-bottom: 1rem;
 `;
@@ -64,7 +64,7 @@ export const Subtitle = styled.span`
   font-weight: 400;
   font-size: 1.5rem;
 
-  color: #003575;
+  color: #515258;
 
   margin-bottom: 2.125rem;
 `;
@@ -156,7 +156,7 @@ export const ForgotPassword = styled.span`
   font-weight: 600;
   font-size: 1.25rem;
 
-  color: #003575;
+  color: #515258;
 
   align-self: flex-end;
 
@@ -182,7 +182,7 @@ export const LoginButton = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #007126;
+  background: #0054bc;
 
   font-family: 'Hindi Siliguri', sans-serif;
   font-style: normal;

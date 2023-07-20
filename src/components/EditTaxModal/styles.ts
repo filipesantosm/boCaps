@@ -42,7 +42,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 1.75rem;
 
-  color: #007126;
+  color: #0054bc;
 
   margin-bottom: 2rem;
 `;
@@ -132,7 +132,7 @@ export const SaveButton = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #007126;
+  background: #0054bc;
 
   font-family: 'Hind Siliguri';
   font-style: normal;
@@ -167,7 +167,7 @@ export const DeleteDivider = styled.div<DeleteProps>`
   font-weight: ${props => (props.hasTax ? '600' : '400')};
   font-size: 1rem;
 
-  color: ${props => (props.hasTax ? '#003575' : '#C6CEDD')};
+  color: ${props => (props.hasTax ? '#515258' : '#C6CEDD')};
 
   &:hover {
     cursor: ${props => (props.hasTax ? 'pointer' : 'default')};

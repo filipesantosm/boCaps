@@ -3,21 +3,20 @@ import { HiOutlineTicket, HiOutlineUsers } from 'react-icons/hi';
 import { TbClipboardText, TbDiscount2 } from 'react-icons/tb';
 import { FaBalanceScaleLeft } from 'react-icons/fa';
 import { BiWalletAlt } from 'react-icons/bi';
-import { MdLockOutline } from 'react-icons/md';
+import { MdLockOutline, MdOutlineCake } from 'react-icons/md';
 import logo from '../../assets/img/logo.svg';
-import { Container, Logo, MenuItem, MenuText } from './styles';
+import { Container, Logo, LogoText, MenuItem, MenuText } from './styles';
 
 const NavBar = () => {
   return (
     <Container>
       <Logo src={logo} alt="Logo" />
-
-      <MenuItem>
+      {/* <MenuItem>
         <NavLink
           className={({ isActive }) => (isActive ? 'active' : '')}
           to="/home"
           style={({ isActive }) => ({
-            color: isActive ? '#007126' : '#C6CEDD',
+            color: isActive ? '#0054BC' : '#C6CEDD',
             textDecoration: 'none',
             alignItems: 'center',
             display: 'flex',
@@ -28,14 +27,14 @@ const NavBar = () => {
           <HiOutlineTicket className="icon" style={{ fontSize: '1.75rem' }} />
           <MenuText>Green-Fees</MenuText>
         </NavLink>
-      </MenuItem>
+      </MenuItem> */}
 
-      <MenuItem>
+      {/* <MenuItem>
         <NavLink
           className={({ isActive }) => (isActive ? 'active' : '')}
           to="/sales"
           style={({ isActive }) => ({
-            color: isActive ? '#007126' : '#C6CEDD',
+            color: isActive ? '#0054BC' : '#C6CEDD',
             textDecoration: 'none',
             alignItems: 'center',
             display: 'flex',
@@ -47,13 +46,13 @@ const NavBar = () => {
           <MenuText>Promoções</MenuText>
         </NavLink>
       </MenuItem>
-
-      <MenuItem>
+ */}
+      {/* <MenuItem>
         <NavLink
           className={({ isActive }) => (isActive ? 'active' : '')}
           to="/tax"
           style={({ isActive }) => ({
-            color: isActive ? '#007126' : '#C6CEDD',
+            color: isActive ? '#0054BC' : '#C6CEDD',
             textDecoration: 'none',
             alignItems: 'center',
             display: 'flex',
@@ -64,14 +63,14 @@ const NavBar = () => {
           <FaBalanceScaleLeft className="icon" style={{ fontSize: '1.5rem' }} />
           <MenuText>Taxas</MenuText>
         </NavLink>
-      </MenuItem>
+      </MenuItem> */}
 
       <MenuItem>
         <NavLink
           className={({ isActive }) => (isActive ? 'active' : '')}
           to="/users"
           style={({ isActive }) => ({
-            color: isActive ? '#007126' : '#C6CEDD',
+            color: isActive ? '#0054BC' : '#C6CEDD',
             textDecoration: 'none',
             alignItems: 'center',
             display: 'flex',
@@ -83,13 +82,30 @@ const NavBar = () => {
           <MenuText>Usuários</MenuText>
         </NavLink>
       </MenuItem>
-
       <MenuItem>
+        <NavLink
+          className={({ isActive }) => (isActive ? 'active' : '')}
+          to="/birthdays"
+          style={({ isActive }) => ({
+            color: isActive ? '#0054BC' : '#C6CEDD',
+            textDecoration: 'none',
+            alignItems: 'center',
+            display: 'flex',
+            width: '100%',
+            paddingLeft: '1.125rem',
+          })}
+        >
+          <MdOutlineCake className="icon" style={{ fontSize: '1.5rem' }} />
+          <MenuText>Aniversariantes</MenuText>
+        </NavLink>
+      </MenuItem>
+
+      {/* <MenuItem>
         <NavLink
           className={({ isActive }) => (isActive ? 'active' : '')}
           to="/payment"
           style={({ isActive }) => ({
-            color: isActive ? '#007126' : '#C6CEDD',
+            color: isActive ? '#0054BC' : '#C6CEDD',
             textDecoration: 'none',
             alignItems: 'center',
             display: 'flex',
@@ -100,14 +116,14 @@ const NavBar = () => {
           <BiWalletAlt className="icon" style={{ fontSize: '1.5rem' }} />
           <MenuText>Pagamento</MenuText>
         </NavLink>
-      </MenuItem>
+      </MenuItem> */}
 
       <MenuItem>
         <NavLink
           className={({ isActive }) => (isActive ? 'active' : '')}
           to="/terms"
           style={({ isActive }) => ({
-            color: isActive ? '#007126' : '#C6CEDD',
+            color: isActive ? '#0054BC' : '#C6CEDD',
             textDecoration: 'none',
             alignItems: 'center',
             display: 'flex',
@@ -125,7 +141,7 @@ const NavBar = () => {
           className={({ isActive }) => (isActive ? 'active' : '')}
           to="/edit-profile"
           style={({ isActive }) => ({
-            color: isActive ? '#007126' : '#C6CEDD',
+            color: isActive ? '#0054BC' : '#C6CEDD',
             textDecoration: 'none',
             alignItems: 'center',
             display: 'flex',

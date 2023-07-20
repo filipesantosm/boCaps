@@ -5,10 +5,11 @@ export const Container = styled.div`
   width: 29.125rem;
   height: 5rem;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   align-self: flex-end;
-  padding: 0 1.5rem 1rem 1rem;
+  // padding: 1rem 1.5rem 1rem 1rem;
+  padding: 0 1.5rem 0.5rem;
   box-shadow: 16px 8px 20px rgba(197, 197, 197, 0.25);
   border-radius: 1.5rem;
 `;
@@ -23,7 +24,7 @@ export const UserRole = styled.span`
   font-family: 'Hind Siliguri';
   font-weight: 400;
   font-size: 1rem;
-  color: #003575;
+  color: #515258;
 `;
 
 export const UserName = styled.span`
@@ -38,6 +39,8 @@ export const LogoutDivider = styled.div`
   align-items: center;
   gap: 0.875rem;
   transition: 500ms;
+  margin-top: auto;
+  margin-bottom: 0.5rem;
   &:hover {
     cursor: pointer;
     opacity: 0.75;
@@ -46,12 +49,12 @@ export const LogoutDivider = styled.div`
 
 export const LogoutIcon = styled(FiLogOut)`
   font-size: 1.25rem;
-  color: #003575;
+  color: #515258;
 `;
 
 export const LogoutText = styled.span`
   font-family: 'Hind Siliguri';
   font-weight: 500;
   font-size: 1rem;
-  color: #003575;
+  color: #515258;
 `;

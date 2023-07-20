@@ -53,7 +53,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 2.25rem;
 
-  color: #003575;
+  color: #515258;
 
   margin-bottom: 1.25rem;
 `;
@@ -121,7 +121,7 @@ export const SendButton = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #007126;
+  background: #0054bc;
 
   font-family: 'Hindi Siliguri', sans-serif;
   font-style: normal;
@@ -146,7 +146,7 @@ export const BackToLogin = styled.span`
   font-weight: 600;
   font-size: 1.25rem;
 
-  color: #003575;
+  color: #515258;
 
   align-self: center;
 

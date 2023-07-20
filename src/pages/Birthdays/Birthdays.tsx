@@ -16,13 +16,8 @@ import {
   CompText,
   Container,
   Content,
-  DeleteIcon,
-  HeaderButtons,
   MainForm,
   PageHeader,
-  SearchDivider,
-  SearchIcon,
-  SearchInput,
   TableBody,
   Title,
   TitleDivider,
@@ -30,7 +25,7 @@ import {
   VisualizeIcon,
 } from './styles';
 
-const Users = () => {
+const Birthdays = () => {
   const [clientPage, setClientPage] = useState(1);
   const [deleteClub, setDeleteClub] = useState('');
   const [deleteClient, setDeleteClient] = useState('');
@@ -50,26 +45,11 @@ const Users = () => {
           <TitleDivider>
             <TitleIcon />
 
-            <Title>Usuários</Title>
+            <Title>Aniversariantes</Title>
           </TitleDivider>
 
           <PageHeader>
-            <SearchDivider>
-              <SearchIcon />
-              <SearchInput
-                type="text"
-                id="search"
-                name="search"
-                placeholder="Buscar clientes"
-              />
-            </SearchDivider>
-
-            <HeaderButtons>
-              <Button>Exportar dados</Button>
-              <Button type="button" onClick={() => navigate('/users/create')}>
-                Cadastrar usuário
-              </Button>
-            </HeaderButtons>
+            <Button>Exportar dados</Button>
           </PageHeader>
 
           <ClientHeader>
@@ -155,4 +135,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Birthdays;

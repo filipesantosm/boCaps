@@ -14,7 +14,7 @@ const SmallPagination = ({ total, currentPage, handleChange }: Props) => {
         renderItem={(item: any) => (
           <PaginationItem
             style={{
-              color: item.page === currentPage ? '#007126' : '#C6CEDD',
+              color: item.page === currentPage ? '#0054BC' : '#C6CEDD',
               fontSize: '1.25rem',
               fontFamily: 'Hind Siliguri',
               fontWeight: 500,

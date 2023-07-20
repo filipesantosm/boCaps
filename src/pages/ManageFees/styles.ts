@@ -52,7 +52,7 @@ export const TitleDivider = styled.div`
 export const TitleIcon = styled(HiOutlineTicket)`
   font-size: 1.875rem;
 
-  color: #003575;
+  color: #515258;
 `;
 
 export const Title = styled.span`
@@ -61,7 +61,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #007126;
+  color: #0054bc;
 `;
 
 export const BackDivider = styled.div`
@@ -130,7 +130,7 @@ export const TableHeaderDivider = styled.div`
   font-weight: 600;
   font-size: 1.75rem;
 
-  color: #007126;
+  color: #0054bc;
 
   &:nth-of-type(1) {
     padding-left: 2.5rem;
@@ -245,7 +245,7 @@ export const NewButton = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #007126;
+  background: #0054bc;
 
   font-family: 'Hind Siliguri';
   font-style: normal;
@@ -264,7 +264,7 @@ export const NewButton = styled.button`
 export const VisualizeIcon = styled(AiOutlineEye)`
   font-size: 1.75rem;
 
-  color: #007126;
+  color: #0054bc;
 
   transition: 500ms;
 
@@ -277,7 +277,7 @@ export const VisualizeIcon = styled(AiOutlineEye)`
 export const DeleteIcon = styled(FiTrash)`
   font-size: 1.5rem;
 
-  color: #003575;
+  color: #515258;
 
   transition: 500ms;
 

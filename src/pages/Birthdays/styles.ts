@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import { HiOutlineUsers } from 'react-icons/hi';
-import { BiSearch } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
+import { BiSearch } from 'react-icons/bi';
 import { FiTrash } from 'react-icons/fi';
+import { MdOutlineCake } from 'react-icons/md';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
@@ -49,7 +49,7 @@ export const TitleDivider = styled.div`
   margin-bottom: 2rem;
 `;
 
-export const TitleIcon = styled(HiOutlineUsers)`
+export const TitleIcon = styled(MdOutlineCake)`
   font-size: 1.875rem;
 
   color: #515258;

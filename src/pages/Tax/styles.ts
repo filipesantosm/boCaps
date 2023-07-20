@@ -53,7 +53,7 @@ export const TitleDivider = styled.div`
 export const TitleIcon = styled(FaBalanceScaleLeft)`
   font-size: 1.875rem;
 
-  color: #003575;
+  color: #515258;
 `;
 
 export const Title = styled.span`
@@ -62,7 +62,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #007126;
+  color: #0054bc;
 `;
 
 export const TableHeader = styled.div`
@@ -85,7 +85,7 @@ export const TableHeaderDivider = styled.div`
   font-weight: 600;
   font-size: 1.75rem;
 
-  color: #007126;
+  color: #0054bc;
 
   &:nth-of-type(1) {
     padding-left: 2.5rem;
@@ -98,7 +98,7 @@ export const TableHeaderDivider = styled.div`
   &:nth-of-type(3) {
     padding-left: 0.375rem;
 
-    color: #003575;
+    color: #515258;
 
     gap: 0.875rem;
 
@@ -229,7 +229,7 @@ export const TaxCompText = styled.div<TaxProps>`
   font-weight: ${props => (props.hasTax ? '600' : '400')};
   font-size: 1rem;
 
-  color: ${props => (props.hasTax ? '#003575' : '#252729')};
+  color: ${props => (props.hasTax ? '#515258' : '#252729')};
 `;
 
 export const EditDivider = styled.div`
@@ -262,7 +262,7 @@ export const TaxText = styled.span`
 export const EditIcon = styled(BsPencil)`
   font-size: 1rem;
 
-  color: #003575;
+  color: #515258;
 
   transition: 500ms;
 
@@ -276,7 +276,7 @@ export const EditIcon = styled(BsPencil)`
 export const DeleteIcon = styled(FiTrash)`
   font-size: 1.375rem;
 
-  color: #003575;
+  color: #515258;
 `;
 
 export const WarnIcon = styled(RiErrorWarningLine)`

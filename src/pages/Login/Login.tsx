@@ -56,7 +56,7 @@ const Login = () => {
       //   password: value.password,
       // });
       // handleLocalStorage(data);
-      navigate('/home');
+      navigate('/users');
     } catch (error) {
       handleError(error);
     }

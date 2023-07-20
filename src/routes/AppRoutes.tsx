@@ -31,6 +31,8 @@ import NewClubFee from '../pages/NewClubFee/NewClubFee';
 import ClubSales from '../pages/ClubSales/ClubSales';
 import NewClubSale from '../pages/NewClubSale/NewClubSale';
 import EditClubSale from '../pages/EditClubSale/EditClubSale';
+import NewClient from '../pages/NewClient/NewClient';
+import Birthdays from '../pages/Birthdays/Birthdays';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -64,8 +66,11 @@ const AppRoutes = () => {
         <Route path="/tax" element={<Tax />} />
 
         <Route path="/users" element={<Users />} />
+        <Route path="/users/create" element={<NewClient />} />
         <Route path="/users/club/:id" element={<ClubDetails />} />
         <Route path="/users/client/:id" element={<ClientDetails />} />
+
+        <Route path="/birthdays" element={<Birthdays />} />
 
         <Route path="/payment" element={<Payment />} />
         <Route path="/payment/new" element={<NewAccount />} />

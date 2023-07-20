@@ -65,7 +65,7 @@ export const TitleDivider = styled.div`
 export const TitleIcon = styled(BiWalletAlt)`
   font-size: 1.875rem;
 
-  color: #003575;
+  color: #515258;
 `;
 
 export const Title = styled.span`
@@ -74,7 +74,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #007126;
+  color: #0054bc;
 `;
 
 export const BackDivider = styled.div`
@@ -157,7 +157,7 @@ export const ColumnTitle = styled.span`
   font-weight: 600;
   font-size: 1.25rem;
 
-  color: #007126;
+  color: #0054bc;
 
   margin-bottom: 1.75rem;
 `;
@@ -249,7 +249,7 @@ export const RegisterButton = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #007126;
+  background: #0054bc;
 
   font-family: 'Hind Siliguri';
   font-style: normal;
@@ -273,7 +273,7 @@ export const CancelButton = styled.button`
   width: 10.5rem;
   height: 3.75rem;
 
-  border: 1px solid #007126;
+  border: 1px solid #0054bc;
   border-radius: 0.875rem;
 
   background: #fff;
@@ -283,7 +283,7 @@ export const CancelButton = styled.button`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #007126;
+  color: #0054bc;
 
   transition: 500ms;
 
@@ -310,7 +310,7 @@ export const DeleteButton = styled.button`
   font-weight: 600;
   font-size: 1rem;
 
-  color: #003575;
+  color: #515258;
 
   transition: 500ms;
 

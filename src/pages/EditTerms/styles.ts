@@ -45,7 +45,7 @@ export const TitleDivider = styled.div`
 
 export const TitleIcon = styled(TbClipboardText)`
   font-size: 1.875rem;
-  color: #003575;
+  color: #515258;
 `;
 
 export const TitleContainer = styled.div`
@@ -58,7 +58,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
   line-height: 110.7%;
-  color: #007126;
+  color: #0054bc;
 `;
 
 export const TextArea = styled.textarea`
@@ -109,7 +109,7 @@ export const CancelButton = styled.button`
   align-items: center;
   justify-content: center;
   background: transparent;
-  border: 1px solid #007126;
+  border: 1px solid #0054bc;
   border-radius: 0.75rem;
 
   font-family: 'Hind Siliguri';
@@ -117,7 +117,7 @@ export const CancelButton = styled.button`
   font-weight: 600;
   font-size: 1rem;
 
-  color: #007126;
+  color: #0054bc;
 
   transition: 500ms;
   &:hover {
@@ -131,7 +131,7 @@ export const EditButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #007126;
+  background: #0054bc;
   box-shadow: -3px 7px 13px #f1f7ff;
   border: none;
   border-radius: 0.875rem;

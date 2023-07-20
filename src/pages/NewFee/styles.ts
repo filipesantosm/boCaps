@@ -65,7 +65,7 @@ export const TitleDivider = styled.div`
 export const TitleIcon = styled(HiOutlineTicket)`
   font-size: 1.875rem;
 
-  color: #003575;
+  color: #515258;
 `;
 
 export const Title = styled.span`
@@ -74,7 +74,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #007126;
+  color: #0054bc;
 `;
 
 export const BackDivider = styled.div`
@@ -256,7 +256,7 @@ export const RegisterButton = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #007126;
+  background: #0054bc;
 
   font-family: 'Hind Siliguri';
   font-style: normal;
@@ -284,7 +284,7 @@ export const CancelButton = styled.button`
   width: 10.5rem;
   height: 3.75rem;
 
-  border: 1px solid #007126;
+  border: 1px solid #0054bc;
   border-radius: 0.875rem;
 
   background: #fff;
@@ -294,7 +294,7 @@ export const CancelButton = styled.button`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #007126;
+  color: #0054bc;
 
   transition: 500ms;
 
@@ -366,7 +366,7 @@ export const RadioBox = styled.input`
     background: #c6cedd;
   }
   &:checked::before {
-    background: #007126;
+    background: #0054bc;
   }
 `;
 
@@ -386,7 +386,7 @@ export const RadioboxLabel = styled.label<LabelProps>`
   font-weight: 400;
   font-size: 1rem;
 
-  color: ${props => (props.isSelected ? '#007126' : '#003575')};
+  color: ${props => (props.isSelected ? '#0054BC' : '#515258')};
 
   &:hover {
     cursor: pointer;
