@@ -257,7 +257,11 @@ export const ImageItem = styled.div`
 
   gap: 1rem;
 `;
-export const Image = styled.img``;
+export const Image = styled.img`
+  width: 100%;
+  aspect-ratio: 2/1;
+  object-fit: contain;
+`;
 export const ImageLabelButton = styled.label`
   input {
     display: none;

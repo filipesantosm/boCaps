@@ -405,15 +405,48 @@ const Sweepstake = () => {
               </InputLine>
               <ImageLine>
                 <ImageItem>
-                  <Image src={img_placeholderImg} alt="" />
+                  <Image
+                    src={
+                      watch('additionalDataSection.image')
+                        ? URL.createObjectURL(
+                            watch('additionalDataSection.image'),
+                          )
+                        : img_placeholderImg
+                    }
+                    alt=""
+                  />
                   <ImageLabelButton>
-                    Upload de Imagem <input type="file" />
+                    Upload de Imagem{' '}
+                    <Controller
+                      control={control}
+                      name="additionalDataSection.image"
+                      render={({ field: { onChange, ref } }) => (
+                        <input
+                          type="file"
+                          accept="image/*"
+                          ref={ref}
+                          onChange={(e: any) => onChange(e.target.files[0])}
+                        />
+                      )}
+                    />
                   </ImageLabelButton>
                 </ImageItem>
                 <ImageItem>
                   <Image src={img_placeholderPDF} alt="" />
                   <ImageLabelButton>
-                    Upload de Cartela <input type="file" />
+                    Upload de Cartela{' '}
+                    <Controller
+                      control={control}
+                      name="additionalDataSection.cardImage"
+                      render={({ field: { onChange, ref } }) => (
+                        <input
+                          type="file"
+                          ref={ref}
+                          accept="application/pdf"
+                          onChange={(e: any) => onChange(e.target.files[0])}
+                        />
+                      )}
+                    />
                   </ImageLabelButton>
                 </ImageItem>
               </ImageLine>
