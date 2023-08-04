@@ -50,7 +50,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: #FFFFFF;
+    background-color: #F3F3F3;
     height: 100vh;
     text-rendering: optimizeLegibility;
   }
