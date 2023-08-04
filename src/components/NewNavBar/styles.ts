@@ -49,6 +49,7 @@ export const Container = styled.aside<ContainerProps>`
   justify-content: center;
   padding-top: 2.125rem;
   padding-bottom: 2rem;
+  background-color: #fff;
 
   box-shadow: 16px 8px 20px rgba(197, 197, 197, 0.25);
   border-radius: 3rem;
