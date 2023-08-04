@@ -16,5 +16,7 @@ export const Content = styled.main`
   display: flex;
   flex-direction: column;
 
+  overflow-y: auto;
+
   padding: 2rem 4rem;
 `;
