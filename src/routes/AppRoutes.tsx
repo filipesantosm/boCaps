@@ -44,18 +44,18 @@ const AppRoutes = () => {
       <Routes>
         <Route
           path="/"
-          element={isAuthenticated() ? <Navigate to="/home" /> : <Login />}
+          element={isAuthenticated() ? <Navigate to="/users" /> : <Login />}
         />
 
         <Route path="/forgot-password" element={<ForgotPassword />} />
 
-        <Route path="/home" element={<Home />} />
+        {/* <Route path="/home" element={<Home />} />
         <Route path="/home/:clubId" element={<GreenFeeDetail />} />
         <Route path="/home/:clubId/:id" element={<EditClubFee />} />
         <Route path="/home/:clubId/new" element={<NewClubFee />} />
         <Route path="/home/manage" element={<ManageFees />} />
         <Route path="/home/manage/new" element={<NewFee />} />
-        <Route path="/home/manage/:id" element={<EditFee />} />
+        <Route path="/home/manage/:id" element={<EditFee />} /> */}
 
         <Route path="/dashboard" element={<Dashboard />} />
 

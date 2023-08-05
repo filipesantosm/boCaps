@@ -166,6 +166,7 @@ export const TableBody = styled.div`
 
   display: grid;
   grid-row-gap: 1rem;
+  place-items: start;
 
   overflow: auto;
 
