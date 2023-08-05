@@ -1,11 +1,16 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/img/logo.svg';
+import { useAuth } from '../../hooks/useAuth';
+import { ILoginResponse } from '../../interfaces/Auth';
+import api from '../../services/api';
+import handleError from '../../services/handleToast';
+import { LoginSchema } from '../../validations/LoginSchema';
 import {
   Container,
   Content,
-  ForgotPassword,
   FormDivider,
   Input,
   InvisibleEye,
@@ -15,10 +20,6 @@ import {
   Title,
   VisibleEye,
 } from './styles';
-import logo from '../../assets/img/logo.svg';
-import { IResponseLogin, useAuth } from '../../hooks/useAuth';
-import { LoginSchema } from '../../validations/LoginSchema';
-import handleError from '../../services/handleToast';
 
 interface LoginProps {
   email: string;
@@ -41,21 +42,28 @@ const Login = () => {
     resolver: yupResolver(LoginSchema),
   });
 
-  const handleLocalStorage = (response: IResponseLogin) => {
-    // setUser(response.user);
-    // localStorage.setItem('@Leishscan: user', JSON.stringify(response.user));
-    // localStorage.setItem('@Leishscan: accessToken', response.access_token);
-    // localStorage.setItem('@Leishscan: refreshToken', response.refresh_token);
-    // navigate('/home');
+  const handleLocalStorage = (response: ILoginResponse) => {
+    setUser(response.user);
+    localStorage.setItem('@MultcapMaster: user', JSON.stringify(response.user));
+    localStorage.setItem('@MultcapMaster: accessToken', response.jwt);
+    navigate('/home');
   };
 
   const handleLogin: SubmitHandler<LoginProps> = async value => {
     try {
-      // const { data } = await api.post<IResponseLogin>('/user/session', {
-      //   email: value.email.trim(),
-      //   password: value.password,
-      // });
-      // handleLocalStorage(data);
+      const { data } = await api.post<ILoginResponse>(
+        '/auth/local',
+        {
+          identifier: value.email.trim(),
+          password: value.password,
+        },
+        {
+          headers: {
+            Authorization: '',
+          },
+        },
+      );
+      handleLocalStorage(data);
       navigate('/users');
     } catch (error) {
       handleError(error);
@@ -65,7 +73,7 @@ const Login = () => {
   return (
     <Container>
       <Content onSubmit={handleSubmit(handleLogin)}>
-        <Logo src={logo} alt="Logo Talk Golf Show" />
+        <Logo src={logo} alt="Logo Multicap" />
 
         <Title>Login</Title>
 

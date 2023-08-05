@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import axios from 'axios';
 
-export const baseURL = '';
+export const baseURL = import.meta.env.VITE_API_URL || '';
 
 const api = axios.create({
   baseURL,
@@ -9,7 +9,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
   async config => {
-    const accessToken = localStorage.getItem('@TGS: accessToken');
+    const accessToken = localStorage.getItem('@MultcapMaster: accessToken');
     if (accessToken) {
       config.headers!.Authorization = `Bearer ${accessToken}`;
     }
@@ -20,15 +20,15 @@ api.interceptors.request.use(
 
 export default api;
 
-export async function refreshAccessToken() {
+/* export async function refreshAccessToken() {
   try {
-    const credentials = localStorage.getItem('@TGS: refreshToken');
+    const credentials = localStorage.getItem('@MultcapMaster: refreshToken');
     if (typeof credentials === 'string') {
       const { data } = await api.put('/user/session', {
         refresh_token: credentials,
       });
-      localStorage.setItem('@TGS: accessToken', data.access_token);
-      localStorage.setItem('@TGS: refreshToken', data.refresh_token);
+      localStorage.setItem('@MultcapMaster: accessToken', data.access_token);
+      localStorage.setItem('@MultcapMaster: refreshToken', data.refresh_token);
       return data?.access_token;
     }
   } catch (error) {
@@ -37,9 +37,9 @@ export async function refreshAccessToken() {
   }
   localStorage.clear();
   window.location.href = '/';
-}
+} */
 
-api.interceptors.response.use(
+/* api.interceptors.response.use(
   response => response,
   async error => {
     const originalRequest = error.config;
@@ -50,10 +50,10 @@ api.interceptors.response.use(
       originalRequest.url !== '/user/session'
     ) {
       originalRequest.retry = true;
-      const accessToken = await refreshAccessToken();
-      originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+      // const accessToken = await refreshAccessToken();
+      // originalRequest.headers.Authorization = `Bearer ${accessToken}`;
       return api(originalRequest);
     }
     return Promise.reject(error);
   },
-);
+); */

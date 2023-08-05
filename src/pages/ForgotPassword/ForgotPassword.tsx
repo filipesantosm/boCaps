@@ -46,7 +46,7 @@ const ForgotPassword = () => {
   return (
     <Container>
       <Content onSubmit={handleSubmit(handleNewPassword)}>
-        <Logo src={logo} alt="Logo Talk Golf Show" />
+        <Logo src={logo} alt="Logo Multicap" />
 
         <Title>Esqueci a Senha</Title>
 
