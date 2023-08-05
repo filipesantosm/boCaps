@@ -52,7 +52,9 @@ export const Container = styled.aside<ContainerProps>`
   background-color: #fff;
 
   box-shadow: 16px 8px 20px rgba(197, 197, 197, 0.25);
-  border-radius: 3rem;
+  border-radius: 1.5rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 
   ${({ isOpen }) =>
     isOpen

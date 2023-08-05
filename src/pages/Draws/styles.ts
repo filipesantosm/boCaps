@@ -25,37 +25,6 @@ export const Title = styled.span`
   margin-bottom: 2rem;
 `;
 
-const clientTableGridSpacing =
-  '0.75fr 0.75fr 0.75fr 2.5fr 1.875fr 1fr 1fr 1fr 0.5fr 1fr 1fr 1fr 0.75fr 0.5fr';
-
-export const ClientHeader = styled.div`
-  width: 100%;
-  height: fit-content;
-
-  display: grid;
-  grid-template-columns: ${clientTableGridSpacing};
-  grid-column-gap: 1rem;
-
-  padding: 0.25rem;
-`;
-
-export const ClientHeaderDivider = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-
-  font-weight: 600;
-  font-size: 1.125rem;
-
-  color: #0054bc;
-
-  &:nth-of-type(1) {
-    padding-left: 1rem;
-  }
-`;
-
 export const PageHeader = styled.div`
   width: 100%;
 
@@ -125,7 +94,7 @@ export const SearchInput = styled.input`
 
   outline: none;
 
-  background: #fff;
+  background: #ffffff;
 
   padding-left: 2.875rem;
 
@@ -152,6 +121,38 @@ export const SearchIcon = styled(BiSearch)`
   font-size: 1.5rem;
 `;
 
+const drawsTableGridSpacing = '0.75fr 0.75fr 0.75fr 0.75fr 0.75fr 0.5fr 0.25fr';
+
+export const DrawsHeader = styled.div`
+  margin-top: 2rem;
+
+  width: 100%;
+  height: fit-content;
+
+  display: grid;
+  grid-template-columns: ${drawsTableGridSpacing};
+  grid-column-gap: 1rem;
+
+  padding: 0.25rem;
+`;
+
+export const DrawsHeaderDivider = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  font-weight: 600;
+  font-size: 1.125rem;
+
+  color: #0054bc;
+
+  &:nth-of-type(1) {
+    padding-left: 1rem;
+  }
+`;
+
 export const TableBody = styled.div`
   width: 100%;
   flex: 1;
@@ -175,12 +176,12 @@ export const TableBody = styled.div`
   }
 `;
 
-export const ClientComp = styled.div`
+export const DrawComp = styled.div`
   width: 100%;
   min-height: 3.5rem;
 
   display: grid;
-  grid-template-columns: ${clientTableGridSpacing};
+  grid-template-columns: ${drawsTableGridSpacing};
   grid-column-gap: 1rem;
 
   background: #ffffff;
@@ -191,7 +192,7 @@ export const ClientComp = styled.div`
   border-radius: 1.5rem;
 `;
 
-export const ClientCompDivider = styled.div`
+export const DrawCompDivider = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;

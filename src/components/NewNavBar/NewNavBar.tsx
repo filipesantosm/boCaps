@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { HiOutlineHome, HiOutlineUsers } from 'react-icons/hi';
+import { HiOutlineGift, HiOutlineHome, HiOutlineUsers } from 'react-icons/hi';
 import { MdLockOutline, MdOutlineCake } from 'react-icons/md';
 import { TbClipboardText } from 'react-icons/tb';
 import { BsList } from 'react-icons/bs';
@@ -40,6 +40,12 @@ const NewNavBar = () => {
           </StyledNavLink>
         </MenuItem>
         <MenuItem>
+          <StyledNavLink to="/sweepstake">
+            <HiOutlineGift className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Sorteios</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
           <StyledNavLink to="/users">
             <HiOutlineUsers className="icon" style={{ fontSize: '1.5rem' }} />
             <MenuText>Usuários</MenuText>
@@ -65,7 +71,13 @@ const NewNavBar = () => {
         </MenuItem>
       </LinksList>
 
-      <HamburgerButton type="button" onClick={() => navigate('/')}>
+      <HamburgerButton
+        type="button"
+        onClick={() => {
+          logout();
+          navigate('/');
+        }}
+      >
         <FiLogOut style={{ fontSize: '1.5rem' }} />
         <MenuText>Logout</MenuText>
       </HamburgerButton>

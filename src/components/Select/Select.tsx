@@ -8,10 +8,12 @@ interface Props extends SelectProps {
   error?: string;
   labelStyle?: CSSProperties;
 }
+
 export interface IOption {
   value: string;
   label: string;
 }
+
 const Select = ({
   labelStyle,
   options,
@@ -22,13 +24,13 @@ const Select = ({
 }: Props) => {
   return (
     <Label style={labelStyle} data-com="SelectLabel">
-      <LabelText>{label}</LabelText>
+      {label && <LabelText>{label}</LabelText>}
       <SelectComponent
         options={options}
         placeholder={placeholder || 'Selecione...'}
         isSearchable={false}
-        {...rest}
         value={options.find(option => option.value === rest.value)}
+        {...rest}
         styles={{
           control: prev => ({
             ...prev,

@@ -47,3 +47,24 @@ export const currencyMask = (value: number) => {
 export const unMask = (value: string) => {
   return value?.replace(/\D/g, '');
 };
+
+export const unmaskCurrency = (value: string) => {
+  if (!value) return 0;
+  const valueFormatted = value
+    .replace(',', '')
+    .replace('.', '')
+    .replace(/\D/g, '');
+
+  return Number(valueFormatted) / 100;
+};
+
+export const maskCurrency = (value: string) => {
+  const valueFormatted = unmaskCurrency(value);
+
+  const masked = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+    useGrouping: false,
+  }).format(valueFormatted);
+  return masked;
+};

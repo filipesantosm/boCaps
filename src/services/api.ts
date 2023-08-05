@@ -39,21 +39,18 @@ export default api;
   window.location.href = '/';
 } */
 
-/* api.interceptors.response.use(
+api.interceptors.response.use(
   response => response,
   async error => {
     const originalRequest = error.config;
 
     if (
       error.response.status === 401 &&
-      !originalRequest.retry &&
-      originalRequest.url !== '/user/session'
+      !originalRequest.url.includes('auth')
     ) {
-      originalRequest.retry = true;
-      // const accessToken = await refreshAccessToken();
-      // originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-      return api(originalRequest);
+      localStorage.clear();
+      window.location.href = '/';
     }
     return Promise.reject(error);
   },
-); */
+);

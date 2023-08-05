@@ -1,33 +1,35 @@
-import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { CgCopy } from 'react-icons/cg';
-import { IoPencil } from 'react-icons/io5';
-import { BsTrash } from 'react-icons/bs';
+/* eslint-disable react/no-array-index-key */
+import { useEffect, useState } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
+import {
+  icon_ArrowSection,
+  img_placeholderImg,
+  img_placeholderPDF,
+} from '../../assets';
+import DrawPremiumSection from '../../components/DrawPremiumSection/DrawPremiumSection';
 import Layout from '../../components/Layout/Layout';
-import Switch from '../../components/Switch/Switch';
+import Select from '../../components/Select/Select';
+import SweepstakeInput from '../../components/SweepstakeInput/SweepstakeInput';
 import SwitchColor from '../../components/SwitchColor/SwitchColor';
+import { useDrawPromos } from '../../hooks/useDrawPromos';
+import { useDrawTypeChance } from '../../hooks/useDrawTypeChance';
+import { usePremiumCategories } from '../../hooks/usePremiumCategories';
+import { usePremiumTypes } from '../../hooks/usePremiumTypes';
+import { IDraw } from '../../interfaces/Draw';
+import { UploadFileResponse } from '../../interfaces/Image';
+import { ISweepstakeForm } from '../../interfaces/SweepstakeForm';
+import api from '../../services/api';
+import handleError from '../../services/handleToast';
+import { getDrawImage, imageUrl } from '../../utils/imageUrl';
 import {
   AdditionalContainer,
   AdditionalDataSection,
-  AdditionalLine,
-  AwardCellLineTable,
-  AwardCellTable,
-  AwardContainer,
-  AwardHeadLineTable,
-  AwardHeadTable,
-  AwardInputContainer,
-  AwardLine,
-  AwardSection,
-  AwardTable,
-  ButtonContainer,
   ButtonFooterContainer,
-  ButtonSubmit,
   ChanceContainer,
   ChanceLine,
   ChanceSection,
   Content,
-  IconButton,
-  IconLink,
   Image,
   ImageItem,
   ImageLabelButton,
@@ -43,7 +45,6 @@ import {
   RetrieveContainer,
   RetrieveHeader,
   SaveButton,
-  SeeMoreButton,
   SelectLabel,
   SelectWrapper,
   SelectWrapperAdditional,
@@ -51,82 +52,180 @@ import {
   Title,
   TitleContainer,
 } from './styles';
-import SweepstakeInput from '../../components/SweepstakeInput/SweepstakeInput';
-import Select from '../../components/Select/Select';
-import BRLMoneyFormater from '../../utils/formaters/BRLMoneyFormater';
 import {
-  icon_ArrowSection,
-  img_placeholderImg,
-  img_placeholderPDF,
-} from '../../assets';
+  getInitialDrawForm,
+  getIsoStringFromDateAndTime,
+  isScratchCardOptions,
+} from './utils';
 
-type FormValues = {
-  proccessNumber: number;
-  status: string;
-  title: string;
-  date: string;
-  hour: string;
-  startDate: string;
-  startHour: string;
-  endDate: string;
-  endHour: string;
-
-  chanceSection: IChanceSection;
-  additionalDataSection: IAdditionalData;
-  mainAwardsSection: IAwardsSection;
-  additionalAwardsSection: IAwardsSection;
-  awardsExtraSpingSection: IAwardsSection;
-};
-interface IChanceSection {
-  typeChance: number;
-  chances: IChance[];
-}
-interface IChance {
-  from: number;
-  to: number;
-  range: number;
-}
-interface IAdditionalData {
-  limit: number;
-  freeTip: string;
-  youtubeLink: string;
-  sweepstakeLink: string;
-  saleValue: string[];
-  shareRescue: string;
-  shareValue: string;
-  extraSpin: string;
-  image: File;
-  cardImage: File;
-  observation: string;
-}
-interface IAwardsSection {
-  awards: IAwards[];
-}
-interface IAwards {
-  name: string;
-  description: string;
-  value: number;
-  type: string;
-  quantity: number;
-  observation: string;
-}
 const Sweepstake = () => {
+  const { drawId } = useParams();
+
+  const [draw, setDraw] = useState<IDraw>();
   const [openedSections, setOpenedSections] = useState<string[]>([]);
   const {
     control,
     formState: { errors },
+    handleSubmit,
     register,
     watch,
-  } = useForm<FormValues>({
+    reset,
+  } = useForm<ISweepstakeForm>({
     defaultValues: {
       chanceSection: {
         typeChance: 1,
       },
     },
   });
+
+  useEffect(() => {
+    if (drawId) {
+      getDraw(drawId);
+    }
+  }, [drawId]);
+
+  const { drawPromoOptions } = useDrawPromos();
+
+  const { drawTypeChanceOptions, drawTypeChances } = useDrawTypeChance();
+
+  const { premiumCategories } = usePremiumCategories();
+
+  const { drawTypePremiums } = usePremiumTypes();
+
+  const getDraw = async (id: string) => {
+    try {
+      const { data } = await api.get<{
+        data: IDraw;
+      }>(`/draws/${id}`, {
+        params: {
+          populate: ['image', 'draw_type_chance', 'draw_promos', 'pdfTitle'],
+        },
+      });
+
+      setDraw(data.data);
+      reset(getInitialDrawForm(data.data));
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
+  const uploadFile = async (image: File) => {
+    const formData = new FormData();
+
+    formData.append('files', image);
+
+    const { data } = await api.post<UploadFileResponse>('/upload', formData);
+
+    return data;
+  };
+
+  const onSubmit: SubmitHandler<ISweepstakeForm> = async form => {
+    const drawDate = getIsoStringFromDateAndTime(form.drawDate, form.drawHour);
+    const startDate = getIsoStringFromDateAndTime(
+      form.startDate,
+      form.startHour,
+    );
+    const endDate = getIsoStringFromDateAndTime(form.endDate, form.endHour);
+
+    try {
+      let imageId = 0;
+      let titlePdfId = 0;
+
+      if (form.additionalDataSection.image) {
+        const imageResponse = await uploadFile(
+          form.additionalDataSection.image,
+        );
+
+        imageId = imageResponse?.[0]?.id || 0;
+      }
+
+      if (form.additionalDataSection.cardImage) {
+        const fileResponse = await uploadFile(
+          form.additionalDataSection.cardImage,
+        );
+
+        titlePdfId = fileResponse?.[0]?.id || 0;
+      }
+
+      const foundChance = drawTypeChances.find(
+        chance =>
+          chance.attributes.total === Number(form.chanceSection.typeChance),
+      );
+
+      const payload = {
+        data: {
+          name: form.name,
+          description: form.additionalDataSection.description,
+          dateStart: startDate,
+          dateFinal: endDate,
+          dateDraw: drawDate,
+          limSale: form.additionalDataSection.limSale,
+          isScratchCard: form.additionalDataSection.isScratchCard === 'true',
+          susep: form.susep,
+          number: form.number,
+          chanceInicial01: form.chanceSection.chanceInicial01,
+          chanceFinal01: form.chanceSection.chanceFinal01,
+          intervalChance1: form.chanceSection.intervalChance1,
+          chanceInicial02: form.chanceSection.chanceInicial02,
+          chanceFinal02: form.chanceSection.chanceFinal02,
+          intervalChance2: form.chanceSection.intervalChance2,
+          chanceInicial03: form.chanceSection.chanceInicial03,
+          chanceFinal03: form.chanceSection.chanceFinal03,
+          lnkYoutube: form.additionalDataSection.lnkYoutube,
+          lnkYoutubeDraw: form.additionalDataSection.lnkYoutubeDraw,
+          redemptionPercent: form.additionalDataSection.redemptionPercent,
+          redemptionValue: form.additionalDataSection.redemptionValue,
+          ...(imageId && {
+            image: {
+              id: imageId,
+            },
+          }),
+          ...(titlePdfId && {
+            pdfTitle: {
+              id: titlePdfId,
+            },
+          }),
+          ...(foundChance && {
+            draw_type_chance: {
+              id: foundChance.id,
+            },
+          }),
+          draw_promos: form.additionalDataSection.saleValue.map(value =>
+            Number(value),
+          ),
+        },
+      };
+
+      if (draw) {
+        const { data } = await api.put(`/draws/${draw.id}`, payload);
+
+        getDraw(data.data.id);
+      } else {
+        const { data } = await api.post('/draws', payload);
+
+        getDraw(data.data.id);
+      }
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
+  const newImage = watch('additionalDataSection.image');
+  const newPdf = watch('additionalDataSection.cardImage');
+
+  const previewImageUrl = newImage
+    ? URL.createObjectURL(newImage)
+    : getDrawImage(draw);
+
+  const previewPdfUrl = newPdf
+    ? URL.createObjectURL(newPdf)
+    : imageUrl(draw?.attributes?.pdfTitle?.data?.attributes?.url);
+
+  const typeChance = watch('chanceSection.typeChance');
+
   return (
     <Layout>
-      <Content>
+      <Content onSubmit={handleSubmit(onSubmit)}>
         <TitleContainer>
           <Title>Sorteios</Title>
         </TitleContainer>
@@ -158,26 +257,17 @@ const Sweepstake = () => {
                 style={{
                   width: '6rem',
                 }}
-                {...register('proccessNumber')}
-                error={errors.proccessNumber?.message}
+                {...register('susep')}
+                error={errors.susep?.message}
               />
-              <SelectLabel>
-                Status:
-                <SelectWrapper>
-                  <Select
-                    options={[
-                      {
-                        value: '1',
-                        label: 'Em andamento',
-                      },
-                      {
-                        value: '2',
-                        label: 'Finalizado',
-                      },
-                    ]}
-                  />
-                </SelectWrapper>
-              </SelectLabel>
+              <SweepstakeInput
+                label="Número do sorteio:"
+                style={{
+                  width: '6rem',
+                }}
+                {...register('number')}
+                error={errors.number?.message}
+              />
             </InputLine>
             <InputLine>
               <SweepstakeInput
@@ -185,55 +275,62 @@ const Sweepstake = () => {
                 style={{
                   width: '18rem',
                 }}
-                {...register('title')}
-                error={errors.title?.message}
+                placeholder="Insira o título"
+                {...register('name')}
+                error={errors.name?.message}
               />
               <SweepstakeInput
                 label="Data:"
                 style={{
-                  width: '8rem',
+                  width: '10rem',
                 }}
-                {...register('date')}
-                error={errors.date?.message}
+                type="date"
+                {...register('drawDate')}
+                error={errors.drawDate?.message}
               />
               <SweepstakeInput
                 label="Hora:"
                 style={{
-                  width: '5rem',
+                  width: '8rem',
                 }}
-                {...register('hour')}
-                error={errors.hour?.message}
+                type="time"
+                {...register('drawHour')}
+                error={errors.drawHour?.message}
               />
             </InputLine>
             <InputLine>
               <SweepstakeInput
                 label="Data início vendas:"
+                type="date"
                 style={{
-                  width: '8.75rem',
+                  width: '10rem',
                 }}
                 {...register('startDate')}
                 error={errors.startDate?.message}
               />
               <SweepstakeInput
                 label="Hora:"
+                type="time"
                 style={{
-                  width: '5rem',
+                  width: '8rem',
                 }}
                 {...register('startHour')}
                 error={errors.startHour?.message}
               />
               <SweepstakeInput
                 label="Data fim vendas:"
+                type="date"
                 style={{
-                  width: '8.75rem',
+                  width: '10rem',
                 }}
                 {...register('endDate')}
                 error={errors.endDate?.message}
               />
               <SweepstakeInput
                 label="Hora:"
+                type="time"
                 style={{
-                  width: '5rem',
+                  width: '8rem',
                 }}
                 {...register('endHour')}
                 error={errors.endHour?.message}
@@ -267,12 +364,10 @@ const Sweepstake = () => {
                 name="chanceSection.typeChance"
                 render={({ field: { value, onChange } }) => (
                   <Select
-                    options={[
-                      { value: '1', label: 'Única Chance' },
-                      { value: '2', label: 'Dupla Chance' },
-                      { value: '3', label: 'Tripla Chance' },
-                    ]}
-                    value={String(value)}
+                    options={drawTypeChanceOptions}
+                    value={drawTypeChanceOptions.find(
+                      option => option.value === String(value),
+                    )}
                     onChange={(e: any) => onChange(Number(e.value))}
                   />
                 )}
@@ -283,45 +378,92 @@ const Sweepstake = () => {
             isExpanded={openedSections.includes('chanceSection')}
           >
             <ChanceContainer>
-              {new Array(Number(watch('chanceSection.typeChance')) || 0)
-                .fill(0)
-                .map((_, index) => {
-                  const nums = ['I', 'II', 'III'];
-                  return (
-                    <ChanceLine>
-                      <SweepstakeInput
-                        labelTextStyle={{
-                          color: '#0F5CBE',
-                        }}
-                        label={`Faixa de Chance ${nums[index]}:`}
-                        {...register(`chanceSection.chances.${index}.from`)}
-                        error={
-                          errors.chanceSection?.chances?.[index]?.from?.message
-                        }
-                      />
-                      <SweepstakeInput
-                        labelTextStyle={{
-                          color: '#0F5CBE',
-                        }}
-                        label={`Final Chance ${nums[index]}:`}
-                        {...register(`chanceSection.chances.${index}.to`)}
-                        error={
-                          errors.chanceSection?.chances?.[index]?.to?.message
-                        }
-                      />
-                      <SweepstakeInput
-                        labelTextStyle={{
-                          color: '#0F5CBE',
-                        }}
-                        label={`Intervalo de Chance ${nums[index]}:`}
-                        {...register(`chanceSection.chances.${index}.range`)}
-                        error={
-                          errors.chanceSection?.chances?.[index]?.range?.message
-                        }
-                      />
-                    </ChanceLine>
-                  );
-                })}
+              {typeChance && (
+                <ChanceLine>
+                  <SweepstakeInput
+                    labelTextStyle={{
+                      color: '#0F5CBE',
+                    }}
+                    label="Faixa de Chance 1:"
+                    {...register('chanceSection.chanceInicial01')}
+                    error={errors?.chanceSection?.chanceInicial01?.message}
+                  />
+                  <SweepstakeInput
+                    labelTextStyle={{
+                      color: '#0F5CBE',
+                    }}
+                    label="Final Chance 1:"
+                    {...register('chanceSection.chanceFinal01')}
+                    error={errors?.chanceSection?.chanceFinal01?.message}
+                  />
+                  <SweepstakeInput
+                    labelTextStyle={{
+                      color: '#0F5CBE',
+                    }}
+                    label="Intervalo de Chance 1:"
+                    {...register(`chanceSection.intervalChance1`)}
+                    error={errors.chanceSection?.intervalChance1?.message}
+                  />
+                </ChanceLine>
+              )}
+              {typeChance >= 2 && (
+                <ChanceLine>
+                  <SweepstakeInput
+                    labelTextStyle={{
+                      color: '#0F5CBE',
+                    }}
+                    label="Faixa de Chance 2:"
+                    {...register('chanceSection.chanceInicial02')}
+                    error={errors?.chanceSection?.chanceInicial02?.message}
+                  />
+                  <SweepstakeInput
+                    labelTextStyle={{
+                      color: '#0F5CBE',
+                    }}
+                    label="Final Chance 2:"
+                    {...register('chanceSection.chanceFinal02')}
+                    error={errors?.chanceSection?.chanceFinal02?.message}
+                  />
+                  <SweepstakeInput
+                    labelTextStyle={{
+                      color: '#0F5CBE',
+                    }}
+                    label="Intervalo de Chance 2:"
+                    {...register(`chanceSection.intervalChance2`)}
+                    error={errors.chanceSection?.intervalChance2?.message}
+                  />
+                </ChanceLine>
+              )}
+              {typeChance >= 3 && (
+                <ChanceLine>
+                  <SweepstakeInput
+                    labelTextStyle={{
+                      color: '#0F5CBE',
+                    }}
+                    label="Faixa de Chance 3:"
+                    {...register('chanceSection.chanceInicial03')}
+                    error={errors?.chanceSection?.chanceInicial03?.message}
+                  />
+                  <SweepstakeInput
+                    labelTextStyle={{
+                      color: '#0F5CBE',
+                    }}
+                    label="Final Chance 3:"
+                    {...register('chanceSection.chanceFinal03')}
+                    error={errors?.chanceSection?.chanceFinal03?.message}
+                  />
+                  <SweepstakeInput
+                    labelTextStyle={{
+                      color: '#0F5CBE',
+                    }}
+                    label="Intervalo de Chance 3:"
+                    /* {...register(`chanceSection.chances.${index}.range`)}
+                    error={
+                      errors.chanceSection?.chances?.[index]?.range?.message
+                    } */
+                  />
+                </ChanceLine>
+              )}
             </ChanceContainer>
           </RetrieveContainer>
         </ChanceSection>
@@ -356,36 +498,56 @@ const Sweepstake = () => {
                   style={{
                     width: '6.25rem',
                   }}
+                  {...register('additionalDataSection.limSale')}
                 />
                 <SelectLabel>
                   Terá raspadinha Gratuita:
                   <SelectWrapper>
-                    <Select
-                      options={[
-                        {
-                          value: '1',
-                          label: 'Sim',
-                        },
-                        {
-                          value: '2',
-                          label: 'Não',
-                        },
-                      ]}
+                    <Controller
+                      control={control}
+                      name="additionalDataSection.isScratchCard"
+                      render={({ field: { onChange, value } }) => (
+                        <Select
+                          value={isScratchCardOptions.find(
+                            option => option.value === value,
+                          )}
+                          onChange={(option: any) => onChange(option.value)}
+                          options={isScratchCardOptions}
+                        />
+                      )}
                     />
                   </SelectWrapper>
                 </SelectLabel>
               </InputLine>
-              <SweepstakeInput label="Link Youtube (Vídeo publicitário):" />
-              <SweepstakeInput label="Link Sorteio (Sorteio ao Vivo):" />
+              <SweepstakeInput
+                label="Link YouTube (Vídeo publicitário):"
+                type="url"
+                placeholder="Ex: https://www.youtube.com/watch?v=lvklC85ZvEw"
+                {...register('additionalDataSection.lnkYoutube')}
+              />
+              <SweepstakeInput
+                label="Link Sorteio (Sorteio ao Vivo):"
+                type="url"
+                placeholder="Ex: https://www.youtube.com/watch?v=lvklC85ZvEw"
+                {...register('additionalDataSection.lnkYoutubeDraw')}
+              />
               <SelectWrapperAdditional>
                 <SelectLabel>Valor promocional:</SelectLabel>
-                <Select
-                  isMulti
-                  options={[
-                    { value: '1', label: 'R$ 1,00' },
-                    { value: '2', label: 'R$ 2,00' },
-                    { value: '3', label: 'R$ 3,00' },
-                  ]}
+                <Controller
+                  control={control}
+                  name="additionalDataSection.saleValue"
+                  render={({ field: { onChange, value } }) => (
+                    <Select
+                      isMulti
+                      options={drawPromoOptions}
+                      value={drawPromoOptions?.filter(option =>
+                        value?.includes(option.value),
+                      )}
+                      onChange={(options: any) => {
+                        onChange(options.map((option: any) => option.value));
+                      }}
+                    />
+                  )}
                 />
               </SelectWrapperAdditional>
               <InputLine>
@@ -394,27 +556,20 @@ const Sweepstake = () => {
                   style={{
                     width: '9.375rem',
                   }}
+                  {...register('additionalDataSection.redemptionPercent')}
                 />
                 <SweepstakeInput
                   label="Valor Resgate:"
                   style={{
                     width: '9.375rem',
                   }}
+                  {...register('additionalDataSection.redemptionValue')}
                 />
-                <SweepstakeInput label="Quota Resgate (%):" />
+                {/* <SweepstakeInput label="Quota Resgate (%):" /> */}
               </InputLine>
               <ImageLine>
                 <ImageItem>
-                  <Image
-                    src={
-                      watch('additionalDataSection.image')
-                        ? URL.createObjectURL(
-                            watch('additionalDataSection.image'),
-                          )
-                        : img_placeholderImg
-                    }
-                    alt=""
-                  />
+                  <Image src={previewImageUrl || img_placeholderImg} alt="" />
                   <ImageLabelButton>
                     Upload de Imagem{' '}
                     <Controller
@@ -432,7 +587,18 @@ const Sweepstake = () => {
                   </ImageLabelButton>
                 </ImageItem>
                 <ImageItem>
-                  <Image src={img_placeholderPDF} alt="" />
+                  <Image
+                    src={img_placeholderPDF}
+                    alt=""
+                    onClick={() => {
+                      if (previewPdfUrl) {
+                        window.open(previewPdfUrl, '_blank', 'noreferrer');
+                      }
+                    }}
+                    style={{
+                      cursor: previewPdfUrl ? 'pointer' : undefined,
+                    }}
+                  />
                   <ImageLabelButton>
                     Upload de Cartela{' '}
                     <Controller
@@ -452,451 +618,22 @@ const Sweepstake = () => {
               </ImageLine>
               <ObservationLabel>
                 <ObservationTextLabel>Observação:</ObservationTextLabel>
-                <ObservationInput />
+                <ObservationInput
+                  {...register('additionalDataSection.description')}
+                />
               </ObservationLabel>
             </AdditionalContainer>
           </RetrieveContainer>
         </AdditionalDataSection>
-        <AwardSection>
-          <RetrieveHeader>
-            <RetrieveArrowButton
-              type="button"
-              style={{
-                transform: openedSections.includes('mainAward')
-                  ? 'rotate(0deg)'
-                  : 'rotate(-90deg)',
-              }}
-              onClick={() =>
-                setOpenedSections(prev =>
-                  prev.includes('mainAward')
-                    ? prev.filter(item => item !== 'mainAward')
-                    : [...prev, 'mainAward'],
-                )
-              }
-            >
-              <img src={icon_ArrowSection} alt="" />
-            </RetrieveArrowButton>
-            Prêmios - Principais
-          </RetrieveHeader>
-          <RetrieveContainer isExpanded={openedSections.includes('mainAward')}>
-            <AwardContainer>
-              <AwardInputContainer>
-                <AwardLine>
-                  <SweepstakeInput label="Título:" />
-                  <SweepstakeInput label="Descrição:" />
-                  <SweepstakeInput label="Valor:" />
-                  <SweepstakeInput label="Tipo de Prêmio:" />
-                  <SweepstakeInput label="Quantidade de Prêmios:" />
-                </AwardLine>
-                <ObservationLabel>
-                  <ObservationTextLabel>Observação:</ObservationTextLabel>
-                  <ObservationInput />
-                </ObservationLabel>
-                <ButtonSubmit>Adicionar</ButtonSubmit>
-              </AwardInputContainer>
-              <AwardTable>
-                <AwardHeadLineTable>
-                  <AwardHeadTable>Título</AwardHeadTable>
-                  <AwardHeadTable>Descrição</AwardHeadTable>
-                  <AwardHeadTable>Valor</AwardHeadTable>
-                  <AwardHeadTable>Tipo de prêmio</AwardHeadTable>
-                  <AwardHeadTable>Observação</AwardHeadTable>
-                  <AwardHeadTable>Ações</AwardHeadTable>
-                </AwardHeadLineTable>
-                <AwardCellLineTable>
-                  <AwardCellTable>Bolão Cap</AwardCellTable>
-                  <AwardCellTable>Lorem ipsum</AwardCellTable>
-                  <AwardCellTable>
-                    {BRLMoneyFormater.format(1235)}
-                  </AwardCellTable>
-                  <AwardCellTable>Carro quatro portas</AwardCellTable>
-                  <AwardCellTable>
-                    <SeeMoreButton>Ver mais</SeeMoreButton>
-                  </AwardCellTable>
-                  <AwardCellTable>
-                    <ButtonContainer>
-                      <IconLink to="">
-                        <IoPencil />
-                      </IconLink>
-                      <IconButton type="button">
-                        <CgCopy />
-                      </IconButton>
-                      <IconButton type="button">
-                        <BsTrash />
-                      </IconButton>
-                    </ButtonContainer>
-                  </AwardCellTable>
-                </AwardCellLineTable>
-                <AwardCellLineTable>
-                  <AwardCellTable>Bolão Cap</AwardCellTable>
-                  <AwardCellTable>Lorem ipsum</AwardCellTable>
-                  <AwardCellTable>
-                    {BRLMoneyFormater.format(1235)}
-                  </AwardCellTable>
-                  <AwardCellTable>Carro quatro portas</AwardCellTable>
-                  <AwardCellTable>
-                    <SeeMoreButton>Ver mais</SeeMoreButton>
-                  </AwardCellTable>
-                  <AwardCellTable>
-                    <ButtonContainer>
-                      <IconLink to="">
-                        <IoPencil />
-                      </IconLink>
-                      <IconButton type="button">
-                        <CgCopy />
-                      </IconButton>
-                      <IconButton type="button">
-                        <BsTrash />
-                      </IconButton>
-                    </ButtonContainer>
-                  </AwardCellTable>
-                </AwardCellLineTable>
-                <AwardCellLineTable>
-                  <AwardCellTable>Bolão Cap</AwardCellTable>
-                  <AwardCellTable>Lorem ipsum</AwardCellTable>
-                  <AwardCellTable>
-                    {BRLMoneyFormater.format(1235)}
-                  </AwardCellTable>
-                  <AwardCellTable>Carro quatro portas</AwardCellTable>
-                  <AwardCellTable>
-                    <SeeMoreButton>Ver mais</SeeMoreButton>
-                  </AwardCellTable>
-                  <AwardCellTable>
-                    <ButtonContainer>
-                      <IconLink to="">
-                        <IoPencil />
-                      </IconLink>
-                      <IconButton type="button">
-                        <CgCopy />
-                      </IconButton>
-                      <IconButton type="button">
-                        <BsTrash />
-                      </IconButton>
-                    </ButtonContainer>
-                  </AwardCellTable>
-                </AwardCellLineTable>
-                <AwardCellLineTable>
-                  <AwardCellTable>Bolão Cap</AwardCellTable>
-                  <AwardCellTable>Lorem ipsum</AwardCellTable>
-                  <AwardCellTable>
-                    {BRLMoneyFormater.format(1235)}
-                  </AwardCellTable>
-                  <AwardCellTable>Carro quatro portas</AwardCellTable>
-                  <AwardCellTable>
-                    <SeeMoreButton>Ver mais</SeeMoreButton>
-                  </AwardCellTable>
-                  <AwardCellTable>
-                    <ButtonContainer>
-                      <IconLink to="">
-                        <IoPencil />
-                      </IconLink>
-                      <IconButton type="button">
-                        <CgCopy />
-                      </IconButton>
-                      <IconButton type="button">
-                        <BsTrash />
-                      </IconButton>
-                    </ButtonContainer>
-                  </AwardCellTable>
-                </AwardCellLineTable>
-              </AwardTable>
-            </AwardContainer>
-          </RetrieveContainer>
-        </AwardSection>
-        <AwardSection>
-          <RetrieveHeader>
-            <RetrieveArrowButton
-              type="button"
-              style={{
-                transform: openedSections.includes('extraAward')
-                  ? 'rotate(0deg)'
-                  : 'rotate(-90deg)',
-              }}
-              onClick={() =>
-                setOpenedSections(prev =>
-                  prev.includes('extraAward')
-                    ? prev.filter(item => item !== 'extraAward')
-                    : [...prev, 'extraAward'],
-                )
-              }
-            >
-              <img src={icon_ArrowSection} alt="" />
-            </RetrieveArrowButton>
-            Prêmios - Extras
-          </RetrieveHeader>
-          <RetrieveContainer isExpanded={openedSections.includes('extraAward')}>
-            <AwardContainer>
-              <AwardInputContainer>
-                <AwardLine>
-                  <SweepstakeInput label="Título:" />
-                  <SweepstakeInput label="Descrição:" />
-                  <SweepstakeInput label="Valor:" />
-                  <SweepstakeInput label="Tipo de Prêmio:" />
-                  <SweepstakeInput label="Quantidade de Prêmios:" />
-                </AwardLine>
-                <ObservationLabel>
-                  <ObservationTextLabel>Observação:</ObservationTextLabel>
-                  <ObservationInput />
-                </ObservationLabel>
-                <ButtonSubmit>Adicionar</ButtonSubmit>
-              </AwardInputContainer>
-              <AwardTable>
-                <AwardHeadLineTable>
-                  <AwardHeadTable>Título</AwardHeadTable>
-                  <AwardHeadTable>Descrição</AwardHeadTable>
-                  <AwardHeadTable>Valor</AwardHeadTable>
-                  <AwardHeadTable>Tipo de prêmio</AwardHeadTable>
-                  <AwardHeadTable>Observação</AwardHeadTable>
-                  <AwardHeadTable>Ações</AwardHeadTable>
-                </AwardHeadLineTable>
-                <AwardCellLineTable>
-                  <AwardCellTable>Bolão Cap</AwardCellTable>
-                  <AwardCellTable>Lorem ipsum</AwardCellTable>
-                  <AwardCellTable>
-                    {BRLMoneyFormater.format(1235)}
-                  </AwardCellTable>
-                  <AwardCellTable>Carro quatro portas</AwardCellTable>
-                  <AwardCellTable>
-                    <SeeMoreButton>Ver mais</SeeMoreButton>
-                  </AwardCellTable>
-                  <AwardCellTable>
-                    <ButtonContainer>
-                      <IconLink to="">
-                        <IoPencil />
-                      </IconLink>
-                      <IconButton type="button">
-                        <CgCopy />
-                      </IconButton>
-                      <IconButton type="button">
-                        <BsTrash />
-                      </IconButton>
-                    </ButtonContainer>
-                  </AwardCellTable>
-                </AwardCellLineTable>
-                <AwardCellLineTable>
-                  <AwardCellTable>Bolão Cap</AwardCellTable>
-                  <AwardCellTable>Lorem ipsum</AwardCellTable>
-                  <AwardCellTable>
-                    {BRLMoneyFormater.format(1235)}
-                  </AwardCellTable>
-                  <AwardCellTable>Carro quatro portas</AwardCellTable>
-                  <AwardCellTable>
-                    <SeeMoreButton>Ver mais</SeeMoreButton>
-                  </AwardCellTable>
-                  <AwardCellTable>
-                    <ButtonContainer>
-                      <IconLink to="">
-                        <IoPencil />
-                      </IconLink>
-                      <IconButton type="button">
-                        <CgCopy />
-                      </IconButton>
-                      <IconButton type="button">
-                        <BsTrash />
-                      </IconButton>
-                    </ButtonContainer>
-                  </AwardCellTable>
-                </AwardCellLineTable>
-                <AwardCellLineTable>
-                  <AwardCellTable>Bolão Cap</AwardCellTable>
-                  <AwardCellTable>Lorem ipsum</AwardCellTable>
-                  <AwardCellTable>
-                    {BRLMoneyFormater.format(1235)}
-                  </AwardCellTable>
-                  <AwardCellTable>Carro quatro portas</AwardCellTable>
-                  <AwardCellTable>
-                    <SeeMoreButton>Ver mais</SeeMoreButton>
-                  </AwardCellTable>
-                  <AwardCellTable>
-                    <ButtonContainer>
-                      <IconLink to="">
-                        <IoPencil />
-                      </IconLink>
-                      <IconButton type="button">
-                        <CgCopy />
-                      </IconButton>
-                      <IconButton type="button">
-                        <BsTrash />
-                      </IconButton>
-                    </ButtonContainer>
-                  </AwardCellTable>
-                </AwardCellLineTable>
-                <AwardCellLineTable>
-                  <AwardCellTable>Bolão Cap</AwardCellTable>
-                  <AwardCellTable>Lorem ipsum</AwardCellTable>
-                  <AwardCellTable>
-                    {BRLMoneyFormater.format(1235)}
-                  </AwardCellTable>
-                  <AwardCellTable>Carro quatro portas</AwardCellTable>
-                  <AwardCellTable>
-                    <SeeMoreButton>Ver mais</SeeMoreButton>
-                  </AwardCellTable>
-                  <AwardCellTable>
-                    <ButtonContainer>
-                      <IconLink to="">
-                        <IoPencil />
-                      </IconLink>
-                      <IconButton type="button">
-                        <CgCopy />
-                      </IconButton>
-                      <IconButton type="button">
-                        <BsTrash />
-                      </IconButton>
-                    </ButtonContainer>
-                  </AwardCellTable>
-                </AwardCellLineTable>
-              </AwardTable>
-            </AwardContainer>
-          </RetrieveContainer>
-        </AwardSection>
-        <AwardSection>
-          <RetrieveHeader>
-            <RetrieveArrowButton
-              type="button"
-              style={{
-                transform: openedSections.includes('extraSpinAward')
-                  ? 'rotate(0deg)'
-                  : 'rotate(-90deg)',
-              }}
-              onClick={() =>
-                setOpenedSections(prev =>
-                  prev.includes('extraSpinAward')
-                    ? prev.filter(item => item !== 'extraSpinAward')
-                    : [...prev, 'extraSpinAward'],
-                )
-              }
-            >
-              <img src={icon_ArrowSection} alt="" />
-            </RetrieveArrowButton>
-            Prêmios - Giro Extra
-          </RetrieveHeader>
-          <RetrieveContainer
-            isExpanded={openedSections.includes('extraSpinAward')}
-          >
-            <AwardContainer>
-              <AwardInputContainer>
-                <AwardLine>
-                  <SweepstakeInput label="Título:" />
-                  <SweepstakeInput label="Descrição:" />
-                  <SweepstakeInput label="Valor:" />
-                  <SweepstakeInput label="Tipo de Prêmio:" />
-                  <SweepstakeInput label="Quantidade de Prêmios:" />
-                </AwardLine>
-                <ObservationLabel>
-                  <ObservationTextLabel>Observação:</ObservationTextLabel>
-                  <ObservationInput />
-                </ObservationLabel>
-                <ButtonSubmit>Adicionar</ButtonSubmit>
-              </AwardInputContainer>
-              <AwardTable>
-                <AwardHeadLineTable>
-                  <AwardHeadTable>Título</AwardHeadTable>
-                  <AwardHeadTable>Descrição</AwardHeadTable>
-                  <AwardHeadTable>Valor</AwardHeadTable>
-                  <AwardHeadTable>Tipo de prêmio</AwardHeadTable>
-                  <AwardHeadTable>Observação</AwardHeadTable>
-                  <AwardHeadTable>Ações</AwardHeadTable>
-                </AwardHeadLineTable>
-                <AwardCellLineTable>
-                  <AwardCellTable>Bolão Cap</AwardCellTable>
-                  <AwardCellTable>Lorem ipsum</AwardCellTable>
-                  <AwardCellTable>
-                    {BRLMoneyFormater.format(1235)}
-                  </AwardCellTable>
-                  <AwardCellTable>Carro quatro portas</AwardCellTable>
-                  <AwardCellTable>
-                    <SeeMoreButton>Ver mais</SeeMoreButton>
-                  </AwardCellTable>
-                  <AwardCellTable>
-                    <ButtonContainer>
-                      <IconLink to="">
-                        <IoPencil />
-                      </IconLink>
-                      <IconButton type="button">
-                        <CgCopy />
-                      </IconButton>
-                      <IconButton type="button">
-                        <BsTrash />
-                      </IconButton>
-                    </ButtonContainer>
-                  </AwardCellTable>
-                </AwardCellLineTable>
-                <AwardCellLineTable>
-                  <AwardCellTable>Bolão Cap</AwardCellTable>
-                  <AwardCellTable>Lorem ipsum</AwardCellTable>
-                  <AwardCellTable>
-                    {BRLMoneyFormater.format(1235)}
-                  </AwardCellTable>
-                  <AwardCellTable>Carro quatro portas</AwardCellTable>
-                  <AwardCellTable>
-                    <SeeMoreButton>Ver mais</SeeMoreButton>
-                  </AwardCellTable>
-                  <AwardCellTable>
-                    <ButtonContainer>
-                      <IconLink to="">
-                        <IoPencil />
-                      </IconLink>
-                      <IconButton type="button">
-                        <CgCopy />
-                      </IconButton>
-                      <IconButton type="button">
-                        <BsTrash />
-                      </IconButton>
-                    </ButtonContainer>
-                  </AwardCellTable>
-                </AwardCellLineTable>
-                <AwardCellLineTable>
-                  <AwardCellTable>Bolão Cap</AwardCellTable>
-                  <AwardCellTable>Lorem ipsum</AwardCellTable>
-                  <AwardCellTable>
-                    {BRLMoneyFormater.format(1235)}
-                  </AwardCellTable>
-                  <AwardCellTable>Carro quatro portas</AwardCellTable>
-                  <AwardCellTable>
-                    <SeeMoreButton>Ver mais</SeeMoreButton>
-                  </AwardCellTable>
-                  <AwardCellTable>
-                    <ButtonContainer>
-                      <IconLink to="">
-                        <IoPencil />
-                      </IconLink>
-                      <IconButton type="button">
-                        <CgCopy />
-                      </IconButton>
-                      <IconButton type="button">
-                        <BsTrash />
-                      </IconButton>
-                    </ButtonContainer>
-                  </AwardCellTable>
-                </AwardCellLineTable>
-                <AwardCellLineTable>
-                  <AwardCellTable>Bolão Cap</AwardCellTable>
-                  <AwardCellTable>Lorem ipsum</AwardCellTable>
-                  <AwardCellTable>
-                    {BRLMoneyFormater.format(1235)}
-                  </AwardCellTable>
-                  <AwardCellTable>Carro quatro portas</AwardCellTable>
-                  <AwardCellTable>
-                    <SeeMoreButton>Ver mais</SeeMoreButton>
-                  </AwardCellTable>
-                  <AwardCellTable>
-                    <ButtonContainer>
-                      <IconLink to="">
-                        <IoPencil />
-                      </IconLink>
-                      <IconButton type="button">
-                        <CgCopy />
-                      </IconButton>
-                      <IconButton type="button">
-                        <BsTrash />
-                      </IconButton>
-                    </ButtonContainer>
-                  </AwardCellTable>
-                </AwardCellLineTable>
-              </AwardTable>
-            </AwardContainer>
-          </RetrieveContainer>
-        </AwardSection>
+        {draw &&
+          premiumCategories.map(category => (
+            <DrawPremiumSection
+              key={category.id}
+              draw={draw}
+              category={category}
+              drawTypePremiums={drawTypePremiums}
+            />
+          ))}
         <ButtonFooterContainer>
           <SaveButton>Salvar</SaveButton>
           <SaveButton
@@ -905,6 +642,7 @@ const Sweepstake = () => {
               color: '#0F5CBE',
               borderColor: '#0F5CBE',
             }}
+            type="button"
           >
             Cancelar
           </SaveButton>
