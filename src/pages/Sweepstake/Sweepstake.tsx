@@ -210,6 +210,25 @@ const Sweepstake = () => {
     }
   };
 
+  const handlePublish = async () => {
+    if (!draw) {
+      handleError('Salve o sorteio antes de ativá-lo');
+      return;
+    }
+
+    try {
+      await api.get('activeDraw', {
+        params: {
+          id: draw.id,
+        },
+      });
+
+      getDraw(draw.id.toString());
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
   const newImage = watch('additionalDataSection.image');
   const newPdf = watch('additionalDataSection.cardImage');
 
@@ -233,20 +252,10 @@ const Sweepstake = () => {
           <MainHeader>
             Dados principais
             <SwitchWrapper>
-              <Controller
-                control={control}
-                name="status"
-                render={({ field: { value, onChange } }) => (
-                  <>
-                    {value === 'active' ? 'Ativo' : 'Inativo'}
-                    <SwitchColor
-                      checked={value === 'active'}
-                      onChange={() =>
-                        onChange(value === 'active' ? 'inactive' : 'active')
-                      }
-                    />
-                  </>
-                )}
+              {draw?.attributes.isPublished ? 'Ativo' : 'Inativo'}
+              <SwitchColor
+                checked={draw?.attributes.isPublished}
+                onChange={handlePublish}
               />
             </SwitchWrapper>
           </MainHeader>
