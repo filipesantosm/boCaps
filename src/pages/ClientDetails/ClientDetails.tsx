@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import UserPlaceholder from '../../assets/img/user-placeholder.png';
 import Layout from '../../components/Layout/Layout';
 import {
@@ -27,11 +27,49 @@ import {
   TitleIcon,
 } from './styles';
 import { AccountSelect } from '../../components/Selects/Selects';
+import { IUser, IUserForm } from '../../interfaces/User';
+import handleError from '../../services/handleToast';
+import api from '../../services/api';
 
 const ClientDetails = () => {
   const navigate = useNavigate();
+  const { userId } = useParams();
   const [file, setFile] = useState<File>();
-  const { control } = useForm();
+  const { control, reset, register } = useForm<IUserForm>();
+  const [user, setUser] = useState<IUser>();
+
+  useEffect(() => {
+    getUser();
+  }, [userId]);
+
+  const getUser = async () => {
+    try {
+      const { data } = await api.get<IUser>(`/users/${userId}`);
+
+      reset({
+        cep: data.cep || undefined,
+        city: data.city || undefined,
+        country: data.country || undefined,
+        cpf: data.cpf || undefined,
+        dateBirth: data.dateBirth || undefined,
+        email: data.email || undefined,
+        facebook: data.facebook || undefined,
+        instagram: data.instagran || undefined,
+        luckyNumber: data.luckyNumber || undefined,
+        name: data.name || undefined,
+        neighborhood: data.neighborhood || undefined,
+        phone: data.phone || undefined,
+        sexo: data.sexo || undefined,
+        state: data.state || undefined,
+        street: data.street || undefined,
+        youtube: data.youtube || undefined,
+        number: data.number || undefined,
+      });
+      setUser(data);
+    } catch (error) {
+      handleError(error);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,7 +95,7 @@ const ClientDetails = () => {
             <BackIcon />
           </IconTag>
 
-          <BackTitle>André Barbosa</BackTitle>
+          <BackTitle>{user?.name}</BackTitle>
         </BackDivider>
 
         <FormDivider>
@@ -70,35 +108,25 @@ const ClientDetails = () => {
               type="text"
               id="name"
               name="name"
-              value="André Barbosa"
+              value={user?.name || ''}
               readOnly
             />
 
             <Label htmlFor="phone">Telefone</Label>
 
-            <Input
-              type="text"
-              id="phone"
-              name="phone"
-              value="(32) 9 1234-5678"
-            />
+            <Input type="text" id="phone" {...register('phone')} />
 
             <Label htmlFor="email">E-mail</Label>
 
-            <Input
-              type="text"
-              id="email"
-              name="email"
-              value="andre.barbosa@gmail.com"
-            />
+            <Input type="text" id="email" {...register('cpf')} />
 
             <Label htmlFor="born_date">Data de Nascimento</Label>
 
             <Input
-              type="text"
+              type="date"
               id="born_date"
               name="born_date"
-              value="12/08/1992"
+              value={user?.dateBirth || ''}
               readOnly
             />
 
@@ -110,8 +138,8 @@ const ClientDetails = () => {
                 { value: 'F', label: 'Feminino' },
               ]}
               placeholder="Selecione"
-              id="sex"
-              name="sex"
+              id="sexo"
+              name="sexo"
               control={control}
             />
           </FormColumn>
@@ -125,29 +153,28 @@ const ClientDetails = () => {
               type="text"
               id="cpf"
               name="cpf"
-              defaultValue="123.456.789-11"
+              value={user?.cpf || ''}
               readOnly
             />
 
             <Label htmlFor="facebook">Facebook</Label>
 
-            <Input type="text" id="facebook" name="facebook" />
+            <Input type="text" id="facebook" {...register('facebook')} />
 
             <Label htmlFor="instagram">Instagram</Label>
 
-            <Input type="text" id="instagram" name="instagram" />
+            <Input type="text" id="instagram" {...register('instagram')} />
 
             <Label htmlFor="youtube">Youtube</Label>
 
-            <Input type="text" id="youtube" name="youtube" />
+            <Input type="text" id="youtube" {...register('youtube')} />
 
             <Label htmlFor="lucky_number">Número da Sorte</Label>
 
             <Input
               type="text"
               id="lucky_number"
-              name="lucky_number"
-              defaultValue="20"
+              {...register('luckyNumber')}
               readOnly
             />
           </FormColumn>
@@ -182,7 +209,6 @@ const ClientDetails = () => {
                 { value: 'S', label: 'S' },
                 { value: 'N', label: 'N' },
               ]}
-              defaultValue={{ value: 'S', label: 'S' }}
               placeholder="Selecione"
               id="sex"
               name="sex"
@@ -201,8 +227,7 @@ const ClientDetails = () => {
                 <Input
                   type="text"
                   id="cep"
-                  name="cep"
-                  value="331630-430"
+                  {...register('cep')}
                   style={{ marginBottom: '0' }}
                 />
               </RowColumn>
@@ -213,8 +238,7 @@ const ClientDetails = () => {
                 <Input
                   type="text"
                   id="street"
-                  name="street"
-                  value="Santa Amélia"
+                  {...register('street')}
                   style={{ marginBottom: '0' }}
                 />
               </RowColumn>
@@ -227,8 +251,7 @@ const ClientDetails = () => {
                 <Input
                   type="text"
                   id="number"
-                  name="number"
-                  value="1304"
+                  {...register('number')}
                   style={{ marginBottom: '0' }}
                 />
               </RowColumn>
@@ -239,8 +262,7 @@ const ClientDetails = () => {
                 <Input
                   type="text"
                   id="neighborhood"
-                  name="neighborhood"
-                  value="Horta"
+                  {...register('neighborhood')}
                   style={{ marginBottom: '0' }}
                 />
               </RowColumn>
@@ -256,10 +278,9 @@ const ClientDetails = () => {
                 <Input
                   type="text"
                   id="country"
-                  name="country"
+                  {...register('country')}
                   style={{ marginBottom: '0' }}
                   placeholder="Insira o país"
-                  defaultValue="Brasil"
                 />
               </RowColumn>
               <RowColumn>
@@ -268,8 +289,7 @@ const ClientDetails = () => {
                 <Input
                   type="text"
                   id="state"
-                  name="state"
-                  value="MG"
+                  {...register('state')}
                   style={{ marginBottom: '0' }}
                 />
               </RowColumn>
@@ -280,8 +300,7 @@ const ClientDetails = () => {
                 <Input
                   type="text"
                   id="city"
-                  name="city"
-                  value="Leopoldina"
+                  {...register('city')}
                   style={{ marginBottom: '0' }}
                 />
               </RowColumn>

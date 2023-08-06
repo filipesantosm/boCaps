@@ -46,6 +46,7 @@ const Users = () => {
       const { data } = await api.get<IUser[]>('/users', {
         params: {
           'filters[id][$ne]': 1, // excluir master da listagem
+          'filters[active][$eq]': true,
           'filters[$or][0][username][$contains]': search || undefined,
           'filters[$or][1][name][$contains]': search || undefined,
           'filters[$or][2][email][$contains]': search || undefined,
@@ -122,18 +123,18 @@ const Users = () => {
                 </ClientCompDivider>
 
                 <ClientCompDivider>
-                  <CompText>{user.email}</CompText>
+                  <CompText title={user.email}>{user.email}</CompText>
                 </ClientCompDivider>
 
                 <ClientCompDivider>
-                  <CompText>{user.name}</CompText>
+                  <CompText title={user.name || ''}>{user.name}</CompText>
                 </ClientCompDivider>
                 <ClientCompDivider>
-                  <CompText>{user.cpf}</CompText>
+                  <CompText title={user.cpf || ''}>{user.cpf}</CompText>
                 </ClientCompDivider>
 
                 <ClientCompDivider>
-                  <CompText>{user.phone}</CompText>
+                  <CompText title={user.phone || ''}>{user.phone}</CompText>
                 </ClientCompDivider>
                 <ClientCompDivider>
                   <CompText>Y</CompText>
@@ -148,7 +149,7 @@ const Users = () => {
                   <CompText>0,00</CompText>
                 </ClientCompDivider>
                 <ClientCompDivider>
-                  <CompText>{user.city}</CompText>
+                  <CompText title={user.city || ''}>{user.city}</CompText>
                 </ClientCompDivider>
                 <ClientCompDivider>
                   <CompText>{user?.blocked ? 'N' : 'Y'}</CompText>
@@ -156,7 +157,7 @@ const Users = () => {
 
                 <ClientCompDivider>
                   <VisualizeIcon
-                    onClick={() => navigate('/users/client/001')}
+                    onClick={() => navigate(`/users/client/${user.id}`)}
                   />
                 </ClientCompDivider>
               </ClientComp>

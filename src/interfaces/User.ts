@@ -29,3 +29,23 @@ export interface IUser {
   phone: null | string;
   isTermAccepted: boolean;
 }
+
+export interface IUserForm {
+  name: string;
+  cpf: string;
+  phone: string;
+  facebook: string;
+  instagram: string;
+  email: string;
+  dateBirth: string;
+  youtube: string;
+  sexo: string;
+  luckyNumber: string;
+  cep: string;
+  street: string;
+  neighborhood: string;
+  city: string;
+  state: string;
+  country: string;
+  number: string;
+}
