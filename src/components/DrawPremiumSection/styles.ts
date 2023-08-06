@@ -40,6 +40,7 @@ export const RetrieveArrowButton = styled.button`
 interface RetrieveTitleProps {
   isExpanded: boolean;
 }
+
 export const RetrieveContainer = styled.div<RetrieveTitleProps>`
   display: grid;
   grid-template-rows: 0fr;

@@ -13,9 +13,11 @@ import {
 import { PaginatedResponse } from '../../interfaces/Paginated';
 import { IDrawPremiumForm } from '../../interfaces/SweepstakeForm';
 import api from '../../services/api';
-import handleError from '../../services/handleToast';
+import handleError, { handleSuccess } from '../../services/handleToast';
 import BRLMoneyFormater from '../../utils/formaters/BRLMoneyFormater';
 import { maskCurrency, unmaskCurrency } from '../../utils/mask';
+import ConfirmModal from '../ConfirmModal/ConfirmModal';
+import EditDrawPremiumModal from '../EditDrawPremiumModal/EditDrawPremiumModal';
 import Select from '../Select/Select';
 import SweepstakeInput from '../SweepstakeInput/SweepstakeInput';
 import {
@@ -31,7 +33,6 @@ import {
   ButtonContainer,
   ButtonSubmit,
   IconButton,
-  IconLink,
   ObservationInput,
   ObservationLabel,
   ObservationTextLabel,
@@ -52,6 +53,8 @@ interface Props {
 const DrawPremiumSection = ({ draw, drawTypePremiums, category }: Props) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [drawPremiums, setDrawPremiums] = useState<DrawPremium[]>([]);
+  const [editingDrawPremium, setEditingDrawPremium] = useState<DrawPremium>();
+  const [drawPremiumIdToDelete, setDrawPremiumIdToDelete] = useState(0);
 
   const { control, register, handleSubmit, reset } =
     useForm<IDrawPremiumForm>();
@@ -70,10 +73,9 @@ const DrawPremiumSection = ({ draw, drawTypePremiums, category }: Props) => {
           params: {
             'filters[draw][id][$eq]': draw?.id,
             'filters[category][id][$eq]': category.id,
-            'pagination[pageSize]': 100,
+            'filters[active][$eq]': true,
             populate: 'draw_type_premium',
-            // TODO: Reabilitar esse filtro do 'active'
-            // 'filters[active][$eq]': true,
+            'pagination[pageSize]': 100,
           },
         },
       );
@@ -109,6 +111,22 @@ const DrawPremiumSection = ({ draw, drawTypePremiums, category }: Props) => {
 
       getDrawPremiums();
       reset();
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      await api.put(`/draw-premiums/${drawPremiumIdToDelete}`, {
+        data: {
+          active: false,
+        },
+      });
+
+      getDrawPremiums();
+      setDrawPremiumIdToDelete(0);
+      handleSuccess('Prêmio apagado com sucesso!');
     } catch (error) {
       handleError(error);
     }
@@ -215,13 +233,20 @@ const DrawPremiumSection = ({ draw, drawTypePremiums, category }: Props) => {
                 </AwardCellTable>
                 <AwardCellTable>
                   <ButtonContainer>
-                    <IconLink to="">
+                    <IconButton
+                      type="button"
+                      onClick={() => setEditingDrawPremium(premium)}
+                    >
                       <IoPencil />
-                    </IconLink>
-                    <IconButton type="button">
+                    </IconButton>
+                    <IconButton type="button" title="Copiar prêmio">
                       <CgCopy />
                     </IconButton>
-                    <IconButton type="button">
+                    <IconButton
+                      type="button"
+                      onClick={() => setDrawPremiumIdToDelete(premium.id)}
+                      title="Apagar prêmio"
+                    >
                       <BsTrash />
                     </IconButton>
                   </ButtonContainer>
@@ -231,6 +256,24 @@ const DrawPremiumSection = ({ draw, drawTypePremiums, category }: Props) => {
           </AwardTable>
         </AwardContainer>
       </RetrieveContainer>
+      {!!drawPremiumIdToDelete && (
+        <ConfirmModal
+          message="Tem certeza que deseja apagar este prêmio?"
+          onConfirm={handleConfirmDelete}
+          onClose={() => setDrawPremiumIdToDelete(0)}
+        />
+      )}
+      {editingDrawPremium && (
+        <EditDrawPremiumModal
+          drawPremium={editingDrawPremium}
+          drawTypePremiumOptions={drawTypePremiumOptions}
+          onClose={() => setEditingDrawPremium(undefined)}
+          onSuccessfulEdit={() => {
+            getDrawPremiums();
+            setEditingDrawPremium(undefined);
+          }}
+        />
+      )}
     </AwardSection>
   );
 };

@@ -18,23 +18,22 @@ import {
   HeaderButtons,
   MainForm,
   PageHeader,
-  SearchDivider,
-  SearchIcon,
-  SearchInput,
   TableBody,
   Title,
   VisualizeIcon,
 } from './styles';
 
+const limit = 10;
+
 const Draws = () => {
-  const [search, setSearch] = useState('');
   const [draws, setDraws] = useState<IDraw[]>([]);
   const [page, setPage] = useState(1);
+  const [maximumPage, setMaximumPage] = useState(1);
   const navigate = useNavigate();
 
   useEffect(() => {
     getDraws();
-  }, []);
+  }, [page]);
 
   const getDraws = async () => {
     try {
@@ -42,8 +41,12 @@ const Draws = () => {
         params: {
           'filters[active][$eq]': true,
           sort: 'number:desc',
+          'pagination[page]': page,
+          'pagination[pageSize]': limit,
         },
       });
+
+      setMaximumPage(data.meta.pagination.pageCount || 1);
 
       setDraws(data.data);
     } catch (error) {
@@ -57,7 +60,7 @@ const Draws = () => {
         <MainForm>
           <Title>Sorteios</Title>
           <PageHeader>
-            <SearchDivider>
+            {/* <SearchDivider>
               <SearchIcon />
               <SearchInput
                 type="text"
@@ -67,7 +70,7 @@ const Draws = () => {
                 value={search}
                 onChange={e => setSearch(e.target.value)}
               />
-            </SearchDivider>
+            </SearchDivider> */}
 
             <HeaderButtons>
               <Button
@@ -126,7 +129,7 @@ const Draws = () => {
           </TableBody>
         </MainForm>
         <SmallPagination
-          total={1}
+          total={maximumPage}
           currentPage={page}
           handleChange={(_, newPage) => setPage(newPage)}
         />

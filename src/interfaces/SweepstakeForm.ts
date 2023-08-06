@@ -70,5 +70,5 @@ export interface IDrawPremiumForm {
   description: string;
   title: string;
   draw_type_premium: string;
-  quantity: number;
+  quantity?: number;
 }
