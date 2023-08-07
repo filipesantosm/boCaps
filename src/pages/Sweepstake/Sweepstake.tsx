@@ -164,7 +164,7 @@ const Sweepstake = () => {
             ? Number(form.additionalDataSection.limSale)
             : undefined,
           isScratchCard: form.additionalDataSection.isScratchCard === 'true',
-          susep: form.susep ? Number(form.susep) : undefined,
+          susep: form.susep ? form.susep : undefined,
           number: form.number ? Number(form.number) : undefined,
           chanceInicial01: form.chanceSection.chanceInicial01
             ? Number(form.chanceSection.chanceInicial01)
