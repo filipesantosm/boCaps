@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   icon_ArrowSection,
   img_placeholderImg,
@@ -20,7 +20,7 @@ import { IDraw } from '../../interfaces/Draw';
 import { UploadFileResponse } from '../../interfaces/Image';
 import { ISweepstakeForm } from '../../interfaces/SweepstakeForm';
 import api from '../../services/api';
-import handleError from '../../services/handleToast';
+import handleError, { handleSuccess } from '../../services/handleToast';
 import { getDrawImage, imageUrl } from '../../utils/imageUrl';
 import {
   AdditionalContainer,
@@ -60,6 +60,7 @@ import {
 
 const Sweepstake = () => {
   const { drawId } = useParams();
+  const navigate = useNavigate();
 
   const [draw, setDraw] = useState<IDraw>();
   const [openedSections, setOpenedSections] = useState<string[]>([]);
@@ -159,22 +160,44 @@ const Sweepstake = () => {
           dateStart: startDate,
           dateFinal: endDate,
           dateDraw: drawDate,
-          limSale: form.additionalDataSection.limSale,
+          limSale: form.additionalDataSection.limSale
+            ? Number(form.additionalDataSection.limSale)
+            : undefined,
           isScratchCard: form.additionalDataSection.isScratchCard === 'true',
-          susep: form.susep,
-          number: form.number,
-          chanceInicial01: form.chanceSection.chanceInicial01,
-          chanceFinal01: form.chanceSection.chanceFinal01,
-          intervalChance1: form.chanceSection.intervalChance1,
-          chanceInicial02: form.chanceSection.chanceInicial02,
-          chanceFinal02: form.chanceSection.chanceFinal02,
-          intervalChance2: form.chanceSection.intervalChance2,
-          chanceInicial03: form.chanceSection.chanceInicial03,
-          chanceFinal03: form.chanceSection.chanceFinal03,
+          susep: form.susep ? Number(form.susep) : undefined,
+          number: form.number ? Number(form.number) : undefined,
+          chanceInicial01: form.chanceSection.chanceInicial01
+            ? Number(form.chanceSection.chanceInicial01)
+            : undefined,
+          chanceFinal01: form.chanceSection.chanceFinal01
+            ? Number(form.chanceSection.chanceFinal01)
+            : undefined,
+          intervalChance1: form.chanceSection.intervalChance1
+            ? Number(form.chanceSection.intervalChance1)
+            : undefined,
+          chanceInicial02: form.chanceSection.chanceInicial02
+            ? Number(form.chanceSection.chanceInicial02)
+            : undefined,
+          chanceFinal02: form.chanceSection.chanceFinal02
+            ? Number(form.chanceSection.chanceFinal02)
+            : undefined,
+          intervalChance2: form.chanceSection.intervalChance2
+            ? Number(form.chanceSection.intervalChance2)
+            : undefined,
+          chanceInicial03: form.chanceSection.chanceInicial03
+            ? Number(form.chanceSection.chanceInicial03)
+            : undefined,
+          chanceFinal03: form.chanceSection.chanceFinal03
+            ? Number(form.chanceSection.chanceFinal03)
+            : undefined,
           lnkYoutube: form.additionalDataSection.lnkYoutube,
           lnkYoutubeDraw: form.additionalDataSection.lnkYoutubeDraw,
-          redemptionPercent: form.additionalDataSection.redemptionPercent,
-          redemptionValue: form.additionalDataSection.redemptionValue,
+          redemptionPercent: form.additionalDataSection.redemptionPercent
+            ? Number(form.additionalDataSection.redemptionPercent)
+            : undefined,
+          redemptionValue: form.additionalDataSection.redemptionValue
+            ? Number(form.additionalDataSection.redemptionValue)
+            : undefined,
           ...(imageId && {
             image: {
               id: imageId,
@@ -205,6 +228,7 @@ const Sweepstake = () => {
 
         getDraw(data.data.id);
       }
+      handleSuccess('Sorteio salvo com sucesso!');
     } catch (error) {
       handleError(error);
     }
@@ -652,6 +676,7 @@ const Sweepstake = () => {
               borderColor: '#0F5CBE',
             }}
             type="button"
+            onClick={() => navigate(-1)}
           >
             Cancelar
           </SaveButton>
