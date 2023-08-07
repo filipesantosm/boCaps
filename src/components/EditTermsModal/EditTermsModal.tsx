@@ -1,5 +1,3 @@
-import React from 'react';
-import handleError from '../../services/handleToast';
 import {
   ButtonDiv,
   CancelButton,
@@ -11,20 +9,11 @@ import {
 } from './styles';
 
 interface ModalProps {
-  isOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  isOtherOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onClose: () => void;
+  onConfirm: () => void;
 }
 
-const EditTermsModal = ({ isOpen, isOtherOpen }: ModalProps) => {
-  const handleEditTerms = async () => {
-    try {
-      isOpen(false);
-      isOtherOpen(true);
-    } catch (error) {
-      handleError(error);
-    }
-  };
-
+const EditTermsModal = ({ onClose, onConfirm }: ModalProps) => {
   return (
     <Container>
       <Content>
@@ -38,11 +27,11 @@ const EditTermsModal = ({ isOpen, isOtherOpen }: ModalProps) => {
         </Description>
 
         <ButtonDiv>
-          <CancelButton type="button" onClick={() => isOpen(false)}>
+          <CancelButton type="button" onClick={onClose}>
             Cancelar
           </CancelButton>
 
-          <DeleteButton type="submit" onClick={handleEditTerms}>
+          <DeleteButton type="submit" onClick={onConfirm}>
             Sim, salvar e enviar
           </DeleteButton>
         </ButtonDiv>

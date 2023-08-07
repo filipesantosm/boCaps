@@ -48,7 +48,10 @@ const EditTerms = () => {
         </ButtonDivider>
       </MainForm>
       {editModal && (
-        <EditTermsModal isOpen={setEditModal} isOtherOpen={setEditSuccess} />
+        <EditTermsModal
+          onClose={() => setEditModal(false)}
+          onConfirm={() => setEditSuccess(true)}
+        />
       )}
 
       {editSuccess && <TermsSuccess isOpen={setEditSuccess} />}

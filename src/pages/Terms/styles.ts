@@ -90,15 +90,6 @@ export const TextArea = styled.textarea`
   }
 `;
 
-export const ButtonDivider = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  height: 3.75rem;
-  margin-top: auto;
-`;
-
 export const EditButton = styled.button`
   width: 14.375rem;
   height: 3.75rem;
@@ -114,6 +105,37 @@ export const EditButton = styled.button`
   font-weight: 600;
   font-size: 1rem;
   color: #fafafa;
+  transition: 500ms;
+  &:hover {
+    opacity: 0.75;
+  }
+`;
+
+export const ButtonDivider = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 3.75rem;
+  gap: 1.75rem;
+  margin-top: auto;
+`;
+
+export const CancelButton = styled.button`
+  width: 10.5rem;
+  height: 3.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid #0054bc;
+  border-radius: 0.75rem;
+
+  font-weight: 600;
+  font-size: 1rem;
+
+  color: #0054bc;
+
   transition: 500ms;
   &:hover {
     opacity: 0.75;
