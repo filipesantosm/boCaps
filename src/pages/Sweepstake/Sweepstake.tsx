@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
+import { isBefore, parseISO } from 'date-fns';
 import {
   icon_ArrowSection,
   img_placeholderImg,
@@ -265,6 +266,14 @@ const Sweepstake = () => {
     : imageUrl(draw?.attributes?.pdfTitle?.data?.attributes?.url);
 
   const typeChance = watch('chanceSection.typeChance');
+
+  const drawDate = draw?.attributes?.dateDraw
+    ? parseISO(draw.attributes.dateDraw)
+    : undefined;
+
+  const disableEditing =
+    draw?.attributes?.isPublished ||
+    (drawDate && isBefore(drawDate, new Date()));
 
   return (
     <Layout>
@@ -665,10 +674,11 @@ const Sweepstake = () => {
               draw={draw}
               category={category}
               drawTypePremiums={drawTypePremiums}
+              disableEditing={!!disableEditing}
             />
           ))}
         <ButtonFooterContainer>
-          <SaveButton>Salvar</SaveButton>
+          <SaveButton disabled={disableEditing}>Salvar</SaveButton>
           <SaveButton
             style={{
               backgroundColor: 'transparent',

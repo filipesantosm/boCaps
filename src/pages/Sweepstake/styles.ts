@@ -255,4 +255,8 @@ export const SaveButton = styled.button`
   height: 3rem;
   width: 12.5rem;
   border-radius: 0.625rem;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 `;

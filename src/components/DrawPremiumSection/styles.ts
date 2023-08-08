@@ -113,6 +113,10 @@ export const ButtonSubmit = styled.button`
   align-items: center;
   justify-content: center;
   margin-top: 4rem;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 `;
 
 export const AwardTable = styled.div`
@@ -174,6 +178,10 @@ export const IconButton = styled.button`
   cursor: pointer;
   font-size: 1.8rem;
   color: #1c1c1c;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 `;
 
 export const Icon = styled.img`

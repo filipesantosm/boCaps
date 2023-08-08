@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { BsTrash } from 'react-icons/bs';
-import { CgCopy } from 'react-icons/cg';
-import { IoPencil } from 'react-icons/io5';
 import { CopyIcon, EditIcon, TrashIcon, icon_ArrowSection } from '../../assets';
 import {
   DrawPremium,
@@ -40,7 +37,6 @@ import {
   RetrieveArrowButton,
   RetrieveContainer,
   RetrieveHeader,
-  SeeMoreButton,
   SelectLabel,
   SelectWrapper,
 } from './styles';
@@ -49,9 +45,15 @@ interface Props {
   draw?: IDraw;
   category: DrawPremiumCategory;
   drawTypePremiums: DrawTypePremium[];
+  disableEditing: boolean;
 }
 
-const DrawPremiumSection = ({ draw, drawTypePremiums, category }: Props) => {
+const DrawPremiumSection = ({
+  draw,
+  drawTypePremiums,
+  category,
+  disableEditing,
+}: Props) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [drawPremiums, setDrawPremiums] = useState<DrawPremium[]>([]);
   const [editingDrawPremium, setEditingDrawPremium] = useState<DrawPremium>();
@@ -213,7 +215,11 @@ const DrawPremiumSection = ({ draw, drawTypePremiums, category }: Props) => {
                 {...register('description')}
               />
             </ObservationLabel>
-            <ButtonSubmit type="button" onClick={handleSubmit(onSubmit)}>
+            <ButtonSubmit
+              type="button"
+              disabled={disableEditing}
+              onClick={handleSubmit(onSubmit)}
+            >
               Adicionar
             </ButtonSubmit>
           </AwardInputContainer>
@@ -245,6 +251,7 @@ const DrawPremiumSection = ({ draw, drawTypePremiums, category }: Props) => {
                       type="button"
                       onClick={() => setEditingDrawPremium(premium)}
                       title="Editar prêmio"
+                      disabled={disableEditing}
                     >
                       <Icon src={EditIcon} />
                     </IconButton>
@@ -259,6 +266,7 @@ const DrawPremiumSection = ({ draw, drawTypePremiums, category }: Props) => {
                       type="button"
                       onClick={() => setDrawPremiumIdToDelete(premium.id)}
                       title="Apagar prêmio"
+                      disabled={disableEditing}
                     >
                       <Icon src={TrashIcon} />
                     </IconButton>
