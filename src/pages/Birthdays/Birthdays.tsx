@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GiSettingsKnobs } from 'react-icons/gi';
 import Layout from '../../components/Layout/Layout';
 import SmallPagination from '../../components/Pagination/Pagination';
@@ -24,11 +24,29 @@ import {
   TitleDivider,
 } from './styles';
 import { cityOptions, monthOptions } from './utils';
+import handleError from '../../services/handleToast';
+import api from '../../services/api';
+import { IUser } from '../../interfaces/User';
 
 const Birthdays = () => {
   const [clientPage, setClientPage] = useState(1);
+  const [birthdayMonth, setBirthdayMonth] = useState<number>();
 
   const [showFilters, setShowFilters] = useState(false);
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = async () => {
+    try {
+      const { data } = await api.get<IUser[]>('/users', {
+        params: {},
+      });
+    } catch (error) {
+      handleError(error);
+    }
+  };
 
   return (
     <Layout>
@@ -61,7 +79,17 @@ const Birthdays = () => {
                 {monthOptions.map(monthOption => (
                   <FilterItem key={monthOption.value}>
                     {monthOption.label}
-                    <FilterCheckbox type="checkbox" />
+                    <FilterCheckbox
+                      type="checkbox"
+                      checked={birthdayMonth === monthOption.value}
+                      onClick={e => {
+                        if (birthdayMonth === monthOption.value) {
+                          setBirthdayMonth(undefined);
+                        } else {
+                          setBirthdayMonth(monthOption.value);
+                        }
+                      }}
+                    />
                   </FilterItem>
                 ))}
               </FilterSection>

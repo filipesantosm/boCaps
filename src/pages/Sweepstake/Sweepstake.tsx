@@ -276,7 +276,7 @@ const Sweepstake = () => {
           <MainHeader>
             Dados principais
             <SwitchWrapper>
-              {draw?.attributes.isPublished ? 'Ativo' : 'Inativo'}
+              {draw?.attributes.isPublished ? 'Publicado' : 'Publicar'}
               <SwitchColor
                 checked={draw?.attributes.isPublished}
                 onChange={handlePublish}

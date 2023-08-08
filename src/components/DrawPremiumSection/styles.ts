@@ -176,6 +176,13 @@ export const IconButton = styled.button`
   color: #1c1c1c;
 `;
 
+export const Icon = styled.img`
+  width: 1.25rem;
+  height: 1.25rem;
+
+  object-fit: contain;
+`;
+
 export const SelectLabel = styled.label`
   display: flex;
   align-items: center;

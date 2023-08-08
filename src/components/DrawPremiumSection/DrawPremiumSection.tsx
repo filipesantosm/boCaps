@@ -3,7 +3,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { BsTrash } from 'react-icons/bs';
 import { CgCopy } from 'react-icons/cg';
 import { IoPencil } from 'react-icons/io5';
-import { icon_ArrowSection } from '../../assets';
+import { CopyIcon, EditIcon, TrashIcon, icon_ArrowSection } from '../../assets';
 import {
   DrawPremium,
   DrawPremiumCategory,
@@ -32,6 +32,7 @@ import {
   AwardTable,
   ButtonContainer,
   ButtonSubmit,
+  Icon,
   IconButton,
   ObservationInput,
   ObservationLabel,
@@ -132,6 +133,15 @@ const DrawPremiumSection = ({ draw, drawTypePremiums, category }: Props) => {
     }
   };
 
+  const handleCopyPremium = (premium: DrawPremium) => {
+    reset({
+      description: premium.attributes.description,
+      draw_type_premium: String(premium.attributes.draw_type_premium.data.id),
+      title: premium.attributes.title,
+      value: BRLMoneyFormater.format(premium.attributes.value),
+    });
+  };
+
   const drawTypePremiumOptions = drawTypePremiums.map(typePremium => ({
     label: typePremium.attributes.name,
     value: typePremium.id.toString(),
@@ -209,15 +219,16 @@ const DrawPremiumSection = ({ draw, drawTypePremiums, category }: Props) => {
           </AwardInputContainer>
           <AwardTable>
             <AwardHeadLineTable>
+              <AwardHeadTable>ID</AwardHeadTable>
               <AwardHeadTable>Título</AwardHeadTable>
               <AwardHeadTable>Descrição</AwardHeadTable>
               <AwardHeadTable>Valor</AwardHeadTable>
               <AwardHeadTable>Tipo de prêmio</AwardHeadTable>
-              <AwardHeadTable>Observação</AwardHeadTable>
               <AwardHeadTable>Ações</AwardHeadTable>
             </AwardHeadLineTable>
             {drawPremiums?.map(premium => (
               <AwardCellLineTable key={premium.id}>
+                <AwardCellTable>{premium.id}</AwardCellTable>
                 <AwardCellTable>{premium.attributes.title}</AwardCellTable>
                 <AwardCellTable>
                   {premium.attributes.description}
@@ -229,25 +240,27 @@ const DrawPremiumSection = ({ draw, drawTypePremiums, category }: Props) => {
                   {premium.attributes.draw_type_premium.data.attributes.name}
                 </AwardCellTable>
                 <AwardCellTable>
-                  <SeeMoreButton>Ver mais</SeeMoreButton>
-                </AwardCellTable>
-                <AwardCellTable>
                   <ButtonContainer>
                     <IconButton
                       type="button"
                       onClick={() => setEditingDrawPremium(premium)}
+                      title="Editar prêmio"
                     >
-                      <IoPencil />
+                      <Icon src={EditIcon} />
                     </IconButton>
-                    <IconButton type="button" title="Copiar prêmio">
-                      <CgCopy />
+                    <IconButton
+                      type="button"
+                      title="Copiar prêmio"
+                      onClick={() => handleCopyPremium(premium)}
+                    >
+                      <Icon src={CopyIcon} />
                     </IconButton>
                     <IconButton
                       type="button"
                       onClick={() => setDrawPremiumIdToDelete(premium.id)}
                       title="Apagar prêmio"
                     >
-                      <BsTrash />
+                      <Icon src={TrashIcon} />
                     </IconButton>
                   </ButtonContainer>
                 </AwardCellTable>
