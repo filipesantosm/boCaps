@@ -241,6 +241,10 @@ const Sweepstake = () => {
       return;
     }
 
+    if (draw.attributes.isPublished) {
+      return;
+    }
+
     try {
       await api.get('activeDraw', {
         params: {
@@ -289,6 +293,7 @@ const Sweepstake = () => {
               <SwitchColor
                 checked={draw?.attributes.isPublished}
                 onChange={handlePublish}
+                disabled={draw?.attributes.isPublished}
               />
             </SwitchWrapper>
           </MainHeader>

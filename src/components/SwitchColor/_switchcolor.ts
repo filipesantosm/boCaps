@@ -34,10 +34,10 @@ export const InputWrapper = styled.label`
     }
   }
   &:has(input:checked) {
-    border-color: #4380cb;
+    border-color: #15c149;
 
     ${Ball} {
-      background-color: #4380cb;
+      background-color: #15c149;
     }
   }
 `;

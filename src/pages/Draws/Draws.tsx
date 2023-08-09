@@ -117,7 +117,9 @@ const Draws = () => {
                   </CompText>
                 </DrawCompDivider>
                 <DrawCompDivider>
-                  <CompText>{draw.attributes.isPublished ? 'Y' : 'N'}</CompText>
+                  <CompText>
+                    {draw.attributes.isPublished ? 'Sim' : 'Não'}
+                  </CompText>
                 </DrawCompDivider>
                 <DrawCompDivider>
                   <VisualizeIcon

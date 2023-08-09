@@ -129,10 +129,10 @@ const Users = () => {
                   <CompText title={user.phone || ''}>{user.phone}</CompText>
                 </ClientCompDivider>
                 <ClientCompDivider>
-                  <CompText>Y</CompText>
+                  <CompText>Sim</CompText>
                 </ClientCompDivider>
                 <ClientCompDivider>
-                  <CompText>Y</CompText>
+                  <CompText>Sim</CompText>
                 </ClientCompDivider>
                 <ClientCompDivider>
                   <CompText>0,00</CompText>
@@ -144,7 +144,7 @@ const Users = () => {
                   <CompText title={user.city || ''}>{user.city}</CompText>
                 </ClientCompDivider>
                 <ClientCompDivider>
-                  <CompText>{user?.blocked ? 'N' : 'Y'}</CompText>
+                  <CompText>{user?.blocked ? 'Não' : 'Sim'}</CompText>
                 </ClientCompDivider>
 
                 <ClientCompDivider>

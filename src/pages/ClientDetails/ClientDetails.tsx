@@ -206,12 +206,12 @@ const ClientDetails = () => {
 
             <AccountSelect
               options={[
-                { value: 'S', label: 'S' },
-                { value: 'N', label: 'N' },
+                { value: 'Y', label: 'Sim' },
+                { value: 'N', label: 'Não' },
               ]}
               placeholder="Selecione"
-              id="sex"
-              name="sex"
+              id="active"
+              name="active"
               control={control}
             />
           </FormColumn>
