@@ -214,9 +214,9 @@ const Sweepstake = () => {
               id: foundChance.id,
             },
           }),
-          draw_promos: form.additionalDataSection.saleValue.map(value =>
-            Number(value),
-          ),
+          draw_promos: form?.additionalDataSection?.saleValue?.length
+            ? form.additionalDataSection.saleValue.map(value => Number(value))
+            : undefined,
         },
       };
 
