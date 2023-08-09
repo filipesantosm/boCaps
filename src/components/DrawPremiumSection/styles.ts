@@ -150,6 +150,17 @@ export const AwardCellTable = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
+
+  word-break: break-word;
+`;
+
+export const AwardCellText = styled.p`
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
 export const SeeMoreButton = styled.button`

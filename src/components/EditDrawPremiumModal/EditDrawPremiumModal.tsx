@@ -104,9 +104,9 @@ const EditDrawPremiumModal = ({
             />
           </SelectWrapper>
           <ObservationLabel>
-            <ObservationTextLabel>Observação:</ObservationTextLabel>
+            <ObservationTextLabel>Descrição:</ObservationTextLabel>
             <ObservationInput
-              placeholder="Insira a observação"
+              placeholder="Insira a descrição"
               {...register('description')}
             />
           </ObservationLabel>

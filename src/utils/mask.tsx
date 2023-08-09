@@ -64,7 +64,15 @@ export const maskCurrency = (value: string) => {
   const masked = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
-    useGrouping: false,
   }).format(valueFormatted);
+  return masked;
+};
+
+export const maskSusep = (value: string) => {
+  const masked = value
+    .replace(/^(\d{5})(\d)/, '$1.$2')
+    .replace(/\.(\d{6})(\d)/, '.$1/$2')
+    .replace(/\/(\d{4})(\d)/, '/$1-$2');
+
   return masked;
 };

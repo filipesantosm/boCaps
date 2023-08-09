@@ -58,6 +58,7 @@ import {
   getIsoStringFromDateAndTime,
   isScratchCardOptions,
 } from './utils';
+import { maskSusep } from '../../utils/mask';
 
 const Sweepstake = () => {
   const { drawId } = useParams();
@@ -302,8 +303,10 @@ const Sweepstake = () => {
               <SweepstakeInput
                 label="Processo susep:"
                 style={{
-                  width: '6rem',
+                  width: '12rem',
                 }}
+                maxLength={20}
+                maskFunction={maskSusep}
                 {...register('susep')}
                 error={errors.susep?.message}
               />
@@ -541,7 +544,7 @@ const Sweepstake = () => {
             <AdditionalContainer>
               <InputLine>
                 <SweepstakeInput
-                  label="Limite de usuários:"
+                  label="Limite de títulos:"
                   style={{
                     width: '6.25rem',
                   }}

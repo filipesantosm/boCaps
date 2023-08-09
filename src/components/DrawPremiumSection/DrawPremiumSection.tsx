@@ -15,11 +15,13 @@ import BRLMoneyFormater from '../../utils/formaters/BRLMoneyFormater';
 import { maskCurrency, unmaskCurrency } from '../../utils/mask';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import EditDrawPremiumModal from '../EditDrawPremiumModal/EditDrawPremiumModal';
+import SmallPagination from '../Pagination/Pagination';
 import Select from '../Select/Select';
 import SweepstakeInput from '../SweepstakeInput/SweepstakeInput';
 import {
   AwardCellLineTable,
   AwardCellTable,
+  AwardCellText,
   AwardContainer,
   AwardHeadLineTable,
   AwardHeadTable,
@@ -40,6 +42,7 @@ import {
   SelectLabel,
   SelectWrapper,
 } from './styles';
+import Loading from '../Loading/Loading';
 
 interface Props {
   draw?: IDraw;
@@ -58,6 +61,9 @@ const DrawPremiumSection = ({
   const [drawPremiums, setDrawPremiums] = useState<DrawPremium[]>([]);
   const [editingDrawPremium, setEditingDrawPremium] = useState<DrawPremium>();
   const [drawPremiumIdToDelete, setDrawPremiumIdToDelete] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [page, setPage] = useState(1);
+  const [maximumPage, setMaximumPage] = useState(1);
 
   const { control, register, handleSubmit, reset } =
     useForm<IDrawPremiumForm>();
@@ -66,7 +72,7 @@ const DrawPremiumSection = ({
     if (isExpanded) {
       getDrawPremiums();
     }
-  }, [isExpanded]);
+  }, [isExpanded, page]);
 
   const getDrawPremiums = async () => {
     try {
@@ -78,11 +84,13 @@ const DrawPremiumSection = ({
             'filters[category][id][$eq]': category.id,
             'filters[active][$eq]': true,
             populate: 'draw_type_premium',
-            'pagination[pageSize]': 100,
+            'pagination[pageSize]': 8,
+            'pagination[page]': page,
           },
         },
       );
 
+      setMaximumPage(data.meta.pagination.pageCount);
       setDrawPremiums(data.data);
     } catch (error) {
       handleError(error);
@@ -90,6 +98,7 @@ const DrawPremiumSection = ({
   };
 
   const onSubmit: SubmitHandler<IDrawPremiumForm> = async form => {
+    setIsSubmitting(true);
     try {
       if (!draw) {
         handleError('Salve o sorteio antes de criar um prêmio');
@@ -116,6 +125,8 @@ const DrawPremiumSection = ({
       reset();
     } catch (error) {
       handleError(error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -209,18 +220,18 @@ const DrawPremiumSection = ({
               />
             </AwardLine>
             <ObservationLabel>
-              <ObservationTextLabel>Observação:</ObservationTextLabel>
+              <ObservationTextLabel>Descrição:</ObservationTextLabel>
               <ObservationInput
-                placeholder="Insira a observação"
+                placeholder="Insira a descrição"
                 {...register('description')}
               />
             </ObservationLabel>
             <ButtonSubmit
               type="button"
-              disabled={disableEditing}
+              disabled={disableEditing || isSubmitting}
               onClick={handleSubmit(onSubmit)}
             >
-              Adicionar
+              {isSubmitting ? <Loading iconColor="#fff" /> : 'Adicionar'}
             </ButtonSubmit>
           </AwardInputContainer>
           <AwardTable>
@@ -237,7 +248,9 @@ const DrawPremiumSection = ({
                 <AwardCellTable>{premium.id}</AwardCellTable>
                 <AwardCellTable>{premium.attributes.title}</AwardCellTable>
                 <AwardCellTable>
-                  {premium.attributes.description}
+                  <AwardCellText>
+                    {premium.attributes.description}
+                  </AwardCellText>
                 </AwardCellTable>
                 <AwardCellTable>
                   {BRLMoneyFormater.format(premium.attributes.value)}
@@ -274,6 +287,11 @@ const DrawPremiumSection = ({
                 </AwardCellTable>
               </AwardCellLineTable>
             ))}
+            <SmallPagination
+              currentPage={page}
+              total={maximumPage}
+              handleChange={(e, value) => setPage(value)}
+            />
           </AwardTable>
         </AwardContainer>
       </RetrieveContainer>
