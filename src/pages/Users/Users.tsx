@@ -89,7 +89,6 @@ const Users = () => {
           <ClientHeader>
             <ClientHeaderDivider>ID</ClientHeaderDivider>
             <ClientHeaderDivider>Criação</ClientHeaderDivider>
-            <ClientHeaderDivider>Aniversário</ClientHeaderDivider>
             <ClientHeaderDivider>E-mail</ClientHeaderDivider>
             <ClientHeaderDivider>Nome</ClientHeaderDivider>
             <ClientHeaderDivider>CPF</ClientHeaderDivider>
@@ -112,13 +111,6 @@ const Users = () => {
                 <ClientCompDivider>
                   <CompText>
                     {format(parseISO(user.createdAt), 'dd/MM/yyyy')}
-                  </CompText>
-                </ClientCompDivider>
-                <ClientCompDivider>
-                  <CompText>
-                    {user.dateBirth
-                      ? format(parseISO(user.dateBirth), 'dd/MM/yyyy')
-                      : ''}
                   </CompText>
                 </ClientCompDivider>
 

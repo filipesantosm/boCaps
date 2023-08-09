@@ -26,7 +26,7 @@ export const Title = styled.span`
 `;
 
 const clientTableGridSpacing =
-  '0.75fr 0.75fr 0.75fr 2.5fr 1.875fr 1fr 1fr 1fr 0.5fr 1fr 1fr 1fr 0.75fr 0.5fr';
+  '0.75fr 0.75fr 2.5fr 1.875fr 1fr 1fr 1fr 0.5fr 1fr 1fr 1fr 0.75fr 0.5fr';
 
 export const ClientHeader = styled.div`
   width: 100%;
