@@ -111,7 +111,7 @@ const Draws = () => {
             <DrawsHeaderDivider>Data final</DrawsHeaderDivider>
             <DrawsHeaderDivider>Data do sorteio</DrawsHeaderDivider>
             <DrawsHeaderDivider>Publicado</DrawsHeaderDivider>
-            <DrawsHeaderDivider />
+            <DrawsHeaderDivider>Exportação Debone</DrawsHeaderDivider>
             <DrawsHeaderDivider />
           </DrawsHeader>
 
