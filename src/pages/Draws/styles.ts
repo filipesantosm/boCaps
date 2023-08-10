@@ -122,7 +122,7 @@ export const SearchIcon = styled(BiSearch)`
 `;
 
 const drawsTableGridSpacing =
-  '0.75fr 0.75fr 0.75fr 0.75fr 0.75fr 0.5fr 0.5fr 0.25fr';
+  '0.75fr 0.75fr 0.75fr 0.75fr 0.75fr 0.5fr 0.5fr 0.65fr 0.25fr';
 
 export const DrawsHeader = styled.div`
   margin-top: 2rem;
@@ -251,5 +251,18 @@ export const VisualizeIcon = styled(AiOutlineEye)`
   &:hover {
     cursor: pointer;
     opacity: 0.75;
+  }
+`;
+
+export const ImportFileLabel = styled.label`
+  width: 100%;
+
+  color: #0054bc;
+  font-size: 1rem;
+  text-align: center;
+  cursor: pointer;
+
+  input {
+    display: none;
   }
 `;

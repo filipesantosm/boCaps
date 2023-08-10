@@ -5,7 +5,7 @@ import SmallPagination from '../../components/Pagination/Pagination';
 import { IDraw } from '../../interfaces/Draw';
 import { PaginatedResponse } from '../../interfaces/Paginated';
 import api from '../../services/api';
-import handleError from '../../services/handleToast';
+import handleError, { handleSuccess } from '../../services/handleToast';
 import { formatDateString } from '../../utils/formatDateString';
 import { getFileUrl } from '../../utils/getFileUrl';
 import {
@@ -18,12 +18,14 @@ import {
   DrawsHeaderDivider,
   GenerateButton,
   HeaderButtons,
+  ImportFileLabel,
   MainForm,
   PageHeader,
   TableBody,
   Title,
   VisualizeIcon,
 } from './styles';
+import { UploadFileResponse } from '../../interfaces/Image';
 
 const limit = 10;
 
@@ -76,6 +78,38 @@ const Draws = () => {
     }
   };
 
+  const handleImportWinners = async (file: File, drawId: number) => {
+    if (file.type !== 'application/json') {
+      handleError('O arquivo deve ser do tipo JSON');
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+
+      formData.append('files', file);
+
+      const { data } = await api.post<UploadFileResponse>('/upload', formData);
+
+      const fileResultId = data?.[0]?.id;
+
+      if (fileResultId) {
+        await api.post('/importResult', {
+          data: {
+            drawId,
+            fileUpload: fileResultId,
+          },
+        });
+
+        handleSuccess('Vencedores importados com sucesso!');
+      } else {
+        handleError('Algo deu errado, tente novamente');
+      }
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
   return (
     <Layout>
       <Content>
@@ -111,6 +145,7 @@ const Draws = () => {
             <DrawsHeaderDivider>Data final</DrawsHeaderDivider>
             <DrawsHeaderDivider>Data do sorteio</DrawsHeaderDivider>
             <DrawsHeaderDivider>Publicado</DrawsHeaderDivider>
+            <DrawsHeaderDivider>Importação Vencedores</DrawsHeaderDivider>
             <DrawsHeaderDivider>Exportação Debone</DrawsHeaderDivider>
             <DrawsHeaderDivider />
           </DrawsHeader>
@@ -143,6 +178,23 @@ const Draws = () => {
                   <CompText>
                     {draw.attributes.isPublished ? 'Sim' : 'Não'}
                   </CompText>
+                </DrawCompDivider>
+                <DrawCompDivider>
+                  <ImportFileLabel>
+                    <input
+                      type="file"
+                      accept="application/JSON"
+                      onChange={e => {
+                        const file = e.target.files?.[0];
+
+                        if (file) {
+                          handleImportWinners(file, draw.id);
+                          e.target.value = '';
+                        }
+                      }}
+                    />
+                    Importar
+                  </ImportFileLabel>
                 </DrawCompDivider>
                 <DrawCompDivider>
                   <GenerateButton
