@@ -12,7 +12,6 @@ import {
   Button,
   CompText,
   Content,
-  DownloadLink,
   DrawComp,
   DrawCompDivider,
   DrawsHeader,
@@ -61,13 +60,15 @@ const Draws = () => {
   const handleCreateDrawFile = async (drawId: number) => {
     setIsGenerating(true);
     try {
-      await api.get('/createExport', {
+      const { data } = await api.get<{
+        file: string;
+      }>('/createExport', {
         params: {
           id: drawId,
         },
       });
 
-      getDraws();
+      window.open(getFileUrl(data.file), '_blank');
     } catch (error) {
       handleError(error);
     } finally {
@@ -144,22 +145,12 @@ const Draws = () => {
                   </CompText>
                 </DrawCompDivider>
                 <DrawCompDivider>
-                  {draw.attributes.file ? (
-                    <DownloadLink
-                      target="_blank"
-                      download
-                      href={getFileUrl(draw.attributes.file)}
-                    >
-                      Baixar arquivo
-                    </DownloadLink>
-                  ) : (
-                    <GenerateButton
-                      onClick={() => handleCreateDrawFile(draw.id)}
-                      disabled={isGenerating}
-                    >
-                      Gerar arquivo
-                    </GenerateButton>
-                  )}
+                  <GenerateButton
+                    onClick={() => handleCreateDrawFile(draw.id)}
+                    disabled={isGenerating}
+                  >
+                    Gerar arquivo
+                  </GenerateButton>
                 </DrawCompDivider>
                 <DrawCompDivider>
                   <VisualizeIcon
