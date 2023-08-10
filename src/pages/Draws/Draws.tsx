@@ -7,14 +7,17 @@ import { PaginatedResponse } from '../../interfaces/Paginated';
 import api from '../../services/api';
 import handleError from '../../services/handleToast';
 import { formatDateString } from '../../utils/formatDateString';
+import { getFileUrl } from '../../utils/getFileUrl';
 import {
   Button,
   CompText,
   Content,
+  DownloadLink,
   DrawComp,
   DrawCompDivider,
   DrawsHeader,
   DrawsHeaderDivider,
+  GenerateButton,
   HeaderButtons,
   MainForm,
   PageHeader,
@@ -29,6 +32,7 @@ const Draws = () => {
   const [draws, setDraws] = useState<IDraw[]>([]);
   const [page, setPage] = useState(1);
   const [maximumPage, setMaximumPage] = useState(1);
+  const [isGenerating, setIsGenerating] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,6 +55,23 @@ const Draws = () => {
       setDraws(data.data);
     } catch (error) {
       handleError(error);
+    }
+  };
+
+  const handleCreateDrawFile = async (drawId: number) => {
+    setIsGenerating(true);
+    try {
+      await api.get('/createExport', {
+        params: {
+          id: drawId,
+        },
+      });
+
+      getDraws();
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setIsGenerating(false);
     }
   };
 
@@ -90,6 +111,7 @@ const Draws = () => {
             <DrawsHeaderDivider>Data do sorteio</DrawsHeaderDivider>
             <DrawsHeaderDivider>Publicado</DrawsHeaderDivider>
             <DrawsHeaderDivider />
+            <DrawsHeaderDivider />
           </DrawsHeader>
 
           <TableBody>
@@ -120,6 +142,24 @@ const Draws = () => {
                   <CompText>
                     {draw.attributes.isPublished ? 'Sim' : 'Não'}
                   </CompText>
+                </DrawCompDivider>
+                <DrawCompDivider>
+                  {draw.attributes.file ? (
+                    <DownloadLink
+                      target="_blank"
+                      download
+                      href={getFileUrl(draw.attributes.file)}
+                    >
+                      Baixar arquivo
+                    </DownloadLink>
+                  ) : (
+                    <GenerateButton
+                      onClick={() => handleCreateDrawFile(draw.id)}
+                      disabled={isGenerating}
+                    >
+                      Gerar arquivo
+                    </GenerateButton>
+                  )}
                 </DrawCompDivider>
                 <DrawCompDivider>
                   <VisualizeIcon

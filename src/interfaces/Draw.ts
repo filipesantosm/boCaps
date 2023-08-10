@@ -33,6 +33,7 @@ export interface IDrawAttributes {
   isPublished: boolean;
   pdfTitle: Image;
   image: Image;
+  file: string | null;
   draw_type_chance: DrawTypeChance;
   draw_premiums: {
     data: DrawPremium[];

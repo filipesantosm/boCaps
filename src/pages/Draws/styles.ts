@@ -121,7 +121,8 @@ export const SearchIcon = styled(BiSearch)`
   font-size: 1.5rem;
 `;
 
-const drawsTableGridSpacing = '0.75fr 0.75fr 0.75fr 0.75fr 0.75fr 0.5fr 0.25fr';
+const drawsTableGridSpacing =
+  '0.75fr 0.75fr 0.75fr 0.75fr 0.75fr 0.5fr 0.375fr 0.25fr';
 
 export const DrawsHeader = styled.div`
   margin-top: 2rem;
@@ -155,7 +156,7 @@ export const DrawsHeaderDivider = styled.div`
 
 export const TableBody = styled.div`
   width: 100%;
-  flex: 1;
+  height: fit-content;
 
   padding: 0.25rem;
 
@@ -220,6 +221,20 @@ export const CompText = styled.div`
 
   text-align: center;
   width: 100%;
+`;
+
+export const DownloadLink = styled.a`
+  color: #0054bc;
+  font-size: 1rem;
+  text-decoration: none;
+`;
+
+export const GenerateButton = styled.button`
+  border: none;
+  background: transparent;
+
+  color: #0054bc;
+  font-size: 1rem;
 `;
 
 export const VisualizeIcon = styled(AiOutlineEye)`
