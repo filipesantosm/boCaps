@@ -26,6 +26,7 @@ import {
   VisualizeIcon,
 } from './styles';
 import { UploadFileResponse } from '../../interfaces/Image';
+import Loading from '../../components/Loading/Loading';
 
 const limit = 10;
 
@@ -34,6 +35,8 @@ const Draws = () => {
   const [page, setPage] = useState(1);
   const [maximumPage, setMaximumPage] = useState(1);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isImporting, setIsImporting] = useState(false);
+  const [importingId, setImportingId] = useState<number | undefined>();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -84,6 +87,9 @@ const Draws = () => {
       return;
     }
 
+    setIsImporting(true);
+    setImportingId(drawId);
+
     try {
       const formData = new FormData();
 
@@ -107,6 +113,9 @@ const Draws = () => {
       }
     } catch (error) {
       handleError(error);
+    } finally {
+      setIsImporting(false);
+      setImportingId(undefined);
     }
   };
 
@@ -192,8 +201,9 @@ const Draws = () => {
                           e.target.value = '';
                         }
                       }}
+                      disabled={isImporting}
                     />
-                    Importar
+                    {importingId === draw.id ? <Loading /> : 'Importar'}
                   </ImportFileLabel>
                 </DrawCompDivider>
                 <DrawCompDivider>
