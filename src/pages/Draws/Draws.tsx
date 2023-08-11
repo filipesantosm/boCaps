@@ -102,8 +102,8 @@ const Draws = () => {
       if (fileResultId) {
         await api.post('/importResult', {
           data: {
-            drawId,
-            fileUpload: fileResultId,
+            drawId: drawId.toString(),
+            fileUpload: fileResultId.toString(),
           },
         });
 
