@@ -26,6 +26,6 @@ export const usePremiumCategories = () => {
   };
 
   return {
-    premiumCategories,
+    premiumCategories: premiumCategories.filter(data => data.id !== 3),
   };
 };
