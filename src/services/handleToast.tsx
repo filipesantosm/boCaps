@@ -41,6 +41,8 @@ function handleError(err: any) {
     if (isBackEndError(err)) {
       return notifyError(err.response?.data.message as string);
     }
+
+    return err.message;
   }
 
   if (err instanceof Error) {

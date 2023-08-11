@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../../components/Layout/Layout';
+import Loading from '../../components/Loading/Loading';
 import SmallPagination from '../../components/Pagination/Pagination';
+import SuccessModal from '../../components/SuccessModal/SuccessModal';
 import { IDraw } from '../../interfaces/Draw';
+import { UploadFileResponse } from '../../interfaces/Image';
 import { PaginatedResponse } from '../../interfaces/Paginated';
 import api from '../../services/api';
-import handleError, { handleSuccess } from '../../services/handleToast';
+import handleError from '../../services/handleToast';
 import { formatDateString } from '../../utils/formatDateString';
 import { getFileUrl } from '../../utils/getFileUrl';
 import {
@@ -25,8 +28,6 @@ import {
   Title,
   VisualizeIcon,
 } from './styles';
-import { UploadFileResponse } from '../../interfaces/Image';
-import Loading from '../../components/Loading/Loading';
 
 const limit = 10;
 
@@ -35,8 +36,8 @@ const Draws = () => {
   const [page, setPage] = useState(1);
   const [maximumPage, setMaximumPage] = useState(1);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [isImporting, setIsImporting] = useState(false);
   const [importingId, setImportingId] = useState<number | undefined>();
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -87,7 +88,6 @@ const Draws = () => {
       return;
     }
 
-    setIsImporting(true);
     setImportingId(drawId);
 
     try {
@@ -107,14 +107,14 @@ const Draws = () => {
           },
         });
 
-        handleSuccess('Vencedores importados com sucesso!');
+        // handleSuccess('Vencedores importados com sucesso!');
+        setShowSuccessModal(true);
       } else {
         handleError('Algo deu errado, tente novamente');
       }
     } catch (error) {
       handleError(error);
     } finally {
-      setIsImporting(false);
       setImportingId(undefined);
     }
   };
@@ -201,7 +201,7 @@ const Draws = () => {
                           e.target.value = '';
                         }
                       }}
-                      disabled={isImporting}
+                      disabled={!!importingId}
                     />
                     {importingId === draw.id ? <Loading /> : 'Importar'}
                   </ImportFileLabel>
@@ -229,6 +229,12 @@ const Draws = () => {
           handleChange={(_, newPage) => setPage(newPage)}
         />
       </Content>
+      {showSuccessModal && (
+        <SuccessModal
+          onClose={() => setShowSuccessModal(false)}
+          message="Vencedores importados com sucesso"
+        />
+      )}
     </Layout>
   );
 };
