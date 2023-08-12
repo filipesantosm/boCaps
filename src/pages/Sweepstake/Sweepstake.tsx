@@ -298,6 +298,7 @@ const Sweepstake = () => {
         },
       });
 
+      setShowConfirmModal(false);
       getDraw(String(draw.id));
     } catch (error) {
       handleError(error);
