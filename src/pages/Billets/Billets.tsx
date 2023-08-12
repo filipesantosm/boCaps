@@ -35,12 +35,15 @@ const Billets = () => {
   const [page, setPage] = useState(1);
   const [maximumPage, setMaximumPage] = useState(1);
   const [payingBilletNumber, setPayingBilletNumber] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const getBillets = async (params: GetBilletParams) => {
     if (!params.search) {
-      handleError('Busque pelo ID do usuário');
+      handleError('Busque pelo ID do usuário ou número do boleto');
       return;
     }
+
+    setIsLoading(true);
 
     try {
       const { data } = await api.get<PaginatedResponse<IUserPayment>>(
@@ -49,7 +52,8 @@ const Billets = () => {
           params: {
             'filters[active]': true,
             'filters[payment_type][id][$eq]': 2,
-            'filters[user][id][$eq]': params.search,
+            'filters[$or][0][user][id][$eq]': params.search.substring(0, 9),
+            'filters[$or][1][ourNumber][$eq]': params.search,
             sort: 'createdAt:desc',
             'pagination[page]': page,
             'pagination[pageSize]': 10,
@@ -61,6 +65,8 @@ const Billets = () => {
       setUserPayments(data.data);
     } catch (error) {
       handleError(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -100,11 +106,13 @@ const Billets = () => {
               id="search"
               name="search"
               required
-              placeholder="Buscar pelo ID do usuário"
+              placeholder="Buscar pelo ID do usuário ou número do boleto"
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
-            <Button>Pesquisar</Button>
+            <Button disabled={isLoading}>
+              {isLoading ? <Loading iconColor="#fff" /> : 'Pesquisar'}
+            </Button>
           </SearchDivider>
         </PageHeader>
 
