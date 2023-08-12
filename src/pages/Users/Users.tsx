@@ -93,10 +93,10 @@ const Users = () => {
             <ClientHeaderDivider>Nome</ClientHeaderDivider>
             <ClientHeaderDivider>CPF</ClientHeaderDivider>
             <ClientHeaderDivider>Telefone</ClientHeaderDivider>
-            <ClientHeaderDivider>Cadastro Completo</ClientHeaderDivider>
+            {/* <ClientHeaderDivider>Cadastro Completo</ClientHeaderDivider>
             <ClientHeaderDivider>Mkt</ClientHeaderDivider>
             <ClientHeaderDivider>Saldo anterior</ClientHeaderDivider>
-            <ClientHeaderDivider>Saldo atual</ClientHeaderDivider>
+            <ClientHeaderDivider>Saldo atual</ClientHeaderDivider> */}
             <ClientHeaderDivider>Cidade</ClientHeaderDivider>
             <ClientHeaderDivider>Ativo</ClientHeaderDivider>
             <ClientHeaderDivider />
@@ -128,7 +128,7 @@ const Users = () => {
                 <ClientCompDivider>
                   <CompText title={user.phone || ''}>{user.phone}</CompText>
                 </ClientCompDivider>
-                <ClientCompDivider>
+                {/*  <ClientCompDivider>
                   <CompText>Sim</CompText>
                 </ClientCompDivider>
                 <ClientCompDivider>
@@ -139,7 +139,7 @@ const Users = () => {
                 </ClientCompDivider>
                 <ClientCompDivider>
                   <CompText>0,00</CompText>
-                </ClientCompDivider>
+                </ClientCompDivider> */}
                 <ClientCompDivider>
                   <CompText title={user.city || ''}>{user.city}</CompText>
                 </ClientCompDivider>
