@@ -154,7 +154,7 @@ export const SearchIcon = styled(BiSearch)`
 
 export const TableBody = styled.div`
   width: 100%;
-  flex: 1;
+  height: fit-content;
 
   padding: 0.25rem;
 
