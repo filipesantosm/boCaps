@@ -59,6 +59,7 @@ import {
   isScratchCardOptions,
 } from './utils';
 import { maskSusep } from '../../utils/mask';
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 
 const Sweepstake = () => {
   const { drawId } = useParams();
@@ -66,6 +67,7 @@ const Sweepstake = () => {
 
   const [draw, setDraw] = useState<IDraw>();
   const [openedSections, setOpenedSections] = useState<string[]>([]);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const {
     control,
     formState: { errors },
@@ -243,6 +245,7 @@ const Sweepstake = () => {
     }
 
     if (draw.attributes.isPublished) {
+      setShowConfirmModal(true);
       return;
     }
 
@@ -254,6 +257,24 @@ const Sweepstake = () => {
       });
 
       getDraw(draw.id.toString());
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
+  const handleConfirmSuspendDraw = async () => {
+    if (!draw) {
+      return;
+    }
+
+    try {
+      await api.put(`/draws/${draw.id}`, {
+        data: {
+          isPublished: false,
+        },
+      });
+
+      getDraw(String(draw.id));
     } catch (error) {
       handleError(error);
     }
@@ -294,7 +315,6 @@ const Sweepstake = () => {
               <SwitchColor
                 checked={draw?.attributes.isPublished}
                 onChange={handlePublish}
-                disabled={draw?.attributes.isPublished}
               />
             </SwitchWrapper>
           </MainHeader>
@@ -386,6 +406,13 @@ const Sweepstake = () => {
                 error={errors.endHour?.message}
               />
             </InputLine>
+            <SweepstakeInput
+              label="Limite de compra de títulos:"
+              style={{
+                width: '6.25rem',
+              }}
+              {...register('additionalDataSection.limSale')}
+            />
           </MainInputContainer>
         </MainSection>
         <ChanceSection>
@@ -543,13 +570,6 @@ const Sweepstake = () => {
           >
             <AdditionalContainer>
               <InputLine>
-                <SweepstakeInput
-                  label="Limite de títulos:"
-                  style={{
-                    width: '6.25rem',
-                  }}
-                  {...register('additionalDataSection.limSale')}
-                />
                 <SelectLabel>
                   Terá raspadinha Gratuita:
                   <SelectWrapper>
@@ -699,6 +719,13 @@ const Sweepstake = () => {
             Cancelar
           </SaveButton>
         </ButtonFooterContainer>
+        {showConfirmModal && (
+          <ConfirmModal
+            message="Tem certeza que deseja suspender o sorteio?"
+            onClose={() => setShowConfirmModal(false)}
+            onConfirm={handleConfirmSuspendDraw}
+          />
+        )}
       </Content>
     </Layout>
   );
