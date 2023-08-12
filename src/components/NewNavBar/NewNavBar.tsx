@@ -1,10 +1,13 @@
 import { useRef, useState } from 'react';
+import { BsList } from 'react-icons/bs';
+import { FaFileInvoiceDollar } from 'react-icons/fa';
+import { FiLogOut } from 'react-icons/fi';
 import { HiOutlineGift, HiOutlineHome, HiOutlineUsers } from 'react-icons/hi';
 import { MdLockOutline, MdOutlineCake } from 'react-icons/md';
 import { TbClipboardText } from 'react-icons/tb';
-import { BsList } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
-import { FiLogOut } from 'react-icons/fi';
+import { useAuth } from '../../hooks/useAuth';
+import { useOutside } from '../../hooks/useOutside';
 import {
   Container,
   HamburgerButton,
@@ -13,8 +16,6 @@ import {
   MenuText,
   StyledNavLink,
 } from './styles';
-import { useAuth } from '../../hooks/useAuth';
-import { useOutside } from '../../hooks/useOutside';
 
 const NewNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,6 +50,15 @@ const NewNavBar = () => {
           <StyledNavLink to="/draw-promos">
             <HiOutlineGift className="icon" style={{ fontSize: '1.5rem' }} />
             <MenuText>Promoções</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/billets">
+            <FaFileInvoiceDollar
+              className="icon"
+              style={{ fontSize: '1.5rem' }}
+            />
+            <MenuText>Boletos</MenuText>
           </StyledNavLink>
         </MenuItem>
         <MenuItem>

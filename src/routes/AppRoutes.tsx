@@ -1,42 +1,36 @@
 import {
-  BrowserRouter as Router,
   Navigate,
   Route,
+  BrowserRouter as Router,
   Routes,
 } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import Billets from '../pages/Billets/Billets';
+import Birthdays from '../pages/Birthdays/Birthdays';
 import ClientDetails from '../pages/ClientDetails/ClientDetails';
 import ClubDetails from '../pages/ClubDetails/ClubDetails';
+import ClubSales from '../pages/ClubSales/ClubSales';
+import Dashboard from '../pages/Dashboard/Dashboard';
+import DrawPromos from '../pages/DrawPromos/DrawPromos';
+import Draws from '../pages/Draws/Draws';
 import EditAccount from '../pages/EditAccount/EditAccount';
-import EditFee from '../pages/EditFee/EditFee';
+import EditClubSale from '../pages/EditClubSale/EditClubSale';
 import EditProfile from '../pages/EditProfile/EditProfile';
 import EditSale from '../pages/EditSale/EditSale';
 import EditTerms from '../pages/EditTerms/EditTerms';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
-import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
-import ManageFees from '../pages/ManageFees/ManageFees';
 import ManageSales from '../pages/ManageSales/ManageSales';
 import NewAccount from '../pages/NewAccount/NewAccount';
-import NewFee from '../pages/NewFee/NewFee';
+import NewClient from '../pages/NewClient/NewClient';
+import NewClubSale from '../pages/NewClubSale/NewClubSale';
 import NewSale from '../pages/NewSale/NewSale';
 import Payment from '../pages/Payment/Payment';
 import Sales from '../pages/Sales/Sales';
+import Sweepstake from '../pages/Sweepstake/Sweepstake';
 import Tax from '../pages/Tax/Tax';
 import Terms from '../pages/Terms/Terms';
 import Users from '../pages/Users/Users';
-import GreenFeeDetail from '../pages/GreenFeeDetail/GreenFeeDetail';
-import EditClubFee from '../pages/EditClubFee/EditClubFee';
-import NewClubFee from '../pages/NewClubFee/NewClubFee';
-import ClubSales from '../pages/ClubSales/ClubSales';
-import NewClubSale from '../pages/NewClubSale/NewClubSale';
-import EditClubSale from '../pages/EditClubSale/EditClubSale';
-import NewClient from '../pages/NewClient/NewClient';
-import Birthdays from '../pages/Birthdays/Birthdays';
-import Dashboard from '../pages/Dashboard/Dashboard';
-import Sweepstake from '../pages/Sweepstake/Sweepstake';
-import Draws from '../pages/Draws/Draws';
-import DrawPromos from '../pages/DrawPromos/DrawPromos';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -50,14 +44,6 @@ const AppRoutes = () => {
         />
 
         <Route path="/forgot-password" element={<ForgotPassword />} />
-
-        {/* <Route path="/home" element={<Home />} />
-        <Route path="/home/:clubId" element={<GreenFeeDetail />} />
-        <Route path="/home/:clubId/:id" element={<EditClubFee />} />
-        <Route path="/home/:clubId/new" element={<NewClubFee />} />
-        <Route path="/home/manage" element={<ManageFees />} />
-        <Route path="/home/manage/new" element={<NewFee />} />
-        <Route path="/home/manage/:id" element={<EditFee />} /> */}
 
         <Route path="/dashboard" element={<Dashboard />} />
 
@@ -82,6 +68,8 @@ const AppRoutes = () => {
         <Route path="/sweepstake/edit/:drawId" element={<Sweepstake />} />
 
         <Route path="/draw-promos" element={<DrawPromos />} />
+
+        <Route path="/billets" element={<Billets />} />
 
         <Route path="/payment" element={<Payment />} />
         <Route path="/payment/new" element={<NewAccount />} />
