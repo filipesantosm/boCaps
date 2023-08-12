@@ -29,7 +29,9 @@ export const maskPhone = (value: string) => {
 };
 
 export const maskCPF = (value: string) => {
-  return value
+  const onlyDigits = value?.replace(/\D/g, '');
+
+  return onlyDigits
     ?.replace(/^(\d{3})(\d)/, '$1.$2')
     .replace(/^(\d{3}).(\d{3})(\d)/, '$1.$2.$3')
     .replace(/.(\d{3})(\d)/, '.$1-$2');

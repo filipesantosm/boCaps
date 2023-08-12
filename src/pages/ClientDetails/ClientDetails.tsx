@@ -9,7 +9,7 @@ import { AccountSelect } from '../../components/Selects/Selects';
 import { IUser, IUserForm } from '../../interfaces/User';
 import api from '../../services/api';
 import handleError from '../../services/handleToast';
-import { maskCPF, maskPhone } from '../../utils/mask';
+import { maskCEP, maskCPF, maskPhone } from '../../utils/mask';
 import {
   BackDivider,
   BackIcon,
@@ -296,7 +296,6 @@ const ClientDetails = () => {
                 id="lucky_number"
                 placeholder="Insira o número da sorte"
                 {...register('luckyNumber')}
-                disabled={!!userId}
               />
               {errors?.luckyNumber?.message && (
                 <ErrorMessage>{errors.luckyNumber.message}</ErrorMessage>
@@ -317,6 +316,9 @@ const ClientDetails = () => {
                     type="text"
                     id="cep"
                     placeholder="Insira o CEP"
+                    as={MaskedInput}
+                    maskFunction={maskCEP}
+                    maxLength={9}
                     {...register('cep', {
                       onBlur: () => {
                         handleCepBlur();
