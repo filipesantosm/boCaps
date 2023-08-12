@@ -19,11 +19,14 @@ import {
   TableBody,
   Title,
 } from './styles';
+import DrawPromoFormModal from '../../components/DrawPromoFormModal/DrawPromoFormModal';
 
 const DrawPromos = () => {
   const [drawPromos, setDrawPromos] = useState<DrawPromo[]>([]);
   const [page, setPage] = useState(1);
   const [maximumPage, setMaximumPage] = useState(1);
+  const [showDrawPromoModal, setShowDrawPromoModal] = useState(false);
+  const [selectedDrawPromo, setSelectedDrawPromo] = useState<DrawPromo>();
 
   useEffect(() => {
     getDrawPromos();
@@ -53,7 +56,7 @@ const DrawPromos = () => {
       <Content>
         <Title>Promoções de sorteio</Title>
         <HeaderButtons>
-          <Button type="button" onClick={() => console.log('/draw-promo')}>
+          <Button type="button" onClick={() => setShowDrawPromoModal(true)}>
             Cadastrar promoção
           </Button>
         </HeaderButtons>
@@ -79,7 +82,12 @@ const DrawPromos = () => {
                 <DataText>{drawPromo.attributes.quantity}</DataText>
               </DrawPromoData>
               <DrawPromoData>
-                <EditIcon />
+                <EditIcon
+                  onClick={() => {
+                    setShowDrawPromoModal(true);
+                    setSelectedDrawPromo(drawPromo);
+                  }}
+                />
               </DrawPromoData>
             </DrawPromoRow>
           ))}
@@ -90,6 +98,20 @@ const DrawPromos = () => {
           handleChange={(_, newPage) => setPage(newPage)}
         />
       </Content>
+      {showDrawPromoModal && (
+        <DrawPromoFormModal
+          drawPromo={selectedDrawPromo}
+          onClose={() => {
+            setShowDrawPromoModal(false);
+            setSelectedDrawPromo(undefined);
+          }}
+          onSuccess={() => {
+            getDrawPromos();
+            setShowDrawPromoModal(false);
+            setSelectedDrawPromo(undefined);
+          }}
+        />
+      )}
     </Layout>
   );
 };
