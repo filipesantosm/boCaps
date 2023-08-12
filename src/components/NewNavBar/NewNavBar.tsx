@@ -1,9 +1,13 @@
 import { useRef, useState } from 'react';
 import { BsList } from 'react-icons/bs';
-import { FaFileInvoiceDollar } from 'react-icons/fa';
+import { LiaFileInvoiceDollarSolid } from 'react-icons/lia';
 import { FiLogOut } from 'react-icons/fi';
 import { HiOutlineGift, HiOutlineHome, HiOutlineUsers } from 'react-icons/hi';
-import { MdLockOutline, MdOutlineCake } from 'react-icons/md';
+import {
+  MdLockOutline,
+  MdOutlineCake,
+  MdOutlineDiscount,
+} from 'react-icons/md';
 import { TbClipboardText } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
@@ -48,13 +52,16 @@ const NewNavBar = () => {
         </MenuItem>
         <MenuItem>
           <StyledNavLink to="/draw-promos">
-            <HiOutlineGift className="icon" style={{ fontSize: '1.5rem' }} />
+            <MdOutlineDiscount
+              className="icon"
+              style={{ fontSize: '1.5rem' }}
+            />
             <MenuText>Promoções</MenuText>
           </StyledNavLink>
         </MenuItem>
         <MenuItem>
           <StyledNavLink to="/billets">
-            <FaFileInvoiceDollar
+            <LiaFileInvoiceDollarSolid
               className="icon"
               style={{ fontSize: '1.5rem' }}
             />
