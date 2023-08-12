@@ -92,7 +92,7 @@ export const Input = styled.input`
 
 export const ErrorMessage = styled.span`
   position: absolute;
-  bottom: -0.75rem;
+  bottom: -1.25rem;
   color: red;
   font-size: 0.75rem;
 `;

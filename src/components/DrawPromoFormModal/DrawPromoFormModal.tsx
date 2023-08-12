@@ -22,6 +22,8 @@ import {
 } from './styles';
 import api from '../../services/api';
 import Loading from '../Loading/Loading';
+import { AccountSelect } from '../Selects/Selects';
+import { drawPromoQuantityOptions } from './utils';
 
 interface Props {
   onClose: () => void;
@@ -29,14 +31,20 @@ interface Props {
   drawPromo?: DrawPromo;
 }
 
+interface Option {
+  value: string;
+  label: string;
+}
+
 interface IDrawPromoForm {
   Campanha: string;
   value: string;
-  quantity: number;
+  quantity: Option;
 }
 
 const DrawPromoFormModal = ({ drawPromo, onClose, onSuccess }: Props) => {
   const {
+    control,
     reset,
     register,
     handleSubmit,
@@ -48,9 +56,13 @@ const DrawPromoFormModal = ({ drawPromo, onClose, onSuccess }: Props) => {
 
   useEffect(() => {
     if (drawPromo) {
+      const foundQuantityOption = drawPromoQuantityOptions.find(
+        option => Number(option.value) === drawPromo.attributes.quantity,
+      );
+
       reset({
         Campanha: drawPromo.attributes.Campanha,
-        quantity: drawPromo.attributes.quantity,
+        quantity: foundQuantityOption,
         value: BRLMoneyFormater.format(drawPromo.attributes.value),
       });
     } else {
@@ -64,7 +76,7 @@ const DrawPromoFormModal = ({ drawPromo, onClose, onSuccess }: Props) => {
       const payload = {
         data: {
           Campanha: form.Campanha,
-          quantity: Number(form.quantity),
+          quantity: Number(form.quantity.value),
           value: unmaskCurrency(form.value),
         },
       };
@@ -115,12 +127,12 @@ const DrawPromoFormModal = ({ drawPromo, onClose, onSuccess }: Props) => {
           </Field>
           <Field>
             <Label>Quantidade</Label>
-            <Input
-              placeholder="0"
-              type="number"
-              step="1"
-              min={1}
-              {...register('quantity')}
+            <AccountSelect
+              options={drawPromoQuantityOptions}
+              control={control}
+              name="quantity"
+              id="quantity"
+              placeholder="Selecione a quantidade"
             />
             {errors?.quantity?.message && (
               <ErrorMessage>{errors?.quantity?.message}</ErrorMessage>
