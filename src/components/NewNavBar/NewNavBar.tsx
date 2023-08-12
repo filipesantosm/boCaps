@@ -46,6 +46,12 @@ const NewNavBar = () => {
           </StyledNavLink>
         </MenuItem>
         <MenuItem>
+          <StyledNavLink to="/draw-promos">
+            <HiOutlineGift className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Promoções</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
           <StyledNavLink to="/users">
             <HiOutlineUsers className="icon" style={{ fontSize: '1.5rem' }} />
             <MenuText>Usuários</MenuText>

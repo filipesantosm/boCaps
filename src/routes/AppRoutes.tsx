@@ -36,6 +36,7 @@ import Birthdays from '../pages/Birthdays/Birthdays';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import Sweepstake from '../pages/Sweepstake/Sweepstake';
 import Draws from '../pages/Draws/Draws';
+import DrawPromos from '../pages/DrawPromos/DrawPromos';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -79,6 +80,8 @@ const AppRoutes = () => {
         <Route path="/sweepstake" element={<Draws />} />
         <Route path="/sweepstake/create" element={<Sweepstake />} />
         <Route path="/sweepstake/edit/:drawId" element={<Sweepstake />} />
+
+        <Route path="/draw-promos" element={<DrawPromos />} />
 
         <Route path="/payment" element={<Payment />} />
         <Route path="/payment/new" element={<NewAccount />} />
