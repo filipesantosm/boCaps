@@ -256,7 +256,18 @@ export const SaveButton = styled.button`
   width: 12.5rem;
   border-radius: 0.625rem;
 
+  font-size: 1rem;
+  font-weight: 500;
+
   &:disabled {
     cursor: not-allowed;
+  }
+
+  transition: opacity 0.3s;
+
+  &:hover {
+    &:not(:disabled) {
+      opacity: 0.9;
+    }
   }
 `;

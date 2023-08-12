@@ -34,6 +34,7 @@ export interface IDrawAttributes {
   pdfTitle: Image;
   image: Image;
   file: string | null;
+  isValidated: boolean;
   draw_type_chance: DrawTypeChance;
   draw_premiums: {
     data: DrawPremium[];

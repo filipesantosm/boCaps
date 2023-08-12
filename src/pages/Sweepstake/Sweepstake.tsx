@@ -60,6 +60,7 @@ import {
 } from './utils';
 import { maskSusep } from '../../utils/mask';
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
+import Loading from '../../components/Loading/Loading';
 
 const Sweepstake = () => {
   const { drawId } = useParams();
@@ -68,6 +69,7 @@ const Sweepstake = () => {
   const [draw, setDraw] = useState<IDraw>();
   const [openedSections, setOpenedSections] = useState<string[]>([]);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     control,
     formState: { errors },
@@ -238,6 +240,28 @@ const Sweepstake = () => {
     }
   };
 
+  const handleValidate = async () => {
+    if (!draw) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      await api.get('/validateDraw', {
+        params: {
+          id: draw.id,
+        },
+      });
+
+      getDraw(String(draw.id));
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const handlePublish = async () => {
     if (!draw) {
       handleError('Salve o sorteio antes de ativá-lo');
@@ -310,13 +334,24 @@ const Sweepstake = () => {
         <MainSection>
           <MainHeader>
             Dados principais
-            <SwitchWrapper>
-              {draw?.attributes.isPublished ? 'Publicado' : 'Publicar'}
-              <SwitchColor
-                checked={draw?.attributes.isPublished}
-                onChange={handlePublish}
-              />
-            </SwitchWrapper>
+            {draw &&
+              (draw?.attributes.isValidated || draw?.attributes.isPublished ? (
+                <SwitchWrapper>
+                  {draw?.attributes.isPublished ? 'Publicado' : 'Publicar'}
+                  <SwitchColor
+                    checked={draw?.attributes.isPublished}
+                    onChange={handlePublish}
+                  />
+                </SwitchWrapper>
+              ) : (
+                <SaveButton
+                  type="button"
+                  onClick={handleValidate}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? <Loading iconColor="#ffffff" /> : 'Validar'}
+                </SaveButton>
+              ))}
           </MainHeader>
           <MainInputContainer>
             <InputLine>
