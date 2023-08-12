@@ -48,4 +48,10 @@ export interface IUserForm {
   state: string;
   country: string;
   number: string;
+  password?: string;
+  passwordConfirmation?: string;
+  blocked: {
+    value: string;
+    label: string;
+  };
 }

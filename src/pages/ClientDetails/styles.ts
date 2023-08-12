@@ -29,7 +29,6 @@ export const Content = styled.div`
 
 export const MainForm = styled.form`
   width: 100%;
-  height: calc(100% - 5rem);
 
   display: flex;
   flex-direction: column;
@@ -39,15 +38,24 @@ export const MainForm = styled.form`
   overflow-x: hidden;
   overflow-y: auto;
 
-  &::-webkit-scrollbar {
-    width: 0.00001px;
-    display: block;
+  scrollbar-width: thin;
+  scrollbar-color: #d6d6d6 #f3f3f3;
+
+  ::-webkit-scrollbar {
+    width: 6px;
   }
-  &::-webkit-scrollbar-track {
-    background: transparent;
+
+  ::-webkit-scrollbar-track {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 6px;
+    background: #f3f3f3;
   }
-  &::-webkit-scrollbar-thumb {
-    background: transparent;
+
+  ::-webkit-scrollbar-thumb {
+    width: 6px;
+    border-radius: 6px;
+    background: #d6d6d6;
   }
 `;
 
@@ -169,13 +177,20 @@ export const ColumnTitle = styled.span`
   margin-bottom: 1.75rem;
 `;
 
+export const Field = styled.div`
+  position: relative;
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+`;
+
 export const Label = styled.label`
   font-weight: 400;
   font-size: 1.125rem;
 
   color: #515258;
-
-  margin-bottom: 0.625rem;
 `;
 
 export const Input = styled.input`
@@ -185,7 +200,7 @@ export const Input = styled.input`
   width: 100%;
   height: 2.625rem;
 
-  padding-left: 1rem;
+  padding: 0 1rem;
 
   border: none;
   border-radius: 0.75rem;
@@ -207,6 +222,13 @@ export const Input = styled.input`
   &::placeholder {
     color: #c6cedd;
   }
+`;
+
+export const ErrorMessage = styled.span`
+  position: absolute;
+  bottom: 0;
+  color: red;
+  font-size: 0.75rem;
 `;
 
 export const FormRow = styled.div`

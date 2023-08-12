@@ -8,27 +8,13 @@ import { useAuth } from '../hooks/useAuth';
 import Billets from '../pages/Billets/Billets';
 import Birthdays from '../pages/Birthdays/Birthdays';
 import ClientDetails from '../pages/ClientDetails/ClientDetails';
-import ClubDetails from '../pages/ClubDetails/ClubDetails';
-import ClubSales from '../pages/ClubSales/ClubSales';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import DrawPromos from '../pages/DrawPromos/DrawPromos';
 import Draws from '../pages/Draws/Draws';
-import EditAccount from '../pages/EditAccount/EditAccount';
-import EditClubSale from '../pages/EditClubSale/EditClubSale';
 import EditProfile from '../pages/EditProfile/EditProfile';
-import EditSale from '../pages/EditSale/EditSale';
-import EditTerms from '../pages/EditTerms/EditTerms';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import Login from '../pages/Login/Login';
-import ManageSales from '../pages/ManageSales/ManageSales';
-import NewAccount from '../pages/NewAccount/NewAccount';
-import NewClient from '../pages/NewClient/NewClient';
-import NewClubSale from '../pages/NewClubSale/NewClubSale';
-import NewSale from '../pages/NewSale/NewSale';
-import Payment from '../pages/Payment/Payment';
-import Sales from '../pages/Sales/Sales';
 import Sweepstake from '../pages/Sweepstake/Sweepstake';
-import Tax from '../pages/Tax/Tax';
 import Terms from '../pages/Terms/Terms';
 import Users from '../pages/Users/Users';
 
@@ -47,19 +33,8 @@ const AppRoutes = () => {
 
         <Route path="/dashboard" element={<Dashboard />} />
 
-        <Route path="/sales" element={<Sales />} />
-        <Route path="/sales/:clubId" element={<ClubSales />} />
-        <Route path="/sales/:clubId/:id" element={<EditClubSale />} />
-        <Route path="/sales/:clubId/new" element={<NewClubSale />} />
-        <Route path="/sales/manage" element={<ManageSales />} />
-        <Route path="/sales/manage/new" element={<NewSale />} />
-        <Route path="/sales/manage/:id" element={<EditSale />} />
-
-        <Route path="/tax" element={<Tax />} />
-
         <Route path="/users" element={<Users />} />
-        <Route path="/users/create" element={<NewClient />} />
-        <Route path="/users/club/:id" element={<ClubDetails />} />
+        <Route path="/users/create" element={<ClientDetails />} />
         <Route path="/users/client/:userId" element={<ClientDetails />} />
 
         <Route path="/birthdays" element={<Birthdays />} />
@@ -71,12 +46,7 @@ const AppRoutes = () => {
 
         <Route path="/billets" element={<Billets />} />
 
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/payment/new" element={<NewAccount />} />
-        <Route path="/payment/:id" element={<EditAccount />} />
-
         <Route path="/terms" element={<Terms />} />
-        <Route path="/terms/edit-terms" element={<EditTerms />} />
 
         <Route path="/edit-profile" element={<EditProfile />} />
       </Routes>
