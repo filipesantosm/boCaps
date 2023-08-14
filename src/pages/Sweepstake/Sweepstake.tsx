@@ -240,12 +240,14 @@ const Sweepstake = () => {
     }
   };
 
-  const handleValidate = async () => {
+  const handleValidate = async (form: ISweepstakeForm) => {
     if (!draw) {
       return;
     }
 
     setIsSubmitting(true);
+
+    await onSubmit(form);
 
     try {
       await api.get('/validateDraw', {
@@ -347,7 +349,7 @@ const Sweepstake = () => {
               ) : (
                 <SaveButton
                   type="button"
-                  onClick={handleValidate}
+                  onClick={handleSubmit(handleValidate)}
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? <Loading iconColor="#ffffff" /> : 'Validar'}
