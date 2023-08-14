@@ -222,6 +222,7 @@ const Sweepstake = () => {
           draw_promos: form?.additionalDataSection?.saleValue?.length
             ? form.additionalDataSection.saleValue.map(value => Number(value))
             : undefined,
+          isValidated: false,
         },
       };
 
@@ -240,14 +241,12 @@ const Sweepstake = () => {
     }
   };
 
-  const handleValidate = async (form: ISweepstakeForm) => {
+  const handleValidate = async () => {
     if (!draw) {
       return;
     }
 
     setIsSubmitting(true);
-
-    await onSubmit(form);
 
     try {
       await api.get('/validateDraw', {
@@ -338,7 +337,7 @@ const Sweepstake = () => {
           <MainHeader>
             Dados principais
             {draw &&
-              (draw?.attributes.isValidated || draw?.attributes.isPublished ? (
+              (draw?.attributes?.isValidated || draw?.attributes.isPublished ? (
                 <SwitchWrapper>
                   {draw?.attributes.isPublished ? 'Publicado' : 'Publicar'}
                   <SwitchColor
@@ -349,7 +348,7 @@ const Sweepstake = () => {
               ) : (
                 <SaveButton
                   type="button"
-                  onClick={handleSubmit(handleValidate)}
+                  onClick={handleValidate}
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? <Loading iconColor="#ffffff" /> : 'Validar'}
