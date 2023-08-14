@@ -392,6 +392,14 @@ export const TableBody = styled.div`
   grid-row-gap: 0.625rem;
 
   margin-bottom: auto;
+
+  max-height: 60vh;
+
+  overflow: auto;
+
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
 `;
 
 export const UserComp = styled.div`

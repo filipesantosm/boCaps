@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { GiSettingsKnobs } from 'react-icons/gi';
 import Layout from '../../components/Layout/Layout';
 import SmallPagination from '../../components/Pagination/Pagination';
+import { IUser } from '../../interfaces/User';
+import api from '../../services/api';
+import handleError from '../../services/handleToast';
+import { formatDateString } from '../../utils/formatDateString';
 import {
   Button,
   ClientComp,
@@ -23,26 +27,33 @@ import {
   Title,
   TitleDivider,
 } from './styles';
-import { cityOptions, monthOptions } from './utils';
-import handleError from '../../services/handleToast';
-import api from '../../services/api';
-import { IUser } from '../../interfaces/User';
+import { monthOptions } from './utils';
 
 const Birthdays = () => {
   const [clientPage, setClientPage] = useState(1);
   const [birthdayMonth, setBirthdayMonth] = useState<number>();
+  const [users, setUsers] = useState<IUser[]>([]);
 
   const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [birthdayMonth]);
 
   const getUsers = async () => {
     try {
       const { data } = await api.get<IUser[]>('/users', {
-        params: {},
+        params: {
+          'filters[id][$ne]': 1, // excluir master da listagem
+          'filters[active][$eq]': true,
+          'filters[dateBirth][$notNull]': birthdayMonth ? true : undefined,
+          'filters[dateBirth][$containsi]': birthdayMonth
+            ? `-${birthdayMonth.toString().padStart(2, '0')}-`
+            : undefined,
+        },
       });
+
+      setUsers(data);
     } catch (error) {
       handleError(error);
     }
@@ -93,7 +104,7 @@ const Birthdays = () => {
                   </FilterItem>
                 ))}
               </FilterSection>
-              <FilterSection>
+              {/*  <FilterSection>
                 <FilterTitle>Cidade</FilterTitle>
                 {cityOptions.map(cityOption => (
                   <FilterItem key={cityOption.value}>
@@ -101,7 +112,7 @@ const Birthdays = () => {
                     <FilterCheckbox type="checkbox" />
                   </FilterItem>
                 ))}
-              </FilterSection>
+              </FilterSection> */}
             </FilterContainer>
           )}
           <MainForm>
@@ -114,31 +125,35 @@ const Birthdays = () => {
               <ClientHeaderDivider>Cidade</ClientHeaderDivider>
             </ClientHeader>
             <TableBody>
-              <ClientComp>
-                <ClientCompDivider>
-                  <CompText>123.456.789-12</CompText>
-                </ClientCompDivider>
-                <ClientCompDivider>
-                  <CompText>André Barbosa</CompText>
-                </ClientCompDivider>
-                <ClientCompDivider>
-                  <CompText>10/01/2000</CompText>
-                </ClientCompDivider>
-                <ClientCompDivider>
-                  <CompText>(11) 99123-4234</CompText>
-                </ClientCompDivider>
-                <ClientCompDivider>
-                  <CompText>andrebarbosa@gmail.com</CompText>
-                </ClientCompDivider>
-                <ClientCompDivider>
-                  <CompText>Bauru</CompText>
-                </ClientCompDivider>
-              </ClientComp>
+              {users.map(user => (
+                <ClientComp key={user.id}>
+                  <ClientCompDivider>
+                    <CompText>{user.cpf}</CompText>
+                  </ClientCompDivider>
+                  <ClientCompDivider>
+                    <CompText>{user.name}</CompText>
+                  </ClientCompDivider>
+                  <ClientCompDivider>
+                    <CompText>
+                      {formatDateString(user.dateBirth, 'dd/MM/yyyy')}
+                    </CompText>
+                  </ClientCompDivider>
+                  <ClientCompDivider>
+                    <CompText>{user.phone}</CompText>
+                  </ClientCompDivider>
+                  <ClientCompDivider>
+                    <CompText>{user.email}</CompText>
+                  </ClientCompDivider>
+                  <ClientCompDivider>
+                    <CompText>{user.city}</CompText>
+                  </ClientCompDivider>
+                </ClientComp>
+              ))}
             </TableBody>
             <SmallPagination
-              total={5}
+              total={1}
               currentPage={clientPage}
-              handleChange={() => setClientPage(clientPage + 1)}
+              handleChange={(e, page) => setClientPage(page)}
             />
           </MainForm>
         </Content>
