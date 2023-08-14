@@ -30,7 +30,7 @@ const DrawPromos = () => {
 
   useEffect(() => {
     getDrawPromos();
-  }, []);
+  }, [page]);
 
   const getDrawPromos = async () => {
     try {

@@ -55,7 +55,7 @@ const Billets = () => {
             'filters[$or][0][user][id][$eq]': params.search.substring(0, 9),
             'filters[$or][1][ourNumber][$eq]': params.search,
             sort: 'createdAt:desc',
-            'pagination[page]': page,
+            'pagination[page]': params.page,
             'pagination[pageSize]': 10,
           },
         },
@@ -98,6 +98,7 @@ const Billets = () => {
             onSubmit={e => {
               e.preventDefault();
               getBillets({ page: 1, search });
+              setPage(1);
             }}
           >
             <SearchIcon />
@@ -180,7 +181,10 @@ const Billets = () => {
         <SmallPagination
           total={maximumPage}
           currentPage={page}
-          handleChange={(_, newPage) => setPage(newPage)}
+          handleChange={(_, newPage) => {
+            getBillets({ search, page: newPage });
+            setPage(newPage);
+          }}
         />
       </Content>
     </Layout>
