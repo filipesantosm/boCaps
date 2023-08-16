@@ -101,13 +101,13 @@ const DrawPromoFormModal = ({ drawPromo, onClose, onSuccess }: Props) => {
   return (
     <Container>
       <Content>
-        <Title>{drawPromo ? 'Editar' : 'Cadastrar'} promoção</Title>
+        <Title>{drawPromo ? 'Editar' : 'Cadastrar'} tipo de sorteio</Title>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Field>
             <Label>Nome</Label>
             <Input
               {...register('Campanha')}
-              placeholder="Insira o nome da promoção"
+              placeholder="Insira o nome do tipo"
             />
             {errors?.Campanha?.message && (
               <ErrorMessage>{errors?.Campanha?.message}</ErrorMessage>
