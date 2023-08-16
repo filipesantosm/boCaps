@@ -56,7 +56,7 @@ const NewNavBar = () => {
               className="icon"
               style={{ fontSize: '1.5rem' }}
             />
-            <MenuText>Promoções</MenuText>
+            <MenuText>Tipos de sorteio</MenuText>
           </StyledNavLink>
         </MenuItem>
         <MenuItem>

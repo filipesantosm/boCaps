@@ -83,10 +83,10 @@ const DrawPromoFormModal = ({ drawPromo, onClose, onSuccess }: Props) => {
 
       if (drawPromo) {
         await api.put(`/draw-promos/${drawPromo.id}`, payload);
-        handleSuccess('Promoção atualizada com sucesso!');
+        handleSuccess('Tipo de sorteio atualizado com sucesso!');
       } else {
         await api.post('/draw-promos', payload);
-        handleSuccess('Promoção cadastrada com sucesso!');
+        handleSuccess('Tipo de sorteio cadastrado com sucesso!');
       }
 
       reset();

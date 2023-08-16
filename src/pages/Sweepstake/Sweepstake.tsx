@@ -2,14 +2,15 @@
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
-import { isBefore, parseISO } from 'date-fns';
 import {
   icon_ArrowSection,
   img_placeholderImg,
   img_placeholderPDF,
 } from '../../assets';
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 import DrawPremiumSection from '../../components/DrawPremiumSection/DrawPremiumSection';
 import Layout from '../../components/Layout/Layout';
+import Loading from '../../components/Loading/Loading';
 import Select from '../../components/Select/Select';
 import SweepstakeInput from '../../components/SweepstakeInput/SweepstakeInput';
 import SwitchColor from '../../components/SwitchColor/SwitchColor';
@@ -23,6 +24,7 @@ import { ISweepstakeForm } from '../../interfaces/SweepstakeForm';
 import api from '../../services/api';
 import handleError, { handleSuccess } from '../../services/handleToast';
 import { getDrawImage, imageUrl } from '../../utils/imageUrl';
+import { maskSusep } from '../../utils/mask';
 import {
   AdditionalContainer,
   AdditionalDataSection,
@@ -58,9 +60,6 @@ import {
   getIsoStringFromDateAndTime,
   isScratchCardOptions,
 } from './utils';
-import { maskSusep } from '../../utils/mask';
-import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
-import Loading from '../../components/Loading/Loading';
 
 const Sweepstake = () => {
   const { drawId } = useParams();
@@ -81,6 +80,10 @@ const Sweepstake = () => {
     defaultValues: {
       chanceSection: {
         typeChance: 1,
+      },
+      drawHour: '09:00',
+      additionalDataSection: {
+        limSale: 30,
       },
     },
   });
@@ -222,7 +225,6 @@ const Sweepstake = () => {
           draw_promos: form?.additionalDataSection?.saleValue?.length
             ? form.additionalDataSection.saleValue.map(value => Number(value))
             : undefined,
-          isValidated: false,
         },
       };
 
@@ -319,13 +321,18 @@ const Sweepstake = () => {
 
   const typeChance = watch('chanceSection.typeChance');
 
-  const drawDate = draw?.attributes?.dateDraw
-    ? parseISO(draw.attributes.dateDraw)
-    : undefined;
+  const hasScratchCard =
+    watch('additionalDataSection.isScratchCard') === 'true';
 
-  const disableEditing =
-    draw?.attributes?.isPublished ||
-    (drawDate && isBefore(drawDate, new Date()));
+  const filteredCategories = hasScratchCard
+    ? premiumCategories.filter(premiumCategory => premiumCategory.id !== 2)
+    : premiumCategories;
+
+  /* const drawDate = draw?.attributes?.dateDraw
+    ? parseISO(draw.attributes.dateDraw)
+    : undefined; */
+
+  const disableEditing = false;
 
   return (
     <Layout>
@@ -639,7 +646,7 @@ const Sweepstake = () => {
                 {...register('additionalDataSection.lnkYoutubeDraw')}
               />
               <SelectWrapperAdditional>
-                <SelectLabel>Valor promocional:</SelectLabel>
+                <SelectLabel>Tipo de sorteio:</SelectLabel>
                 <Controller
                   control={control}
                   name="additionalDataSection.saleValue"
@@ -733,7 +740,7 @@ const Sweepstake = () => {
           </RetrieveContainer>
         </AdditionalDataSection>
         {draw &&
-          premiumCategories.map(category => (
+          filteredCategories.map(category => (
             <DrawPremiumSection
               key={category.id}
               draw={draw}
