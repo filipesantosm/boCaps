@@ -608,7 +608,7 @@ const Sweepstake = () => {
             <AdditionalContainer>
               <InputLine>
                 <SelectLabel>
-                  Terá raspadinha Gratuita:
+                  Terá riscadinha Gratuita:
                   <SelectWrapper>
                     <Controller
                       control={control}
