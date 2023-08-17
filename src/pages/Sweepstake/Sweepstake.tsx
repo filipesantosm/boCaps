@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable react/no-array-index-key */
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -61,13 +62,23 @@ import {
   isScratchCardOptions,
 } from './utils';
 
+const initialHandleConfirmModal = {
+  isOpen: false,
+  onClose: () => {},
+  onConfirm: () => {},
+  onCancel: () => {},
+  message: '',
+};
+
 const Sweepstake = () => {
   const { drawId } = useParams();
   const navigate = useNavigate();
 
   const [draw, setDraw] = useState<IDraw>();
   const [openedSections, setOpenedSections] = useState<string[]>([]);
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [handleConfirmModal, setHandleConfirmModal] = useState(
+    initialHandleConfirmModal,
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     control,
@@ -94,7 +105,7 @@ const Sweepstake = () => {
     }
   }, [drawId]);
 
-  const { drawPromoOptions } = useDrawPromos();
+  const { drawPromoOptions, drawPromos } = useDrawPromos();
 
   const { drawTypeChanceOptions, drawTypeChances } = useDrawTypeChance();
 
@@ -130,12 +141,32 @@ const Sweepstake = () => {
   };
 
   const onSubmit: SubmitHandler<ISweepstakeForm> = async form => {
+    if (draw && draw.attributes.isPublished) {
+      setHandleConfirmModal(prev => ({
+        ...prev,
+        isOpen: true,
+        message: 'O sorteio já está publicado, deseja realmente atualizá-lo?',
+        onCancel: handleCloseConfirmModal,
+        onClose: handleCloseConfirmModal,
+        onConfirm: () => handleSave(form),
+      }));
+      return;
+    }
+
+    handleSave(form);
+  };
+
+  const handleSave = async (form: ISweepstakeForm) => {
     const drawDate = getIsoStringFromDateAndTime(form.drawDate, form.drawHour);
     const startDate = getIsoStringFromDateAndTime(
       form.startDate,
       form.startHour,
     );
     const endDate = getIsoStringFromDateAndTime(form.endDate, form.endHour);
+
+    handleCloseConfirmModal();
+
+    setIsSubmitting(true);
 
     try {
       let imageId = 0;
@@ -164,6 +195,7 @@ const Sweepstake = () => {
 
       const payload = {
         data: {
+          id: draw ? draw.id : undefined,
           name: form.name,
           description: form.additionalDataSection.description,
           dateStart: startDate,
@@ -218,28 +250,47 @@ const Sweepstake = () => {
             },
           }),
           ...(foundChance && {
-            draw_type_chance: {
-              id: foundChance.id,
-            },
+            draw_type_chance: foundChance,
           }),
           draw_promos: form?.additionalDataSection?.saleValue?.length
-            ? form.additionalDataSection.saleValue.map(value => Number(value))
+            ? form.additionalDataSection.saleValue
+                .map(value => {
+                  const foundDrawPromo = drawPromos.find(
+                    drawPromo => drawPromo.id === Number(value),
+                  );
+
+                  if (foundDrawPromo) {
+                    return {
+                      id: foundDrawPromo.id,
+                      ...foundDrawPromo.attributes,
+                    };
+                  }
+                  return undefined;
+                })
+                .filter(Boolean)
             : undefined,
         },
       };
 
-      if (draw) {
-        const { data } = await api.put(`/draws/${draw.id}`, payload);
+      if (draw?.attributes.isPublished || draw?.attributes.isValidated) {
+        await api.post(`/updateDraw`, payload);
 
-        getDraw(data.data.id);
+        getDraw(String(draw.id));
+      } else if (draw) {
+        await api.put(`/draws/${draw.id}`, payload);
+
+        getDraw(String(draw.id));
       } else {
         const { data } = await api.post('/draws', payload);
 
         getDraw(data.data.id);
       }
+
       handleSuccess('Sorteio salvo com sucesso!');
     } catch (error) {
       handleError(error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -272,7 +323,6 @@ const Sweepstake = () => {
     }
 
     if (draw.attributes.isPublished) {
-      setShowConfirmModal(true);
       return;
     }
 
@@ -289,23 +339,8 @@ const Sweepstake = () => {
     }
   };
 
-  const handleConfirmSuspendDraw = async () => {
-    if (!draw) {
-      return;
-    }
-
-    try {
-      await api.put(`/draws/${draw.id}`, {
-        data: {
-          isPublished: false,
-        },
-      });
-
-      setShowConfirmModal(false);
-      getDraw(String(draw.id));
-    } catch (error) {
-      handleError(error);
-    }
+  const handleCloseConfirmModal = () => {
+    setHandleConfirmModal(initialHandleConfirmModal);
   };
 
   const newImage = watch('additionalDataSection.image');
@@ -332,7 +367,7 @@ const Sweepstake = () => {
     ? parseISO(draw.attributes.dateDraw)
     : undefined; */
 
-  const disableEditing = false;
+  const disableEditing = isSubmitting;
 
   return (
     <Layout>
@@ -763,11 +798,11 @@ const Sweepstake = () => {
             Cancelar
           </SaveButton>
         </ButtonFooterContainer>
-        {showConfirmModal && (
+        {handleConfirmModal.isOpen && (
           <ConfirmModal
-            message="Tem certeza que deseja suspender o sorteio?"
-            onClose={() => setShowConfirmModal(false)}
-            onConfirm={handleConfirmSuspendDraw}
+            message={handleConfirmModal.message}
+            onClose={handleConfirmModal.onClose}
+            onConfirm={handleConfirmModal.onConfirm}
           />
         )}
       </Content>
