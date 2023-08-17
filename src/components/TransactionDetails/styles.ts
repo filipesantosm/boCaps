@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -111,15 +110,20 @@ export const InformationText = styled.p`
   color: #1a1a1a;
 `;
 
-export const ClientLink = styled(NavLink)`
+export const ClientButton = styled.button`
+  border: none;
+  background: transparent;
+
   max-width: 50%;
 
   display: flex;
   align-items: center;
   gap: 0.5rem;
+
   color: #0054bc;
   font-size: 1rem;
   font-weight: 500;
+  text-decoration: underline;
 
   svg {
     font-size: 1.5rem;

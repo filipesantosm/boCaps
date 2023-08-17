@@ -1,10 +1,12 @@
 import { format, parseISO } from 'date-fns';
-import { IoIosClose } from 'react-icons/io';
 import { BiSearch } from 'react-icons/bi';
+import { IoIosClose } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
+import BRLMoneyFormater from '../../utils/formaters/BRLMoneyFormater';
 import {
   BottomSection,
   BottomSectionTitle,
-  ClientLink,
+  ClientButton,
   CloseButton,
   Container,
   Content,
@@ -14,7 +16,6 @@ import {
   ModalHeader,
   Title,
 } from './styles';
-import BRLMoneyFormater from '../../utils/formaters/BRLMoneyFormater';
 
 interface Props {
   onClose: () => void;
@@ -22,6 +23,8 @@ interface Props {
 }
 
 const TransactionDetails = ({ onClose, transaction }: Props) => {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Content>
@@ -39,10 +42,15 @@ const TransactionDetails = ({ onClose, transaction }: Props) => {
           </InformationRow>
           <InformationRow>
             <InformationText>Cliente</InformationText>
-            <ClientLink to="/transactions/client/1">
+            <ClientButton
+              onClick={() => {
+                navigate('/transactions/client/1');
+                onClose();
+              }}
+            >
               <p>Nome Sobrenome</p>
               <BiSearch />
-            </ClientLink>
+            </ClientButton>
           </InformationRow>
           <InformationRow>
             <InformationText>CPF</InformationText>
