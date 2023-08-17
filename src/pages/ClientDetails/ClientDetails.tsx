@@ -164,6 +164,9 @@ const ClientDetails = () => {
         setValue('street', data.logradouro, {
           shouldValidate: true,
         });
+        setValue('neighborhood', data.bairro, {
+          shouldValidate: true,
+        });
       }
     } catch (error) {
       handleError(error);
