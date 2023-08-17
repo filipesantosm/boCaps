@@ -10,6 +10,7 @@ import {
 } from 'react-icons/md';
 import { TbClipboardText } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
+import { AiOutlineDollarCircle } from 'react-icons/ai';
 import { useAuth } from '../../hooks/useAuth';
 import { useOutside } from '../../hooks/useOutside';
 import {
@@ -66,6 +67,15 @@ const NewNavBar = () => {
               style={{ fontSize: '1.5rem' }}
             />
             <MenuText>Boletos</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/transactions">
+            <AiOutlineDollarCircle
+              className="icon"
+              style={{ fontSize: '1.5rem' }}
+            />
+            <MenuText>Transações</MenuText>
           </StyledNavLink>
         </MenuItem>
         <MenuItem>

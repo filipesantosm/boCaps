@@ -17,6 +17,7 @@ import Login from '../pages/Login/Login';
 import Sweepstake from '../pages/Sweepstake/Sweepstake';
 import Terms from '../pages/Terms/Terms';
 import Users from '../pages/Users/Users';
+import Transactions from '../pages/Transactions/Transactions';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -45,6 +46,8 @@ const AppRoutes = () => {
         <Route path="/draw-promos" element={<DrawPromos />} />
 
         <Route path="/billets" element={<Billets />} />
+
+        <Route path="/transactions" element={<Transactions />} />
 
         <Route path="/terms" element={<Terms />} />
 
