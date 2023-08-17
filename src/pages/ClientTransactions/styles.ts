@@ -74,8 +74,6 @@ export const ChartLabel = styled.p`
 `;
 
 export const ClientInformationColumn = styled.div`
-  padding-left: 2rem;
-
   width: 100%;
   max-width: max(35vw, 40rem);
 

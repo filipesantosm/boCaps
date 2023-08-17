@@ -6,17 +6,17 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import Layout from '../../components/Layout/Layout';
 import SmallPagination from '../../components/Pagination/Pagination';
 import Select from '../../components/Select/Select';
-import SweepstakeInput from '../../components/SweepstakeInput/SweepstakeInput';
 import TransactionDetails from '../../components/TransactionDetails/TransactionDetails';
 import { useDrawOptions } from '../../hooks/useDrawOptions';
 import handleError from '../../services/handleToast';
 import {
   Content,
   DataText,
+  Field,
   FilledButton,
   FilterForm,
-  SelectLabel,
-  SelectWrapper,
+  Input,
+  Label,
   TableBody,
   TableData,
   TableHeaderData,
@@ -97,8 +97,8 @@ const Transactions = () => {
       <Content>
         <Title>Transações</Title>
         <FilterForm onSubmit={handleSubmit(onSubmit)}>
-          <SelectWrapper>
-            <SelectLabel>Origem</SelectLabel>
+          <Field>
+            <Label>Origem</Label>
             <Controller
               control={control}
               name="origin"
@@ -110,9 +110,9 @@ const Transactions = () => {
                 />
               )}
             />
-          </SelectWrapper>
-          <SelectWrapper>
-            <SelectLabel>Sorteio</SelectLabel>
+          </Field>
+          <Field>
+            <Label>Sorteio</Label>
             <Controller
               control={control}
               name="drawNumber"
@@ -124,9 +124,9 @@ const Transactions = () => {
                 />
               )}
             />
-          </SelectWrapper>
-          <SelectWrapper>
-            <SelectLabel>Forma de pagamento</SelectLabel>
+          </Field>
+          <Field>
+            <Label>Forma de pagamento</Label>
             <Controller
               control={control}
               name="paymentMethod"
@@ -138,14 +138,35 @@ const Transactions = () => {
                 />
               )}
             />
-          </SelectWrapper>
+          </Field>
 
-          <SweepstakeInput label="Número do boleto" />
-          <SweepstakeInput label="Nome do cliente" />
-          <SweepstakeInput label="CPF do cliente" />
-          <SweepstakeInput label="Número da transação" />
+          <Field>
+            <Label>Número do boleto</Label>
+            <Input
+              placeholder="0000000000000000"
+              {...register('billetNumber')}
+            />
+          </Field>
+          <Field>
+            <Label>Nome do cliente</Label>
+            <Input
+              placeholder="Pesquise pelo nome do cliente"
+              {...register('customerName')}
+            />
+          </Field>
+          <Field>
+            <Label>CPF do cliente</Label>
+            <Input placeholder="123.456.789-00" {...register('customerCpf')} />
+          </Field>
+          <Field>
+            <Label>Número da transação</Label>
+            <Input
+              placeholder="Pesquise pelo número da transação"
+              {...register('transactionNumber')}
+            />
+          </Field>
 
-          <FilledButton>Pesquisar</FilledButton>
+          <FilledButton disabled={isLoading}>Pesquisar</FilledButton>
         </FilterForm>
 
         <TableHeaderRow>

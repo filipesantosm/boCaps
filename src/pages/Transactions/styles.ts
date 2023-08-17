@@ -22,7 +22,7 @@ export const FilterForm = styled.form`
   display: grid;
   grid-template-columns: 1fr 1fr;
 
-  gap: 1rem;
+  grid-row-gap: 1.25rem;
   grid-column-gap: 3rem;
 `;
 
@@ -38,8 +38,17 @@ export const FormRow = styled.div`
   }
 `;
 
-export const SelectLabel = styled.label`
+export const Field = styled.div`
+  width: 100%;
+
+  display: flex;
+  gap: 1rem;
+`;
+
+export const Label = styled.label`
   margin-right: 1.25rem;
+  min-width: 30%;
+  width: 30%;
 
   display: flex;
   align-items: center;
@@ -49,11 +58,23 @@ export const SelectLabel = styled.label`
   white-space: nowrap;
 `;
 
-export const SelectWrapper = styled.div`
-  display: flex;
+export const Input = styled.input`
+  outline: none;
+  border: none;
 
-  @media (max-width: 480px) {
-    width: 100%;
+  width: 100%;
+  height: 2.625rem;
+  padding: 0 1rem;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
+
+  font-weight: 400;
+  font-size: 1rem;
+  color: #898f9a;
+
+  &::placeholder {
+    color: #c6cedd;
   }
 `;
 
@@ -187,7 +208,7 @@ export const DataText = styled.div`
 export const FilledButton = styled.button`
   width: 100%;
   max-width: 20rem;
-  min-height: 3rem;
+  min-height: 2.75rem;
 
   display: flex;
   align-items: center;
