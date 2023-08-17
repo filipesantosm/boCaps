@@ -1,18 +1,20 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { format, parseISO } from 'date-fns';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import Layout from '../../components/Layout/Layout';
+import SmallPagination from '../../components/Pagination/Pagination';
 import Select from '../../components/Select/Select';
 import SweepstakeInput from '../../components/SweepstakeInput/SweepstakeInput';
+import TransactionDetails from '../../components/TransactionDetails/TransactionDetails';
 import { useDrawOptions } from '../../hooks/useDrawOptions';
+import handleError from '../../services/handleToast';
 import {
   Content,
   DataText,
   FilledButton,
   FilterForm,
-  FormRow,
   SelectLabel,
   SelectWrapper,
   TableBody,
@@ -23,14 +25,16 @@ import {
   TextButton,
   Title,
 } from './styles';
-import SmallPagination from '../../components/Pagination/Pagination';
-import handleError from '../../services/handleToast';
-import TransactionDetails from '../../components/TransactionDetails/TransactionDetails';
+
+interface Option {
+  value: string;
+  label: string;
+}
 
 interface IFilterForm {
-  origin: string;
-  drawNumber: string;
-  paymentMethod: string;
+  origin?: Option | null;
+  drawNumber?: Option | null;
+  paymentMethod?: Option | null;
   customerName: string;
   customerCpf: string;
   billetNumber: string;
@@ -101,8 +105,8 @@ const Transactions = () => {
               render={({ field: { value, onChange } }) => (
                 <Select
                   options={originOptions}
-                  value={originOptions.find(option => option.value === value)}
-                  onChange={(option: any) => onChange(option.value)}
+                  value={value}
+                  onChange={onChange}
                 />
               )}
             />
@@ -115,8 +119,8 @@ const Transactions = () => {
               render={({ field: { value, onChange } }) => (
                 <Select
                   options={drawOptions}
-                  value={drawOptions.find(option => option.value === value)}
-                  onChange={(option: any) => onChange(option.value)}
+                  value={value}
+                  onChange={onChange}
                 />
               )}
             />
@@ -129,10 +133,8 @@ const Transactions = () => {
               render={({ field: { value, onChange } }) => (
                 <Select
                   options={paymentMethodOptions}
-                  value={paymentMethodOptions.find(
-                    option => option.value === value,
-                  )}
-                  onChange={(option: any) => onChange(option.value)}
+                  value={value}
+                  onChange={onChange}
                 />
               )}
             />

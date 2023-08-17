@@ -1,35 +1,28 @@
-import { Props as SelectProps } from 'react-select';
+import ReactSelect, { Props as SelectProps } from 'react-select';
 import { CSSProperties } from 'react';
-import { ErrorMessage, Label, LabelText, SelectComponent } from './styles';
+import { ErrorMessage, Label, LabelText } from './styles';
 
-interface Props extends SelectProps {
-  options: IOption[];
+interface Props<OptionType, T extends boolean>
+  extends SelectProps<OptionType, T, { options: OptionType[] }> {
   label?: string;
   error?: string;
   labelStyle?: CSSProperties;
+  options: OptionType[];
+  isMulti?: T;
 }
 
-export interface IOption {
-  value: string;
-  label: string;
-}
-
-const Select = ({
+const Select = <OptionType, T extends boolean = false>({
   labelStyle,
-  options,
   label,
   placeholder,
   error,
   ...rest
-}: Props) => {
+}: Props<OptionType, T>) => {
   return (
     <Label style={labelStyle} data-com="SelectLabel">
       {label && <LabelText>{label}</LabelText>}
-      <SelectComponent
-        options={options}
+      <ReactSelect
         placeholder={placeholder || 'Selecione...'}
-        isSearchable={false}
-        value={options.find(option => option.value === rest.value)}
         {...rest}
         styles={{
           control: prev => ({
