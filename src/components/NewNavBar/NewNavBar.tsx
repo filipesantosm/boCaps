@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { BsList } from 'react-icons/bs';
 import { LiaFileInvoiceDollarSolid } from 'react-icons/lia';
-import { FiLogOut } from 'react-icons/fi';
+import { FiHelpCircle, FiLogOut } from 'react-icons/fi';
+import { ImCogs } from 'react-icons/im';
 import { HiOutlineGift, HiOutlineHome, HiOutlineUsers } from 'react-icons/hi';
 import {
   MdLockOutline,
@@ -96,6 +97,18 @@ const NewNavBar = () => {
             <MenuText>Termos de Uso</MenuText>
           </StyledNavLink>
         </MenuItem>
+        {/* <MenuItem>
+          <StyledNavLink to="/faqs">
+            <FiHelpCircle className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Perguntas frequentes</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/how-it-works">
+            <ImCogs className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Como funciona</MenuText>
+          </StyledNavLink>
+        </MenuItem> */}
         <MenuItem>
           <StyledNavLink to="/edit-profile">
             <MdLockOutline className="icon" style={{ fontSize: '1.5rem' }} />
