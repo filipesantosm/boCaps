@@ -102,6 +102,7 @@ export const MenuItem = styled.div`
   .active .icon {
     color: #0054bc;
   }
+
   &:last-of-type {
     margin-bottom: 0;
   }
