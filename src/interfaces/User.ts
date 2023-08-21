@@ -28,6 +28,8 @@ export interface IUser {
   country: null | string;
   phone: null | string;
   isTermAccepted: boolean;
+  cityCodIBGE?: number;
+  stateCodIBGE?: number;
 }
 
 export interface IUserForm {
@@ -50,6 +52,8 @@ export interface IUserForm {
   number: string;
   password?: string;
   passwordConfirmation?: string;
+  cityCodIBGE?: string;
+  stateCodIBGE?: string;
   blocked: {
     value: string;
     label: string;

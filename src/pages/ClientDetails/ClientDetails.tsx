@@ -86,6 +86,8 @@ const ClientDetails = () => {
         youtube: data.youtube || undefined,
         number: data.number || undefined,
         blocked: data.blocked ? blockedOptions[1] : blockedOptions[0],
+        cityCodIBGE: data.cityCodIBGE?.toString() || undefined,
+        stateCodIBGE: data.stateCodIBGE?.toString() || undefined,
       });
       setUser(data);
     } catch (error) {
@@ -117,6 +119,8 @@ const ClientDetails = () => {
         dateBirth: form.dateBirth,
         password: form.password,
         name: form.name,
+        cityCodIBGE: form.cityCodIBGE ? Number(form.cityCodIBGE) : undefined,
+        stateCodIBGE: form.stateCodIBGE ? Number(form.stateCodIBGE) : undefined,
       };
 
       if (!userId) {
@@ -167,6 +171,10 @@ const ClientDetails = () => {
         setValue('neighborhood', data.bairro, {
           shouldValidate: true,
         });
+
+        setValue('cityCodIBGE', data.ibge);
+
+        setValue('stateCodIBGE', data.ibge?.toString().substring(0, 2));
       }
     } catch (error) {
       handleError(error);
