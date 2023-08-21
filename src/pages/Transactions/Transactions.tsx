@@ -25,6 +25,11 @@ import {
   TextButton,
   Title,
 } from './styles';
+import api from '../../services/api';
+import { PaginatedResponse } from '../../interfaces/Paginated';
+import { IUserPayment } from '../../interfaces/UserPayments';
+import MaskedInput from '../../components/MaskedInput/MaskedInput';
+import { maskCPF } from '../../utils/mask';
 
 interface Option {
   value: string;
@@ -68,21 +73,51 @@ const paymentMethodOptions = [
 ];
 
 const Transactions = () => {
-  const { register, control, handleSubmit } = useForm<IFilterForm>();
+  const { register, control, handleSubmit, getValues } = useForm<IFilterForm>();
   const { drawOptions } = useDrawOptions();
+
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedTransaction, setSelectedTransaction] = useState<any>();
+  const [selectedTransactionId, setSelectedTransactionId] = useState<number>();
   const [page, setPage] = useState(1);
   const [maximumPage, setMaximumPage] = useState(1);
 
+  const [userPayments, setUserPayments] = useState<IUserPayment[]>([]);
+
   useEffect(() => {
-    getTransactions();
+    getTransactions(1);
   }, []);
 
-  const getTransactions = async () => {
+  const getTransactions = async (pageParam: number, form?: IFilterForm) => {
     setIsLoading(true);
+
+    const formValues = form || getValues();
+
     try {
-      console.log('here');
+      const { data } = await api.get<PaginatedResponse<IUserPayment>>(
+        '/user-payments',
+        {
+          params: {
+            'pagination[page]': pageParam,
+            'filters[$or][0][ourNumber][$eq]':
+              formValues?.billetNumber || undefined,
+            'filters[$or][1][payment_type][id][$eq]':
+              formValues?.paymentMethod?.value || undefined,
+            'filters[$or][2][origin][$eq]':
+              formValues?.origin?.value || undefined,
+            'filters[$or][3][user][name][$containsi]':
+              formValues?.customerName || undefined,
+            'filters[$or][4][user][username][$containsi]':
+              formValues?.customerCpf || undefined,
+            'filters[$or][5][externalId][$eq]':
+              formValues?.transactionNumber || undefined,
+            sort: 'createdAt:desc',
+            populate: '*',
+          },
+        },
+      );
+
+      setMaximumPage(data.meta.pagination.pageCount);
+      setUserPayments(data.data);
     } catch (error) {
       handleError(error);
     } finally {
@@ -90,7 +125,10 @@ const Transactions = () => {
     }
   };
 
-  const onSubmit: SubmitHandler<IFilterForm> = form => {};
+  const onSubmit: SubmitHandler<IFilterForm> = form => {
+    setPage(1);
+    getTransactions(1, form);
+  };
 
   return (
     <Layout>
@@ -156,7 +194,13 @@ const Transactions = () => {
           </Field>
           <Field>
             <Label>CPF do cliente</Label>
-            <Input placeholder="123.456.789-00" {...register('customerCpf')} />
+            <Input
+              as={MaskedInput}
+              maskFunction={maskCPF}
+              maxLength={14}
+              placeholder="123.456.789-00"
+              {...register('customerCpf')}
+            />
           </Field>
           <Field>
             <Label>Número da transação</Label>
@@ -182,38 +226,43 @@ const Transactions = () => {
         </TableHeaderRow>
 
         <TableBody>
-          {Array.from({ length: 12 }).map((_, index) => (
-            <TableRow key={index}>
+          {userPayments.map(payment => (
+            <TableRow key={payment.id}>
               <TableData>
                 <DataText>Compra</DataText>
               </TableData>
               <TableData>
                 <DataText>
-                  {format(parseISO('2023-08-15'), 'dd/MM/yyyy')}
+                  {format(parseISO(payment.attributes.createdAt), 'dd/MM/yyyy')}
                 </DataText>
               </TableData>
               <TableData>
-                <DataText>Nome Sobrenome</DataText>
+                <DataText>
+                  {payment.attributes?.user?.data?.attributes?.name || '-'}
+                </DataText>
               </TableData>
               <TableData>
-                <DataText>Pix</DataText>
+                <DataText>
+                  {payment.attributes?.payment_type?.data?.attributes?.name ||
+                    '-'}
+                </DataText>
               </TableData>
               <TableData>
-                <DataText>12354687856418784521</DataText>
+                <DataText>{payment.attributes.ourNumber || '-'}</DataText>
               </TableData>
               <TableData>
-                <DataText>Web</DataText>
+                <DataText>{payment.attributes.origin || '-'}</DataText>
               </TableData>
               <TableData>
-                <DataText>157978</DataText>
+                <DataText>{payment.attributes.externalId || '-'}</DataText>
               </TableData>
               <TableData>
-                <DataText>184</DataText>
+                <DataText>-</DataText>
               </TableData>
               <TableData>
                 <TextButton
                   type="button"
-                  onClick={() => setSelectedTransaction({})}
+                  onClick={() => setSelectedTransactionId(payment.id)}
                 >
                   Ver mais
                 </TextButton>
@@ -224,12 +273,15 @@ const Transactions = () => {
         <SmallPagination
           currentPage={page}
           total={maximumPage}
-          handleChange={(_, newPage) => setPage(newPage)}
+          handleChange={(_, newPage) => {
+            setPage(newPage);
+            getTransactions(newPage);
+          }}
         />
-        {!!selectedTransaction && (
+        {!!selectedTransactionId && (
           <TransactionDetails
-            onClose={() => setSelectedTransaction(undefined)}
-            transaction={selectedTransaction}
+            onClose={() => setSelectedTransactionId(undefined)}
+            userPaymentId={selectedTransactionId}
           />
         )}
       </Content>
