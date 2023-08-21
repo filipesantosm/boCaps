@@ -19,7 +19,6 @@ import {
   LocalePermissionSchema,
 } from '../../validations/LocalePermissionSchema';
 import {
-  Checkbox,
   CheckboxLabel,
   Content,
   DataText,
@@ -374,11 +373,7 @@ const LocalePermissions = () => {
               </TableData>
               <TableData>
                 <DataText>
-                  <Checkbox
-                    type="checkbox"
-                    defaultChecked={localePermission.attributes.cityPermisson}
-                    disabled
-                  />
+                  {localePermission.attributes.cityPermisson ? 'Sim' : 'Não'}
                 </DataText>
               </TableData>
               <TableData>
@@ -389,11 +384,7 @@ const LocalePermissions = () => {
               </TableData>
               <TableData>
                 <DataText>
-                  <Checkbox
-                    type="checkbox"
-                    defaultChecked={localePermission.attributes.statePermission}
-                    disabled
-                  />
+                  {localePermission.attributes.statePermission ? 'Sim' : 'Não'}
                 </DataText>
               </TableData>
               <TableData>
