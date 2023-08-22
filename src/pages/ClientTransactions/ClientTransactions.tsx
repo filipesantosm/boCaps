@@ -132,7 +132,7 @@ const ClientTransactions = () => {
           <TableHeaderData>Valor</TableHeaderData>
           <TableHeaderData>Data confirmação</TableHeaderData>
           <TableHeaderData>Meio de pagamento</TableHeaderData>
-          <TableHeaderData>Nosso número</TableHeaderData>
+          <TableHeaderData>Número do boleto</TableHeaderData>
           <TableHeaderData>Canal de venda</TableHeaderData>
           <TableHeaderData>Status</TableHeaderData>
           <TableHeaderData>Ações</TableHeaderData>
