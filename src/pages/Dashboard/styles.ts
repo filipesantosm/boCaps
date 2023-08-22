@@ -145,7 +145,7 @@ export const ChartContainer = styled.div`
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
 
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   align-items: stretch;
   justify-content: space-between;
   gap: 2rem;
