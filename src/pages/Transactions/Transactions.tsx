@@ -136,7 +136,7 @@ const Transactions = () => {
         <Title>Transações</Title>
         <FilterForm onSubmit={handleSubmit(onSubmit)}>
           <Field>
-            <Label>Origem</Label>
+            <Label>Canal de venda</Label>
             <Controller
               control={control}
               name="origin"
@@ -219,7 +219,7 @@ const Transactions = () => {
           <TableHeaderData>Cliente</TableHeaderData>
           <TableHeaderData>Forma de pagamento</TableHeaderData>
           <TableHeaderData>Nosso número</TableHeaderData>
-          <TableHeaderData>Origem</TableHeaderData>
+          <TableHeaderData>Canal de venda</TableHeaderData>
           <TableHeaderData>Código EFI</TableHeaderData>
           <TableHeaderData>Sorteio</TableHeaderData>
           <TableHeaderData>Ações</TableHeaderData>

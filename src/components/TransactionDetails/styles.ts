@@ -145,3 +145,16 @@ export const BottomSectionTitle = styled.p`
   font-weight: 600;
   color: #1a1a1a;
 `;
+
+interface TitleNumberButtonProps {
+  isChecked?: boolean;
+}
+
+export const TitleNumberButton = styled.button<TitleNumberButtonProps>`
+  border: none;
+  background: transparent;
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: ${({ isChecked }) => (isChecked ? 'green' : '#1a1a1a')};
+`;

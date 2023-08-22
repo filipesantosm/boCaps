@@ -17,6 +17,7 @@ import {
   InformationText,
   ModalHeader,
   Title,
+  TitleNumberButton,
 } from './styles';
 import handleError from '../../services/handleToast';
 import api from '../../services/api';
@@ -29,6 +30,8 @@ interface Props {
 const TransactionDetails = ({ onClose, userPaymentId }: Props) => {
   const navigate = useNavigate();
   const [userPayment, setUserPayment] = useState<IUserPayment>();
+
+  const [checkedTitleIds, setCheckedTitleIds] = useState<number[]>([]);
 
   useEffect(() => {
     getUserPayment();
@@ -51,6 +54,14 @@ const TransactionDetails = ({ onClose, userPaymentId }: Props) => {
       setUserPayment(data.data);
     } catch (error) {
       handleError(error);
+    }
+  };
+
+  const handleToggleChecked = (titleId: number) => {
+    if (checkedTitleIds.includes(titleId)) {
+      setCheckedTitleIds(prev => prev.filter(id => id !== titleId));
+    } else {
+      setCheckedTitleIds(prev => [...prev, titleId]);
     }
   };
 
@@ -141,8 +152,14 @@ const TransactionDetails = ({ onClose, userPaymentId }: Props) => {
           </InformationRow>
           <BottomSection>
             <BottomSectionTitle>Títulos adquiridos</BottomSectionTitle>
-            {userPayment?.attributes.observation?.split('-').map(title => (
-              <InformationText key={title}>{title}</InformationText>
+            {userPayment?.attributes.user_titles?.data.map(title => (
+              <TitleNumberButton
+                key={title.id}
+                isChecked={checkedTitleIds.includes(title.id)}
+                // onClick={() => handleToggleChecked(title.id)}
+              >
+                {title.attributes.number}
+              </TitleNumberButton>
             ))}
           </BottomSection>
         </InformationContainer>

@@ -113,13 +113,13 @@ const NewNavBar = () => {
             <ImCogs className="icon" style={{ fontSize: '1.5rem' }} />
             <MenuText>Como funciona</MenuText>
           </StyledNavLink>
-        </MenuItem> */}
+        </MenuItem>
         <MenuItem>
           <StyledNavLink to="/edit-profile">
             <MdLockOutline className="icon" style={{ fontSize: '1.5rem' }} />
             <MenuText>Redefinir Senha</MenuText>
           </StyledNavLink>
-        </MenuItem>
+        </MenuItem> */}
       </LinksList>
 
       <HamburgerButton

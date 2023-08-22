@@ -32,6 +32,22 @@ export interface UserPaymentAttributes {
   payment_type: {
     data: IPaymentType;
   };
+  user_titles: {
+    data: UserTitle[];
+  };
+}
+
+export interface UserTitle {
+  id: number;
+  attributes: {
+    active: boolean;
+    createdAt: string;
+    dateSale: string;
+    drawId: number;
+    number: number;
+    price: number;
+    updatedAt: string;
+  };
 }
 
 export interface IPaymentType {

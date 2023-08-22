@@ -106,7 +106,7 @@ const ClientTransactions = () => {
           <TableHeaderData>Valor</TableHeaderData>
           <TableHeaderData>Data confirmação</TableHeaderData>
           <TableHeaderData>Meio de pagamento</TableHeaderData>
-          <TableHeaderData>Origem</TableHeaderData>
+          <TableHeaderData>Canal de venda</TableHeaderData>
           <TableHeaderData>Status</TableHeaderData>
           <TableHeaderData>Ações</TableHeaderData>
         </TableHeaderRow>
