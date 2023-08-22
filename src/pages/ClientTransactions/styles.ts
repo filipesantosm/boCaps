@@ -126,7 +126,80 @@ export const ClientInfoText = styled.p`
   }
 `;
 
-const tableGridSpacing = '0.75fr 0.75fr 1fr 0.5fr 1fr 0.5fr 0.5fr';
+export const FilterRow = styled.div`
+  margin-top: 1rem;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+export const FilterField = styled.div`
+  position: relative;
+
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+export const FilterLabel = styled.label`
+  font-size: 1.125rem;
+  color: #515258;
+  font-weight: 500;
+  white-space: nowrap;
+`;
+
+export const FilterInput = styled.input`
+  outline: none;
+  border: none;
+
+  width: 100%;
+  height: 2.625rem;
+  padding: 0 1rem;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  box-shadow: 0px 2px 5px rgba(175, 176, 197, 0.42);
+
+  font-weight: 400;
+  font-size: 1rem;
+  color: #898f9a;
+
+  &::placeholder {
+    color: #c6cedd;
+  }
+`;
+
+export const FilledButton = styled.button`
+  width: 100%;
+  min-height: 2.625rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 0.875rem;
+
+  background: #0054bc;
+
+  font-family: 'Hind Siliguri', sans-serif;
+
+  font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: 0.4px;
+
+  color: #ffffff;
+
+  transition: 500ms;
+
+  &:hover {
+    opacity: 0.875;
+  }
+`;
+
+const tableGridSpacing = '0.75fr 0.75fr 0.5fr 1fr 1.5fr 0.5fr 0.5fr 0.5fr';
 
 export const TableHeaderRow = styled.div`
   margin-top: 2rem;
@@ -138,7 +211,7 @@ export const TableHeaderRow = styled.div`
   grid-template-columns: ${tableGridSpacing};
   grid-column-gap: 1rem;
 
-  padding: 0.25rem;
+  padding: 0.125rem 0.25rem;
 `;
 
 export const TableHeaderData = styled.div`
@@ -190,7 +263,7 @@ export const TableBody = styled.div`
 
   padding: 0.25rem;
 
-  max-height: 35vh;
+  max-height: 30vh;
 
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -202,8 +275,22 @@ export const TableBody = styled.div`
 
   overflow: auto;
 
+  scrollbar-width: thin;
+  scrollbar-color: #d6d6d6 #f3f3f3;
+
   ::-webkit-scrollbar {
-    width: 0px;
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    width: 6px;
+    background: #f3f3f3;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    width: 6px;
+    border-radius: 6px;
+    background: #d6d6d6;
   }
 `;
 

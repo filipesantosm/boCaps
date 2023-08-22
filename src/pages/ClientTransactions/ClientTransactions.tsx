@@ -2,16 +2,18 @@
 import { format, parseISO } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import ClientPurchasesCarousel from '../../components/ClientPurchaseCarousel/ClientPurchasesCarousel';
+import GaugeChart from '../../components/GaugeChart/GaugeChart';
 import Layout from '../../components/Layout/Layout';
-import SalesGraph from '../../components/SalesGraph/SalesGraph';
+import Select from '../../components/Select/Select';
 import TransactionDetails from '../../components/TransactionDetails/TransactionDetails';
+import { useDrawOptions } from '../../hooks/useDrawOptions';
 import { IUser } from '../../interfaces/User';
 import api from '../../services/api';
 import handleError from '../../services/handleToast';
 import BRLMoneyFormater from '../../utils/formaters/BRLMoneyFormater';
 import {
   BackIcon,
-  ChartLabel,
   ChartWrapper,
   ClientInfoRow,
   ClientInfoText,
@@ -19,6 +21,11 @@ import {
   ClientInformationColumn,
   Content,
   DataText,
+  FilledButton,
+  FilterField,
+  FilterInput,
+  FilterLabel,
+  FilterRow,
   IconTag,
   TableBody,
   TableData,
@@ -29,8 +36,6 @@ import {
   Title,
   TopSection,
 } from './styles';
-import GaugeChart from '../../components/GaugeChart/GaugeChart';
-import ClientPurchasesCarousel from '../../components/ClientPurchaseCarousel/ClientPurchasesCarousel';
 
 const ClientTransactions = () => {
   const { clientId } = useParams();
@@ -59,6 +64,8 @@ const ClientTransactions = () => {
       handleError(error);
     }
   };
+
+  const { drawOptions } = useDrawOptions();
 
   return (
     <Layout>
@@ -102,16 +109,30 @@ const ClientTransactions = () => {
             <GaugeChart />
           </ChartWrapper>
           <ClientPurchasesCarousel />
-          {/* <ChartWrapper>
-            <ChartLabel>Compras por sorteio</ChartLabel>
-            <SalesGraph />
-          </ChartWrapper> */}
         </TopSection>
+
+        <FilterRow>
+          <FilterField>
+            <FilterLabel>Sorteio:</FilterLabel>
+            <Select options={drawOptions} />
+          </FilterField>
+          <FilterField>
+            <FilterLabel>Data:</FilterLabel>
+            <FilterInput type="date" />
+          </FilterField>
+          <FilterField>
+            <FilterLabel>Número do boleto:</FilterLabel>
+            <FilterInput type="text" placeholder="Insira o número do boleto" />
+          </FilterField>
+          <FilledButton>Pesquisar</FilledButton>
+        </FilterRow>
+
         <TableHeaderRow>
           <TableHeaderData>Data</TableHeaderData>
           <TableHeaderData>Valor</TableHeaderData>
           <TableHeaderData>Data confirmação</TableHeaderData>
           <TableHeaderData>Meio de pagamento</TableHeaderData>
+          <TableHeaderData>Nosso número</TableHeaderData>
           <TableHeaderData>Canal de venda</TableHeaderData>
           <TableHeaderData>Status</TableHeaderData>
           <TableHeaderData>Ações</TableHeaderData>
@@ -142,6 +163,20 @@ const ClientTransactions = () => {
               </TableData>
               <TableData>
                 <DataText>{userPayment.payment_type.name}</DataText>
+              </TableData>
+              <TableData>
+                <DataText
+                  style={{
+                    cursor: userPayment.ourNumber ? 'pointer' : 'auto',
+                  }}
+                  onClick={() => {
+                    if (userPayment.ourNumber) {
+                      navigator.clipboard.writeText(userPayment.ourNumber);
+                    }
+                  }}
+                >
+                  {userPayment.ourNumber || '-'}
+                </DataText>
               </TableData>
               <TableData>
                 <DataText>{userPayment.origin}</DataText>
