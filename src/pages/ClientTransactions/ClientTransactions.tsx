@@ -29,6 +29,8 @@ import {
   Title,
   TopSection,
 } from './styles';
+import GaugeChart from '../../components/GaugeChart/GaugeChart';
+import ClientPurchasesCarousel from '../../components/ClientPurchaseCarousel/ClientPurchasesCarousel';
 
 const ClientTransactions = () => {
   const { clientId } = useParams();
@@ -97,9 +99,13 @@ const ClientTransactions = () => {
             </ClientInfoRow>
           </ClientInformationColumn>
           <ChartWrapper>
+            <GaugeChart />
+          </ChartWrapper>
+          <ClientPurchasesCarousel />
+          {/* <ChartWrapper>
             <ChartLabel>Compras por sorteio</ChartLabel>
             <SalesGraph />
-          </ChartWrapper>
+          </ChartWrapper> */}
         </TopSection>
         <TableHeaderRow>
           <TableHeaderData>Data</TableHeaderData>

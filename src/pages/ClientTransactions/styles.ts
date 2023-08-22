@@ -52,16 +52,11 @@ export const TopSection = styled.div`
   width: 100%;
 
   display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem;
 `;
 
 export const ChartWrapper = styled.div`
-  padding-right: 4rem;
-
-  margin-left: auto;
-  height: 30vh;
-
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -195,7 +190,7 @@ export const TableBody = styled.div`
 
   padding: 0.25rem;
 
-  max-height: 40vh;
+  max-height: 35vh;
 
   padding-top: 1rem;
   padding-bottom: 1rem;
