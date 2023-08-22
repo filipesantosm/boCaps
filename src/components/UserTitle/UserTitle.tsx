@@ -4,7 +4,7 @@ import { ITitle } from '../../interfaces/Title';
 import api from '../../services/api';
 import handleError from '../../services/handleToast';
 import Loading from '../Loading/Loading';
-import { Container, NumberText, NumbersGrid } from './styles';
+import { Container, NumberText, NumbersGrid, NumbersHeader } from './styles';
 
 interface Props {
   titleNumber: number;
@@ -56,6 +56,10 @@ const UserTitle = ({ titleNumber }: Props) => {
 
   return (
     <Container>
+      <NumbersHeader>
+        <p>Número da sorte</p>
+        <p>{title?.attributes.luckyNumber}</p>
+      </NumbersHeader>
       <NumbersGrid>
         {isLoading ? (
           <Loading

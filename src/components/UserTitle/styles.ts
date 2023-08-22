@@ -9,6 +9,20 @@ export const Container = styled.div`
   margin: auto;
 `;
 
+export const NumbersHeader = styled.div`
+  border-top-right-radius: 0.875rem;
+  border-top-left-radius: 0.875rem;
+
+  background: #0054bc;
+  color: #fff;
+
+  padding: 1rem 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export const NumbersGrid = styled.div`
   width: 100%;
   max-width: 22rem;
@@ -20,7 +34,8 @@ export const NumbersGrid = styled.div`
   grid-gap: 1.5rem;
 
   padding: 1.5rem;
-  border-radius: 0.875rem;
+  border-bottom-right-radius: 0.875rem;
+  border-bottom-left-radius: 0.875rem;
   background: #fafafa;
 `;
 
