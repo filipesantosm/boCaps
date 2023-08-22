@@ -6,6 +6,9 @@ import ClientPurchasesCarousel from '../../components/ClientPurchaseCarousel/Cli
 import GaugeChart from '../../components/GaugeChart/GaugeChart';
 import Layout from '../../components/Layout/Layout';
 import Select from '../../components/Select/Select';
+import SortButton, {
+  SortDirection,
+} from '../../components/SortButton/SortButton';
 import TransactionDetails from '../../components/TransactionDetails/TransactionDetails';
 import { useDrawOptions } from '../../hooks/useDrawOptions';
 import { IUser } from '../../interfaces/User';
@@ -37,35 +40,60 @@ import {
   TopSection,
 } from './styles';
 
+type SortObject = Record<string, SortDirection>;
+
 const ClientTransactions = () => {
   const { clientId } = useParams();
   const navigate = useNavigate();
-  const [selectedTransactionId, setSelectedTransactionId] = useState<number>();
+
   const [userDetails, setUserDetails] = useState<IUser>();
+  const [selectedTransactionId, setSelectedTransactionId] = useState<number>();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [sortObject, setSortObject] = useState<SortObject>({
+    createdAt: 'desc',
+  });
 
   useEffect(() => {
     getUserDetails();
-  }, [clientId]);
+  }, [clientId, sortObject]);
 
   const getUserDetails = async () => {
     if (!clientId) {
       return;
     }
 
+    const sortParams = sortObject
+      ? Object.entries(sortObject)
+          .map(([key, value]) => (value ? `${key}:${value}` : undefined))
+          .filter(Boolean)
+      : undefined;
+
+    setIsLoading(true);
     try {
       const { data } = await api.get<IUser>(`/users/${clientId}`, {
         params: {
-          populate: 'user_payments,user_payments.payment_type',
+          'populate[user_payments][populate]': 'payment_type',
+          'populate[user_payments][sort]': sortParams,
         },
       });
 
       setUserDetails(data);
     } catch (error) {
       handleError(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const { drawOptions } = useDrawOptions();
+
+  const handleChangeSort = (key: string, dir: SortDirection) => {
+    setSortObject(prev => ({
+      ...prev,
+      [key]: dir,
+    }));
+  };
 
   return (
     <Layout>
@@ -128,12 +156,66 @@ const ClientTransactions = () => {
         </FilterRow>
 
         <TableHeaderRow>
-          <TableHeaderData>Data</TableHeaderData>
-          <TableHeaderData>Valor</TableHeaderData>
-          <TableHeaderData>Data confirmação</TableHeaderData>
-          <TableHeaderData>Meio de pagamento</TableHeaderData>
-          <TableHeaderData>Número do boleto</TableHeaderData>
-          <TableHeaderData>Canal de venda</TableHeaderData>
+          <TableHeaderData>
+            Data{' '}
+            <SortButton
+              disabled={isLoading}
+              direction={sortObject?.createdAt}
+              onChangeDirection={(dir: SortDirection) =>
+                handleChangeSort('createdAt', dir)
+              }
+            />
+          </TableHeaderData>
+          <TableHeaderData>
+            Valor{' '}
+            <SortButton
+              disabled={isLoading}
+              direction={sortObject?.value}
+              onChangeDirection={(dir: SortDirection) =>
+                handleChangeSort('value', dir)
+              }
+            />
+          </TableHeaderData>
+          <TableHeaderData>
+            Data confirmação{' '}
+            <SortButton
+              disabled={isLoading}
+              direction={sortObject?.dateCompensation}
+              onChangeDirection={(dir: SortDirection) =>
+                handleChangeSort('dateCompensation', dir)
+              }
+            />
+          </TableHeaderData>
+          <TableHeaderData>
+            Meio de pagamento{' '}
+            <SortButton
+              disabled={isLoading}
+              direction={sortObject?.['payment_type.name']}
+              onChangeDirection={(dir: SortDirection) =>
+                handleChangeSort('payment_type.name', dir)
+              }
+            />
+          </TableHeaderData>
+          <TableHeaderData>
+            Número do boleto{' '}
+            <SortButton
+              disabled={isLoading}
+              direction={sortObject?.ourNumber}
+              onChangeDirection={(dir: SortDirection) =>
+                handleChangeSort('ourNumber', dir)
+              }
+            />
+          </TableHeaderData>
+          <TableHeaderData>
+            Canal de venda{' '}
+            <SortButton
+              disabled={isLoading}
+              direction={sortObject?.origin}
+              onChangeDirection={(dir: SortDirection) =>
+                handleChangeSort('origin', dir)
+              }
+            />
+          </TableHeaderData>
           <TableHeaderData>Status</TableHeaderData>
           <TableHeaderData>Ações</TableHeaderData>
         </TableHeaderRow>

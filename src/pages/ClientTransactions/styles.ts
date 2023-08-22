@@ -127,11 +127,11 @@ export const ClientInfoText = styled.p`
 `;
 
 export const FilterRow = styled.div`
-  margin-top: 1rem;
+  margin-top: 1.25rem;
 
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 3rem;
 `;
 
 export const FilterField = styled.div`
@@ -202,7 +202,7 @@ export const FilledButton = styled.button`
 const tableGridSpacing = '0.75fr 0.75fr 0.5fr 1fr 1.5fr 0.5fr 0.5fr 0.5fr';
 
 export const TableHeaderRow = styled.div`
-  margin-top: 2rem;
+  margin-top: 1.25rem;
 
   width: 100%;
   height: fit-content;
@@ -218,6 +218,7 @@ export const TableHeaderData = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
 
   text-align: center;
   font-weight: 600;
