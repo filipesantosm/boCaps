@@ -138,12 +138,25 @@ export const ClientButton = styled.button`
 
 export const BottomSection = styled.div`
   padding: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
 `;
 
 export const BottomSectionTitle = styled.p`
   font-size: 1.25rem;
   font-weight: 600;
   color: #1a1a1a;
+`;
+
+export const TitlesList = styled.div`
+  align-items: start;
+  justify-content: start;
+
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-auto-flow: column;
+  grid-column-gap: 4rem;
 `;
 
 interface TitleNumberButtonProps {
@@ -154,7 +167,46 @@ export const TitleNumberButton = styled.button<TitleNumberButtonProps>`
   border: none;
   background: transparent;
 
+  /* font-size: 1rem;
+  font-weight: 500;
+  color: ${({ isChecked }) => (isChecked ? 'green' : '#1a1a1a')}; */
+
+  color: #0054bc;
   font-size: 1rem;
   font-weight: 500;
-  color: ${({ isChecked }) => (isChecked ? 'green' : '#1a1a1a')};
+  text-decoration: underline;
+
+  transition: filter 0.3s;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+`;
+
+export const BackButton = styled.button`
+  border: none;
+
+  height: fit-content;
+  width: fit-content;
+  padding: 0.5rem 0.75rem 0.5rem 0.25rem;
+  border-radius: 0.625rem;
+
+  background: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  color: #0054bc;
+  font-size: 1rem;
+  font-weight: 500;
+
+  transition: filter 0.3s;
+
+  svg {
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    filter: brightness(0.95);
+  }
 `;
