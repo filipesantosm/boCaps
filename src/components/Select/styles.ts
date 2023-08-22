@@ -5,7 +5,6 @@ export const Label = styled.label`
   flex-direction: column;
   width: 100%;
   position: relative;
-  gap: 5px;
   p {
     padding-left: 16px;
     font-size: 0.925rem;
@@ -15,6 +14,7 @@ export const Label = styled.label`
 export const LabelText = styled.span.attrs({ 'data-com': 'LabelText' })`
   font-size: 0.75rem;
 `;
+
 export const ErrorMessage = styled.span`
   display: grid;
   grid-template-rows: 0fr;

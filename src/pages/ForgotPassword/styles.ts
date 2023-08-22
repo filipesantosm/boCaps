@@ -48,7 +48,7 @@ export const Logo = styled.img`
 `;
 
 export const Title = styled.span`
-  font-family: 'Hindi Siliguri', sans-serif;
+  font-family: 'Hind Siliguri', sans-serif;
 
   font-weight: 600;
   font-size: 2.25rem;
@@ -59,7 +59,7 @@ export const Title = styled.span`
 `;
 
 export const Description = styled.p`
-  font-family: 'Hindi Siliguri', sans-serif;
+  font-family: 'Hind Siliguri', sans-serif;
 
   font-weight: 400;
   font-size: 1.25rem;
@@ -91,7 +91,7 @@ export const Input = styled.input<InputProps>`
 
   padding: 0 1.75rem;
 
-  font-family: 'Hindi Siliguri', sans-serif;
+  font-family: 'Hind Siliguri', sans-serif;
 
   font-weight: 400;
   font-size: 1.375rem;
@@ -101,7 +101,7 @@ export const Input = styled.input<InputProps>`
   margin-bottom: 5.125rem;
 
   &::placeholder {
-    font-family: 'Hindi Siliguri', sans-serif;
+    font-family: 'Hind Siliguri', sans-serif;
 
     font-weight: 400;
     font-size: 1.375rem;
@@ -123,7 +123,7 @@ export const SendButton = styled.button`
 
   background: #0054bc;
 
-  font-family: 'Hindi Siliguri', sans-serif;
+  font-family: 'Hind Siliguri', sans-serif;
 
   font-weight: 400;
   font-size: 1.25rem;
@@ -141,7 +141,7 @@ export const SendButton = styled.button`
 `;
 
 export const BackToLogin = styled.span`
-  font-family: 'Hindi Siliguri', sans-serif;
+  font-family: 'Hind Siliguri', sans-serif;
 
   font-weight: 600;
   font-size: 1.25rem;
