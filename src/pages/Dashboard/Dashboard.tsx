@@ -2,11 +2,13 @@ import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
 import { Controller, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../../components/Layout/Layout';
 import Select from '../../components/Select/Select';
 import { useDrawOptions } from '../../hooks/useDrawOptions';
 import {
   ChartContainer,
+  ChartInfoColumn,
   ChartTitle,
   ChartWrapper,
   ChartsSection,
@@ -19,8 +21,10 @@ import {
   FilterRow,
   FilterSection,
   Title,
+  TotalValue,
 } from './styles';
-import { data, monthOptions } from './utils';
+import { generateData, generateTitleData, monthOptions } from './utils';
+import BRLMoneyFormater from '../../utils/formaters/BRLMoneyFormater';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -38,6 +42,7 @@ interface IDashboardForm {
 }
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const { register, control } = useForm<IDashboardForm>();
 
   const { drawOptions } = useDrawOptions();
@@ -66,6 +71,7 @@ const Dashboard = () => {
                 style={{
                   width: '15%',
                 }}
+                onClick={() => navigate('/transactions')}
               >
                 Ir para transações
               </FilledButton>
@@ -135,10 +141,9 @@ const Dashboard = () => {
           </FilterSection>
           <ChartsSection>
             <ChartContainer>
-              <ChartTitle>Total de vendas</ChartTitle>
               <ChartWrapper>
                 <Pie
-                  data={data}
+                  data={generateData()}
                   options={{
                     plugins: {
                       legend: {
@@ -149,12 +154,15 @@ const Dashboard = () => {
                   }}
                 />
               </ChartWrapper>
+              <ChartInfoColumn>
+                <ChartTitle>Total de vendas</ChartTitle>
+                <TotalValue>{BRLMoneyFormater.format(10000)}</TotalValue>
+              </ChartInfoColumn>
             </ChartContainer>
             <ChartContainer>
-              <ChartTitle>Quantidade compras</ChartTitle>
               <ChartWrapper>
                 <Pie
-                  data={data}
+                  data={generateData()}
                   options={{
                     plugins: {
                       legend: {
@@ -166,12 +174,15 @@ const Dashboard = () => {
                   }}
                 />
               </ChartWrapper>
+              <ChartInfoColumn>
+                <ChartTitle>Quantidade compras</ChartTitle>
+                <TotalValue>{(1000).toLocaleString('pt-BR')}</TotalValue>
+              </ChartInfoColumn>
             </ChartContainer>
             <ChartContainer>
-              <ChartTitle>Ticket médio</ChartTitle>
               <ChartWrapper>
                 <Pie
-                  data={data}
+                  data={generateData()}
                   options={{
                     plugins: {
                       legend: {
@@ -183,12 +194,15 @@ const Dashboard = () => {
                   }}
                 />
               </ChartWrapper>
+              <ChartInfoColumn>
+                <ChartTitle>Ticket médio</ChartTitle>
+                <TotalValue>{BRLMoneyFormater.format(20)}</TotalValue>
+              </ChartInfoColumn>
             </ChartContainer>
             <ChartContainer>
-              <ChartTitle>Total de títulos</ChartTitle>
               <ChartWrapper>
                 <Pie
-                  data={data}
+                  data={generateTitleData()}
                   options={{
                     plugins: {
                       legend: {
@@ -200,12 +214,15 @@ const Dashboard = () => {
                   }}
                 />
               </ChartWrapper>
+              <ChartInfoColumn>
+                <ChartTitle>Total de títulos</ChartTitle>
+                <TotalValue>{(1000).toLocaleString('pt-BR')}</TotalValue>
+              </ChartInfoColumn>
             </ChartContainer>
             <ChartContainer>
-              <ChartTitle>Títulos por compra</ChartTitle>
               <ChartWrapper>
                 <Pie
-                  data={data}
+                  data={generateTitleData()}
                   options={{
                     plugins: {
                       legend: {
@@ -217,12 +234,15 @@ const Dashboard = () => {
                   }}
                 />
               </ChartWrapper>
+              <ChartInfoColumn>
+                <ChartTitle>Títulos por compra</ChartTitle>
+                <TotalValue>{(2).toLocaleString('pt-BR')}</TotalValue>
+              </ChartInfoColumn>
             </ChartContainer>
             <ChartContainer>
-              <ChartTitle>Ticket médio por título</ChartTitle>
               <ChartWrapper>
                 <Pie
-                  data={data}
+                  data={generateTitleData()}
                   options={{
                     plugins: {
                       legend: {
@@ -234,6 +254,10 @@ const Dashboard = () => {
                   }}
                 />
               </ChartWrapper>
+              <ChartInfoColumn>
+                <ChartTitle>Ticket médio por título</ChartTitle>
+                <TotalValue>{(10).toLocaleString('pt-BR')}</TotalValue>
+              </ChartInfoColumn>
             </ChartContainer>
           </ChartsSection>
         </Content>

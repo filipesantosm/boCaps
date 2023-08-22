@@ -112,10 +112,8 @@ export const ChartsSection = styled.section`
   overflow: auto;
 
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
-  place-items: center;
-  justify-content: center;
-  grid-column-gap: 2rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 3rem;
   grid-row-gap: 2rem;
 
   scrollbar-width: thin;
@@ -138,7 +136,7 @@ export const ChartsSection = styled.section`
 `;
 
 export const ChartContainer = styled.div`
-  padding: 1rem 3rem 2rem;
+  padding: 1.5rem 3rem 1rem;
 
   background: #fff;
 
@@ -147,14 +145,32 @@ export const ChartContainer = styled.div`
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
 
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 2rem;
 `;
 
 export const ChartWrapper = styled.div`
   position: relative;
 
   width: 11vw;
+
+  margin: auto 0;
+`;
+
+export const ChartInfoColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const TotalValue = styled.p`
+  margin-bottom: auto;
+  font-size: 1.875rem;
+  font-weight: 600;
+  color: #1a1a1a;
 `;
 
 export const CenterText = styled.p`
@@ -171,8 +187,9 @@ export const CenterText = styled.p`
 `;
 
 export const ChartTitle = styled.p`
-  margin-bottom: 1rem;
+  margin-bottom: auto;
 
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
+  text-align: center;
 `;
