@@ -8,6 +8,7 @@ import { EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { addWeeks, format } from 'date-fns';
+import { useState } from 'react';
 import {
   CarouselTitle,
   Container,
@@ -15,8 +16,11 @@ import {
   SlideRowText,
   SlideTitle,
 } from './styles';
+import UserTitleModal from '../UserTitleModal/UserTitleModal';
 
 const ClientPurchasesCarousel = () => {
+  const [selectedTitleNumber, setSelectedTitleNumber] = useState('');
+
   return (
     <Container>
       <CarouselTitle>Compras por sorteio</CarouselTitle>
@@ -53,24 +57,58 @@ const ClientPurchasesCarousel = () => {
             </SlideRow>
 
             <SlideRow>
-              <SlideRowText>12345</SlideRowText>
+              <SlideRowText
+                style={{
+                  cursor: 'pointer',
+                }}
+                onClick={() => setSelectedTitleNumber('12345')}
+              >
+                12345
+              </SlideRowText>
               <SlideRowText>9876543210</SlideRowText>
             </SlideRow>
             <SlideRow>
-              <SlideRowText>12345</SlideRowText>
+              <SlideRowText
+                style={{
+                  cursor: 'pointer',
+                }}
+                onClick={() => setSelectedTitleNumber('12345')}
+              >
+                12345
+              </SlideRowText>
               <SlideRowText>9876543210</SlideRowText>
             </SlideRow>
             <SlideRow>
-              <SlideRowText>12345</SlideRowText>
+              <SlideRowText
+                style={{
+                  cursor: 'pointer',
+                }}
+                onClick={() => setSelectedTitleNumber('12345')}
+              >
+                12345
+              </SlideRowText>
               <SlideRowText>9876543210</SlideRowText>
             </SlideRow>
             <SlideRow>
-              <SlideRowText>12345</SlideRowText>
+              <SlideRowText
+                style={{
+                  cursor: 'pointer',
+                }}
+                onClick={() => setSelectedTitleNumber('12345')}
+              >
+                12345
+              </SlideRowText>
               <SlideRowText>9876543210</SlideRowText>
             </SlideRow>
           </SwiperSlide>
         ))}
       </Swiper>
+      {selectedTitleNumber && (
+        <UserTitleModal
+          onClose={() => setSelectedTitleNumber('')}
+          titleNumber={selectedTitleNumber}
+        />
+      )}
     </Container>
   );
 };
