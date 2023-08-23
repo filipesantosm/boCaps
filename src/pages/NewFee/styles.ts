@@ -72,7 +72,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const BackDivider = styled.div`
@@ -248,7 +248,7 @@ export const RegisterButton = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #0054bc;
+  background: ${({ theme }) => theme.colors.primary};
 
   font-weight: 400;
   font-size: 1rem;
@@ -274,7 +274,7 @@ export const CancelButton = styled.button`
   width: 10.5rem;
   height: 3.75rem;
 
-  border: 1px solid #0054bc;
+  border: 1px solid ${({ theme }) => theme.colors.primary};
   border-radius: 0.875rem;
 
   background: #fff;
@@ -282,7 +282,7 @@ export const CancelButton = styled.button`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   transition: 500ms;
 
@@ -354,7 +354,7 @@ export const RadioBox = styled.input`
     background: #c6cedd;
   }
   &:checked::before {
-    background: #0054bc;
+    background: ${({ theme }) => theme.colors.primary};
   }
 `;
 
@@ -372,7 +372,8 @@ export const RadioboxLabel = styled.label<LabelProps>`
   font-weight: 400;
   font-size: 1rem;
 
-  color: ${props => (props.isSelected ? '#0054BC' : '#515258')};
+  color: ${props =>
+    props.isSelected ? '${({ theme }) => theme.colors.primary}' : '#515258'};
 
   &:hover {
     cursor: pointer;

@@ -30,7 +30,7 @@ export const Title = styled.p`
   font-weight: 600;
   font-size: 1.75rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   margin-bottom: 2rem;
 `;

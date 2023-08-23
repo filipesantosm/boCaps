@@ -50,7 +50,7 @@ export const CloseIcon = styled(RiCloseFill)`
 export const SuccessIcon = styled(FaCheckCircle)`
   font-size: 4.25rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const Title = styled.span`
@@ -59,7 +59,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 2rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   margin-bottom: 1.5rem;
 `;

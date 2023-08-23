@@ -20,7 +20,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   margin-bottom: 2rem;
 `;
@@ -49,7 +49,7 @@ export const ClientHeaderDivider = styled.div`
   font-weight: 600;
   font-size: 1.125rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   &:nth-of-type(1) {
     padding-left: 1rem;
@@ -89,7 +89,7 @@ export const Button = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #0054bc;
+  background: ${({ theme }) => theme.colors.primary};
 
   font-weight: 400;
   font-size: 0.875rem;
@@ -224,7 +224,7 @@ export const CompText = styled.div`
 export const VisualizeIcon = styled(AiOutlineEye)`
   font-size: 1.75rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   transition: 500ms;
 

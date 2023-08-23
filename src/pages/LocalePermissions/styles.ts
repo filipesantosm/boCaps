@@ -11,7 +11,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   margin-bottom: 1rem;
 `;
@@ -42,7 +42,7 @@ export const TableHeaderData = styled.div`
 
   white-space: normal;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   &:nth-of-type(1) {
     padding-left: 1rem;
@@ -54,7 +54,7 @@ export const EmptyText = styled.p`
 
   text-align: center;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
   font-size: 1.5rem;
   font-weight: 600;
 `;
@@ -65,7 +65,7 @@ export const TextButton = styled.button`
 
   margin: auto;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
   font-size: 1rem;
   font-weight: 500;
 
@@ -153,7 +153,7 @@ export const IconButton = styled.button`
 
   font-size: 1.75rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   transition: 500ms;
 

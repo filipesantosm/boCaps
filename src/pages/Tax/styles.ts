@@ -60,7 +60,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const TableHeader = styled.div`
@@ -81,7 +81,7 @@ export const TableHeaderDivider = styled.div`
   font-weight: 600;
   font-size: 1.75rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   &:nth-of-type(1) {
     padding-left: 2.5rem;

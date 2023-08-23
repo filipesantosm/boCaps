@@ -19,7 +19,7 @@ export const Title = styled.h1`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const FilterSection = styled.section`
@@ -87,7 +87,7 @@ export const FilledButton = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #0054bc;
+  background: ${({ theme }) => theme.colors.primary};
 
   font-family: 'Hind Siliguri', sans-serif;
 

@@ -30,7 +30,7 @@ export const Title = styled.p`
   font-weight: 600;
   font-size: 1.75rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   margin-bottom: 2rem;
 `;
@@ -118,7 +118,7 @@ export const FilledButton = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #0054bc;
+  background: ${({ theme }) => theme.colors.primary};
 
   font-family: 'Hind Siliguri', sans-serif;
 
@@ -138,6 +138,6 @@ export const FilledButton = styled.button`
 export const OutlinedButton = styled(FilledButton)`
   background: transparent;
 
-  color: #0054bc;
-  border: 1px solid #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
 `;

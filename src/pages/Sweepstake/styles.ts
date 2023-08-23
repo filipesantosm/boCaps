@@ -9,7 +9,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
   line-height: 110.7%;
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const Content = styled.form`

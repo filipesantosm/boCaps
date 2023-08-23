@@ -70,7 +70,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const FormDivider = styled.div`
@@ -184,7 +184,7 @@ export const SaveButton = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #0054bc;
+  background: ${({ theme }) => theme.colors.primary};
 
   font-weight: 600;
   font-size: 1rem;

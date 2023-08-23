@@ -43,7 +43,7 @@ export const Title = styled.div`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   margin-bottom: 1rem;
 `;
@@ -91,7 +91,7 @@ export const ClientInfoTitle = styled.p`
 
   font-size: 1.125rem;
   font-weight: 600;
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const ClientInfoText = styled.p`
@@ -182,7 +182,7 @@ export const FilledButton = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #0054bc;
+  background: ${({ theme }) => theme.colors.primary};
 
   font-family: 'Hind Siliguri', sans-serif;
 
@@ -226,7 +226,7 @@ export const TableHeaderData = styled.div`
 
   white-space: normal;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   &:nth-of-type(1) {
     padding-left: 1rem;
@@ -238,7 +238,7 @@ export const EmptyText = styled.p`
 
   text-align: center;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
   font-size: 1.5rem;
   font-weight: 600;
 `;
@@ -249,7 +249,7 @@ export const TextButton = styled.button`
 
   margin: auto;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
   font-size: 1rem;
   font-weight: 500;
 

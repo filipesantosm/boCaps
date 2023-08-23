@@ -30,7 +30,7 @@ export const HamburgerButton = styled.button`
   transition: color 0.3s;
 
   &:hover {
-    color: #0054bc;
+    color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
@@ -95,12 +95,12 @@ export const MenuItem = styled.div`
       top: 0;
       width: 4px;
       height: 100%;
-      background: #0054bc;
+      background: ${({ theme }) => theme.colors.primary};
       border-radius: 2rem;
     }
   }
   .active .icon {
-    color: #0054bc;
+    color: ${({ theme }) => theme.colors.primary};
   }
 
   &:last-of-type {
@@ -122,6 +122,6 @@ export const StyledNavLink = styled(NavLink)`
   padding-left: 1.125rem;
 
   &.active {
-    color: #0054bc;
+    color: ${({ theme }) => theme.colors.primary};
   }
 `;

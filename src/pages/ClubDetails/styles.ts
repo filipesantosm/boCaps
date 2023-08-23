@@ -76,7 +76,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const Subtitle = styled.span`
@@ -168,7 +168,7 @@ export const ColumnTitle = styled.span`
   font-weight: 600;
   font-size: 1.25rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   margin-bottom: 1.75rem;
 `;
@@ -236,7 +236,7 @@ export const HourTitle = styled.span`
   font-weight: 600;
   font-size: 1.25rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   margin-left: 2.5rem;
   margin-bottom: 1.75rem;
@@ -326,7 +326,7 @@ export const RadioBox = styled.input`
     background: #c6cedd;
   }
   &:checked::before {
-    background: #0054bc;
+    background: ${({ theme }) => theme.colors.primary};
   }
 `;
 

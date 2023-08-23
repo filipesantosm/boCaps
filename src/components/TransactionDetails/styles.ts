@@ -53,7 +53,7 @@ export const Title = styled.p`
   font-weight: 600;
   font-size: 1.75rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   margin-bottom: 2rem;
 `;
@@ -120,7 +120,7 @@ export const ClientButton = styled.button`
   align-items: center;
   gap: 0.5rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
   font-size: 1rem;
   font-weight: 500;
   text-decoration: underline;
@@ -171,7 +171,7 @@ export const TitleNumberButton = styled.button<TitleNumberButtonProps>`
   font-weight: 500;
   color: ${({ isChecked }) => (isChecked ? 'green' : '#1a1a1a')}; */
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
   font-size: 1rem;
   font-weight: 500;
   text-decoration: underline;
@@ -196,7 +196,7 @@ export const BackButton = styled.button`
   align-items: center;
   gap: 0.5rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
   font-size: 1rem;
   font-weight: 500;
 

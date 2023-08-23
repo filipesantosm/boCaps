@@ -57,7 +57,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const ManageButton = styled.button`
@@ -104,7 +104,7 @@ export const TableHeaderTitle = styled.span`
   font-weight: 600;
   font-size: 1.75rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const SearchDivider = styled.div`

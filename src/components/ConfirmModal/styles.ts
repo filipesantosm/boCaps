@@ -80,7 +80,7 @@ export const ConfirmButton = styled.button`
 
   font-weight: 600;
   font-size: 1rem;
-  color: #fafafa;
+  color: ${({ theme }) => theme.colors.grayfa};
   transition: 500ms;
   &:hover {
     opacity: 0.75;

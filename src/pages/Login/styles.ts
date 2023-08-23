@@ -182,7 +182,7 @@ export const LoginButton = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #0054bc;
+  background: ${({ theme }) => theme.colors.primary};
 
   font-family: 'Hind Siliguri', sans-serif;
 

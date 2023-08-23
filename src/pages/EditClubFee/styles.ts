@@ -72,7 +72,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const BackDivider = styled.div`
@@ -255,7 +255,7 @@ export const DeleteImageTag = styled.div`
 
   border-radius: 50%;
 
-  background: #0054bc;
+  background: ${({ theme }) => theme.colors.primary};
 
   color: #fff;
 
@@ -297,7 +297,7 @@ export const SaveButton = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #0054bc;
+  background: ${({ theme }) => theme.colors.primary};
 
   font-weight: 400;
   font-size: 1rem;
@@ -403,7 +403,7 @@ export const RadioBox = styled.input`
     background: #c6cedd;
   }
   &:checked::before {
-    background: #0054bc;
+    background: ${({ theme }) => theme.colors.primary};
   }
 `;
 

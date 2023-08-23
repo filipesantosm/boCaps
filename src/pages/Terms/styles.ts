@@ -57,7 +57,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
   line-height: 110.7%;
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const TextArea = styled.textarea`
@@ -97,14 +97,14 @@ export const EditButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 1.875rem;
-  background: #0054bc;
+  background: ${({ theme }) => theme.colors.primary};
   box-shadow: -3px 7px 13px #f1f7ff;
   border: none;
   border-radius: 0.875rem;
 
   font-weight: 600;
   font-size: 1rem;
-  color: #fafafa;
+  color: ${({ theme }) => theme.colors.grayfa};
   transition: 500ms;
   &:hover {
     opacity: 0.75;
@@ -128,13 +128,13 @@ export const CancelButton = styled.button`
   align-items: center;
   justify-content: center;
   background: transparent;
-  border: 1px solid #0054bc;
+  border: 1px solid ${({ theme }) => theme.colors.primary};
   border-radius: 0.75rem;
 
   font-weight: 600;
   font-size: 1rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   transition: 500ms;
   &:hover {
