@@ -16,6 +16,7 @@ const Select = <OptionType, T extends boolean = false>({
   label,
   placeholder,
   error,
+  isMulti,
   ...rest
 }: Props<OptionType, T>) => {
   return (
@@ -23,13 +24,14 @@ const Select = <OptionType, T extends boolean = false>({
       {label && <LabelText>{label}</LabelText>}
       <ReactSelect
         placeholder={placeholder || 'Selecione...'}
+        isMulti={isMulti}
         {...rest}
         styles={{
           control: prev => ({
             ...prev,
             borderRadius: '0.75rem',
             border: error ? '1px solid #BE0F0F' : 'none',
-            height: '2.625rem',
+            height: isMulti ? undefined : '2.625rem',
             minHeight: '2.625rem',
             width: '100%',
             outline: 'none',
@@ -52,17 +54,17 @@ const Select = <OptionType, T extends boolean = false>({
             width: '100%',
             outline: 'none',
             minHeight: '2.625rem',
-            maxHeight: '2.625rem',
+            maxHeight: isMulti ? undefined : '2.625rem',
           }),
           valueContainer: prev => ({
             ...prev,
             minHeight: '2.625rem',
-            maxHeight: '2.625rem',
+            maxHeight: isMulti ? undefined : '2.625rem',
           }),
           indicatorsContainer: prev => ({
             ...prev,
             minHeight: '2.625rem',
-            maxHeight: '2.625rem',
+            maxHeight: isMulti ? undefined : '2.625rem',
           }),
           menu: prev => ({
             ...prev,

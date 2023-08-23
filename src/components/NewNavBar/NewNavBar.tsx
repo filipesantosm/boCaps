@@ -8,6 +8,7 @@ import {
   MdLockOutline,
   MdOutlineCake,
   MdOutlineDiscount,
+  MdOutlineWorkspacePremium,
 } from 'react-icons/md';
 import { TbClipboardText } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
@@ -82,6 +83,15 @@ const NewNavBar = () => {
           <StyledNavLink to="/locale-permissions">
             <FiMapPin className="icon" style={{ fontSize: '1.5rem' }} />
             <MenuText>Locais permitidos</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/scores">
+            <MdOutlineWorkspacePremium
+              className="icon"
+              style={{ fontSize: '1.5rem' }}
+            />
+            <MenuText>Scores</MenuText>
           </StyledNavLink>
         </MenuItem>
         <MenuItem>

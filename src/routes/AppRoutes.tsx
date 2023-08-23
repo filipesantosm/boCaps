@@ -22,6 +22,7 @@ import Transactions from '../pages/Transactions/Transactions';
 import Users from '../pages/Users/Users';
 import LocalePermissions from '../pages/LocalePermissions/LocalePermissions';
 import PrivateRoute from './PrivateRoute';
+import Scores from '../pages/Scores/Scores';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -57,6 +58,8 @@ const AppRoutes = () => {
           <Route path="/how-it-works" element={<HowItWorks />} />
 
           <Route path="/billets" element={<Billets />} />
+
+          <Route path="/scores" element={<Scores />} />
 
           <Route path="/transactions" element={<Transactions />} />
           <Route
