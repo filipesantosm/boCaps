@@ -16,7 +16,7 @@ export const Title = styled.span`
   margin-bottom: 1rem;
 `;
 
-const tableGridSpacing = '0.75fr 0.75fr 1fr 0.5fr 1fr 0.5fr 1fr 0.25fr';
+const tableGridSpacing = '0.875fr 0.75fr 0.75fr 0.1fr';
 
 export const TableHeaderRow = styled.div`
   margin-top: 2rem;

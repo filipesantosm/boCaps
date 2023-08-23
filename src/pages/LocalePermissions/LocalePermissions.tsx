@@ -39,7 +39,9 @@ const LocalePermissions = () => {
         '/locale-permissions',
         {
           params: {
-            sort: 'cityName:asc',
+            /* 'sort[0]': 'cityPermisson:desc',
+            'sort[1]': 'statePermission:desc',
+            'sort[2]': 'cep:asc', */
             'pagination[page]': page,
             'pagination[pageSize]': 100,
           },
@@ -69,6 +71,42 @@ const LocalePermissions = () => {
     }
   };
 
+  const renderPermissionLocale = (permission: ILocalePermission) => {
+    if (permission.attributes.statePermission) {
+      return permission.attributes.stateName;
+    }
+
+    if (permission.attributes.cityPermisson) {
+      return `${permission.attributes.cityName} - ${permission.attributes.stateName}`;
+    }
+
+    return permission.attributes.cep;
+  };
+
+  const renderPermissionIbgeCode = (permission: ILocalePermission) => {
+    if (permission.attributes.statePermission) {
+      return permission.attributes.stateIBGECod;
+    }
+
+    if (permission.attributes.cityPermisson) {
+      return permission.attributes.cityIBGECod;
+    }
+
+    return '-';
+  };
+
+  const renderPermissionType = (permission: ILocalePermission) => {
+    if (permission.attributes.statePermission) {
+      return 'Estado';
+    }
+
+    if (permission.attributes.cityPermisson) {
+      return 'Cidade';
+    }
+
+    return 'CEP';
+  };
+
   return (
     <Layout>
       <Content>
@@ -77,13 +115,9 @@ const LocalePermissions = () => {
         <LocalePermissionForm onSuccess={getLocalePermissions} />
 
         <TableHeaderRow>
-          <TableHeaderData>CEP</TableHeaderData>
-          <TableHeaderData>Cidade</TableHeaderData>
-          <TableHeaderData>Código Cidade</TableHeaderData>
-          <TableHeaderData>Permitir Cidade</TableHeaderData>
-          <TableHeaderData>Estado</TableHeaderData>
-          <TableHeaderData>Código Estado</TableHeaderData>
-          <TableHeaderData>Permitir Estado</TableHeaderData>
+          <TableHeaderData>Tipo</TableHeaderData>
+          <TableHeaderData>Local</TableHeaderData>
+          <TableHeaderData>Código IBGE</TableHeaderData>
           <TableHeaderData />
         </TableHeaderRow>
 
@@ -91,28 +125,14 @@ const LocalePermissions = () => {
           {localePermissions.map(localePermission => (
             <TableRow key={localePermission.id}>
               <TableData>
-                <DataText>{localePermission.attributes.cep}</DataText>
+                <DataText>{renderPermissionType(localePermission)}</DataText>
               </TableData>
               <TableData>
-                <DataText>{localePermission.attributes.cityName}</DataText>
-              </TableData>
-              <TableData>
-                <DataText>{localePermission.attributes.cityIBGECod}</DataText>
+                <DataText>{renderPermissionLocale(localePermission)}</DataText>
               </TableData>
               <TableData>
                 <DataText>
-                  {localePermission.attributes.cityPermisson ? 'Sim' : 'Não'}
-                </DataText>
-              </TableData>
-              <TableData>
-                <DataText>{localePermission.attributes.stateName}</DataText>
-              </TableData>
-              <TableData>
-                <DataText>{localePermission.attributes.stateIBGECod}</DataText>
-              </TableData>
-              <TableData>
-                <DataText>
-                  {localePermission.attributes.statePermission ? 'Sim' : 'Não'}
+                  {renderPermissionIbgeCode(localePermission)}
                 </DataText>
               </TableData>
               <TableData>
@@ -128,6 +148,7 @@ const LocalePermissions = () => {
             </TableRow>
           ))}
         </TableBody>
+
         <SmallPagination
           currentPage={page}
           total={maximumPage}
