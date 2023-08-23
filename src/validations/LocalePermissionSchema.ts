@@ -17,6 +17,6 @@ export const LocalePermissionSchema = yup.object({
   stateIBGECod: yup.string().required('Código do estado obrigatório'),
   cityName: yup.string().required('Nome da cidade obrigatório'),
   stateName: yup.string().required('Nome do estado obrigatório'),
-  cityPermisson: yup.mixed().required('Selecione uma opção'),
-  statePermission: yup.mixed().required('Selecione uma opção'),
+  cityPermisson: yup.boolean().required('Selecione uma opção'),
+  statePermission: yup.boolean().required('Selecione uma opção'),
 });

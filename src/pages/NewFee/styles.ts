@@ -373,7 +373,7 @@ export const RadioboxLabel = styled.label<LabelProps>`
   font-size: 1rem;
 
   color: ${props =>
-    props.isSelected ? '${({ theme }) => theme.colors.primary}' : '#515258'};
+    props.isSelected ? props.theme.colors.primary : '#515258'};
 
   &:hover {
     cursor: pointer;

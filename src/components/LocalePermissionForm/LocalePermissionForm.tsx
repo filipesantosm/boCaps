@@ -11,7 +11,6 @@ import {
 } from '../../validations/LocalePermissionSchema';
 import Loading from '../Loading/Loading';
 import MaskedInput from '../MaskedInput/MaskedInput';
-import Select from '../Select/Select';
 import {
   ErrorMessage,
   Field,
@@ -20,18 +19,9 @@ import {
   Input,
   Label,
   SelectLabel,
+  Toggle,
+  ToggleLabel,
 } from './styles';
-
-const allowOptions = [
-  {
-    label: 'Sim',
-    value: true,
-  },
-  {
-    label: 'Não',
-    value: false,
-  },
-];
 
 interface Props {
   onSuccess: () => void;
@@ -88,8 +78,8 @@ const LocalePermissionForm = ({ onSuccess }: Props) => {
           cityName: data.localidade,
           cityIBGECod: data.ibge?.toString(),
           stateIBGECod: data.ibge?.toString()?.substring(0, 2),
-          cityPermisson: allowOptions[1],
-          statePermission: allowOptions[1],
+          cityPermisson: false,
+          statePermission: false,
         });
         setIsCepValid(true);
       }
@@ -115,8 +105,8 @@ const LocalePermissionForm = ({ onSuccess }: Props) => {
           cityName: form.cityName,
           stateName: form.stateName,
           stateIBGECod: Number(form.stateIBGECod),
-          cityPermisson: !!form.cityPermisson?.value,
-          statePermission: !!form.statePermission?.value,
+          cityPermisson: !!form.cityPermisson,
+          statePermission: !!form.statePermission,
           active: true,
         },
       };
@@ -129,8 +119,8 @@ const LocalePermissionForm = ({ onSuccess }: Props) => {
         stateIBGECod: '',
         stateName: '',
         cep: '',
-        statePermission: allowOptions[1],
-        cityPermisson: allowOptions[1],
+        statePermission: false,
+        cityPermisson: false,
       });
       setIsCepValid(false);
       handleSuccess('Local adicionado com sucesso!');
@@ -165,8 +155,8 @@ const LocalePermissionForm = ({ onSuccess }: Props) => {
                   cityName: '',
                   stateIBGECod: '',
                   stateName: '',
-                  cityPermisson: allowOptions[1],
-                  statePermission: allowOptions[1],
+                  cityPermisson: false,
+                  statePermission: false,
                 });
                 setIsCepValid(false);
               }
@@ -214,24 +204,16 @@ const LocalePermissionForm = ({ onSuccess }: Props) => {
         <Controller
           control={control}
           name="cityPermisson"
-          defaultValue={allowOptions[1]}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <>
-              <Select
-                options={allowOptions}
-                onChange={onChange}
-                value={value}
+          defaultValue={false}
+          render={({ field: { onChange, value } }) => (
+            <ToggleLabel isActive={value}>
+              <Toggle
+                type="checkbox"
+                checked={value}
+                onChange={e => onChange(e.target.checked)}
               />
-              {error?.message && (
-                <ErrorMessage
-                  style={{
-                    left: '55%',
-                  }}
-                >
-                  {error.message}
-                </ErrorMessage>
-              )}
-            </>
+              {/* value ? 'Sim' : 'Não' */}
+            </ToggleLabel>
           )}
         />
       </Field>
@@ -254,24 +236,16 @@ const LocalePermissionForm = ({ onSuccess }: Props) => {
         <Controller
           control={control}
           name="statePermission"
-          defaultValue={allowOptions[1]}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <>
-              <Select
-                options={allowOptions}
-                onChange={onChange}
-                value={value}
+          defaultValue={false}
+          render={({ field: { onChange, value } }) => (
+            <ToggleLabel isActive={value}>
+              <Toggle
+                type="checkbox"
+                checked={value}
+                onChange={e => onChange(e.target.checked)}
               />
-              {error?.message && (
-                <ErrorMessage
-                  style={{
-                    left: '55%',
-                  }}
-                >
-                  {error.message}
-                </ErrorMessage>
-              )}
-            </>
+              {/* value ? 'Sim' : 'Não' */}
+            </ToggleLabel>
           )}
         />
       </Field>

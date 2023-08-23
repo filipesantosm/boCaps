@@ -116,3 +116,58 @@ export const FilledButton = styled.button`
     opacity: 0.875;
   }
 `;
+
+interface LabelProps {
+  isActive: boolean;
+}
+
+export const ToggleLabel = styled.label<LabelProps>`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  font-weight: 500;
+  color: ${({ isActive, theme }) =>
+    isActive ? theme.colors.primary : theme.colors.grayb9};
+`;
+
+export const Toggle = styled.input`
+  appearance: none;
+  width: 2.375rem;
+  height: 1.375rem;
+  background: #cfcfcf;
+  border-radius: 2rem;
+
+  cursor: pointer;
+
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.16);
+
+  &:after {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    margin: 3px;
+
+    display: inline-block;
+
+    margin-left: 0.25rem;
+
+    border-radius: 50%;
+
+    background-color: #fafafa;
+    border: none;
+
+    transition: transform 0.2s ease;
+  }
+
+  &:checked {
+    background-color: ${({ theme }) => theme.colors.primary};
+
+    &:after {
+      width: 1rem;
+      height: 1rem;
+      background-color: #fafafa;
+      transform: translateX(95%);
+    }
+  }
+`;
