@@ -228,7 +228,7 @@ export const ButtonsContainer = styled.div`
   margin: auto;
 
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
 `;
 
 export const IconButton = styled.button`

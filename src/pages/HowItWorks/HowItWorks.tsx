@@ -25,6 +25,7 @@ import {
   TableRow,
   Title,
 } from './styles';
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 
 const HowItWorks = () => {
   const [search, setSearch] = useState('');
@@ -79,6 +80,8 @@ const HowItWorks = () => {
 
     try {
       await api.delete(`/term-details/${idToDelete}`);
+
+      getTermDetails();
       handleSuccess('Item excluído com sucesso!');
       setIdToDelete(0);
     } catch (error) {
@@ -106,7 +109,6 @@ const HowItWorks = () => {
               type="text"
               id="search"
               name="search"
-              required
               placeholder="Buscar"
               value={search}
               onChange={e => setSearch(e.target.value)}
@@ -140,18 +142,19 @@ const HowItWorks = () => {
                       setSelectedTermDetail(termDetail);
                       setShowFormModal(true);
                     }}
+                    title="Editar"
                   >
                     <FiEdit3 />
                   </IconButton>
-                  {/* <IconButton
+                  <IconButton
                     type="button"
                     onClick={() => {
-                      setSelectedTermDetail(termDetail);
-                      setShowFormModal(true);
+                      handleDeleteTermDetail(termDetail.id);
                     }}
+                    title="Excluir"
                   >
                     <FiTrash2 />
-                  </IconButton> */}
+                  </IconButton>
                 </ButtonsContainer>
               </TableData>
             </TableRow>
@@ -174,6 +177,13 @@ const HowItWorks = () => {
               getTermDetails();
             }}
             initialTermDetails={selectedTermDetail}
+          />
+        )}
+        {!!idToDelete && (
+          <ConfirmModal
+            message="Tem certeza que deseja excluir o item?"
+            onClose={() => setIdToDelete(0)}
+            onConfirm={confirmDeleteTermDetail}
           />
         )}
       </Content>

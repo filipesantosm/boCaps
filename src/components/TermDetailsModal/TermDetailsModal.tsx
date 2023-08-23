@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { img_placeholderImg } from '../../assets';
+import PlaceholderImage from '../../assets/img/placeholder-image.jpg';
 import { ITermDetails } from '../../interfaces/Terms';
 import api from '../../services/api';
 import { uploadFile } from '../../services/files';
@@ -86,6 +86,9 @@ const TermDetailsModal = ({
       } else {
         await api.post('/term-details', payload);
       }
+      setImage(undefined);
+      reset();
+      onSuccess();
     } catch (error) {
       handleError(error);
     } finally {
@@ -97,7 +100,7 @@ const TermDetailsModal = ({
     ? URL.createObjectURL(image)
     : imageUrl(
         initialTermDetails?.attributes?.image?.data?.[0]?.attributes?.url,
-      ) || img_placeholderImg;
+      ) || PlaceholderImage;
 
   return (
     <Container>
@@ -109,8 +112,8 @@ const TermDetailsModal = ({
 
           <FormRow>
             <Field>
-              <Label>Nome</Label>
-              <Input placeholder="Insira o nome" {...register('title')} />
+              <Label>Título</Label>
+              <Input placeholder="Insira o título" {...register('title')} />
               {errors.title?.message && (
                 <ErrorMessage>{errors.title.message}</ErrorMessage>
               )}
