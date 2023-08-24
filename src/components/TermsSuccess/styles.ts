@@ -58,5 +58,5 @@ export const Description = styled.p`
   font-size: 1.25rem;
   line-height: 110.7%;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 `;

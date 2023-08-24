@@ -154,7 +154,7 @@ export const TitleDivider = styled.div`
 export const TitleIcon = styled(MdOutlineCake)`
   font-size: 1.875rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 `;
 
 export const Title = styled.span`
@@ -376,7 +376,7 @@ export const SearchIcon = styled(BiSearch)`
   align-self: center;
   left: 1rem;
 
-  color: #c6cedd;
+  color: ${({ theme }) => theme.colors.grayc6};
 
   font-size: 1.5rem;
 `;
@@ -441,7 +441,7 @@ export const CompDivider = styled.div`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -470,7 +470,7 @@ export const ClientCompDivider = styled.div`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -507,7 +507,7 @@ export const VisualizeIcon = styled(AiOutlineEye)`
 export const DeleteIcon = styled(FiTrash)`
   font-size: 1.5rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 
   transition: 500ms;
 
@@ -550,7 +550,7 @@ export const BirthdayText = styled.div`
 
   padding-bottom: 0.625rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 
   border-bottom: 1px solid #e4e7f9;
 

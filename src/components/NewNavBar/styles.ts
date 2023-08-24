@@ -25,7 +25,7 @@ export const HamburgerButton = styled.button`
   align-items: center;
   justify-content: flex-start;
 
-  color: #c6cedd;
+  color: ${({ theme }) => theme.colors.grayc6};
 
   transition: color 0.3s;
 
@@ -113,7 +113,7 @@ export const MenuItem = styled.div`
 `;
 
 export const StyledNavLink = styled(NavLink)`
-  color: #c6cedd;
+  color: ${({ theme }) => theme.colors.grayc6};
   text-decoration: none;
 
   display: flex;

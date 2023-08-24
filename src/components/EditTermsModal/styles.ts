@@ -29,7 +29,7 @@ export const Content = styled.div`
 
 export const ErrorIcon = styled(MdErrorOutline)`
   font-size: 4rem;
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
   margin-bottom: 1.25rem;
 `;
 
@@ -37,9 +37,9 @@ export const Description = styled.p`
   font-weight: 500;
   font-size: 1.5rem;
   line-height: 110.7%;
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
   span {
-    color: #515258;
+    color: ${({ theme }) => theme.colors.gray51};
   }
 `;
 
@@ -78,7 +78,7 @@ export const DeleteButton = styled.button`
   justify-content: center;
   width: 12.125rem;
   height: 3.125rem;
-  background: #515258;
+  background: ${({ theme }) => theme.colors.gray51};
   box-shadow: -3px 7px 13px #f1f7ff;
   border: none;
   border-radius: 0.875rem;

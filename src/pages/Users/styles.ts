@@ -147,7 +147,7 @@ export const SearchIcon = styled(BiSearch)`
   align-self: center;
   left: 1rem;
 
-  color: #c6cedd;
+  color: ${({ theme }) => theme.colors.grayc6};
 
   font-size: 1.5rem;
 `;
@@ -199,7 +199,7 @@ export const ClientCompDivider = styled.div`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 
   text-overflow: ellipsis;
   white-space: nowrap;

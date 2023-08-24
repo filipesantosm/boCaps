@@ -116,10 +116,10 @@ export const ClientInfoText = styled.p`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #898f9a;
+  color: ${({ theme }) => theme.colors.gray89};
 
   &::placeholder {
-    color: #c6cedd;
+    color: ${({ theme }) => theme.colors.grayc6};
   }
   @media (max-width: 480px) {
     width: 100% !important;
@@ -146,7 +146,7 @@ export const FilterField = styled.div`
 
 export const FilterLabel = styled.label`
   font-size: 1.125rem;
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
   font-weight: 500;
   white-space: nowrap;
 `;
@@ -164,10 +164,10 @@ export const FilterInput = styled.input`
 
   font-weight: 400;
   font-size: 1rem;
-  color: #898f9a;
+  color: ${({ theme }) => theme.colors.gray89};
 
   &::placeholder {
-    color: #c6cedd;
+    color: ${({ theme }) => theme.colors.grayc6};
   }
 `;
 
@@ -319,7 +319,7 @@ export const TableData = styled.div`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 
   text-overflow: ellipsis;
   white-space: nowrap;

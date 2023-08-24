@@ -121,7 +121,7 @@ export const TableData = styled.div`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 
   text-overflow: ellipsis;
   white-space: nowrap;

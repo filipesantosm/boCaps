@@ -63,7 +63,7 @@ export const TitleDivider = styled.div`
 export const TitleIcon = styled(MdLockOutline)`
   font-size: 1.875rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 `;
 
 export const Title = styled.span`
@@ -100,7 +100,7 @@ export const Label = styled.label`
   font-weight: 400;
   font-size: 1.125rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 `;
 
 export const Input = styled.input<InputProps>`
@@ -128,14 +128,14 @@ export const Input = styled.input<InputProps>`
   color: #252729;
 
   &::placeholder {
-    color: #c6cedd;
+    color: ${({ theme }) => theme.colors.grayc6};
   }
 `;
 
 export const InvisibleIcon = styled(HiOutlineEyeOff)`
   font-size: 1.25rem;
 
-  color: #898f9a;
+  color: ${({ theme }) => theme.colors.gray89};
 
   position: absolute;
   bottom: 0.75rem;
@@ -149,7 +149,7 @@ export const InvisibleIcon = styled(HiOutlineEyeOff)`
 export const VisibleIcon = styled(HiOutlineEye)`
   font-size: 1.25rem;
 
-  color: #898f9a;
+  color: ${({ theme }) => theme.colors.gray89};
 
   position: absolute;
   bottom: 0.75rem;
@@ -198,7 +198,7 @@ export const SaveButton = styled.button`
   }
 
   &:disabled {
-    background: #c6cedd;
+    background: ${({ theme }) => theme.colors.grayc6};
 
     cursor: not-allowed;
   }

@@ -130,7 +130,7 @@ export const SelectLabel = styled.label`
   align-items: center;
   gap: 1rem;
   font-size: 1.125rem;
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
   white-space: nowrap;
 `;
 

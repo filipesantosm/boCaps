@@ -70,5 +70,5 @@ export const Description = styled.p`
   line-height: 110.7%;
   text-align: center;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 `;

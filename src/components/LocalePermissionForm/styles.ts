@@ -38,7 +38,7 @@ export const Label = styled.label`
   width: max-content;
 
   font-size: 1.125rem;
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
   font-weight: 500;
   white-space: nowrap;
 
@@ -53,7 +53,7 @@ export const SelectLabel = styled.label`
 
   font-size: 1.125rem;
   font-weight: 500;
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
   white-space: nowrap;
 
   @media (max-width: 1000px) {
@@ -74,10 +74,10 @@ export const Input = styled.input`
 
   font-weight: 400;
   font-size: 1rem;
-  color: #898f9a;
+  color: ${({ theme }) => theme.colors.gray89};
 
   &::placeholder {
-    color: #c6cedd;
+    color: ${({ theme }) => theme.colors.grayc6};
   }
 `;
 

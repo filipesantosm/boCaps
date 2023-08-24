@@ -53,7 +53,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 2.25rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 
   margin-bottom: 1rem;
 `;
@@ -64,7 +64,7 @@ export const Subtitle = styled.span`
   font-weight: 400;
   font-size: 1.5rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 
   margin-bottom: 2.125rem;
 `;
@@ -110,7 +110,7 @@ export const Input = styled.input<InputProps>`
   font-weight: 400;
   font-size: 1.375rem;
 
-  color: #898f9a;
+  color: ${({ theme }) => theme.colors.gray89};
 
   &::placeholder {
     font-family: 'Hind Siliguri', sans-serif;
@@ -118,7 +118,7 @@ export const Input = styled.input<InputProps>`
     font-weight: 400;
     font-size: 1.375rem;
 
-    color: #898f9a;
+    color: ${({ theme }) => theme.colors.gray89};
   }
 `;
 
@@ -127,7 +127,7 @@ export const VisibleEye = styled(IoEyeOutline)`
   align-self: center;
   right: 2.125rem;
 
-  color: #898f9a;
+  color: ${({ theme }) => theme.colors.gray89};
 
   font-size: 2rem;
 
@@ -141,7 +141,7 @@ export const InvisibleEye = styled(IoEyeOffOutline)`
   align-self: center;
   right: 2.125rem;
 
-  color: #898f9a;
+  color: ${({ theme }) => theme.colors.gray89};
 
   font-size: 2rem;
 
@@ -156,7 +156,7 @@ export const ForgotPassword = styled.span`
   font-weight: 600;
   font-size: 1.25rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 
   align-self: flex-end;
 

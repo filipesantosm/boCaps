@@ -90,7 +90,7 @@ export const Label = styled.label`
   font-weight: 400;
   font-size: 1.125rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 `;
 
 export const Input = styled.input`
@@ -111,12 +111,12 @@ export const Input = styled.input`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #898f9a;
+  color: ${({ theme }) => theme.colors.gray89};
 
   margin-bottom: 0.5rem;
 
   &::placeholder {
-    color: #c6cedd;
+    color: ${({ theme }) => theme.colors.grayc6};
   }
 `;
 
@@ -139,12 +139,12 @@ export const TextArea = styled.textarea`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #898f9a;
+  color: ${({ theme }) => theme.colors.gray89};
 
   margin-bottom: 0.5rem;
 
   &::placeholder {
-    color: #c6cedd;
+    color: ${({ theme }) => theme.colors.grayc6};
   }
 `;
 

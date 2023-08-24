@@ -69,7 +69,7 @@ export const TitleDivider = styled.div`
 export const TitleIcon = styled(HiOutlineUsers)`
   font-size: 1.875rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 `;
 
 export const Title = styled.span`
@@ -177,7 +177,7 @@ export const Label = styled.label`
   font-weight: 400;
   font-size: 1.125rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 
   margin-bottom: 0.625rem;
 `;
@@ -204,7 +204,7 @@ export const Input = styled.input`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #898f9a;
+  color: ${({ theme }) => theme.colors.gray89};
 
   margin-bottom: 1.25rem;
 
@@ -358,7 +358,7 @@ export const InputDivider = styled.div`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 `;
 
 export const HourInput = styled.input`

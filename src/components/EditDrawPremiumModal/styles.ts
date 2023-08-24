@@ -52,7 +52,7 @@ export const ObservationLabel = styled.label`
 `;
 
 export const ObservationTextLabel = styled.span`
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
   font-size: 1.125rem;
 `;
 
@@ -71,10 +71,10 @@ export const ObservationInput = styled.textarea`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #898f9a;
+  color: ${({ theme }) => theme.colors.gray89};
 
   &::placeholder {
-    color: #c6cedd;
+    color: ${({ theme }) => theme.colors.grayc6};
   }
 `;
 
@@ -83,7 +83,7 @@ export const SelectLabel = styled.label`
   align-items: center;
   gap: 1rem;
   font-size: 1.125rem;
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
   white-space: nowrap;
 `;
 

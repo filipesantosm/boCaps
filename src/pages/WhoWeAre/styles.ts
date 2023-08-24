@@ -45,7 +45,7 @@ export const TitleDivider = styled.div`
 
 export const TitleIcon = styled(TbClipboardText)`
   font-size: 1.875rem;
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 `;
 
 export const TitleContainer = styled.div`
@@ -73,7 +73,7 @@ export const TextArea = styled.textarea`
 
   font-weight: 400;
   font-size: 1rem;
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
   overflow-y: scroll;
   overflow-x: hidden;
   &::-webkit-scrollbar {
