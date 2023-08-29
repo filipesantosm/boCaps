@@ -54,7 +54,7 @@ const DrawPromos = () => {
   return (
     <Layout>
       <Content>
-        <Title>Tipos de sorteio</Title>
+        <Title>Tipos de título</Title>
         <HeaderButtons>
           <Button type="button" onClick={() => setShowDrawPromoModal(true)}>
             Cadastrar tipo

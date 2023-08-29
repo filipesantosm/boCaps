@@ -681,7 +681,7 @@ const Sweepstake = () => {
                 {...register('additionalDataSection.lnkYoutubeDraw')}
               />
               <SelectWrapperAdditional>
-                <SelectLabel>Tipo de sorteio:</SelectLabel>
+                <SelectLabel>Tipo de título:</SelectLabel>
                 <Controller
                   control={control}
                   name="additionalDataSection.saleValue"
