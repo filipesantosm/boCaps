@@ -12,7 +12,7 @@ export const Title = styled.h1`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   margin-bottom: 2rem;
 `;
@@ -50,7 +50,7 @@ export const Button = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #0054bc;
+  background: ${({ theme }) => theme.colors.primary};
 
   font-weight: 400;
   font-size: 0.875rem;
@@ -109,7 +109,7 @@ export const SearchIcon = styled(BiSearch)`
   align-self: center;
   left: 1rem;
 
-  color: #c6cedd;
+  color: ${({ theme }) => theme.colors.grayc6};
 
   font-size: 1.5rem;
 `;
@@ -138,7 +138,7 @@ export const TableHeaderData = styled.div`
   font-weight: 600;
   font-size: 1.125rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   &:nth-of-type(1) {
     padding-left: 1rem;
@@ -150,7 +150,7 @@ export const EmptyText = styled.p`
 
   text-align: center;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
   font-size: 1.5rem;
   font-weight: 600;
 `;
@@ -202,7 +202,7 @@ export const TableData = styled.div`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 
   text-overflow: ellipsis;
   white-space: nowrap;

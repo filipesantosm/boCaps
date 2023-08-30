@@ -37,6 +37,23 @@ export const ClientSchema = yup.object({
       },
     }),
   email: yup.string().required('E-mail é obrigatório').email('E-mail inválido'),
+  phone: yup
+    .string()
+    .required('Telefone obrigatório')
+    .test({
+      message: 'Telefone inválido',
+      test: value => {
+        if (!value) {
+          return false;
+        }
+
+        if (value.length < 14) {
+          return false;
+        }
+
+        return true;
+      },
+    }),
   cep: yup
     .string()
     .required('CEP é obrigatório')
@@ -49,6 +66,7 @@ export const ClientSchema = yup.object({
   city: yup.string().required('Cidade é obrigatória'),
   street: yup.string().required('Rua é obrigatória'),
   number: yup.string().required('Número é obrigatório'),
+  neighborhood: yup.string().required('Bairro é obrigatório'),
   password: yup.string().typeError(''),
   passwordConfirmation: yup
     .string()

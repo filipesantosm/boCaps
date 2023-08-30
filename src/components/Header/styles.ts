@@ -29,7 +29,7 @@ export const UserRole = styled.span`
 export const UserName = styled.span`
   font-weight: 400;
   font-size: 1rem;
-  color: #898f9a;
+  color: ${({ theme }) => theme.colors.gray89};
 `;
 
 export const LogoutDivider = styled.div`

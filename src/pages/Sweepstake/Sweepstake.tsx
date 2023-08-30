@@ -1,15 +1,17 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable react/no-array-index-key */
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
-import { isBefore, parseISO } from 'date-fns';
 import {
   icon_ArrowSection,
   img_placeholderImg,
   img_placeholderPDF,
 } from '../../assets';
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 import DrawPremiumSection from '../../components/DrawPremiumSection/DrawPremiumSection';
 import Layout from '../../components/Layout/Layout';
+import Loading from '../../components/Loading/Loading';
 import Select from '../../components/Select/Select';
 import SweepstakeInput from '../../components/SweepstakeInput/SweepstakeInput';
 import SwitchColor from '../../components/SwitchColor/SwitchColor';
@@ -23,6 +25,7 @@ import { ISweepstakeForm } from '../../interfaces/SweepstakeForm';
 import api from '../../services/api';
 import handleError, { handleSuccess } from '../../services/handleToast';
 import { getDrawImage, imageUrl } from '../../utils/imageUrl';
+import { maskSusep } from '../../utils/mask';
 import {
   AdditionalContainer,
   AdditionalDataSection,
@@ -58,9 +61,14 @@ import {
   getIsoStringFromDateAndTime,
   isScratchCardOptions,
 } from './utils';
-import { maskSusep } from '../../utils/mask';
-import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
-import Loading from '../../components/Loading/Loading';
+
+const initialHandleConfirmModal = {
+  isOpen: false,
+  onClose: () => {},
+  onConfirm: () => {},
+  onCancel: () => {},
+  message: '',
+};
 
 const Sweepstake = () => {
   const { drawId } = useParams();
@@ -68,7 +76,9 @@ const Sweepstake = () => {
 
   const [draw, setDraw] = useState<IDraw>();
   const [openedSections, setOpenedSections] = useState<string[]>([]);
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [handleConfirmModal, setHandleConfirmModal] = useState(
+    initialHandleConfirmModal,
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     control,
@@ -82,6 +92,10 @@ const Sweepstake = () => {
       chanceSection: {
         typeChance: 1,
       },
+      drawHour: '09:00',
+      additionalDataSection: {
+        limSale: 30,
+      },
     },
   });
 
@@ -91,7 +105,7 @@ const Sweepstake = () => {
     }
   }, [drawId]);
 
-  const { drawPromoOptions } = useDrawPromos();
+  const { drawPromoOptions, drawPromos } = useDrawPromos();
 
   const { drawTypeChanceOptions, drawTypeChances } = useDrawTypeChance();
 
@@ -127,12 +141,32 @@ const Sweepstake = () => {
   };
 
   const onSubmit: SubmitHandler<ISweepstakeForm> = async form => {
+    if (draw && draw.attributes.isPublished) {
+      setHandleConfirmModal(prev => ({
+        ...prev,
+        isOpen: true,
+        message: 'O sorteio já está publicado, deseja realmente atualizá-lo?',
+        onCancel: handleCloseConfirmModal,
+        onClose: handleCloseConfirmModal,
+        onConfirm: () => handleSave(form),
+      }));
+      return;
+    }
+
+    handleSave(form);
+  };
+
+  const handleSave = async (form: ISweepstakeForm) => {
     const drawDate = getIsoStringFromDateAndTime(form.drawDate, form.drawHour);
     const startDate = getIsoStringFromDateAndTime(
       form.startDate,
       form.startHour,
     );
     const endDate = getIsoStringFromDateAndTime(form.endDate, form.endHour);
+
+    handleCloseConfirmModal();
+
+    setIsSubmitting(true);
 
     try {
       let imageId = 0;
@@ -161,6 +195,7 @@ const Sweepstake = () => {
 
       const payload = {
         data: {
+          id: draw ? draw.id : undefined,
           name: form.name,
           description: form.additionalDataSection.description,
           dateStart: startDate,
@@ -215,29 +250,47 @@ const Sweepstake = () => {
             },
           }),
           ...(foundChance && {
-            draw_type_chance: {
-              id: foundChance.id,
-            },
+            draw_type_chance: foundChance,
           }),
           draw_promos: form?.additionalDataSection?.saleValue?.length
-            ? form.additionalDataSection.saleValue.map(value => Number(value))
+            ? form.additionalDataSection.saleValue
+                .map(value => {
+                  const foundDrawPromo = drawPromos.find(
+                    drawPromo => drawPromo.id === Number(value),
+                  );
+
+                  if (foundDrawPromo) {
+                    return {
+                      id: foundDrawPromo.id,
+                      ...foundDrawPromo.attributes,
+                    };
+                  }
+                  return undefined;
+                })
+                .filter(Boolean)
             : undefined,
-          isValidated: false,
         },
       };
 
-      if (draw) {
-        const { data } = await api.put(`/draws/${draw.id}`, payload);
+      if (draw?.attributes.isPublished || draw?.attributes.isValidated) {
+        await api.post(`/updateDraw`, payload);
 
-        getDraw(data.data.id);
+        getDraw(String(draw.id));
+      } else if (draw) {
+        await api.put(`/draws/${draw.id}`, payload);
+
+        getDraw(String(draw.id));
       } else {
         const { data } = await api.post('/draws', payload);
 
         getDraw(data.data.id);
       }
+
       handleSuccess('Sorteio salvo com sucesso!');
     } catch (error) {
       handleError(error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -270,7 +323,6 @@ const Sweepstake = () => {
     }
 
     if (draw.attributes.isPublished) {
-      setShowConfirmModal(true);
       return;
     }
 
@@ -287,23 +339,8 @@ const Sweepstake = () => {
     }
   };
 
-  const handleConfirmSuspendDraw = async () => {
-    if (!draw) {
-      return;
-    }
-
-    try {
-      await api.put(`/draws/${draw.id}`, {
-        data: {
-          isPublished: false,
-        },
-      });
-
-      setShowConfirmModal(false);
-      getDraw(String(draw.id));
-    } catch (error) {
-      handleError(error);
-    }
+  const handleCloseConfirmModal = () => {
+    setHandleConfirmModal(initialHandleConfirmModal);
   };
 
   const newImage = watch('additionalDataSection.image');
@@ -319,13 +356,18 @@ const Sweepstake = () => {
 
   const typeChance = watch('chanceSection.typeChance');
 
-  const drawDate = draw?.attributes?.dateDraw
-    ? parseISO(draw.attributes.dateDraw)
-    : undefined;
+  const hasScratchCard =
+    watch('additionalDataSection.isScratchCard') === 'true';
 
-  const disableEditing =
-    draw?.attributes?.isPublished ||
-    (drawDate && isBefore(drawDate, new Date()));
+  const filteredCategories = hasScratchCard
+    ? premiumCategories.filter(premiumCategory => premiumCategory.id !== 2)
+    : premiumCategories;
+
+  /* const drawDate = draw?.attributes?.dateDraw
+    ? parseISO(draw.attributes.dateDraw)
+    : undefined; */
+
+  const disableEditing = isSubmitting;
 
   return (
     <Layout>
@@ -639,7 +681,7 @@ const Sweepstake = () => {
                 {...register('additionalDataSection.lnkYoutubeDraw')}
               />
               <SelectWrapperAdditional>
-                <SelectLabel>Valor promocional:</SelectLabel>
+                <SelectLabel>Tipo de título:</SelectLabel>
                 <Controller
                   control={control}
                   name="additionalDataSection.saleValue"
@@ -733,7 +775,7 @@ const Sweepstake = () => {
           </RetrieveContainer>
         </AdditionalDataSection>
         {draw &&
-          premiumCategories.map(category => (
+          filteredCategories.map(category => (
             <DrawPremiumSection
               key={category.id}
               draw={draw}
@@ -756,11 +798,11 @@ const Sweepstake = () => {
             Cancelar
           </SaveButton>
         </ButtonFooterContainer>
-        {showConfirmModal && (
+        {handleConfirmModal.isOpen && (
           <ConfirmModal
-            message="Tem certeza que deseja suspender o sorteio?"
-            onClose={() => setShowConfirmModal(false)}
-            onConfirm={handleConfirmSuspendDraw}
+            message={handleConfirmModal.message}
+            onClose={handleConfirmModal.onClose}
+            onConfirm={handleConfirmModal.onConfirm}
           />
         )}
       </Content>

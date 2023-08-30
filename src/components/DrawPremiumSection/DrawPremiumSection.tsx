@@ -188,7 +188,7 @@ const DrawPremiumSection = ({
                 placeholder="Insira a descrição"
               /> */}
               <SweepstakeInput
-                label="Valor:"
+                label="Dinheiro:"
                 placeholder="Insira o valor"
                 maskFunction={maskCurrency}
                 {...register('value')}
@@ -239,7 +239,7 @@ const DrawPremiumSection = ({
               <AwardHeadTable>ID</AwardHeadTable>
               <AwardHeadTable>Título</AwardHeadTable>
               <AwardHeadTable>Descrição</AwardHeadTable>
-              <AwardHeadTable>Valor</AwardHeadTable>
+              <AwardHeadTable>Dinheiro</AwardHeadTable>
               <AwardHeadTable>Tipo de prêmio</AwardHeadTable>
               <AwardHeadTable>Ações</AwardHeadTable>
             </AwardHeadLineTable>

@@ -45,7 +45,7 @@ export const FilterButton = styled.button<FilterButtonProps>`
 
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   width: 2.5rem;
   height: 2.5rem;
@@ -62,7 +62,7 @@ export const FilterButton = styled.button<FilterButtonProps>`
     isOpen &&
     css`
       color: #ffffff;
-      background: #0054bc;
+      background: ${({ theme }) => theme.colors.primary};
     `}
 
   &:hover {
@@ -87,7 +87,7 @@ export const FilterTitle = styled.p`
 
   font-size: 1rem;
   font-weight: 600;
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const FilterItem = styled.label`
@@ -128,7 +128,7 @@ export const FilterCheckbox = styled.input`
   }
 
   &:checked::before {
-    background: #0054bc;
+    background: ${({ theme }) => theme.colors.primary};
     color: #fff !important;
   }
 `;
@@ -154,14 +154,14 @@ export const TitleDivider = styled.div`
 export const TitleIcon = styled(MdOutlineCake)`
   font-size: 1.875rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 `;
 
 export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const FilterDivider = styled.div`
@@ -245,7 +245,7 @@ export const TableHeaderDivider = styled.div`
   font-weight: 600;
   font-size: 1.75rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   &:nth-of-type(1) {
     padding-left: 2.5rem;
@@ -276,7 +276,7 @@ export const ClientHeaderDivider = styled.div`
   font-weight: 600;
   font-size: 1.125rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   &:nth-of-type(1) {
     padding-left: 1rem;
@@ -316,9 +316,9 @@ export const Button = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #0054bc;
+  background: ${({ theme }) => theme.colors.primary};
 
-  font-family: 'Hindi Siliguri', sans-serif;
+  font-family: 'HindSiliguri', sans-serif;
 
   font-weight: 400;
   font-size: 0.875rem;
@@ -376,7 +376,7 @@ export const SearchIcon = styled(BiSearch)`
   align-self: center;
   left: 1rem;
 
-  color: #c6cedd;
+  color: ${({ theme }) => theme.colors.grayc6};
 
   font-size: 1.5rem;
 `;
@@ -441,7 +441,7 @@ export const CompDivider = styled.div`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -470,7 +470,7 @@ export const ClientCompDivider = styled.div`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -494,7 +494,7 @@ export const CompText = styled.div`
 export const VisualizeIcon = styled(AiOutlineEye)`
   font-size: 1.75rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   transition: 500ms;
 
@@ -507,7 +507,7 @@ export const VisualizeIcon = styled(AiOutlineEye)`
 export const DeleteIcon = styled(FiTrash)`
   font-size: 1.5rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 
   transition: 500ms;
 
@@ -550,7 +550,7 @@ export const BirthdayText = styled.div`
 
   padding-bottom: 0.625rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 
   border-bottom: 1px solid #e4e7f9;
 

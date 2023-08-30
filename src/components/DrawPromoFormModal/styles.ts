@@ -30,7 +30,7 @@ export const Title = styled.p`
   font-weight: 600;
   font-size: 1.75rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   margin-bottom: 2rem;
 `;
@@ -56,7 +56,7 @@ export const Label = styled.label`
   font-weight: 400;
   font-size: 1.125rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
 `;
 
 export const Input = styled.input`
@@ -81,12 +81,12 @@ export const Input = styled.input`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #898f9a;
+  color: ${({ theme }) => theme.colors.gray89};
 
   margin-bottom: 0.5rem;
 
   &::placeholder {
-    color: #c6cedd;
+    color: ${({ theme }) => theme.colors.grayc6};
   }
 `;
 
@@ -118,9 +118,9 @@ export const FilledButton = styled.button`
   border: none;
   border-radius: 0.875rem;
 
-  background: #0054bc;
+  background: ${({ theme }) => theme.colors.primary};
 
-  font-family: 'Hindi Siliguri', sans-serif;
+  font-family: 'Hind Siliguri', sans-serif;
 
   font-weight: 400;
   font-size: 1rem;
@@ -138,6 +138,6 @@ export const FilledButton = styled.button`
 export const OutlinedButton = styled(FilledButton)`
   background: transparent;
 
-  color: #0054bc;
-  border: 1px solid #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
 `;

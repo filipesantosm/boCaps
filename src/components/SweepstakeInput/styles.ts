@@ -5,7 +5,7 @@ export const LabelText = styled.span`
   font-weight: 400;
   font-size: 1.125rem;
 
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
   white-space: nowrap;
 `;
 export const Input = styled.input`
@@ -30,10 +30,10 @@ export const Input = styled.input`
   font-weight: 400;
   font-size: 1rem;
 
-  color: #898f9a;
+  color: ${({ theme }) => theme.colors.gray89};
 
   &::placeholder {
-    color: #c6cedd;
+    color: ${({ theme }) => theme.colors.grayc6};
   }
   @media (max-width: 480px) {
     width: 100% !important;

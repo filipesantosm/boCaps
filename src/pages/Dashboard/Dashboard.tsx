@@ -1,95 +1,265 @@
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
+import { Controller, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../../components/Layout/Layout';
+import Select from '../../components/Select/Select';
+import { useDrawOptions } from '../../hooks/useDrawOptions';
 import {
+  ChartContainer,
+  ChartInfoColumn,
   ChartTitle,
   ChartWrapper,
+  ChartsSection,
   Container,
   Content,
-  Table,
-  TableData,
-  TableHeader,
-  TableWrapper,
+  FilledButton,
+  FilterField,
+  FilterInput,
+  FilterLabel,
+  FilterRow,
+  FilterSection,
   Title,
+  TotalValue,
 } from './styles';
+import { generateData, generateTitleData, monthOptions } from './utils';
+import BRLMoneyFormater from '../../utils/formaters/BRLMoneyFormater';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const data = {
-  labels: ['P0', 'P1', 'P2', 'Y'],
-  datasets: [
-    {
-      label: 'Quantidade',
-      data: [27713, 4105, 4809, 248705, 2, 3],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
+interface Option {
+  value: string | number;
+  label: string;
+}
+
+interface IDashboardForm {
+  draw: Option;
+  origin: Option;
+  month: Option;
+  initialDate: string;
+  finalDate: string;
+}
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const { register, control } = useForm<IDashboardForm>();
+
+  const { drawOptions } = useDrawOptions();
+
   return (
     <Layout>
       <Container>
-        <Title>Home</Title>
+        <Title>Dashboard</Title>
         <Content>
-          {/* <TableWrapper>
-            <Table>
-              <thead>
-                <tr>
-                  <TableHeader>Cadastro Completo</TableHeader>
-                  <TableHeader>Quantidade</TableHeader>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <TableData>P0</TableData>
-                  <TableData>{(27713).toLocaleString('pt-BR')}</TableData>
-                </tr>
-                <tr>
-                  <TableData>P1</TableData>
-                  <TableData>{(4105).toLocaleString('pt-BR')}</TableData>
-                </tr>
-                <tr>
-                  <TableData>P2</TableData>
-                  <TableData>{(4809).toLocaleString('pt-BR')}</TableData>
-                </tr>
-                <tr>
-                  <TableData>Y</TableData>
-                  <TableData>{(248705).toLocaleString('pt-BR')}</TableData>
-                </tr>
-              </tbody>
-            </Table>
-          </TableWrapper> */}
-          <ChartWrapper>
-            <ChartTitle>Resumo cadastros</ChartTitle>
-            <Pie
-              data={data}
-              options={{
-                plugins: {
-                  legend: {
-                    position: 'bottom',
-                  },
-                },
+          <FilterSection>
+            <FilterRow
+              style={{
+                justifyContent: 'flex-end',
               }}
-            />
-          </ChartWrapper>
+            >
+              <FilledButton
+                type="button"
+                style={{
+                  width: '15%',
+                }}
+              >
+                Exportar dados
+              </FilledButton>
+              <FilledButton
+                type="button"
+                style={{
+                  width: '15%',
+                }}
+                onClick={() => navigate('/transactions')}
+              >
+                Ir para transações
+              </FilledButton>
+            </FilterRow>
+            <FilterRow>
+              <FilterField>
+                <FilterLabel>Sorteio</FilterLabel>
+                <Controller
+                  control={control}
+                  name="draw"
+                  render={({ field: { onChange, value } }) => (
+                    <Select
+                      options={drawOptions}
+                      onChange={onChange}
+                      value={value}
+                    />
+                  )}
+                />
+              </FilterField>
+              <FilterField>
+                <FilterLabel>Canal de vendas</FilterLabel>
+                <Controller
+                  control={control}
+                  name="origin"
+                  render={({ field: { onChange, value } }) => (
+                    <Select
+                      options={[
+                        {
+                          value: 'Web',
+                          label: 'Web',
+                        },
+                        {
+                          value: 'app',
+                          label: 'App',
+                        },
+                      ]}
+                      onChange={onChange}
+                      value={value}
+                    />
+                  )}
+                />
+              </FilterField>
+              <FilterField>
+                <FilterLabel>Mês</FilterLabel>
+                <Controller
+                  control={control}
+                  name="month"
+                  render={({ field: { onChange, value } }) => (
+                    <Select
+                      options={monthOptions}
+                      onChange={onChange}
+                      value={value}
+                    />
+                  )}
+                />
+              </FilterField>
+              <FilterField>
+                <FilterLabel>Data inicial</FilterLabel>
+                <FilterInput type="date" {...register('initialDate')} />
+              </FilterField>
+              <FilterField>
+                <FilterLabel>Data final</FilterLabel>
+                <FilterInput type="date" {...register('finalDate')} />
+              </FilterField>
+              <FilledButton>Aplicar filtros</FilledButton>
+            </FilterRow>
+          </FilterSection>
+          <ChartsSection>
+            <ChartContainer>
+              <ChartWrapper>
+                <Pie
+                  data={generateData()}
+                  options={{
+                    plugins: {
+                      legend: {
+                        position: 'bottom',
+                        display: false,
+                      },
+                    },
+                  }}
+                />
+              </ChartWrapper>
+              <ChartInfoColumn>
+                <ChartTitle>Total de vendas</ChartTitle>
+                <TotalValue>{BRLMoneyFormater.format(10000)}</TotalValue>
+              </ChartInfoColumn>
+            </ChartContainer>
+            <ChartContainer>
+              <ChartWrapper>
+                <Pie
+                  data={generateData()}
+                  options={{
+                    plugins: {
+                      legend: {
+                        position: 'bottom',
+                        display: false,
+                      },
+                    },
+                    responsive: true,
+                  }}
+                />
+              </ChartWrapper>
+              <ChartInfoColumn>
+                <ChartTitle>Quantidade compras</ChartTitle>
+                <TotalValue>{(1000).toLocaleString('pt-BR')}</TotalValue>
+              </ChartInfoColumn>
+            </ChartContainer>
+            <ChartContainer>
+              <ChartWrapper>
+                <Pie
+                  data={generateData()}
+                  options={{
+                    plugins: {
+                      legend: {
+                        position: 'bottom',
+                        display: false,
+                      },
+                    },
+                    responsive: true,
+                  }}
+                />
+              </ChartWrapper>
+              <ChartInfoColumn>
+                <ChartTitle>Ticket médio</ChartTitle>
+                <TotalValue>{BRLMoneyFormater.format(20)}</TotalValue>
+              </ChartInfoColumn>
+            </ChartContainer>
+            <ChartContainer>
+              <ChartWrapper>
+                <Pie
+                  data={generateTitleData()}
+                  options={{
+                    plugins: {
+                      legend: {
+                        position: 'bottom',
+                        display: false,
+                      },
+                    },
+                    responsive: true,
+                  }}
+                />
+              </ChartWrapper>
+              <ChartInfoColumn>
+                <ChartTitle>Total de títulos</ChartTitle>
+                <TotalValue>{(1000).toLocaleString('pt-BR')}</TotalValue>
+              </ChartInfoColumn>
+            </ChartContainer>
+            <ChartContainer>
+              <ChartWrapper>
+                <Pie
+                  data={generateTitleData()}
+                  options={{
+                    plugins: {
+                      legend: {
+                        position: 'bottom',
+                        display: false,
+                      },
+                    },
+                    responsive: true,
+                  }}
+                />
+              </ChartWrapper>
+              <ChartInfoColumn>
+                <ChartTitle>Títulos por compra</ChartTitle>
+                <TotalValue>{(2).toLocaleString('pt-BR')}</TotalValue>
+              </ChartInfoColumn>
+            </ChartContainer>
+            <ChartContainer>
+              <ChartWrapper>
+                <Pie
+                  data={generateTitleData()}
+                  options={{
+                    plugins: {
+                      legend: {
+                        position: 'bottom',
+                        display: false,
+                      },
+                    },
+                    responsive: true,
+                  }}
+                />
+              </ChartWrapper>
+              <ChartInfoColumn>
+                <ChartTitle>Ticket médio por título</ChartTitle>
+                <TotalValue>{(10).toLocaleString('pt-BR')}</TotalValue>
+              </ChartInfoColumn>
+            </ChartContainer>
+          </ChartsSection>
         </Content>
       </Container>
     </Layout>

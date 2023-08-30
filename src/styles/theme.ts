@@ -1,0 +1,22 @@
+export const theme = {
+  colors: {
+    black: '#181818',
+    gray2f: '#2f2f2f',
+    gray51: '#515258',
+    gray5d: '#5d5d5d',
+    gray74: '#747474',
+    gray89: '#898f9a',
+    grayb9: '#b9b9b9',
+    grayc6: '#c6cedd',
+    graydc: '#dcdcdc',
+    grayf3: '#f3f3f3',
+    grayfa: '#fafafa',
+    white: '#ffffff',
+    primary: '#0054bc',
+    primaryDark: '#003a83',
+    green: '#15c149',
+    error: '#de3737',
+    error30: '#d16464',
+    error10: '#f3ccce',
+  },
+} as const;

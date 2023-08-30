@@ -66,7 +66,7 @@ export const getInitialDrawForm = (draw: IDraw) => {
 };
 
 export const getIsoStringFromDateAndTime = (date: string, time: string) => {
-  const joined = `${date} ${time}`;
+  const joined = `${date} ${time || '00:00'}`;
 
   const isoString = joined.trim()
     ? parse(joined, 'yyyy-MM-dd HH:mm', new Date())

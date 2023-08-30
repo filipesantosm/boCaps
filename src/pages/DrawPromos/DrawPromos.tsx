@@ -54,10 +54,10 @@ const DrawPromos = () => {
   return (
     <Layout>
       <Content>
-        <Title>Promoções de sorteio</Title>
+        <Title>Tipos de título</Title>
         <HeaderButtons>
           <Button type="button" onClick={() => setShowDrawPromoModal(true)}>
-            Cadastrar promoção
+            Cadastrar tipo
           </Button>
         </HeaderButtons>
         <DrawPromosHeader>

@@ -9,7 +9,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
   line-height: 110.7%;
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const Content = styled.form`
@@ -130,7 +130,7 @@ export const SelectLabel = styled.label`
   align-items: center;
   gap: 1rem;
   font-size: 1.125rem;
-  color: #515258;
+  color: ${({ theme }) => theme.colors.gray51};
   white-space: nowrap;
 `;
 

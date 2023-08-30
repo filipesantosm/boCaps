@@ -1,12 +1,14 @@
 import { useRef, useState } from 'react';
+import { AiOutlineDollarCircle } from 'react-icons/ai';
 import { BsList } from 'react-icons/bs';
-import { LiaFileInvoiceDollarSolid } from 'react-icons/lia';
-import { FiLogOut } from 'react-icons/fi';
+import { FiLogOut, FiMapPin } from 'react-icons/fi';
 import { HiOutlineGift, HiOutlineHome, HiOutlineUsers } from 'react-icons/hi';
+import { LiaFileInvoiceDollarSolid } from 'react-icons/lia';
 import {
   MdLockOutline,
   MdOutlineCake,
   MdOutlineDiscount,
+  MdOutlineWorkspacePremium,
 } from 'react-icons/md';
 import { TbClipboardText } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
@@ -56,7 +58,7 @@ const NewNavBar = () => {
               className="icon"
               style={{ fontSize: '1.5rem' }}
             />
-            <MenuText>Promoções</MenuText>
+            <MenuText>Tipos de título</MenuText>
           </StyledNavLink>
         </MenuItem>
         <MenuItem>
@@ -66,6 +68,30 @@ const NewNavBar = () => {
               style={{ fontSize: '1.5rem' }}
             />
             <MenuText>Boletos</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/transactions">
+            <AiOutlineDollarCircle
+              className="icon"
+              style={{ fontSize: '1.5rem' }}
+            />
+            <MenuText>Transações</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/locale-permissions">
+            <FiMapPin className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Locais permitidos</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/scores">
+            <MdOutlineWorkspacePremium
+              className="icon"
+              style={{ fontSize: '1.5rem' }}
+            />
+            <MenuText>Scores</MenuText>
           </StyledNavLink>
         </MenuItem>
         <MenuItem>
@@ -86,12 +112,24 @@ const NewNavBar = () => {
             <MenuText>Termos de Uso</MenuText>
           </StyledNavLink>
         </MenuItem>
+        {/* <MenuItem>
+          <StyledNavLink to="/faqs">
+            <FiHelpCircle className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Perguntas frequentes</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/how-it-works">
+            <ImCogs className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Como funciona</MenuText>
+          </StyledNavLink>
+        </MenuItem>
         <MenuItem>
           <StyledNavLink to="/edit-profile">
             <MdLockOutline className="icon" style={{ fontSize: '1.5rem' }} />
             <MenuText>Redefinir Senha</MenuText>
           </StyledNavLink>
-        </MenuItem>
+        </MenuItem> */}
       </LinksList>
 
       <HamburgerButton

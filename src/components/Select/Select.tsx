@@ -1,42 +1,37 @@
-import { Props as SelectProps } from 'react-select';
+import ReactSelect, { Props as SelectProps } from 'react-select';
 import { CSSProperties } from 'react';
-import { ErrorMessage, Label, LabelText, SelectComponent } from './styles';
+import { ErrorMessage, Label, LabelText } from './styles';
 
-interface Props extends SelectProps {
-  options: IOption[];
+interface Props<OptionType, T extends boolean>
+  extends SelectProps<OptionType, T, { options: OptionType[] }> {
   label?: string;
   error?: string;
   labelStyle?: CSSProperties;
+  options: OptionType[];
+  isMulti?: T;
 }
 
-export interface IOption {
-  value: string;
-  label: string;
-}
-
-const Select = ({
+const Select = <OptionType, T extends boolean = false>({
   labelStyle,
-  options,
   label,
   placeholder,
   error,
+  isMulti,
   ...rest
-}: Props) => {
+}: Props<OptionType, T>) => {
   return (
     <Label style={labelStyle} data-com="SelectLabel">
       {label && <LabelText>{label}</LabelText>}
-      <SelectComponent
-        options={options}
+      <ReactSelect
         placeholder={placeholder || 'Selecione...'}
-        isSearchable={false}
-        value={options.find(option => option.value === rest.value)}
+        isMulti={isMulti}
         {...rest}
         styles={{
           control: prev => ({
             ...prev,
             borderRadius: '0.75rem',
             border: error ? '1px solid #BE0F0F' : 'none',
-            height: '2.625rem',
+            height: isMulti ? undefined : '2.625rem',
             minHeight: '2.625rem',
             width: '100%',
             outline: 'none',
@@ -59,17 +54,17 @@ const Select = ({
             width: '100%',
             outline: 'none',
             minHeight: '2.625rem',
-            maxHeight: '2.625rem',
+            maxHeight: isMulti ? undefined : '2.625rem',
           }),
           valueContainer: prev => ({
             ...prev,
             minHeight: '2.625rem',
-            maxHeight: '2.625rem',
+            maxHeight: isMulti ? undefined : '2.625rem',
           }),
           indicatorsContainer: prev => ({
             ...prev,
             minHeight: '2.625rem',
-            maxHeight: '2.625rem',
+            maxHeight: isMulti ? undefined : '2.625rem',
           }),
           menu: prev => ({
             ...prev,

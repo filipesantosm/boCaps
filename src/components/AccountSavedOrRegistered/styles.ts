@@ -49,7 +49,7 @@ export const Title = styled.span`
   font-weight: 500;
   font-size: 2rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   margin-bottom: 1.5rem;
 `;

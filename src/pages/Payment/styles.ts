@@ -72,7 +72,7 @@ export const Title = styled.span`
   font-weight: 600;
   font-size: 3rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const SubtitleDivider = styled.div`
@@ -87,7 +87,7 @@ export const SubtitleDivider = styled.div`
   font-weight: 600;
   font-size: 1.75rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const PaymentDivider = styled.div`
@@ -290,7 +290,7 @@ export const NewButton = styled.button`
   width: 12.5rem;
   height: 3.75rem;
 
-  border: 1px solid #0054bc;
+  border: 1px solid ${({ theme }) => theme.colors.primary};
   border-radius: 0.75rem;
 
   background: #ffffff;
@@ -298,12 +298,12 @@ export const NewButton = styled.button`
   font-weight: 600;
   font-size: 1rem;
 
-  color: #0054bc;
+  color: ${({ theme }) => theme.colors.primary};
 
   transition: 500ms;
 
   &:hover {
-    background: #0054bc;
+    background: ${({ theme }) => theme.colors.primary};
 
     color: #fff;
   }

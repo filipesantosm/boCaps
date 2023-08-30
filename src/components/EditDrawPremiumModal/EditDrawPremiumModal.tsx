@@ -80,7 +80,7 @@ const EditDrawPremiumModal = ({
             {...register('title')}
           />
           <SweepstakeInput
-            label="Valor"
+            label="Dinheiro"
             placeholder="Insira o valor"
             maskFunction={maskCurrency}
             {...register('value')}
