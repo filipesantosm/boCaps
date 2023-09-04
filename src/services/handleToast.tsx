@@ -35,14 +35,14 @@ const notifySuccess = (message: string) =>
 function handleError(err: any) {
   if (axios.isAxiosError(err)) {
     if (isStrapiError(err)) {
-      return notifyError(err.response?.data.error.message as string);
+      return notifyError(err.response?.data?.error?.message || err?.message);
     }
 
     if (isBackEndError(err)) {
-      return notifyError(err.response?.data.message as string);
+      return notifyError(err.response?.data?.message || err?.message);
     }
 
-    return err.message;
+    return err?.message;
   }
 
   if (err instanceof Error) {
@@ -52,6 +52,8 @@ function handleError(err: any) {
   if (typeof err === 'string') {
     return notifyError(err);
   }
+
+  return notifyError(err?.message);
 }
 
 export function handleSuccess(message: string) {

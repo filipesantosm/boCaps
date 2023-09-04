@@ -1,3 +1,4 @@
+import { saveAs } from 'file-saver';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../../components/Layout/Layout';
@@ -5,12 +6,10 @@ import Loading from '../../components/Loading/Loading';
 import SmallPagination from '../../components/Pagination/Pagination';
 import SuccessModal from '../../components/SuccessModal/SuccessModal';
 import { IDraw } from '../../interfaces/Draw';
-import { UploadFileResponse } from '../../interfaces/Image';
 import { PaginatedResponse } from '../../interfaces/Paginated';
 import api from '../../services/api';
 import handleError from '../../services/handleToast';
 import { formatDateString } from '../../utils/formatDateString';
-import { getFileUrl } from '../../utils/getFileUrl';
 import {
   Button,
   CompText,
@@ -66,15 +65,15 @@ const Draws = () => {
   const handleCreateDrawFile = async (drawId: number) => {
     setIsGenerating(true);
     try {
-      const { data } = await api.get<{
-        file: string;
-      }>('/createExport', {
+      const { data } = await api.get<string>('/createExport', {
         params: {
           id: drawId,
         },
       });
 
-      window.open(getFileUrl(data.file), '_blank');
+      const blob = new Blob([data], { type: 'text/plain ' });
+
+      saveAs(blob, `${drawId}.txt`);
     } catch (error) {
       handleError(error);
     } finally {
@@ -88,30 +87,16 @@ const Draws = () => {
       return;
     }
 
-    setImportingId(drawId);
-
     try {
+      setImportingId(drawId);
+
       const formData = new FormData();
 
-      formData.append('files', file);
+      formData.append('file', file);
 
-      const { data } = await api.post<UploadFileResponse>('/upload', formData);
+      await api.post('/processResult', formData);
 
-      const fileResultId = data?.[0]?.id;
-
-      if (fileResultId) {
-        await api.post('/importResult', {
-          data: {
-            drawId: drawId.toString(),
-            fileUpload: fileResultId.toString(),
-          },
-        });
-
-        // handleSuccess('Vencedores importados com sucesso!');
-        setShowSuccessModal(true);
-      } else {
-        handleError('Algo deu errado, tente novamente');
-      }
+      setShowSuccessModal(true);
     } catch (error) {
       handleError(error);
     } finally {
