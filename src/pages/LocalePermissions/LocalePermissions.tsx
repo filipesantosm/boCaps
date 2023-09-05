@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
-import Layout from '../../components/Layout/Layout';
 import LocalePermissionForm from '../../components/LocalePermissionForm/LocalePermissionForm';
 import SmallPagination from '../../components/Pagination/Pagination';
 import { ILocalePermission } from '../../interfaces/LocalePermission';
@@ -108,61 +107,57 @@ const LocalePermissions = () => {
   };
 
   return (
-    <Layout>
-      <Content>
-        <Title>Locais permitidos</Title>
+    <Content>
+      <Title>Locais permitidos</Title>
 
-        <LocalePermissionForm onSuccess={getLocalePermissions} />
+      <LocalePermissionForm onSuccess={getLocalePermissions} />
 
-        <TableHeaderRow>
-          <TableHeaderData>Tipo</TableHeaderData>
-          <TableHeaderData>Local</TableHeaderData>
-          <TableHeaderData>Código IBGE</TableHeaderData>
-          <TableHeaderData />
-        </TableHeaderRow>
+      <TableHeaderRow>
+        <TableHeaderData>Tipo</TableHeaderData>
+        <TableHeaderData>Local</TableHeaderData>
+        <TableHeaderData>Código IBGE</TableHeaderData>
+        <TableHeaderData />
+      </TableHeaderRow>
 
-        <TableBody>
-          {localePermissions.map(localePermission => (
-            <TableRow key={localePermission.id}>
-              <TableData>
-                <DataText>{renderPermissionType(localePermission)}</DataText>
-              </TableData>
-              <TableData>
-                <DataText>{renderPermissionLocale(localePermission)}</DataText>
-              </TableData>
-              <TableData>
-                <DataText>
-                  {renderPermissionIbgeCode(localePermission)}
-                </DataText>
-              </TableData>
-              <TableData>
-                <IconButton
-                  type="button"
-                  onClick={() => {
-                    setIdToDelete(localePermission.id);
-                  }}
-                >
-                  <FiTrash2 />
-                </IconButton>
-              </TableData>
-            </TableRow>
-          ))}
-        </TableBody>
+      <TableBody>
+        {localePermissions.map(localePermission => (
+          <TableRow key={localePermission.id}>
+            <TableData>
+              <DataText>{renderPermissionType(localePermission)}</DataText>
+            </TableData>
+            <TableData>
+              <DataText>{renderPermissionLocale(localePermission)}</DataText>
+            </TableData>
+            <TableData>
+              <DataText>{renderPermissionIbgeCode(localePermission)}</DataText>
+            </TableData>
+            <TableData>
+              <IconButton
+                type="button"
+                onClick={() => {
+                  setIdToDelete(localePermission.id);
+                }}
+              >
+                <FiTrash2 />
+              </IconButton>
+            </TableData>
+          </TableRow>
+        ))}
+      </TableBody>
 
-        <SmallPagination
-          currentPage={page}
-          total={maximumPage}
-          handleChange={(_, newPage) => setPage(newPage)}
+      <SmallPagination
+        currentPage={page}
+        total={maximumPage}
+        handleChange={(_, newPage) => setPage(newPage)}
+      />
+      {!!idToDelete && (
+        <ConfirmModal
+          message="Tem certeza que deseja excluir este local?"
+          onClose={() => setIdToDelete(0)}
+          onConfirm={handleConfirmDelete}
         />
-        {!!idToDelete && (
-          <ConfirmModal
-            message="Tem certeza que deseja excluir este local?"
-            onClose={() => setIdToDelete(0)}
-            onConfirm={handleConfirmDelete}
-          />
-        )}
-      </Content>
-    </Layout>
+      )}
+    </Content>
   );
 };
 

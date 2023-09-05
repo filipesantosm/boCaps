@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { FiEdit3, FiTrash2 } from 'react-icons/fi';
 import { useParams } from 'react-router-dom';
-import Layout from '../../components/Layout/Layout';
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
+import FaqQuestionFormModal from '../../components/FaqQuestionFormModal/FaqQuestionFormModal';
 import Loading from '../../components/Loading/Loading';
 import PageTitle from '../../components/PageTitle/PageTitle';
+import SmallPagination from '../../components/Pagination/Pagination';
 import { IFaqQuestion } from '../../interfaces/Faq';
 import { PaginatedResponse } from '../../interfaces/Paginated';
 import api from '../../services/api';
@@ -24,9 +26,6 @@ import {
   TableHeaderRow,
   TableRow,
 } from './styles';
-import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
-import SmallPagination from '../../components/Pagination/Pagination';
-import FaqQuestionFormModal from '../../components/FaqQuestionFormModal/FaqQuestionFormModal';
 
 const FaqQuestions = () => {
   const { faqId } = useParams();
@@ -81,7 +80,7 @@ const FaqQuestions = () => {
   };
 
   return (
-    <Layout>
+    <>
       <Content>
         <PageTitle>Perguntas</PageTitle>
         <PageHeader>
@@ -176,7 +175,7 @@ const FaqQuestions = () => {
           initialFaqQuestion={selectedFaqQuestion}
         />
       )}
-    </Layout>
+    </>
   );
 };
 

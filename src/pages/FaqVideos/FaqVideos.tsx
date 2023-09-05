@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { FiEdit3, FiTrash2 } from 'react-icons/fi';
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 import FaqVideoFormModal from '../../components/FaqVideoFormModal/FaqVideoFormModal';
-import Layout from '../../components/Layout/Layout';
 import Loading from '../../components/Loading/Loading';
 import PageTitle from '../../components/PageTitle/PageTitle';
 import SmallPagination from '../../components/Pagination/Pagination';
@@ -77,108 +76,106 @@ const FaqVideos = () => {
   };
 
   return (
-    <Layout>
-      <Content>
-        <PageTitle>Ajuda - Vídeos</PageTitle>
+    <Content>
+      <PageTitle>Ajuda - Vídeos</PageTitle>
 
-        <PageHeader>
-          <SearchDivider
-            onSubmit={e => {
-              e.preventDefault();
-              if (page === 1) {
-                getFaqVideos();
-              } else {
-                setPage(1);
-              }
-            }}
-          >
-            <SearchIcon />
-            <SearchInput
-              type="text"
-              id="search"
-              name="search"
-              placeholder="Buscar pelo título do vídeo"
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-            />
-            <Button disabled={isLoading}>
-              {isLoading ? <Loading iconColor="#fff" /> : 'Pesquisar'}
-            </Button>
-          </SearchDivider>
-          <Button type="button" onClick={() => setShowFormModal(true)}>
-            Cadastrar vídeo
-          </Button>
-        </PageHeader>
-        <TableHeaderRow>
-          <TableHeaderData>Título</TableHeaderData>
-          <TableHeaderData>Link YouTube</TableHeaderData>
-          <TableHeaderData>Ações</TableHeaderData>
-        </TableHeaderRow>
-        <TableBody>
-          {faqVideos.map(faqVideo => (
-            <TableRow key={faqVideo.id}>
-              <TableData>
-                <DataText>{faqVideo.attributes.title}</DataText>
-              </TableData>
-              <TableData>
-                <DataText>{faqVideo.attributes.url}</DataText>
-              </TableData>
-              <TableData>
-                <ButtonsContainer>
-                  <IconButton
-                    type="button"
-                    onClick={() => {
-                      setShowFormModal(true);
-                      setSelectedFaqVideo(faqVideo);
-                    }}
-                    title="Editar categoria"
-                  >
-                    <FiEdit3 />
-                  </IconButton>
-
-                  <IconButton
-                    type="button"
-                    onClick={() => {
-                      setIdToDelete(faqVideo.id);
-                    }}
-                    title="Excluir categoria"
-                  >
-                    <FiTrash2 />
-                  </IconButton>
-                </ButtonsContainer>
-              </TableData>
-            </TableRow>
-          ))}
-        </TableBody>
-        <SmallPagination
-          currentPage={page}
-          handleChange={(_, newPage) => setPage(newPage)}
-          total={maximumPage}
-        />
-        {showFormModal && (
-          <FaqVideoFormModal
-            onClose={() => {
-              setShowFormModal(false);
-              setSelectedFaqVideo(undefined);
-            }}
-            onFinishSubmit={() => {
-              setShowFormModal(false);
-              setSelectedFaqVideo(undefined);
+      <PageHeader>
+        <SearchDivider
+          onSubmit={e => {
+            e.preventDefault();
+            if (page === 1) {
               getFaqVideos();
-            }}
-            initialFaqVideo={selectedFaqVideo}
+            } else {
+              setPage(1);
+            }
+          }}
+        >
+          <SearchIcon />
+          <SearchInput
+            type="text"
+            id="search"
+            name="search"
+            placeholder="Buscar pelo título do vídeo"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
           />
-        )}
-        {idToDelete && (
-          <ConfirmModal
-            message="Tem certeza que deseja excluir esse vídeo?"
-            onClose={() => setIdToDelete(undefined)}
-            onConfirm={handleConfirmDelete}
-            onCancel={() => setIdToDelete(undefined)}
-          />
-        )}
-      </Content>
-    </Layout>
+          <Button disabled={isLoading}>
+            {isLoading ? <Loading iconColor="#fff" /> : 'Pesquisar'}
+          </Button>
+        </SearchDivider>
+        <Button type="button" onClick={() => setShowFormModal(true)}>
+          Cadastrar vídeo
+        </Button>
+      </PageHeader>
+      <TableHeaderRow>
+        <TableHeaderData>Título</TableHeaderData>
+        <TableHeaderData>Link YouTube</TableHeaderData>
+        <TableHeaderData>Ações</TableHeaderData>
+      </TableHeaderRow>
+      <TableBody>
+        {faqVideos.map(faqVideo => (
+          <TableRow key={faqVideo.id}>
+            <TableData>
+              <DataText>{faqVideo.attributes.title}</DataText>
+            </TableData>
+            <TableData>
+              <DataText>{faqVideo.attributes.url}</DataText>
+            </TableData>
+            <TableData>
+              <ButtonsContainer>
+                <IconButton
+                  type="button"
+                  onClick={() => {
+                    setShowFormModal(true);
+                    setSelectedFaqVideo(faqVideo);
+                  }}
+                  title="Editar categoria"
+                >
+                  <FiEdit3 />
+                </IconButton>
+
+                <IconButton
+                  type="button"
+                  onClick={() => {
+                    setIdToDelete(faqVideo.id);
+                  }}
+                  title="Excluir categoria"
+                >
+                  <FiTrash2 />
+                </IconButton>
+              </ButtonsContainer>
+            </TableData>
+          </TableRow>
+        ))}
+      </TableBody>
+      <SmallPagination
+        currentPage={page}
+        handleChange={(_, newPage) => setPage(newPage)}
+        total={maximumPage}
+      />
+      {showFormModal && (
+        <FaqVideoFormModal
+          onClose={() => {
+            setShowFormModal(false);
+            setSelectedFaqVideo(undefined);
+          }}
+          onFinishSubmit={() => {
+            setShowFormModal(false);
+            setSelectedFaqVideo(undefined);
+            getFaqVideos();
+          }}
+          initialFaqVideo={selectedFaqVideo}
+        />
+      )}
+      {idToDelete && (
+        <ConfirmModal
+          message="Tem certeza que deseja excluir esse vídeo?"
+          onClose={() => setIdToDelete(undefined)}
+          onConfirm={handleConfirmDelete}
+          onCancel={() => setIdToDelete(undefined)}
+        />
+      )}
+    </Content>
   );
 };
 

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { useEffect, useState } from 'react';
 import InstitutionForm from '../../components/InstitutionForm/InstitutionForm';
-import Layout from '../../components/Layout/Layout';
 import Loading from '../../components/Loading/Loading';
 import PageTitle from '../../components/PageTitle/PageTitle';
 import { IInstitution } from '../../interfaces/Institution';
@@ -41,19 +40,17 @@ const Institutions = () => {
   const institution = institutions?.[0];
 
   return (
-    <Layout>
-      <Content>
-        <PageTitle>Instituição Beneficiada</PageTitle>
-        {isLoading ? (
-          <Loading iconFontSize="4rem" />
-        ) : (
-          <InstitutionForm
-            initialInstitution={institution}
-            onFinish={getInstitutions}
-          />
-        )}
-      </Content>
-    </Layout>
+    <Content>
+      <PageTitle>Instituição Beneficiada</PageTitle>
+      {isLoading ? (
+        <Loading iconFontSize="4rem" />
+      ) : (
+        <InstitutionForm
+          initialInstitution={institution}
+          onFinish={getInstitutions}
+        />
+      )}
+    </Content>
   );
 };
 

@@ -1,5 +1,4 @@
-import NewHeader from '../NewHeader/NewHeader';
-import NewNavBar from '../NewNavBar/NewNavBar';
+import NavBar from '../NavBar/NavBar';
 import { Container, Content } from './styles';
 
 interface Props {
@@ -9,7 +8,7 @@ interface Props {
 const Layout = ({ children }: Props) => {
   return (
     <Container>
-      <NewNavBar />
+      <NavBar />
       <Content>{children}</Content>
     </Container>
   );

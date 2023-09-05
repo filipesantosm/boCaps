@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { AiOutlineEye } from 'react-icons/ai';
 import { FiEdit3, FiTrash2 } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 import FaqFormModal from '../../components/FaqFormModal/FaqFormModal';
-import Layout from '../../components/Layout/Layout';
 import Loading from '../../components/Loading/Loading';
 import SmallPagination from '../../components/Pagination/Pagination';
 import { IFaq } from '../../interfaces/Faq';
@@ -27,7 +27,6 @@ import {
   TableRow,
   Title,
 } from './styles';
-import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 
 const Faqs = () => {
   const navigate = useNavigate();
@@ -79,7 +78,7 @@ const Faqs = () => {
   };
 
   return (
-    <Layout>
+    <>
       <Content>
         <Title>Categorias de perguntas</Title>
         <PageHeader>
@@ -193,7 +192,7 @@ const Faqs = () => {
           onCancel={() => setIdToDelete(undefined)}
         />
       )}
-    </Layout>
+    </>
   );
 };
 

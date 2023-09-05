@@ -1,84 +1,146 @@
-import { HiOutlineUsers } from 'react-icons/hi';
-import { MdLockOutline, MdOutlineCake } from 'react-icons/md';
+import { useRef, useState } from 'react';
+import { AiOutlineDollarCircle } from 'react-icons/ai';
+import { BsList } from 'react-icons/bs';
+import { FiLogOut, FiMapPin } from 'react-icons/fi';
+import { HiOutlineGift, HiOutlineHome, HiOutlineUsers } from 'react-icons/hi';
+import { LiaFileInvoiceDollarSolid } from 'react-icons/lia';
+import {
+  MdOutlineCake,
+  MdOutlineDiscount,
+  MdOutlineWorkspacePremium,
+} from 'react-icons/md';
 import { TbClipboardText } from 'react-icons/tb';
-import { NavLink } from 'react-router-dom';
-import logo from '../../assets/img/logo.svg';
-import { Container, Logo, MenuItem, MenuText } from './styles';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
+import { useOutside } from '../../hooks/useOutside';
+import {
+  Container,
+  HamburgerButton,
+  LinksList,
+  MenuItem,
+  MenuText,
+  StyledNavLink,
+} from './styles';
 
 const NavBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useOutside(containerRef, () => setIsOpen(false));
+
   return (
-    <Container>
-      <Logo src={logo} alt="Logo" />
-      <MenuItem>
-        <NavLink
-          className={({ isActive }) => (isActive ? 'active' : '')}
-          to="/users"
-          style={({ isActive }) => ({
-            color: isActive ? '#0054BC' : '#C6CEDD',
-            textDecoration: 'none',
-            alignItems: 'center',
-            display: 'flex',
-            width: '100%',
-            paddingLeft: '1.125rem',
-          })}
-        >
-          <HiOutlineUsers className="icon" style={{ fontSize: '1.5rem' }} />
-          <MenuText>Usuários</MenuText>
-        </NavLink>
-      </MenuItem>
-      <MenuItem>
-        <NavLink
-          className={({ isActive }) => (isActive ? 'active' : '')}
-          to="/birthdays"
-          style={({ isActive }) => ({
-            color: isActive ? '#0054BC' : '#C6CEDD',
-            textDecoration: 'none',
-            alignItems: 'center',
-            display: 'flex',
-            width: '100%',
-            paddingLeft: '1.125rem',
-          })}
-        >
-          <MdOutlineCake className="icon" style={{ fontSize: '1.5rem' }} />
-          <MenuText>Aniversariantes</MenuText>
-        </NavLink>
-      </MenuItem>
+    <Container isOpen={isOpen} ref={containerRef}>
+      {/* <Logo src={logo} alt="Logo" /> */}
 
-      <MenuItem>
-        <NavLink
-          className={({ isActive }) => (isActive ? 'active' : '')}
-          to="/terms"
-          style={({ isActive }) => ({
-            color: isActive ? '#0054BC' : '#C6CEDD',
-            textDecoration: 'none',
-            alignItems: 'center',
-            display: 'flex',
-            width: '100%',
-            paddingLeft: '1.125rem',
-          })}
-        >
-          <TbClipboardText className="icon" style={{ fontSize: '1.5rem' }} />
-          <MenuText>Termos de Uso</MenuText>
-        </NavLink>
-      </MenuItem>
+      <HamburgerButton type="button" onClick={() => setIsOpen(prev => !prev)}>
+        <BsList style={{ fontSize: '1.5rem' }} />
+      </HamburgerButton>
 
-      <MenuItem>
-        <NavLink
-          className={({ isActive }) => (isActive ? 'active' : '')}
-          to="/edit-profile"
-          style={({ isActive }) => ({
-            color: isActive ? '#0054BC' : '#C6CEDD',
-            textDecoration: 'none',
-            alignItems: 'center',
-            display: 'flex',
-            width: '100%',
-            paddingLeft: '1.125rem',
-          })}
-        >
-          <MdLockOutline className="icon" style={{ fontSize: '1.5rem' }} />
-          <MenuText>Redefinir Senha</MenuText>
-        </NavLink>
-      </MenuItem>
+      <LinksList>
+        <MenuItem>
+          <StyledNavLink to="/dashboard">
+            <HiOutlineHome className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Home</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/sweepstake">
+            <HiOutlineGift className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Sorteios</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/draw-promos">
+            <MdOutlineDiscount
+              className="icon"
+              style={{ fontSize: '1.5rem' }}
+            />
+            <MenuText>Tipos de título</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/billets">
+            <LiaFileInvoiceDollarSolid
+              className="icon"
+              style={{ fontSize: '1.5rem' }}
+            />
+            <MenuText>Boletos</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/transactions">
+            <AiOutlineDollarCircle
+              className="icon"
+              style={{ fontSize: '1.5rem' }}
+            />
+            <MenuText>Transações</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/locale-permissions">
+            <FiMapPin className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Locais permitidos</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/scores">
+            <MdOutlineWorkspacePremium
+              className="icon"
+              style={{ fontSize: '1.5rem' }}
+            />
+            <MenuText>Scores</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/users">
+            <HiOutlineUsers className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Usuários</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/birthdays">
+            <MdOutlineCake className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Aniversariantes</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/terms">
+            <TbClipboardText className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Termos de Uso</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        {/* <MenuItem>
+          <StyledNavLink to="/faqs">
+            <FiHelpCircle className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Perguntas frequentes</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/how-it-works">
+            <ImCogs className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Como funciona</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/edit-profile">
+            <MdLockOutline className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Redefinir Senha</MenuText>
+          </StyledNavLink>
+        </MenuItem> */}
+      </LinksList>
+
+      <HamburgerButton
+        type="button"
+        onClick={() => {
+          logout();
+          navigate('/');
+        }}
+      >
+        <FiLogOut style={{ fontSize: '1.5rem' }} />
+        <MenuText>Logout</MenuText>
+      </HamburgerButton>
     </Container>
   );
 };

@@ -2,7 +2,6 @@
 import { format, parseISO } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Layout from '../../components/Layout/Layout';
 import SmallPagination from '../../components/Pagination/Pagination';
 import useDebounce from '../../hooks/useDebounce';
 import { IUser } from '../../interfaces/User';
@@ -60,75 +59,74 @@ const Users = () => {
   };
 
   return (
-    <Layout>
-      <Content>
-        <MainForm>
-          <Title>Usuários</Title>
+    <Content>
+      <MainForm>
+        <Title>Usuários</Title>
 
-          <PageHeader>
-            <SearchDivider>
-              <SearchIcon />
-              <SearchInput
-                type="text"
-                id="search"
-                name="search"
-                placeholder="Buscar clientes"
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-              />
-            </SearchDivider>
+        <PageHeader>
+          <SearchDivider>
+            <SearchIcon />
+            <SearchInput
+              type="text"
+              id="search"
+              name="search"
+              placeholder="Buscar clientes"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+          </SearchDivider>
 
-            <HeaderButtons>
-              <Button>Exportar dados</Button>
-              <Button type="button" onClick={() => navigate('/users/create')}>
-                Cadastrar usuário
-              </Button>
-            </HeaderButtons>
-          </PageHeader>
+          <HeaderButtons>
+            <Button>Exportar dados</Button>
+            <Button type="button" onClick={() => navigate('/users/create')}>
+              Cadastrar usuário
+            </Button>
+          </HeaderButtons>
+        </PageHeader>
 
-          <ClientHeader>
-            <ClientHeaderDivider>ID</ClientHeaderDivider>
-            <ClientHeaderDivider>Criação</ClientHeaderDivider>
-            <ClientHeaderDivider>E-mail</ClientHeaderDivider>
-            <ClientHeaderDivider>Nome</ClientHeaderDivider>
-            <ClientHeaderDivider>CPF</ClientHeaderDivider>
-            <ClientHeaderDivider>Telefone</ClientHeaderDivider>
-            {/* <ClientHeaderDivider>Cadastro Completo</ClientHeaderDivider>
+        <ClientHeader>
+          <ClientHeaderDivider>ID</ClientHeaderDivider>
+          <ClientHeaderDivider>Criação</ClientHeaderDivider>
+          <ClientHeaderDivider>E-mail</ClientHeaderDivider>
+          <ClientHeaderDivider>Nome</ClientHeaderDivider>
+          <ClientHeaderDivider>CPF</ClientHeaderDivider>
+          <ClientHeaderDivider>Telefone</ClientHeaderDivider>
+          {/* <ClientHeaderDivider>Cadastro Completo</ClientHeaderDivider>
             <ClientHeaderDivider>Mkt</ClientHeaderDivider>
             <ClientHeaderDivider>Saldo anterior</ClientHeaderDivider>
             <ClientHeaderDivider>Saldo atual</ClientHeaderDivider> */}
-            <ClientHeaderDivider>Cidade</ClientHeaderDivider>
-            <ClientHeaderDivider>Ativo</ClientHeaderDivider>
-            <ClientHeaderDivider />
-          </ClientHeader>
+          <ClientHeaderDivider>Cidade</ClientHeaderDivider>
+          <ClientHeaderDivider>Ativo</ClientHeaderDivider>
+          <ClientHeaderDivider />
+        </ClientHeader>
 
-          <TableBody>
-            {users.map(user => (
-              <ClientComp key={user.id}>
-                <ClientCompDivider>
-                  <CompText>{user.id}</CompText>
-                </ClientCompDivider>
-                <ClientCompDivider>
-                  <CompText>
-                    {format(parseISO(user.createdAt), 'dd/MM/yyyy')}
-                  </CompText>
-                </ClientCompDivider>
+        <TableBody>
+          {users.map(user => (
+            <ClientComp key={user.id}>
+              <ClientCompDivider>
+                <CompText>{user.id}</CompText>
+              </ClientCompDivider>
+              <ClientCompDivider>
+                <CompText>
+                  {format(parseISO(user.createdAt), 'dd/MM/yyyy')}
+                </CompText>
+              </ClientCompDivider>
 
-                <ClientCompDivider>
-                  <CompText title={user.email}>{user.email}</CompText>
-                </ClientCompDivider>
+              <ClientCompDivider>
+                <CompText title={user.email}>{user.email}</CompText>
+              </ClientCompDivider>
 
-                <ClientCompDivider>
-                  <CompText title={user.name || ''}>{user.name}</CompText>
-                </ClientCompDivider>
-                <ClientCompDivider>
-                  <CompText title={user.cpf || ''}>{user.cpf}</CompText>
-                </ClientCompDivider>
+              <ClientCompDivider>
+                <CompText title={user.name || ''}>{user.name}</CompText>
+              </ClientCompDivider>
+              <ClientCompDivider>
+                <CompText title={user.cpf || ''}>{user.cpf}</CompText>
+              </ClientCompDivider>
 
-                <ClientCompDivider>
-                  <CompText title={user.phone || ''}>{user.phone}</CompText>
-                </ClientCompDivider>
-                {/*  <ClientCompDivider>
+              <ClientCompDivider>
+                <CompText title={user.phone || ''}>{user.phone}</CompText>
+              </ClientCompDivider>
+              {/*  <ClientCompDivider>
                   <CompText>Sim</CompText>
                 </ClientCompDivider>
                 <ClientCompDivider>
@@ -140,30 +138,29 @@ const Users = () => {
                 <ClientCompDivider>
                   <CompText>0,00</CompText>
                 </ClientCompDivider> */}
-                <ClientCompDivider>
-                  <CompText title={user.city || ''}>{user.city}</CompText>
-                </ClientCompDivider>
-                <ClientCompDivider>
-                  <CompText>{user?.blocked ? 'Não' : 'Sim'}</CompText>
-                </ClientCompDivider>
+              <ClientCompDivider>
+                <CompText title={user.city || ''}>{user.city}</CompText>
+              </ClientCompDivider>
+              <ClientCompDivider>
+                <CompText>{user?.blocked ? 'Não' : 'Sim'}</CompText>
+              </ClientCompDivider>
 
-                <ClientCompDivider>
-                  <VisualizeIcon
-                    onClick={() => navigate(`/users/client/${user.id}`)}
-                  />
-                </ClientCompDivider>
-              </ClientComp>
-            ))}
-          </TableBody>
+              <ClientCompDivider>
+                <VisualizeIcon
+                  onClick={() => navigate(`/users/client/${user.id}`)}
+                />
+              </ClientCompDivider>
+            </ClientComp>
+          ))}
+        </TableBody>
 
-          <SmallPagination
-            total={1}
-            currentPage={clientPage}
-            handleChange={() => setClientPage(clientPage + 1)}
-          />
-        </MainForm>
-      </Content>
-    </Layout>
+        <SmallPagination
+          total={1}
+          currentPage={clientPage}
+          handleChange={() => setClientPage(clientPage + 1)}
+        />
+      </MainForm>
+    </Content>
   );
 };
 

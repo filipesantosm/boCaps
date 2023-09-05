@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Layout from '../../components/Layout/Layout';
+import DrawPromoFormModal from '../../components/DrawPromoFormModal/DrawPromoFormModal';
 import SmallPagination from '../../components/Pagination/Pagination';
 import { DrawPromo } from '../../interfaces/Draw';
 import { PaginatedResponse } from '../../interfaces/Paginated';
@@ -19,7 +19,6 @@ import {
   TableBody,
   Title,
 } from './styles';
-import DrawPromoFormModal from '../../components/DrawPromoFormModal/DrawPromoFormModal';
 
 const DrawPromos = () => {
   const [drawPromos, setDrawPromos] = useState<DrawPromo[]>([]);
@@ -52,52 +51,50 @@ const DrawPromos = () => {
   };
 
   return (
-    <Layout>
-      <Content>
-        <Title>Tipos de título</Title>
-        <HeaderButtons>
-          <Button type="button" onClick={() => setShowDrawPromoModal(true)}>
-            Cadastrar tipo
-          </Button>
-        </HeaderButtons>
-        <DrawPromosHeader>
-          <DrawPromoHeaderDivider>Nome</DrawPromoHeaderDivider>
-          <DrawPromoHeaderDivider>Valor</DrawPromoHeaderDivider>
-          <DrawPromoHeaderDivider>Quantidade</DrawPromoHeaderDivider>
-          <DrawPromoHeaderDivider />
-        </DrawPromosHeader>
+    <Content>
+      <Title>Tipos de título</Title>
+      <HeaderButtons>
+        <Button type="button" onClick={() => setShowDrawPromoModal(true)}>
+          Cadastrar tipo
+        </Button>
+      </HeaderButtons>
+      <DrawPromosHeader>
+        <DrawPromoHeaderDivider>Nome</DrawPromoHeaderDivider>
+        <DrawPromoHeaderDivider>Valor</DrawPromoHeaderDivider>
+        <DrawPromoHeaderDivider>Quantidade</DrawPromoHeaderDivider>
+        <DrawPromoHeaderDivider />
+      </DrawPromosHeader>
 
-        <TableBody>
-          {drawPromos.map(drawPromo => (
-            <DrawPromoRow key={drawPromo.id}>
-              <DrawPromoData>
-                <DataText>{drawPromo.attributes.Campanha}</DataText>
-              </DrawPromoData>
-              <DrawPromoData>
-                <DataText>
-                  {BRLMoneyFormater.format(drawPromo.attributes.value)}
-                </DataText>
-              </DrawPromoData>
-              <DrawPromoData>
-                <DataText>{drawPromo.attributes.quantity}</DataText>
-              </DrawPromoData>
-              <DrawPromoData>
-                <EditIcon
-                  onClick={() => {
-                    setShowDrawPromoModal(true);
-                    setSelectedDrawPromo(drawPromo);
-                  }}
-                />
-              </DrawPromoData>
-            </DrawPromoRow>
-          ))}
-        </TableBody>
-        <SmallPagination
-          total={maximumPage}
-          currentPage={page}
-          handleChange={(_, newPage) => setPage(newPage)}
-        />
-      </Content>
+      <TableBody>
+        {drawPromos.map(drawPromo => (
+          <DrawPromoRow key={drawPromo.id}>
+            <DrawPromoData>
+              <DataText>{drawPromo.attributes.Campanha}</DataText>
+            </DrawPromoData>
+            <DrawPromoData>
+              <DataText>
+                {BRLMoneyFormater.format(drawPromo.attributes.value)}
+              </DataText>
+            </DrawPromoData>
+            <DrawPromoData>
+              <DataText>{drawPromo.attributes.quantity}</DataText>
+            </DrawPromoData>
+            <DrawPromoData>
+              <EditIcon
+                onClick={() => {
+                  setShowDrawPromoModal(true);
+                  setSelectedDrawPromo(drawPromo);
+                }}
+              />
+            </DrawPromoData>
+          </DrawPromoRow>
+        ))}
+      </TableBody>
+      <SmallPagination
+        total={maximumPage}
+        currentPage={page}
+        handleChange={(_, newPage) => setPage(newPage)}
+      />
       {showDrawPromoModal && (
         <DrawPromoFormModal
           drawPromo={selectedDrawPromo}
@@ -112,7 +109,7 @@ const DrawPromos = () => {
           }}
         />
       )}
-    </Layout>
+    </Content>
   );
 };
 

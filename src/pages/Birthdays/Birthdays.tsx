@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { GiSettingsKnobs } from 'react-icons/gi';
-import Layout from '../../components/Layout/Layout';
 import SmallPagination from '../../components/Pagination/Pagination';
 import { IUser } from '../../interfaces/User';
 import api from '../../services/api';
@@ -60,51 +59,50 @@ const Birthdays = () => {
   };
 
   return (
-    <Layout>
-      <Container>
-        <TitleDivider>
-          <Title>Aniversariantes</Title>
-        </TitleDivider>
+    <Container>
+      <TitleDivider>
+        <Title>Aniversariantes</Title>
+      </TitleDivider>
 
-        <PageHeader>
-          <FilterButton
-            type="button"
-            onClick={() => setShowFilters(prev => !prev)}
-            isOpen={showFilters}
-            title={showFilters ? 'Esconder filtros' : 'Mostrar filtros'}
-          >
-            <GiSettingsKnobs
-              style={{
-                transform: 'rotate(90deg)',
-              }}
-            />
-          </FilterButton>
-          <Button>Exportar dados</Button>
-        </PageHeader>
+      <PageHeader>
+        <FilterButton
+          type="button"
+          onClick={() => setShowFilters(prev => !prev)}
+          isOpen={showFilters}
+          title={showFilters ? 'Esconder filtros' : 'Mostrar filtros'}
+        >
+          <GiSettingsKnobs
+            style={{
+              transform: 'rotate(90deg)',
+            }}
+          />
+        </FilterButton>
+        <Button>Exportar dados</Button>
+      </PageHeader>
 
-        <Content>
-          {showFilters && (
-            <FilterContainer>
-              <FilterSection>
-                <FilterTitle>Meses</FilterTitle>
-                {monthOptions.map(monthOption => (
-                  <FilterItem key={monthOption.value}>
-                    {monthOption.label}
-                    <FilterCheckbox
-                      type="checkbox"
-                      checked={birthdayMonth === monthOption.value}
-                      onClick={e => {
-                        if (birthdayMonth === monthOption.value) {
-                          setBirthdayMonth(undefined);
-                        } else {
-                          setBirthdayMonth(monthOption.value);
-                        }
-                      }}
-                    />
-                  </FilterItem>
-                ))}
-              </FilterSection>
-              {/*  <FilterSection>
+      <Content>
+        {showFilters && (
+          <FilterContainer>
+            <FilterSection>
+              <FilterTitle>Meses</FilterTitle>
+              {monthOptions.map(monthOption => (
+                <FilterItem key={monthOption.value}>
+                  {monthOption.label}
+                  <FilterCheckbox
+                    type="checkbox"
+                    checked={birthdayMonth === monthOption.value}
+                    onClick={e => {
+                      if (birthdayMonth === monthOption.value) {
+                        setBirthdayMonth(undefined);
+                      } else {
+                        setBirthdayMonth(monthOption.value);
+                      }
+                    }}
+                  />
+                </FilterItem>
+              ))}
+            </FilterSection>
+            {/*  <FilterSection>
                 <FilterTitle>Cidade</FilterTitle>
                 {cityOptions.map(cityOption => (
                   <FilterItem key={cityOption.value}>
@@ -113,52 +111,51 @@ const Birthdays = () => {
                   </FilterItem>
                 ))}
               </FilterSection> */}
-            </FilterContainer>
-          )}
-          <MainForm>
-            <ClientHeader>
-              <ClientHeaderDivider>CPF</ClientHeaderDivider>
-              <ClientHeaderDivider>Nome</ClientHeaderDivider>
-              <ClientHeaderDivider>Aniversário</ClientHeaderDivider>
-              <ClientHeaderDivider>Telefone</ClientHeaderDivider>
-              <ClientHeaderDivider>E-mail</ClientHeaderDivider>
-              <ClientHeaderDivider>Cidade</ClientHeaderDivider>
-            </ClientHeader>
-            <TableBody>
-              {users.map(user => (
-                <ClientComp key={user.id}>
-                  <ClientCompDivider>
-                    <CompText>{user.cpf}</CompText>
-                  </ClientCompDivider>
-                  <ClientCompDivider>
-                    <CompText>{user.name}</CompText>
-                  </ClientCompDivider>
-                  <ClientCompDivider>
-                    <CompText>
-                      {formatDateString(user.dateBirth, 'dd/MM/yyyy')}
-                    </CompText>
-                  </ClientCompDivider>
-                  <ClientCompDivider>
-                    <CompText>{user.phone}</CompText>
-                  </ClientCompDivider>
-                  <ClientCompDivider>
-                    <CompText>{user.email}</CompText>
-                  </ClientCompDivider>
-                  <ClientCompDivider>
-                    <CompText>{user.city}</CompText>
-                  </ClientCompDivider>
-                </ClientComp>
-              ))}
-            </TableBody>
-            <SmallPagination
-              total={1}
-              currentPage={clientPage}
-              handleChange={(e, page) => setClientPage(page)}
-            />
-          </MainForm>
-        </Content>
-      </Container>
-    </Layout>
+          </FilterContainer>
+        )}
+        <MainForm>
+          <ClientHeader>
+            <ClientHeaderDivider>CPF</ClientHeaderDivider>
+            <ClientHeaderDivider>Nome</ClientHeaderDivider>
+            <ClientHeaderDivider>Aniversário</ClientHeaderDivider>
+            <ClientHeaderDivider>Telefone</ClientHeaderDivider>
+            <ClientHeaderDivider>E-mail</ClientHeaderDivider>
+            <ClientHeaderDivider>Cidade</ClientHeaderDivider>
+          </ClientHeader>
+          <TableBody>
+            {users.map(user => (
+              <ClientComp key={user.id}>
+                <ClientCompDivider>
+                  <CompText>{user.cpf}</CompText>
+                </ClientCompDivider>
+                <ClientCompDivider>
+                  <CompText>{user.name}</CompText>
+                </ClientCompDivider>
+                <ClientCompDivider>
+                  <CompText>
+                    {formatDateString(user.dateBirth, 'dd/MM/yyyy')}
+                  </CompText>
+                </ClientCompDivider>
+                <ClientCompDivider>
+                  <CompText>{user.phone}</CompText>
+                </ClientCompDivider>
+                <ClientCompDivider>
+                  <CompText>{user.email}</CompText>
+                </ClientCompDivider>
+                <ClientCompDivider>
+                  <CompText>{user.city}</CompText>
+                </ClientCompDivider>
+              </ClientComp>
+            ))}
+          </TableBody>
+          <SmallPagination
+            total={1}
+            currentPage={clientPage}
+            handleChange={(e, page) => setClientPage(page)}
+          />
+        </MainForm>
+      </Content>
+    </Container>
   );
 };
 

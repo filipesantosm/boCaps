@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TbEditCircle } from 'react-icons/tb';
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
-import Layout from '../../components/Layout/Layout';
 import SuccessModal from '../../components/SuccessModal/SuccessModal';
 import { ITerm } from '../../interfaces/Terms';
 import api from '../../services/api';
@@ -66,63 +65,61 @@ const WhoWeAre = () => {
   };
 
   return (
-    <Layout>
-      <Content>
-        <MainForm>
-          <TitleContainer>
-            <Title>Quem somos</Title>
-          </TitleContainer>
+    <Content>
+      <MainForm>
+        <TitleContainer>
+          <Title>Quem somos</Title>
+        </TitleContainer>
 
-          <TextArea
-            id="text"
-            name="text"
-            value={terms}
-            readOnly={!isEditing}
-            onChange={e => setTerms(e.target.value)}
-            style={{
-              marginTop: '2rem',
-            }}
-          />
+        <TextArea
+          id="text"
+          name="text"
+          value={terms}
+          readOnly={!isEditing}
+          onChange={e => setTerms(e.target.value)}
+          style={{
+            marginTop: '2rem',
+          }}
+        />
 
-          {isEditing ? (
-            <ButtonDivider>
-              <CancelButton type="button" onClick={() => setIsEditing(false)}>
-                Cancelar
-              </CancelButton>
+        {isEditing ? (
+          <ButtonDivider>
+            <CancelButton type="button" onClick={() => setIsEditing(false)}>
+              Cancelar
+            </CancelButton>
 
-              <EditButton
-                type="button"
-                onClick={() => setEditModal(true)}
-                disabled={isLoading}
-              >
-                Salvar e enviar
-              </EditButton>
-            </ButtonDivider>
-          ) : (
-            <ButtonDivider>
-              <EditButton type="button" onClick={() => setIsEditing(true)}>
-                <TbEditCircle size={28} />
-                Editar
-              </EditButton>
-            </ButtonDivider>
-          )}
-        </MainForm>
-        {editModal && (
-          <ConfirmModal
-            message="Tem certeza que deseja atualizar?"
-            onClose={() => setEditModal(false)}
-            onConfirm={handleConfirmEdit}
-          />
+            <EditButton
+              type="button"
+              onClick={() => setEditModal(true)}
+              disabled={isLoading}
+            >
+              Salvar e enviar
+            </EditButton>
+          </ButtonDivider>
+        ) : (
+          <ButtonDivider>
+            <EditButton type="button" onClick={() => setIsEditing(true)}>
+              <TbEditCircle size={28} />
+              Editar
+            </EditButton>
+          </ButtonDivider>
         )}
+      </MainForm>
+      {editModal && (
+        <ConfirmModal
+          message="Tem certeza que deseja atualizar?"
+          onClose={() => setEditModal(false)}
+          onConfirm={handleConfirmEdit}
+        />
+      )}
 
-        {editSuccess && (
-          <SuccessModal
-            onClose={() => setEditSuccess(false)}
-            message="Atualizado com sucesso!"
-          />
-        )}
-      </Content>
-    </Layout>
+      {editSuccess && (
+        <SuccessModal
+          onClose={() => setEditSuccess(false)}
+          message="Atualizado com sucesso!"
+        />
+      )}
+    </Content>
   );
 };
 
