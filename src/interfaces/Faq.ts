@@ -23,3 +23,16 @@ export interface FaqQuestionAttributes {
   updatedAt: string;
   publishedAt: string;
 }
+
+export interface IFaqVideo {
+  id: number;
+  attributes: Attributes;
+}
+
+export interface Attributes {
+  url: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+}

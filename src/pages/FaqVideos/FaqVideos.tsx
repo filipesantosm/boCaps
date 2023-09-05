@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { AiOutlineEye } from 'react-icons/ai';
 import { FiEdit3, FiTrash2 } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
-import FaqFormModal from '../../components/FaqFormModal/FaqFormModal';
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
+import FaqVideoFormModal from '../../components/FaqVideoFormModal/FaqVideoFormModal';
 import Layout from '../../components/Layout/Layout';
 import Loading from '../../components/Loading/Loading';
+import PageTitle from '../../components/PageTitle/PageTitle';
 import SmallPagination from '../../components/Pagination/Pagination';
-import { IFaq } from '../../interfaces/Faq';
+import { IFaqVideo } from '../../interfaces/Faq';
 import { PaginatedResponse } from '../../interfaces/Paginated';
 import api from '../../services/api';
 import handleError, { handleSuccess } from '../../services/handleToast';
@@ -25,40 +25,38 @@ import {
   TableHeaderData,
   TableHeaderRow,
   TableRow,
-  Title,
 } from './styles';
-import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 
-const Faqs = () => {
-  const navigate = useNavigate();
-
-  const [search, setSearch] = useState('');
+const FaqVideos = () => {
+  const [faqVideos, setFaqVideos] = useState<IFaqVideo[]>([]);
   const [page, setPage] = useState(1);
   const [maximumPage, setMaximumPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [search, setSearch] = useState('');
   const [idToDelete, setIdToDelete] = useState<number>();
 
-  const [selectedFaq, setSelectedFaq] = useState<IFaq>();
+  const [selectedFaqVideo, setSelectedFaqVideo] = useState<IFaqVideo>();
   const [showFormModal, setShowFormModal] = useState(false);
 
-  const [faqs, setFaqs] = useState<IFaq[]>([]);
-
   useEffect(() => {
-    getFaqs();
+    getFaqVideos();
   }, [page]);
 
-  const getFaqs = async () => {
+  const getFaqVideos = async () => {
     setIsLoading(true);
     try {
-      const { data } = await api.get<PaginatedResponse<IFaq>>('/faqs', {
-        params: {
-          'pagination[pageSize]': 10,
-          'pagination[page]': page,
-          'filters[title][$containsi]': search || undefined,
+      const { data } = await api.get<PaginatedResponse<IFaqVideo>>(
+        '/faq-videos',
+        {
+          params: {
+            'pagination[pageSize]': 10,
+            'pagination[page]': page,
+            'filters[title][$containsi]': search || undefined,
+          },
         },
-      });
+      );
 
-      setFaqs(data.data);
+      setFaqVideos(data.data);
       setMaximumPage(data.meta.pagination.pageCount);
     } catch (error) {
       handleError(error);
@@ -71,7 +69,7 @@ const Faqs = () => {
     try {
       await api.delete(`/faqs/${idToDelete}`);
 
-      getFaqs();
+      getFaqVideos();
       handleSuccess('Pergunta excluída com sucesso!');
     } catch (error) {
       handleError(error);
@@ -81,13 +79,14 @@ const Faqs = () => {
   return (
     <Layout>
       <Content>
-        <Title>Categorias de perguntas</Title>
+        <PageTitle>Ajuda - Vídeos</PageTitle>
+
         <PageHeader>
           <SearchDivider
             onSubmit={e => {
               e.preventDefault();
               if (page === 1) {
-                getFaqs();
+                getFaqVideos();
               } else {
                 setPage(1);
               }
@@ -98,7 +97,7 @@ const Faqs = () => {
               type="text"
               id="search"
               name="search"
-              placeholder="Buscar pelo título da categoria"
+              placeholder="Buscar pelo título do vídeo"
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
@@ -107,44 +106,30 @@ const Faqs = () => {
             </Button>
           </SearchDivider>
           <Button type="button" onClick={() => setShowFormModal(true)}>
-            Cadastrar categoria
+            Cadastrar vídeo
           </Button>
         </PageHeader>
         <TableHeaderRow>
           <TableHeaderData>Título</TableHeaderData>
-          <TableHeaderData>Descrição</TableHeaderData>
+          <TableHeaderData>Link YouTube</TableHeaderData>
           <TableHeaderData>Ações</TableHeaderData>
         </TableHeaderRow>
         <TableBody>
-          {faqs.map(faq => (
-            <TableRow key={faq.id}>
+          {faqVideos.map(faqVideo => (
+            <TableRow key={faqVideo.id}>
               <TableData>
-                <DataText>{faq.attributes.title}</DataText>
+                <DataText>{faqVideo.attributes.title}</DataText>
               </TableData>
               <TableData>
-                <DataText>{faq.attributes.description}</DataText>
+                <DataText>{faqVideo.attributes.url}</DataText>
               </TableData>
               <TableData>
                 <ButtonsContainer>
                   <IconButton
                     type="button"
                     onClick={() => {
-                      navigate(`/faqs/${faq.id}`);
-                    }}
-                    title="Visualizar perguntas"
-                  >
-                    <AiOutlineEye
-                      style={{
-                        fontSize: '2rem',
-                      }}
-                    />
-                  </IconButton>
-
-                  <IconButton
-                    type="button"
-                    onClick={() => {
                       setShowFormModal(true);
-                      setSelectedFaq(faq);
+                      setSelectedFaqVideo(faqVideo);
                     }}
                     title="Editar categoria"
                   >
@@ -154,7 +139,7 @@ const Faqs = () => {
                   <IconButton
                     type="button"
                     onClick={() => {
-                      setIdToDelete(faq.id);
+                      setIdToDelete(faqVideo.id);
                     }}
                     title="Excluir categoria"
                   >
@@ -170,31 +155,31 @@ const Faqs = () => {
           handleChange={(_, newPage) => setPage(newPage)}
           total={maximumPage}
         />
+        {showFormModal && (
+          <FaqVideoFormModal
+            onClose={() => {
+              setShowFormModal(false);
+              setSelectedFaqVideo(undefined);
+            }}
+            onFinishSubmit={() => {
+              setShowFormModal(false);
+              setSelectedFaqVideo(undefined);
+              getFaqVideos();
+            }}
+            initialFaqVideo={selectedFaqVideo}
+          />
+        )}
+        {idToDelete && (
+          <ConfirmModal
+            message="Tem certeza que deseja excluir esse vídeo?"
+            onClose={() => setIdToDelete(undefined)}
+            onConfirm={handleConfirmDelete}
+            onCancel={() => setIdToDelete(undefined)}
+          />
+        )}
       </Content>
-      {showFormModal && (
-        <FaqFormModal
-          onClose={() => {
-            setShowFormModal(false);
-            setSelectedFaq(undefined);
-          }}
-          onFinishSubmit={() => {
-            setShowFormModal(false);
-            setSelectedFaq(undefined);
-            getFaqs();
-          }}
-          initialFaq={selectedFaq}
-        />
-      )}
-      {idToDelete && (
-        <ConfirmModal
-          message="Tem certeza que deseja excluir essa categoria?"
-          onClose={() => setIdToDelete(undefined)}
-          onConfirm={handleConfirmDelete}
-          onCancel={() => setIdToDelete(undefined)}
-        />
-      )}
     </Layout>
   );
 };
 
-export default Faqs;
+export default FaqVideos;

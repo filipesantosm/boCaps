@@ -160,7 +160,7 @@ export const TableBody = styled.div`
 
   padding: 0.25rem;
 
-  max-height: 60vh;
+  max-height: 58vh;
 
   padding-top: 1rem;
   padding-bottom: 1rem;

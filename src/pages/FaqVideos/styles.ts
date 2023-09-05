@@ -8,15 +8,6 @@ export const Content = styled.div`
   flex-direction: column;
 `;
 
-export const Title = styled.h1`
-  font-weight: 600;
-  font-size: 3rem;
-
-  color: ${({ theme }) => theme.colors.primary};
-
-  margin-bottom: 2rem;
-`;
-
 export const PageHeader = styled.div`
   width: 100%;
 

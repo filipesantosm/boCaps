@@ -5,6 +5,7 @@ import {
   Routes,
 } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+
 import Billets from '../pages/Billets/Billets';
 import Birthdays from '../pages/Birthdays/Birthdays';
 import ClientDetails from '../pages/ClientDetails/ClientDetails';
@@ -13,7 +14,11 @@ import Dashboard from '../pages/Dashboard/Dashboard';
 import DrawPromos from '../pages/DrawPromos/DrawPromos';
 import Draws from '../pages/Draws/Draws';
 import EditProfile from '../pages/EditProfile/EditProfile';
+import FaqQuestions from '../pages/FaqQuestions/FaqQuestions';
+import FaqVideos from '../pages/FaqVideos/FaqVideos';
+import Faqs from '../pages/Faqs/Faqs';
 import HowItWorks from '../pages/HowItWorks/HowItWorks';
+import Institutions from '../pages/Institutions/Institutions';
 import LocalePermissions from '../pages/LocalePermissions/LocalePermissions';
 import Login from '../pages/Login/Login';
 import Scores from '../pages/Scores/Scores';
@@ -23,7 +28,6 @@ import Transactions from '../pages/Transactions/Transactions';
 import Users from '../pages/Users/Users';
 import WhoWeAre from '../pages/WhoWeAre/WhoWeAre';
 import PrivateRoute from './PrivateRoute';
-import Institutions from '../pages/Institutions/Institutions';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -52,8 +56,10 @@ const AppRoutes = () => {
 
           <Route path="/locale-permissions" element={<LocalePermissions />} />
 
-          {/* <Route path="/faqs" element={<Faqs />} />
-        <Route path="/faqs/:faqId" element={<DrawPromos />} /> */}
+          <Route path="/faqs" element={<Faqs />} index />
+          <Route path="/faqs/:faqId" element={<FaqQuestions />} />
+          <Route path="/faq-videos" element={<FaqVideos />} />
+
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/who-we-are" element={<WhoWeAre />} />
           <Route path="/institutions" element={<Institutions />} />

@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
-import { AiOutlineEye } from 'react-icons/ai';
 import { FiEdit3, FiTrash2 } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
-import FaqFormModal from '../../components/FaqFormModal/FaqFormModal';
+import { useParams } from 'react-router-dom';
 import Layout from '../../components/Layout/Layout';
 import Loading from '../../components/Loading/Loading';
-import SmallPagination from '../../components/Pagination/Pagination';
-import { IFaq } from '../../interfaces/Faq';
+import PageTitle from '../../components/PageTitle/PageTitle';
+import { IFaqQuestion } from '../../interfaces/Faq';
 import { PaginatedResponse } from '../../interfaces/Paginated';
 import api from '../../services/api';
 import handleError, { handleSuccess } from '../../services/handleToast';
@@ -25,40 +23,44 @@ import {
   TableHeaderData,
   TableHeaderRow,
   TableRow,
-  Title,
 } from './styles';
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
+import SmallPagination from '../../components/Pagination/Pagination';
+import FaqQuestionFormModal from '../../components/FaqQuestionFormModal/FaqQuestionFormModal';
 
-const Faqs = () => {
-  const navigate = useNavigate();
-
+const FaqQuestions = () => {
+  const { faqId } = useParams();
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [maximumPage, setMaximumPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [idToDelete, setIdToDelete] = useState<number>();
-
-  const [selectedFaq, setSelectedFaq] = useState<IFaq>();
   const [showFormModal, setShowFormModal] = useState(false);
 
-  const [faqs, setFaqs] = useState<IFaq[]>([]);
+  const [faqQuestions, setFaqQuestions] = useState<IFaqQuestion[]>([]);
+  const [selectedFaqQuestion, setSelectedFaqQuestion] =
+    useState<IFaqQuestion>();
+  const [idToDelete, setIdToDelete] = useState<number>();
 
   useEffect(() => {
-    getFaqs();
-  }, [page]);
+    getFaqQuestions();
+  }, [page, faqId]);
 
-  const getFaqs = async () => {
+  const getFaqQuestions = async () => {
     setIsLoading(true);
     try {
-      const { data } = await api.get<PaginatedResponse<IFaq>>('/faqs', {
-        params: {
-          'pagination[pageSize]': 10,
-          'pagination[page]': page,
-          'filters[title][$containsi]': search || undefined,
+      const { data } = await api.get<PaginatedResponse<IFaqQuestion>>(
+        '/faq-questions',
+        {
+          params: {
+            'pagination[pageSize]': 10,
+            'pagination[page]': page,
+            'filters[question][$containsi]': search || undefined,
+            'filters[faq][id][$eq]': faqId,
+          },
         },
-      });
+      );
 
-      setFaqs(data.data);
+      setFaqQuestions(data.data);
       setMaximumPage(data.meta.pagination.pageCount);
     } catch (error) {
       handleError(error);
@@ -69,9 +71,9 @@ const Faqs = () => {
 
   const handleConfirmDelete = async () => {
     try {
-      await api.delete(`/faqs/${idToDelete}`);
+      await api.delete(`/faq-questions/${idToDelete}`);
 
-      getFaqs();
+      getFaqQuestions();
       handleSuccess('Pergunta excluída com sucesso!');
     } catch (error) {
       handleError(error);
@@ -81,13 +83,13 @@ const Faqs = () => {
   return (
     <Layout>
       <Content>
-        <Title>Categorias de perguntas</Title>
+        <PageTitle>Perguntas</PageTitle>
         <PageHeader>
           <SearchDivider
             onSubmit={e => {
               e.preventDefault();
               if (page === 1) {
-                getFaqs();
+                getFaqQuestions();
               } else {
                 setPage(1);
               }
@@ -98,7 +100,7 @@ const Faqs = () => {
               type="text"
               id="search"
               name="search"
-              placeholder="Buscar pelo título da categoria"
+              placeholder="Buscar pela pergunta"
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
@@ -107,56 +109,41 @@ const Faqs = () => {
             </Button>
           </SearchDivider>
           <Button type="button" onClick={() => setShowFormModal(true)}>
-            Cadastrar categoria
+            Cadastrar pergunta
           </Button>
         </PageHeader>
         <TableHeaderRow>
-          <TableHeaderData>Título</TableHeaderData>
-          <TableHeaderData>Descrição</TableHeaderData>
+          <TableHeaderData>Pergunta</TableHeaderData>
+          <TableHeaderData>Resposta</TableHeaderData>
           <TableHeaderData>Ações</TableHeaderData>
         </TableHeaderRow>
         <TableBody>
-          {faqs.map(faq => (
-            <TableRow key={faq.id}>
+          {faqQuestions.map(faqQuestion => (
+            <TableRow key={faqQuestion.id}>
               <TableData>
-                <DataText>{faq.attributes.title}</DataText>
+                <DataText>{faqQuestion.attributes.question}</DataText>
               </TableData>
               <TableData>
-                <DataText>{faq.attributes.description}</DataText>
+                <DataText>{faqQuestion.attributes.response}</DataText>
               </TableData>
               <TableData>
                 <ButtonsContainer>
                   <IconButton
                     type="button"
                     onClick={() => {
-                      navigate(`/faqs/${faq.id}`);
-                    }}
-                    title="Visualizar perguntas"
-                  >
-                    <AiOutlineEye
-                      style={{
-                        fontSize: '2rem',
-                      }}
-                    />
-                  </IconButton>
-
-                  <IconButton
-                    type="button"
-                    onClick={() => {
                       setShowFormModal(true);
-                      setSelectedFaq(faq);
+                      setSelectedFaqQuestion(faqQuestion);
                     }}
-                    title="Editar categoria"
+                    title="Editar pergunta"
                   >
                     <FiEdit3 />
                   </IconButton>
-
                   <IconButton
                     type="button"
                     onClick={() => {
-                      setIdToDelete(faq.id);
+                      setIdToDelete(faqQuestion.id);
                     }}
-                    title="Excluir categoria"
+                    title="Excluir pergunta"
                   >
                     <FiTrash2 />
                   </IconButton>
@@ -171,30 +158,26 @@ const Faqs = () => {
           total={maximumPage}
         />
       </Content>
-      {showFormModal && (
-        <FaqFormModal
-          onClose={() => {
-            setShowFormModal(false);
-            setSelectedFaq(undefined);
-          }}
-          onFinishSubmit={() => {
-            setShowFormModal(false);
-            setSelectedFaq(undefined);
-            getFaqs();
-          }}
-          initialFaq={selectedFaq}
-        />
-      )}
       {idToDelete && (
         <ConfirmModal
-          message="Tem certeza que deseja excluir essa categoria?"
+          message="Tem certeza que deseja excluir essa pergunta?"
           onClose={() => setIdToDelete(undefined)}
           onConfirm={handleConfirmDelete}
           onCancel={() => setIdToDelete(undefined)}
+        />
+      )}
+      {showFormModal && (
+        <FaqQuestionFormModal
+          faqId={faqId || ''}
+          onClose={() => {
+            setShowFormModal(false);
+            setSelectedFaqQuestion(undefined);
+          }}
+          initialFaqQuestion={selectedFaqQuestion}
         />
       )}
     </Layout>
   );
 };
 
-export default Faqs;
+export default FaqQuestions;
