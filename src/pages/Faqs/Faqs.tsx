@@ -128,7 +128,7 @@ const Faqs = () => {
                   <IconButton
                     type="button"
                     onClick={() => {
-                      navigate(`/faqs/${faq.id}`);
+                      navigate(`/infos/faqs/${faq.id}`);
                     }}
                     title="Visualizar perguntas"
                   >

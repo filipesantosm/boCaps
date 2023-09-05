@@ -128,11 +128,11 @@ export const ButtonsContainer = styled.div`
   margin-left: auto;
 
   width: 100%;
-  max-width: 25rem;
+  max-width: 40rem;
 
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.75rem;
 `;
 
 export const FilledButton = styled.button`

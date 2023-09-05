@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import PlaceholderImage from '../../assets/img/placeholder-image.jpg';
 import { IInstitution } from '../../interfaces/Institution';
 import api from '../../services/api';
@@ -21,6 +22,7 @@ import {
   ImageWrapper,
   Input,
   Label,
+  OutlinedButton,
   TextArea,
 } from './styles';
 
@@ -35,6 +37,7 @@ interface IInstitutionForm {
 }
 
 const InstitutionForm = ({ initialInstitution, onFinish }: Props) => {
+  const navigate = useNavigate();
   const [image, setImage] = useState<File>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const {
@@ -137,6 +140,7 @@ const InstitutionForm = ({ initialInstitution, onFinish }: Props) => {
         )}
       </Field>
       <ButtonsContainer>
+        <OutlinedButton onClick={() => navigate(-1)}>Voltar</OutlinedButton>
         <FilledButton disabled={isSubmitting}>
           {isSubmitting ? (
             <Loading iconColor="#ffffff" iconFontSize="1.5rem" />

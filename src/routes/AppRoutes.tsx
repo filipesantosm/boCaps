@@ -18,6 +18,7 @@ import FaqQuestions from '../pages/FaqQuestions/FaqQuestions';
 import FaqVideos from '../pages/FaqVideos/FaqVideos';
 import Faqs from '../pages/Faqs/Faqs';
 import HowItWorks from '../pages/HowItWorks/HowItWorks';
+import Information from '../pages/Information/Information';
 import Institutions from '../pages/Institutions/Institutions';
 import LocalePermissions from '../pages/LocalePermissions/LocalePermissions';
 import Login from '../pages/Login/Login';
@@ -56,13 +57,13 @@ const AppRoutes = () => {
 
           <Route path="/locale-permissions" element={<LocalePermissions />} />
 
-          <Route path="/faqs" element={<Faqs />} index />
-          <Route path="/faqs/:faqId" element={<FaqQuestions />} />
-          <Route path="/faq-videos" element={<FaqVideos />} />
-
-          <Route path="/how-it-works" element={<HowItWorks />} />
+          <Route path="/infos" element={<Information />} index />
+          <Route path="/infos/faqs" element={<Faqs />} index />
+          <Route path="/infos/faqs/:faqId" element={<FaqQuestions />} />
+          <Route path="/infos/faq-videos" element={<FaqVideos />} />
+          <Route path="/infos/how-it-works" element={<HowItWorks />} />
+          <Route path="/infos/institutions" element={<Institutions />} />
           <Route path="/who-we-are" element={<WhoWeAre />} />
-          <Route path="/institutions" element={<Institutions />} />
 
           <Route path="/billets" element={<Billets />} />
 

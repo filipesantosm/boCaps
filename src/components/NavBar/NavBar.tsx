@@ -1,7 +1,7 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AiOutlineDollarCircle } from 'react-icons/ai';
 import { BsList } from 'react-icons/bs';
-import { FiLogOut, FiMapPin } from 'react-icons/fi';
+import { FiHelpCircle, FiLogOut, FiMapPin } from 'react-icons/fi';
 import { HiOutlineGift, HiOutlineHome, HiOutlineUsers } from 'react-icons/hi';
 import { LiaFileInvoiceDollarSolid } from 'react-icons/lia';
 import {
@@ -10,7 +10,7 @@ import {
   MdOutlineWorkspacePremium,
 } from 'react-icons/md';
 import { TbClipboardText } from 'react-icons/tb';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useOutside } from '../../hooks/useOutside';
 import {
@@ -26,9 +26,14 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const containerRef = useRef<HTMLDivElement>(null);
 
   useOutside(containerRef, () => setIsOpen(false));
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   return (
     <Container isOpen={isOpen} ref={containerRef}>
@@ -109,6 +114,12 @@ const NavBar = () => {
           <StyledNavLink to="/terms">
             <TbClipboardText className="icon" style={{ fontSize: '1.5rem' }} />
             <MenuText>Termos de Uso</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/infos">
+            <FiHelpCircle className="icon" style={{ fontSize: '1.5rem' }} />
+            <MenuText>Informações</MenuText>
           </StyledNavLink>
         </MenuItem>
         {/* <MenuItem>
