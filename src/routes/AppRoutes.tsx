@@ -23,6 +23,7 @@ import Transactions from '../pages/Transactions/Transactions';
 import Users from '../pages/Users/Users';
 import WhoWeAre from '../pages/WhoWeAre/WhoWeAre';
 import PrivateRoute from './PrivateRoute';
+import Institutions from '../pages/Institutions/Institutions';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -55,6 +56,7 @@ const AppRoutes = () => {
         <Route path="/faqs/:faqId" element={<DrawPromos />} /> */}
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/who-we-are" element={<WhoWeAre />} />
+          <Route path="/institutions" element={<Institutions />} />
 
           <Route path="/billets" element={<Billets />} />
 
