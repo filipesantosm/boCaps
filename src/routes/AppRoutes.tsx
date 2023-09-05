@@ -13,17 +13,16 @@ import Dashboard from '../pages/Dashboard/Dashboard';
 import DrawPromos from '../pages/DrawPromos/DrawPromos';
 import Draws from '../pages/Draws/Draws';
 import EditProfile from '../pages/EditProfile/EditProfile';
-import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import HowItWorks from '../pages/HowItWorks/HowItWorks';
+import LocalePermissions from '../pages/LocalePermissions/LocalePermissions';
 import Login from '../pages/Login/Login';
+import Scores from '../pages/Scores/Scores';
 import Sweepstake from '../pages/Sweepstake/Sweepstake';
 import Terms from '../pages/Terms/Terms';
 import Transactions from '../pages/Transactions/Transactions';
 import Users from '../pages/Users/Users';
-import LocalePermissions from '../pages/LocalePermissions/LocalePermissions';
-import PrivateRoute from './PrivateRoute';
-import Scores from '../pages/Scores/Scores';
 import WhoWeAre from '../pages/WhoWeAre/WhoWeAre';
+import PrivateRoute from './PrivateRoute';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -35,8 +34,6 @@ const AppRoutes = () => {
           path="/"
           element={isAuthenticated() ? <Navigate to="/users" /> : <Login />}
         />
-
-        <Route path="/forgot-password" element={<ForgotPassword />} />
 
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />

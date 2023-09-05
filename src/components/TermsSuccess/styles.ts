@@ -1,3 +1,4 @@
+import { RiCloseFill } from 'react-icons/ri';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -59,4 +60,18 @@ export const Description = styled.p`
   line-height: 110.7%;
 
   color: ${({ theme }) => theme.colors.gray51};
+`;
+
+export const CloseIcon = styled(RiCloseFill)`
+  font-size: 2rem;
+
+  color: 003575;
+
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
