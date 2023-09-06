@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { FiEdit3, FiTrash2 } from 'react-icons/fi';
-import { useParams } from 'react-router-dom';
+import { FiChevronLeft, FiEdit3, FiTrash2 } from 'react-icons/fi';
+import { useNavigate, useParams } from 'react-router-dom';
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 import FaqQuestionFormModal from '../../components/FaqQuestionFormModal/FaqQuestionFormModal';
 import Loading from '../../components/Loading/Loading';
@@ -11,6 +11,8 @@ import { PaginatedResponse } from '../../interfaces/Paginated';
 import api from '../../services/api';
 import handleError, { handleSuccess } from '../../services/handleToast';
 import {
+  BackButton,
+  BackContainer,
   Button,
   ButtonsContainer,
   Content,
@@ -28,6 +30,7 @@ import {
 } from './styles';
 
 const FaqQuestions = () => {
+  const navigate = useNavigate();
   const { faqId } = useParams();
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
@@ -82,7 +85,19 @@ const FaqQuestions = () => {
   return (
     <>
       <Content>
-        <PageTitle>Perguntas</PageTitle>
+        <PageTitle
+          style={{
+            marginBottom: '1rem',
+          }}
+        >
+          Perguntas
+        </PageTitle>
+        <BackContainer>
+          <BackButton type="button" onClick={() => navigate(-1)}>
+            <FiChevronLeft />
+          </BackButton>
+          Voltar
+        </BackContainer>
         <PageHeader>
           <SearchDivider
             onSubmit={e => {

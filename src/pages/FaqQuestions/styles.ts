@@ -8,13 +8,42 @@ export const Content = styled.div`
   flex-direction: column;
 `;
 
-export const Title = styled.h1`
+export const BackContainer = styled.div`
+  margin-bottom: 1.5rem;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
   font-weight: 600;
-  font-size: 3rem;
+  font-size: 1.5rem;
 
-  color: ${({ theme }) => theme.colors.primary};
+  color: #2c406e;
+`;
 
-  margin-bottom: 2rem;
+export const BackButton = styled.button`
+  background: transparent;
+  border: none;
+
+  width: 2.625rem;
+  height: 2.625rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  font-size: 1.5rem;
+  color: #10275a;
+
+  box-shadow: -3px 7px 13px #f1f7ff;
+
+  transition: filter 0.3s;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
 `;
 
 export const PageHeader = styled.div`
@@ -161,7 +190,7 @@ export const TableBody = styled.div`
 
   padding: 0.25rem;
 
-  max-height: 60vh;
+  max-height: 55vh;
 
   padding-top: 1rem;
   padding-bottom: 1rem;
