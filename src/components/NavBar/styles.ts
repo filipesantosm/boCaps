@@ -84,7 +84,7 @@ export const MenuItem = styled.div`
   align-items: center;
   width: 100%;
   background: transparent;
-  margin-bottom: 2.25rem;
+  margin-bottom: 1.75rem;
   transition: 500ms;
   position: relative;
   .active {

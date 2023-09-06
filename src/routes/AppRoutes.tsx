@@ -31,6 +31,7 @@ import WhoWeAre from '../pages/WhoWeAre/WhoWeAre';
 import PrivateRoute from './PrivateRoute';
 import Regulation from '../pages/Regulation/Regulation';
 import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
+import TitleStock from '../pages/TitleStock/TitleStock';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -58,6 +59,7 @@ const AppRoutes = () => {
           <Route path="/draw-promos" element={<DrawPromos />} />
 
           <Route path="/locale-permissions" element={<LocalePermissions />} />
+          <Route path="/title-stocks" element={<TitleStock />} />
 
           <Route path="/infos" element={<Information />} index />
           <Route path="/infos/faqs" element={<Faqs />} index />

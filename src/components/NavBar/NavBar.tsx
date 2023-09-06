@@ -7,6 +7,7 @@ import { LiaFileInvoiceDollarSolid } from 'react-icons/lia';
 import {
   MdOutlineCake,
   MdOutlineDiscount,
+  MdOutlineInventory,
   MdOutlineWorkspacePremium,
 } from 'react-icons/md';
 import { TbClipboardText } from 'react-icons/tb';
@@ -54,6 +55,15 @@ const NavBar = () => {
           <StyledNavLink to="/sweepstake">
             <HiOutlineGift className="icon" style={{ fontSize: '1.5rem' }} />
             <MenuText>Sorteios</MenuText>
+          </StyledNavLink>
+        </MenuItem>
+        <MenuItem>
+          <StyledNavLink to="/title-stocks">
+            <MdOutlineInventory
+              className="icon"
+              style={{ fontSize: '1.5rem' }}
+            />
+            <MenuText>Estoque de títulos</MenuText>
           </StyledNavLink>
         </MenuItem>
         <MenuItem>
