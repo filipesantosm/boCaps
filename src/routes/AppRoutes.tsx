@@ -29,6 +29,8 @@ import Transactions from '../pages/Transactions/Transactions';
 import Users from '../pages/Users/Users';
 import WhoWeAre from '../pages/WhoWeAre/WhoWeAre';
 import PrivateRoute from './PrivateRoute';
+import Regulation from '../pages/Regulation/Regulation';
+import PrivacyPolicy from '../pages/PrivacyPolicy/PrivacyPolicy';
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -63,7 +65,9 @@ const AppRoutes = () => {
           <Route path="/infos/faq-videos" element={<FaqVideos />} />
           <Route path="/infos/how-it-works" element={<HowItWorks />} />
           <Route path="/infos/institutions" element={<Institutions />} />
-          <Route path="/who-we-are" element={<WhoWeAre />} />
+          <Route path="/infos/who-we-are" element={<WhoWeAre />} />
+          <Route path="/infos/regulation" element={<Regulation />} />
+          <Route path="/infos/privacy-policy" element={<PrivacyPolicy />} />
 
           <Route path="/billets" element={<Billets />} />
 

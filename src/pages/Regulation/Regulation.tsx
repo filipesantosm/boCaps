@@ -16,7 +16,7 @@ import {
   TitleContainer,
 } from './styles';
 
-const WhoWeAre = () => {
+const Regulation = () => {
   const navigate = useNavigate();
   const [terms, setTerms] = useState('');
   const [editModal, setEditModal] = useState(false);
@@ -31,9 +31,9 @@ const WhoWeAre = () => {
     try {
       const { data } = await api.get<{
         data: ITerm;
-      }>('/term-uses/4', {
+      }>('/term-uses/2', {
         params: {
-          'filters[type][$eq]': 'Termo Uso',
+          'filters[type][$eq]': 'Regulamento',
           'filters[active][$eq]': true,
         },
       });
@@ -48,7 +48,7 @@ const WhoWeAre = () => {
     setEditModal(false);
     setIsLoading(true);
     try {
-      await api.put('/term-uses/4', {
+      await api.put('/term-uses/2', {
         data: {
           description: terms,
         },
@@ -67,7 +67,7 @@ const WhoWeAre = () => {
     <Content>
       <MainForm>
         <TitleContainer>
-          <Title>Quem somos</Title>
+          <Title>Regulamentos</Title>
         </TitleContainer>
 
         <TextArea
@@ -112,4 +112,4 @@ const WhoWeAre = () => {
   );
 };
 
-export default WhoWeAre;
+export default Regulation;

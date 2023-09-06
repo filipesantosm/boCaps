@@ -5,7 +5,7 @@ import { Content, Link, LinksList } from './styles';
 const Information = () => {
   return (
     <Content>
-      <PageTitle>Cadastros de informações</PageTitle>
+      <PageTitle>Informações</PageTitle>
 
       <LinksList>
         <Link to="/infos/faqs">
@@ -20,6 +20,15 @@ const Information = () => {
         </Link>
         <Link to="/infos/institutions">
           Instituição beneficiada <FiChevronRight />
+        </Link>
+        <Link to="/infos/who-we-are">
+          Quem somos <FiChevronRight />
+        </Link>
+        <Link to="/infos/regulation">
+          Regulamentos <FiChevronRight />
+        </Link>
+        <Link to="/infos/privacy-policy">
+          Política de Privacidade <FiChevronRight />
         </Link>
       </LinksList>
     </Content>
