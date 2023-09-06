@@ -66,10 +66,11 @@ const FaqVideos = () => {
 
   const handleConfirmDelete = async () => {
     try {
-      await api.delete(`/faqs/${idToDelete}`);
+      await api.delete(`/faq-videos/${idToDelete}`);
 
       getFaqVideos();
-      handleSuccess('Pergunta excluída com sucesso!');
+      setIdToDelete(undefined);
+      handleSuccess('Vídeo excluída com sucesso!');
     } catch (error) {
       handleError(error);
     }

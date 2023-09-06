@@ -69,7 +69,7 @@ const FaqFormModal = ({ onClose, onFinishSubmit, initialFaq }: Props) => {
 
       reset();
       handleSuccess('Criada com sucesso!');
-      onClose();
+      onFinishSubmit();
     } catch (error) {
       handleError(error);
     } finally {

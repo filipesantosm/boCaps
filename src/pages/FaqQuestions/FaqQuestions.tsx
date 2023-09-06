@@ -172,6 +172,11 @@ const FaqQuestions = () => {
             setShowFormModal(false);
             setSelectedFaqQuestion(undefined);
           }}
+          onFinishSubmit={() => {
+            setShowFormModal(false);
+            setSelectedFaqQuestion(undefined);
+            getFaqQuestions();
+          }}
           initialFaqQuestion={selectedFaqQuestion}
         />
       )}

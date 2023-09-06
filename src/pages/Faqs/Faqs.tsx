@@ -72,6 +72,7 @@ const Faqs = () => {
 
       getFaqs();
       handleSuccess('Pergunta excluída com sucesso!');
+      setIdToDelete(undefined);
     } catch (error) {
       handleError(error);
     }

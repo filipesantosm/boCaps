@@ -22,6 +22,7 @@ import { FaqQuestionSchema } from '../../validations/FaqSchema';
 
 interface Props {
   onClose: () => void;
+  onFinishSubmit: () => void;
   initialFaqQuestion?: IFaqQuestion;
   faqId: string;
 }
@@ -34,6 +35,7 @@ interface IFaqQuestionForm {
 const FaqQuestionFormModal = ({
   faqId,
   onClose,
+  onFinishSubmit,
   initialFaqQuestion,
 }: Props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -76,7 +78,7 @@ const FaqQuestionFormModal = ({
 
       reset();
       handleSuccess('Criada com sucesso!');
-      onClose();
+      onFinishSubmit();
     } catch (error) {
       handleError(error);
     } finally {
