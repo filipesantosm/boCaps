@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EditTermsModal from '../../components/EditTermsModal/EditTermsModal';
-import Layout from '../../components/Layout/Layout';
 import TermsSuccess from '../../components/TermsSuccess/TermsSuccess';
 import {
   ButtonDivider,
@@ -21,7 +20,7 @@ const EditTerms = () => {
   const navigate = useNavigate();
 
   return (
-    <Layout>
+    <>
       <MainForm>
         <TitleDivider>
           {/* <TitleIcon /> */}
@@ -55,7 +54,7 @@ const EditTerms = () => {
       )}
 
       {editSuccess && <TermsSuccess isOpen={setEditSuccess} />}
-    </Layout>
+    </>
   );
 };
 

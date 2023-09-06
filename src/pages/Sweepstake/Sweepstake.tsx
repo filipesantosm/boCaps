@@ -10,7 +10,6 @@ import {
 } from '../../assets';
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 import DrawPremiumSection from '../../components/DrawPremiumSection/DrawPremiumSection';
-import Layout from '../../components/Layout/Layout';
 import Loading from '../../components/Loading/Loading';
 import Select from '../../components/Select/Select';
 import SweepstakeInput from '../../components/SweepstakeInput/SweepstakeInput';
@@ -370,443 +369,441 @@ const Sweepstake = () => {
   const disableEditing = isSubmitting;
 
   return (
-    <Layout>
-      <Content onSubmit={handleSubmit(onSubmit)}>
-        <TitleContainer>
-          <Title>Sorteios</Title>
-        </TitleContainer>
-        <MainSection>
-          <MainHeader>
-            Dados principais
-            {draw &&
-              (draw?.attributes?.isValidated || draw?.attributes.isPublished ? (
-                <SwitchWrapper>
-                  {draw?.attributes.isPublished ? 'Publicado' : 'Publicar'}
-                  <SwitchColor
-                    checked={draw?.attributes.isPublished}
-                    onChange={handlePublish}
-                  />
-                </SwitchWrapper>
-              ) : (
-                <SaveButton
-                  type="button"
-                  onClick={handleValidate}
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? <Loading iconColor="#ffffff" /> : 'Validar'}
-                </SaveButton>
-              ))}
-          </MainHeader>
-          <MainInputContainer>
-            <InputLine>
-              <SweepstakeInput
-                label="Processo susep:"
-                style={{
-                  width: '12rem',
-                }}
-                maxLength={20}
-                maskFunction={maskSusep}
-                {...register('susep')}
-                error={errors.susep?.message}
-              />
-              <SweepstakeInput
-                label="Número do sorteio:"
-                style={{
-                  width: '6rem',
-                }}
-                {...register('number')}
-                error={errors.number?.message}
-              />
-            </InputLine>
-            <InputLine>
-              <SweepstakeInput
-                label="Título:"
-                style={{
-                  width: '18rem',
-                }}
-                placeholder="Insira o título"
-                {...register('name')}
-                error={errors.name?.message}
-              />
-              <SweepstakeInput
-                label="Data:"
-                style={{
-                  width: '10rem',
-                }}
-                type="date"
-                {...register('drawDate')}
-                error={errors.drawDate?.message}
-              />
-              <SweepstakeInput
-                label="Hora:"
-                style={{
-                  width: '8rem',
-                }}
-                type="time"
-                {...register('drawHour')}
-                error={errors.drawHour?.message}
-              />
-            </InputLine>
-            <InputLine>
-              <SweepstakeInput
-                label="Data início vendas:"
-                type="date"
-                style={{
-                  width: '10rem',
-                }}
-                {...register('startDate')}
-                error={errors.startDate?.message}
-              />
-              <SweepstakeInput
-                label="Hora:"
-                type="time"
-                style={{
-                  width: '8rem',
-                }}
-                {...register('startHour')}
-                error={errors.startHour?.message}
-              />
-              <SweepstakeInput
-                label="Data fim vendas:"
-                type="date"
-                style={{
-                  width: '10rem',
-                }}
-                {...register('endDate')}
-                error={errors.endDate?.message}
-              />
-              <SweepstakeInput
-                label="Hora:"
-                type="time"
-                style={{
-                  width: '8rem',
-                }}
-                {...register('endHour')}
-                error={errors.endHour?.message}
-              />
-            </InputLine>
+    <Content onSubmit={handleSubmit(onSubmit)}>
+      <TitleContainer>
+        <Title>Sorteios</Title>
+      </TitleContainer>
+      <MainSection>
+        <MainHeader>
+          Dados principais
+          {draw &&
+            (draw?.attributes?.isValidated || draw?.attributes.isPublished ? (
+              <SwitchWrapper>
+                {draw?.attributes.isPublished ? 'Publicado' : 'Publicar'}
+                <SwitchColor
+                  checked={draw?.attributes.isPublished}
+                  onChange={handlePublish}
+                />
+              </SwitchWrapper>
+            ) : (
+              <SaveButton
+                type="button"
+                onClick={handleValidate}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? <Loading iconColor="#ffffff" /> : 'Validar'}
+              </SaveButton>
+            ))}
+        </MainHeader>
+        <MainInputContainer>
+          <InputLine>
             <SweepstakeInput
-              label="Limite de compra de títulos:"
+              label="Processo susep:"
               style={{
-                width: '6.25rem',
+                width: '12rem',
               }}
-              {...register('additionalDataSection.limSale')}
+              maxLength={20}
+              maskFunction={maskSusep}
+              {...register('susep')}
+              error={errors.susep?.message}
             />
-          </MainInputContainer>
-        </MainSection>
-        <ChanceSection>
-          <RetrieveHeader>
-            <RetrieveArrowButton
-              type="button"
+            <SweepstakeInput
+              label="Número do sorteio:"
               style={{
-                transform: openedSections.includes('chanceSection')
-                  ? 'rotate(0deg)'
-                  : 'rotate(-90deg)',
+                width: '6rem',
               }}
-              onClick={() =>
-                setOpenedSections(prev =>
-                  prev.includes('chanceSection')
-                    ? prev.filter(item => item !== 'chanceSection')
-                    : [...prev, 'chanceSection'],
-                )
-              }
-            >
-              <img src={icon_ArrowSection} alt="" />
-            </RetrieveArrowButton>
-            Tipo Chance:
-            <SelectWrapper>
-              <Controller
-                control={control}
-                name="chanceSection.typeChance"
-                render={({ field: { value, onChange } }) => (
-                  <Select
-                    options={drawTypeChanceOptions}
-                    value={drawTypeChanceOptions.find(
-                      option => option.value === String(value),
-                    )}
-                    onChange={(e: any) => onChange(Number(e.value))}
-                  />
-                )}
-              />
-            </SelectWrapper>
-          </RetrieveHeader>
-          <RetrieveContainer
-            isExpanded={openedSections.includes('chanceSection')}
+              {...register('number')}
+              error={errors.number?.message}
+            />
+          </InputLine>
+          <InputLine>
+            <SweepstakeInput
+              label="Título:"
+              style={{
+                width: '18rem',
+              }}
+              placeholder="Insira o título"
+              {...register('name')}
+              error={errors.name?.message}
+            />
+            <SweepstakeInput
+              label="Data:"
+              style={{
+                width: '10rem',
+              }}
+              type="date"
+              {...register('drawDate')}
+              error={errors.drawDate?.message}
+            />
+            <SweepstakeInput
+              label="Hora:"
+              style={{
+                width: '8rem',
+              }}
+              type="time"
+              {...register('drawHour')}
+              error={errors.drawHour?.message}
+            />
+          </InputLine>
+          <InputLine>
+            <SweepstakeInput
+              label="Data início vendas:"
+              type="date"
+              style={{
+                width: '10rem',
+              }}
+              {...register('startDate')}
+              error={errors.startDate?.message}
+            />
+            <SweepstakeInput
+              label="Hora:"
+              type="time"
+              style={{
+                width: '8rem',
+              }}
+              {...register('startHour')}
+              error={errors.startHour?.message}
+            />
+            <SweepstakeInput
+              label="Data fim vendas:"
+              type="date"
+              style={{
+                width: '10rem',
+              }}
+              {...register('endDate')}
+              error={errors.endDate?.message}
+            />
+            <SweepstakeInput
+              label="Hora:"
+              type="time"
+              style={{
+                width: '8rem',
+              }}
+              {...register('endHour')}
+              error={errors.endHour?.message}
+            />
+          </InputLine>
+          <SweepstakeInput
+            label="Limite de compra de títulos:"
+            style={{
+              width: '6.25rem',
+            }}
+            {...register('additionalDataSection.limSale')}
+          />
+        </MainInputContainer>
+      </MainSection>
+      <ChanceSection>
+        <RetrieveHeader>
+          <RetrieveArrowButton
+            type="button"
+            style={{
+              transform: openedSections.includes('chanceSection')
+                ? 'rotate(0deg)'
+                : 'rotate(-90deg)',
+            }}
+            onClick={() =>
+              setOpenedSections(prev =>
+                prev.includes('chanceSection')
+                  ? prev.filter(item => item !== 'chanceSection')
+                  : [...prev, 'chanceSection'],
+              )
+            }
           >
-            <ChanceContainer>
-              {typeChance && (
-                <ChanceLine>
-                  <SweepstakeInput
-                    labelTextStyle={{
-                      color: '#0F5CBE',
-                    }}
-                    label="Faixa de Chance 1:"
-                    {...register('chanceSection.chanceInicial01')}
-                    error={errors?.chanceSection?.chanceInicial01?.message}
-                  />
-                  <SweepstakeInput
-                    labelTextStyle={{
-                      color: '#0F5CBE',
-                    }}
-                    label="Final Chance 1:"
-                    {...register('chanceSection.chanceFinal01')}
-                    error={errors?.chanceSection?.chanceFinal01?.message}
-                  />
-                  <SweepstakeInput
-                    labelTextStyle={{
-                      color: '#0F5CBE',
-                    }}
-                    label="Intervalo de Chance 1:"
-                    {...register(`chanceSection.intervalChance1`)}
-                    error={errors.chanceSection?.intervalChance1?.message}
-                  />
-                </ChanceLine>
+            <img src={icon_ArrowSection} alt="" />
+          </RetrieveArrowButton>
+          Tipo Chance:
+          <SelectWrapper>
+            <Controller
+              control={control}
+              name="chanceSection.typeChance"
+              render={({ field: { value, onChange } }) => (
+                <Select
+                  options={drawTypeChanceOptions}
+                  value={drawTypeChanceOptions.find(
+                    option => option.value === String(value),
+                  )}
+                  onChange={(e: any) => onChange(Number(e.value))}
+                />
               )}
-              {typeChance >= 2 && (
-                <ChanceLine>
-                  <SweepstakeInput
-                    labelTextStyle={{
-                      color: '#0F5CBE',
-                    }}
-                    label="Faixa de Chance 2:"
-                    {...register('chanceSection.chanceInicial02')}
-                    error={errors?.chanceSection?.chanceInicial02?.message}
-                  />
-                  <SweepstakeInput
-                    labelTextStyle={{
-                      color: '#0F5CBE',
-                    }}
-                    label="Final Chance 2:"
-                    {...register('chanceSection.chanceFinal02')}
-                    error={errors?.chanceSection?.chanceFinal02?.message}
-                  />
-                  <SweepstakeInput
-                    labelTextStyle={{
-                      color: '#0F5CBE',
-                    }}
-                    label="Intervalo de Chance 2:"
-                    {...register(`chanceSection.intervalChance2`)}
-                    error={errors.chanceSection?.intervalChance2?.message}
-                  />
-                </ChanceLine>
-              )}
-              {typeChance >= 3 && (
-                <ChanceLine>
-                  <SweepstakeInput
-                    labelTextStyle={{
-                      color: '#0F5CBE',
-                    }}
-                    label="Faixa de Chance 3:"
-                    {...register('chanceSection.chanceInicial03')}
-                    error={errors?.chanceSection?.chanceInicial03?.message}
-                  />
-                  <SweepstakeInput
-                    labelTextStyle={{
-                      color: '#0F5CBE',
-                    }}
-                    label="Final Chance 3:"
-                    {...register('chanceSection.chanceFinal03')}
-                    error={errors?.chanceSection?.chanceFinal03?.message}
-                  />
-                  <SweepstakeInput
-                    labelTextStyle={{
-                      color: '#0F5CBE',
-                    }}
-                    label="Intervalo de Chance 3:"
-                    /* {...register(`chanceSection.chances.${index}.range`)}
+            />
+          </SelectWrapper>
+        </RetrieveHeader>
+        <RetrieveContainer
+          isExpanded={openedSections.includes('chanceSection')}
+        >
+          <ChanceContainer>
+            {typeChance && (
+              <ChanceLine>
+                <SweepstakeInput
+                  labelTextStyle={{
+                    color: '#0F5CBE',
+                  }}
+                  label="Faixa de Chance 1:"
+                  {...register('chanceSection.chanceInicial01')}
+                  error={errors?.chanceSection?.chanceInicial01?.message}
+                />
+                <SweepstakeInput
+                  labelTextStyle={{
+                    color: '#0F5CBE',
+                  }}
+                  label="Final Chance 1:"
+                  {...register('chanceSection.chanceFinal01')}
+                  error={errors?.chanceSection?.chanceFinal01?.message}
+                />
+                <SweepstakeInput
+                  labelTextStyle={{
+                    color: '#0F5CBE',
+                  }}
+                  label="Intervalo de Chance 1:"
+                  {...register(`chanceSection.intervalChance1`)}
+                  error={errors.chanceSection?.intervalChance1?.message}
+                />
+              </ChanceLine>
+            )}
+            {typeChance >= 2 && (
+              <ChanceLine>
+                <SweepstakeInput
+                  labelTextStyle={{
+                    color: '#0F5CBE',
+                  }}
+                  label="Faixa de Chance 2:"
+                  {...register('chanceSection.chanceInicial02')}
+                  error={errors?.chanceSection?.chanceInicial02?.message}
+                />
+                <SweepstakeInput
+                  labelTextStyle={{
+                    color: '#0F5CBE',
+                  }}
+                  label="Final Chance 2:"
+                  {...register('chanceSection.chanceFinal02')}
+                  error={errors?.chanceSection?.chanceFinal02?.message}
+                />
+                <SweepstakeInput
+                  labelTextStyle={{
+                    color: '#0F5CBE',
+                  }}
+                  label="Intervalo de Chance 2:"
+                  {...register(`chanceSection.intervalChance2`)}
+                  error={errors.chanceSection?.intervalChance2?.message}
+                />
+              </ChanceLine>
+            )}
+            {typeChance >= 3 && (
+              <ChanceLine>
+                <SweepstakeInput
+                  labelTextStyle={{
+                    color: '#0F5CBE',
+                  }}
+                  label="Faixa de Chance 3:"
+                  {...register('chanceSection.chanceInicial03')}
+                  error={errors?.chanceSection?.chanceInicial03?.message}
+                />
+                <SweepstakeInput
+                  labelTextStyle={{
+                    color: '#0F5CBE',
+                  }}
+                  label="Final Chance 3:"
+                  {...register('chanceSection.chanceFinal03')}
+                  error={errors?.chanceSection?.chanceFinal03?.message}
+                />
+                <SweepstakeInput
+                  labelTextStyle={{
+                    color: '#0F5CBE',
+                  }}
+                  label="Intervalo de Chance 3:"
+                  /* {...register(`chanceSection.chances.${index}.range`)}
                     error={
                       errors.chanceSection?.chances?.[index]?.range?.message
                     } */
-                  />
-                </ChanceLine>
-              )}
-            </ChanceContainer>
-          </RetrieveContainer>
-        </ChanceSection>
-        <AdditionalDataSection>
-          <RetrieveHeader>
-            <RetrieveArrowButton
-              type="button"
-              style={{
-                transform: openedSections.includes('additionalDataSection')
-                  ? 'rotate(0deg)'
-                  : 'rotate(-90deg)',
-              }}
-              onClick={() =>
-                setOpenedSections(prev =>
-                  prev.includes('additionalDataSection')
-                    ? prev.filter(item => item !== 'additionalDataSection')
-                    : [...prev, 'additionalDataSection'],
-                )
-              }
-            >
-              <img src={icon_ArrowSection} alt="" />
-            </RetrieveArrowButton>
-            Dados adicionais
-          </RetrieveHeader>
-          <RetrieveContainer
-            isExpanded={openedSections.includes('additionalDataSection')}
-          >
-            <AdditionalContainer>
-              <InputLine>
-                <SelectLabel>
-                  Terá riscadinha Gratuita:
-                  <SelectWrapper>
-                    <Controller
-                      control={control}
-                      name="additionalDataSection.isScratchCard"
-                      render={({ field: { onChange, value } }) => (
-                        <Select
-                          value={isScratchCardOptions.find(
-                            option => option.value === value,
-                          )}
-                          onChange={(option: any) => onChange(option.value)}
-                          options={isScratchCardOptions}
-                        />
-                      )}
-                    />
-                  </SelectWrapper>
-                </SelectLabel>
-              </InputLine>
-              <SweepstakeInput
-                label="Link YouTube (Vídeo publicitário):"
-                type="url"
-                placeholder="Ex: https://www.youtube.com/watch?v=lvklC85ZvEw"
-                {...register('additionalDataSection.lnkYoutube')}
-              />
-              <SweepstakeInput
-                label="Link Sorteio (Sorteio ao Vivo):"
-                type="url"
-                placeholder="Ex: https://www.youtube.com/watch?v=lvklC85ZvEw"
-                {...register('additionalDataSection.lnkYoutubeDraw')}
-              />
-              <SelectWrapperAdditional>
-                <SelectLabel>Tipo de título:</SelectLabel>
-                <Controller
-                  control={control}
-                  name="additionalDataSection.saleValue"
-                  render={({ field: { onChange, value } }) => (
-                    <Select
-                      isMulti
-                      options={drawPromoOptions}
-                      value={drawPromoOptions?.filter(option =>
-                        value?.includes(option.value),
-                      )}
-                      onChange={(options: any) => {
-                        onChange(options.map((option: any) => option.value));
-                      }}
-                    />
-                  )}
                 />
-              </SelectWrapperAdditional>
-              <InputLine>
-                <SweepstakeInput
-                  label="Quota Resgate (%):"
-                  style={{
-                    width: '9.375rem',
-                  }}
-                  {...register('additionalDataSection.redemptionPercent')}
-                />
-                <SweepstakeInput
-                  label="Valor Resgate:"
-                  style={{
-                    width: '9.375rem',
-                  }}
-                  {...register('additionalDataSection.redemptionValue')}
-                />
-                {/* <SweepstakeInput label="Quota Resgate (%):" /> */}
-              </InputLine>
-              <ImageLine>
-                <ImageItem>
-                  <Image src={previewImageUrl || img_placeholderImg} alt="" />
-                  <ImageLabelButton>
-                    Upload de Imagem{' '}
-                    <Controller
-                      control={control}
-                      name="additionalDataSection.image"
-                      render={({ field: { onChange, ref } }) => (
-                        <input
-                          type="file"
-                          accept="image/*"
-                          ref={ref}
-                          onChange={(e: any) => onChange(e.target.files[0])}
-                        />
-                      )}
-                    />
-                  </ImageLabelButton>
-                </ImageItem>
-                <ImageItem>
-                  <Image
-                    src={img_placeholderPDF}
-                    alt=""
-                    onClick={() => {
-                      if (previewPdfUrl) {
-                        window.open(previewPdfUrl, '_blank', 'noreferrer');
-                      }
-                    }}
-                    style={{
-                      cursor: previewPdfUrl ? 'pointer' : undefined,
-                    }}
-                  />
-                  <ImageLabelButton>
-                    Upload de Cartela{' '}
-                    <Controller
-                      control={control}
-                      name="additionalDataSection.cardImage"
-                      render={({ field: { onChange, ref } }) => (
-                        <input
-                          type="file"
-                          ref={ref}
-                          accept="application/pdf"
-                          onChange={(e: any) => onChange(e.target.files[0])}
-                        />
-                      )}
-                    />
-                  </ImageLabelButton>
-                </ImageItem>
-              </ImageLine>
-              <ObservationLabel>
-                <ObservationTextLabel>Observação:</ObservationTextLabel>
-                <ObservationInput
-                  {...register('additionalDataSection.description')}
-                />
-              </ObservationLabel>
-            </AdditionalContainer>
-          </RetrieveContainer>
-        </AdditionalDataSection>
-        {draw &&
-          filteredCategories.map(category => (
-            <DrawPremiumSection
-              key={category.id}
-              draw={draw}
-              category={category}
-              drawTypePremiums={drawTypePremiums}
-              disableEditing={!!disableEditing}
-            />
-          ))}
-        <ButtonFooterContainer>
-          <SaveButton disabled={disableEditing}>Salvar</SaveButton>
-          <SaveButton
-            style={{
-              backgroundColor: 'transparent',
-              color: '#0F5CBE',
-              borderColor: '#0F5CBE',
-            }}
+              </ChanceLine>
+            )}
+          </ChanceContainer>
+        </RetrieveContainer>
+      </ChanceSection>
+      <AdditionalDataSection>
+        <RetrieveHeader>
+          <RetrieveArrowButton
             type="button"
-            onClick={() => navigate(-1)}
+            style={{
+              transform: openedSections.includes('additionalDataSection')
+                ? 'rotate(0deg)'
+                : 'rotate(-90deg)',
+            }}
+            onClick={() =>
+              setOpenedSections(prev =>
+                prev.includes('additionalDataSection')
+                  ? prev.filter(item => item !== 'additionalDataSection')
+                  : [...prev, 'additionalDataSection'],
+              )
+            }
           >
-            Cancelar
-          </SaveButton>
-        </ButtonFooterContainer>
-        {handleConfirmModal.isOpen && (
-          <ConfirmModal
-            message={handleConfirmModal.message}
-            onClose={handleConfirmModal.onClose}
-            onConfirm={handleConfirmModal.onConfirm}
+            <img src={icon_ArrowSection} alt="" />
+          </RetrieveArrowButton>
+          Dados adicionais
+        </RetrieveHeader>
+        <RetrieveContainer
+          isExpanded={openedSections.includes('additionalDataSection')}
+        >
+          <AdditionalContainer>
+            <InputLine>
+              <SelectLabel>
+                Terá riscadinha Gratuita:
+                <SelectWrapper>
+                  <Controller
+                    control={control}
+                    name="additionalDataSection.isScratchCard"
+                    render={({ field: { onChange, value } }) => (
+                      <Select
+                        value={isScratchCardOptions.find(
+                          option => option.value === value,
+                        )}
+                        onChange={(option: any) => onChange(option.value)}
+                        options={isScratchCardOptions}
+                      />
+                    )}
+                  />
+                </SelectWrapper>
+              </SelectLabel>
+            </InputLine>
+            <SweepstakeInput
+              label="Link YouTube (Vídeo publicitário):"
+              type="url"
+              placeholder="Ex: https://www.youtube.com/watch?v=lvklC85ZvEw"
+              {...register('additionalDataSection.lnkYoutube')}
+            />
+            <SweepstakeInput
+              label="Link Sorteio (Sorteio ao Vivo):"
+              type="url"
+              placeholder="Ex: https://www.youtube.com/watch?v=lvklC85ZvEw"
+              {...register('additionalDataSection.lnkYoutubeDraw')}
+            />
+            <SelectWrapperAdditional>
+              <SelectLabel>Tipo de título:</SelectLabel>
+              <Controller
+                control={control}
+                name="additionalDataSection.saleValue"
+                render={({ field: { onChange, value } }) => (
+                  <Select
+                    isMulti
+                    options={drawPromoOptions}
+                    value={drawPromoOptions?.filter(option =>
+                      value?.includes(option.value),
+                    )}
+                    onChange={(options: any) => {
+                      onChange(options.map((option: any) => option.value));
+                    }}
+                  />
+                )}
+              />
+            </SelectWrapperAdditional>
+            <InputLine>
+              <SweepstakeInput
+                label="Quota Resgate (%):"
+                style={{
+                  width: '9.375rem',
+                }}
+                {...register('additionalDataSection.redemptionPercent')}
+              />
+              <SweepstakeInput
+                label="Valor Resgate:"
+                style={{
+                  width: '9.375rem',
+                }}
+                {...register('additionalDataSection.redemptionValue')}
+              />
+              {/* <SweepstakeInput label="Quota Resgate (%):" /> */}
+            </InputLine>
+            <ImageLine>
+              <ImageItem>
+                <Image src={previewImageUrl || img_placeholderImg} alt="" />
+                <ImageLabelButton>
+                  Upload de Imagem{' '}
+                  <Controller
+                    control={control}
+                    name="additionalDataSection.image"
+                    render={({ field: { onChange, ref } }) => (
+                      <input
+                        type="file"
+                        accept="image/*"
+                        ref={ref}
+                        onChange={(e: any) => onChange(e.target.files[0])}
+                      />
+                    )}
+                  />
+                </ImageLabelButton>
+              </ImageItem>
+              <ImageItem>
+                <Image
+                  src={img_placeholderPDF}
+                  alt=""
+                  onClick={() => {
+                    if (previewPdfUrl) {
+                      window.open(previewPdfUrl, '_blank', 'noreferrer');
+                    }
+                  }}
+                  style={{
+                    cursor: previewPdfUrl ? 'pointer' : undefined,
+                  }}
+                />
+                <ImageLabelButton>
+                  Upload de Cartela{' '}
+                  <Controller
+                    control={control}
+                    name="additionalDataSection.cardImage"
+                    render={({ field: { onChange, ref } }) => (
+                      <input
+                        type="file"
+                        ref={ref}
+                        accept="application/pdf"
+                        onChange={(e: any) => onChange(e.target.files[0])}
+                      />
+                    )}
+                  />
+                </ImageLabelButton>
+              </ImageItem>
+            </ImageLine>
+            <ObservationLabel>
+              <ObservationTextLabel>Observação:</ObservationTextLabel>
+              <ObservationInput
+                {...register('additionalDataSection.description')}
+              />
+            </ObservationLabel>
+          </AdditionalContainer>
+        </RetrieveContainer>
+      </AdditionalDataSection>
+      {draw &&
+        filteredCategories.map(category => (
+          <DrawPremiumSection
+            key={category.id}
+            draw={draw}
+            category={category}
+            drawTypePremiums={drawTypePremiums}
+            disableEditing={!!disableEditing}
           />
-        )}
-      </Content>
-    </Layout>
+        ))}
+      <ButtonFooterContainer>
+        <SaveButton disabled={disableEditing}>Salvar</SaveButton>
+        <SaveButton
+          style={{
+            backgroundColor: 'transparent',
+            color: '#0F5CBE',
+            borderColor: '#0F5CBE',
+          }}
+          type="button"
+          onClick={() => navigate(-1)}
+        >
+          Cancelar
+        </SaveButton>
+      </ButtonFooterContainer>
+      {handleConfirmModal.isOpen && (
+        <ConfirmModal
+          message={handleConfirmModal.message}
+          onClose={handleConfirmModal.onClose}
+          onConfirm={handleConfirmModal.onConfirm}
+        />
+      )}
+    </Content>
   );
 };
 

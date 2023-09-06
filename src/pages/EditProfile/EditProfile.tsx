@@ -45,68 +45,66 @@ const EditProfile = () => {
   };
 
   return (
-    <Layout>
-      <MainForm onSubmit={handleSubmit(handleEditPassword)}>
-        <Title>Redefinir Senha</Title>
+    <MainForm onSubmit={handleSubmit(handleEditPassword)}>
+      <Title>Redefinir Senha</Title>
 
-        <FormDivider>
-          <Label htmlFor="password">Senha antiga</Label>
+      <FormDivider>
+        <Label htmlFor="password">Senha antiga</Label>
 
-          <Input
-            type={passwordVisible ? 'text' : 'password'}
-            hasError={!!errors.password}
-            {...register('password')}
-            placeholder="Digite sua senha antiga"
-          />
+        <Input
+          type={passwordVisible ? 'text' : 'password'}
+          hasError={!!errors.password}
+          {...register('password')}
+          placeholder="Digite sua senha antiga"
+        />
 
-          {passwordVisible ? (
-            <VisibleIcon onClick={() => setPasswordVisible(false)} />
-          ) : (
-            <InvisibleIcon onClick={() => setPasswordVisible(true)} />
-          )}
-        </FormDivider>
+        {passwordVisible ? (
+          <VisibleIcon onClick={() => setPasswordVisible(false)} />
+        ) : (
+          <InvisibleIcon onClick={() => setPasswordVisible(true)} />
+        )}
+      </FormDivider>
 
-        <FormDivider>
-          <Label htmlFor="new_password">Nova senha</Label>
+      <FormDivider>
+        <Label htmlFor="new_password">Nova senha</Label>
 
-          <Input
-            type={newPasswordVisible ? 'text' : 'password'}
-            hasError={!!errors.new_password}
-            {...register('new_password')}
-            placeholder="Digite sua nova senha"
-          />
+        <Input
+          type={newPasswordVisible ? 'text' : 'password'}
+          hasError={!!errors.new_password}
+          {...register('new_password')}
+          placeholder="Digite sua nova senha"
+        />
 
-          {newPasswordVisible ? (
-            <VisibleIcon onClick={() => setNewPasswordVisible(false)} />
-          ) : (
-            <InvisibleIcon onClick={() => setNewPasswordVisible(true)} />
-          )}
-        </FormDivider>
+        {newPasswordVisible ? (
+          <VisibleIcon onClick={() => setNewPasswordVisible(false)} />
+        ) : (
+          <InvisibleIcon onClick={() => setNewPasswordVisible(true)} />
+        )}
+      </FormDivider>
 
-        <FormDivider>
-          <Label htmlFor="confirm_password">Confirme nova senha</Label>
+      <FormDivider>
+        <Label htmlFor="confirm_password">Confirme nova senha</Label>
 
-          <Input
-            type={confirmVisible ? 'text' : 'password'}
-            hasError={!!errors.confirm_password}
-            {...register('confirm_password')}
-            placeholder="Confirme a senha"
-          />
+        <Input
+          type={confirmVisible ? 'text' : 'password'}
+          hasError={!!errors.confirm_password}
+          {...register('confirm_password')}
+          placeholder="Confirme a senha"
+        />
 
-          {confirmVisible ? (
-            <VisibleIcon onClick={() => setConfirmVisible(false)} />
-          ) : (
-            <InvisibleIcon onClick={() => setConfirmVisible(true)} />
-          )}
-        </FormDivider>
+        {confirmVisible ? (
+          <VisibleIcon onClick={() => setConfirmVisible(false)} />
+        ) : (
+          <InvisibleIcon onClick={() => setConfirmVisible(true)} />
+        )}
+      </FormDivider>
 
-        <ButtonDivider>
-          <SaveButton type="submit" disabled={!isValid}>
-            Redefinir senha
-          </SaveButton>
-        </ButtonDivider>
-      </MainForm>
-    </Layout>
+      <ButtonDivider>
+        <SaveButton type="submit" disabled={!isValid}>
+          Redefinir senha
+        </SaveButton>
+      </ButtonDivider>
+    </MainForm>
   );
 };
 

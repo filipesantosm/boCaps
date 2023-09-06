@@ -1,16 +1,14 @@
+import { saveAs } from 'file-saver';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Layout from '../../components/Layout/Layout';
 import Loading from '../../components/Loading/Loading';
 import SmallPagination from '../../components/Pagination/Pagination';
 import SuccessModal from '../../components/SuccessModal/SuccessModal';
 import { IDraw } from '../../interfaces/Draw';
-import { UploadFileResponse } from '../../interfaces/Image';
 import { PaginatedResponse } from '../../interfaces/Paginated';
 import api from '../../services/api';
 import handleError from '../../services/handleToast';
 import { formatDateString } from '../../utils/formatDateString';
-import { getFileUrl } from '../../utils/getFileUrl';
 import {
   Button,
   CompText,
@@ -66,15 +64,15 @@ const Draws = () => {
   const handleCreateDrawFile = async (drawId: number) => {
     setIsGenerating(true);
     try {
-      const { data } = await api.get<{
-        file: string;
-      }>('/createExport', {
+      const { data } = await api.get<string>('/createExport', {
         params: {
           id: drawId,
         },
       });
 
-      window.open(getFileUrl(data.file), '_blank');
+      const blob = new Blob([data], { type: 'text/plain ' });
+
+      saveAs(blob, `${drawId}.txt`);
     } catch (error) {
       handleError(error);
     } finally {
@@ -88,30 +86,16 @@ const Draws = () => {
       return;
     }
 
-    setImportingId(drawId);
-
     try {
+      setImportingId(drawId);
+
       const formData = new FormData();
 
-      formData.append('files', file);
+      formData.append('file', file);
 
-      const { data } = await api.post<UploadFileResponse>('/upload', formData);
+      await api.post('/processResult', formData);
 
-      const fileResultId = data?.[0]?.id;
-
-      if (fileResultId) {
-        await api.post('/importResult', {
-          data: {
-            drawId: drawId.toString(),
-            fileUpload: fileResultId.toString(),
-          },
-        });
-
-        // handleSuccess('Vencedores importados com sucesso!');
-        setShowSuccessModal(true);
-      } else {
-        handleError('Algo deu errado, tente novamente');
-      }
+      setShowSuccessModal(true);
     } catch (error) {
       handleError(error);
     } finally {
@@ -120,12 +104,11 @@ const Draws = () => {
   };
 
   return (
-    <Layout>
-      <Content>
-        <MainForm>
-          <Title>Sorteios</Title>
-          <PageHeader>
-            {/* <SearchDivider>
+    <Content>
+      <MainForm>
+        <Title>Sorteios</Title>
+        <PageHeader>
+          {/* <SearchDivider>
               <SearchIcon />
               <SearchInput
                 type="text"
@@ -137,105 +120,104 @@ const Draws = () => {
               />
             </SearchDivider> */}
 
-            <HeaderButtons>
-              <Button
-                type="button"
-                onClick={() => navigate('/sweepstake/create')}
-              >
-                Cadastrar sorteio
-              </Button>
-            </HeaderButtons>
-          </PageHeader>
+          <HeaderButtons>
+            <Button
+              type="button"
+              onClick={() => navigate('/sweepstake/create')}
+            >
+              Cadastrar sorteio
+            </Button>
+          </HeaderButtons>
+        </PageHeader>
 
-          <DrawsHeader>
-            <DrawsHeaderDivider>Número</DrawsHeaderDivider>
-            <DrawsHeaderDivider>Nome</DrawsHeaderDivider>
-            <DrawsHeaderDivider>Data de cadastro</DrawsHeaderDivider>
-            <DrawsHeaderDivider>Data final</DrawsHeaderDivider>
-            <DrawsHeaderDivider>Data do sorteio</DrawsHeaderDivider>
-            <DrawsHeaderDivider>Publicado</DrawsHeaderDivider>
-            <DrawsHeaderDivider>Importação Vencedores</DrawsHeaderDivider>
-            <DrawsHeaderDivider>Exportação Debone</DrawsHeaderDivider>
-            <DrawsHeaderDivider />
-          </DrawsHeader>
+        <DrawsHeader>
+          <DrawsHeaderDivider>Número</DrawsHeaderDivider>
+          <DrawsHeaderDivider>Nome</DrawsHeaderDivider>
+          <DrawsHeaderDivider>Data de cadastro</DrawsHeaderDivider>
+          <DrawsHeaderDivider>Data final</DrawsHeaderDivider>
+          <DrawsHeaderDivider>Data do sorteio</DrawsHeaderDivider>
+          <DrawsHeaderDivider>Publicado</DrawsHeaderDivider>
+          <DrawsHeaderDivider>Importação Vencedores</DrawsHeaderDivider>
+          <DrawsHeaderDivider>Exportação Debone</DrawsHeaderDivider>
+          <DrawsHeaderDivider />
+        </DrawsHeader>
 
-          <TableBody>
-            {draws.map(draw => (
-              <DrawComp key={draw.id}>
-                <DrawCompDivider>
-                  <CompText>{draw.attributes.number}</CompText>
-                </DrawCompDivider>
-                <DrawCompDivider>
-                  <CompText>{draw.attributes.name}</CompText>
-                </DrawCompDivider>
-                <DrawCompDivider>
-                  <CompText>
-                    {formatDateString(draw.attributes.createdAt, 'dd/MM/yyyy')}
-                  </CompText>
-                </DrawCompDivider>
-                <DrawCompDivider>
-                  <CompText>
-                    {formatDateString(draw.attributes.dateFinal, 'dd/MM/yyyy')}
-                  </CompText>
-                </DrawCompDivider>
-                <DrawCompDivider>
-                  <CompText>
-                    {formatDateString(draw.attributes.dateDraw, 'dd/MM/yyyy')}
-                  </CompText>
-                </DrawCompDivider>
-                <DrawCompDivider>
-                  <CompText>
-                    {draw.attributes.isPublished ? 'Sim' : 'Não'}
-                  </CompText>
-                </DrawCompDivider>
-                <DrawCompDivider>
-                  <ImportFileLabel>
-                    <input
-                      type="file"
-                      accept="application/JSON"
-                      onChange={e => {
-                        const file = e.target.files?.[0];
+        <TableBody>
+          {draws.map(draw => (
+            <DrawComp key={draw.id}>
+              <DrawCompDivider>
+                <CompText>{draw.attributes.number}</CompText>
+              </DrawCompDivider>
+              <DrawCompDivider>
+                <CompText>{draw.attributes.name}</CompText>
+              </DrawCompDivider>
+              <DrawCompDivider>
+                <CompText>
+                  {formatDateString(draw.attributes.createdAt, 'dd/MM/yyyy')}
+                </CompText>
+              </DrawCompDivider>
+              <DrawCompDivider>
+                <CompText>
+                  {formatDateString(draw.attributes.dateFinal, 'dd/MM/yyyy')}
+                </CompText>
+              </DrawCompDivider>
+              <DrawCompDivider>
+                <CompText>
+                  {formatDateString(draw.attributes.dateDraw, 'dd/MM/yyyy')}
+                </CompText>
+              </DrawCompDivider>
+              <DrawCompDivider>
+                <CompText>
+                  {draw.attributes.isPublished ? 'Sim' : 'Não'}
+                </CompText>
+              </DrawCompDivider>
+              <DrawCompDivider>
+                <ImportFileLabel>
+                  <input
+                    type="file"
+                    accept="application/JSON"
+                    onChange={e => {
+                      const file = e.target.files?.[0];
 
-                        if (file) {
-                          handleImportWinners(file, draw.id);
-                          e.target.value = '';
-                        }
-                      }}
-                      disabled={!!importingId}
-                    />
-                    {importingId === draw.id ? <Loading /> : 'Importar'}
-                  </ImportFileLabel>
-                </DrawCompDivider>
-                <DrawCompDivider>
-                  <GenerateButton
-                    onClick={() => handleCreateDrawFile(draw.id)}
-                    disabled={isGenerating}
-                  >
-                    Gerar arquivo
-                  </GenerateButton>
-                </DrawCompDivider>
-                <DrawCompDivider>
-                  <VisualizeIcon
-                    onClick={() => navigate(`/sweepstake/edit/${draw.id}`)}
+                      if (file) {
+                        handleImportWinners(file, draw.id);
+                        e.target.value = '';
+                      }
+                    }}
+                    disabled={!!importingId}
                   />
-                </DrawCompDivider>
-              </DrawComp>
-            ))}
-          </TableBody>
-        </MainForm>
-        <SmallPagination
-          total={maximumPage}
-          currentPage={page}
-          handleChange={(_, newPage) => setPage(newPage)}
-        />
-      </Content>
+                  {importingId === draw.id ? <Loading /> : 'Importar'}
+                </ImportFileLabel>
+              </DrawCompDivider>
+              <DrawCompDivider>
+                <GenerateButton
+                  onClick={() => handleCreateDrawFile(draw.id)}
+                  disabled={isGenerating}
+                >
+                  Gerar arquivo
+                </GenerateButton>
+              </DrawCompDivider>
+              <DrawCompDivider>
+                <VisualizeIcon
+                  onClick={() => navigate(`/sweepstake/edit/${draw.id}`)}
+                />
+              </DrawCompDivider>
+            </DrawComp>
+          ))}
+        </TableBody>
+      </MainForm>
+      <SmallPagination
+        total={maximumPage}
+        currentPage={page}
+        handleChange={(_, newPage) => setPage(newPage)}
+      />
       {showSuccessModal && (
         <SuccessModal
           onClose={() => setShowSuccessModal(false)}
           message="Vencedores importados com sucesso"
         />
       )}
-    </Layout>
+    </Content>
   );
 };
 

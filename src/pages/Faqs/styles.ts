@@ -223,3 +223,30 @@ export const DataText = styled.div`
   text-align: center;
   width: 100%;
 `;
+
+export const ButtonsContainer = styled.div`
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+`;
+
+export const IconButton = styled.button`
+  border: none;
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: 1.75rem;
+
+  transition: 500ms;
+
+  &:hover {
+    opacity: 0.75;
+  }
+`;

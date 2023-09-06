@@ -1,7 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import { Container, Content, Description, SuccessIcon, Title } from './styles';
 import success from '../../assets/img/success.svg';
-import { CloseIcon } from '../AccountSavedOrRegistered/styles';
+import {
+  CloseIcon,
+  Container,
+  Content,
+  Description,
+  SuccessIcon,
+  Title,
+} from './styles';
 
 interface ModalProps {
   isOpen: React.Dispatch<React.SetStateAction<boolean>>;
