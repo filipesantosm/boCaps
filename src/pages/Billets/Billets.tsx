@@ -51,7 +51,9 @@ const Billets = () => {
           params: {
             'filters[active]': true,
             'filters[payment_type][id][$eq]': 2,
-            'filters[$or][0][user][id][$eq]': params.search.substring(0, 9),
+            'filters[$or][0][user][id][$eq]': params.search
+              .replace(/\D/g, '')
+              .substring(0, 9),
             'filters[$or][1][ourNumber][$eq]': params.search,
             sort: 'createdAt:desc',
             'pagination[page]': params.page,
