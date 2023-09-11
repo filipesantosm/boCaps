@@ -76,6 +76,7 @@ const FaqQuestions = () => {
       await api.delete(`/faq-questions/${idToDelete}`);
 
       getFaqQuestions();
+      setIdToDelete(undefined);
       handleSuccess('Pergunta excluída com sucesso!');
     } catch (error) {
       handleError(error);
